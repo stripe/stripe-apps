@@ -35,3 +35,9 @@ This will create a new, minimal tailor.json file.
 ```sh
 $ stripe-preview tailor serve
 ```
+
+This will open the Stripe Dashboard and prompt to enable developer mode, and cause the Dashboard to load your extension from your local machine.
+
+## Next steps
+
+[Learn more about building apps with UI extensions for Dashboard](../ui-extensions/index.md)

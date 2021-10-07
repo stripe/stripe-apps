@@ -1,8 +1,6 @@
-Introduction to Dashboard UI extensions
----------------------------------------
-This is an early preview of the tools and APIs Stripe will provide developers to enable them to build Dashboard UI extensions. Feedback is welcome.
-# Overview
-Dashboard UI extensions enable developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
+# Introduction to UI extensions for Dashboard 
+
+UI extensions for Dashboard enable developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
 
 ## How it works
 - Using the Stripe CLI, developers can set up a new extension, configure their extension, and generate boilerplate for fulfilling Stripe’s interfaces
@@ -13,25 +11,26 @@ Dashboard UI extensions enable developers to create custom UI for the Stripe Das
 - Developers test their changes in the live Stripe Dashboard by running a development server locally with the Stripe CLI
 - Once the extension is ready for others to use, developers use the Stripe CLI to build the extension and push it to Stripe for publication.
 
-# Getting started
-If you haven't already created an app, see [Bootstrapping a new app](../README.md#bootstrapping-a-new-app).
+## Getting started
+If you haven't already created an app, see [Creating a new app](../create/index.md).
 
-## 
 ```sh
-    $ stripe-preview app generate view # Walk through wizard for configuring the view, including which stripe object is being extended
-    $ stripe-preview app serve # This starts a local server with the extension
+$ stripe-preview app generate view # Walk through wizard for configuring the view, including which stripe object is being extended
+$ stripe-preview app serve # This starts a local server with the extension
 ```
+
 - `stripe-preview app serve` will open the Stripe Dashboard and prompt to enable developer mode.
   - This will cause the Dashboard to load your extension from your local machine.
 - Go to the Stripe Dashboard and navigate to where the view is configured to appear (for example, [a product page](https://dashboard.stripe.com/products))
 - The "Hello world" extension will appear right above the Metadata section
 - Modify the view that was generated above and observe that changes are reflected in the Dashboard
 
-# Extension SDK API reference
+## Extension SDK API reference
 The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Actions (coming soon!) and Views.
-## Views
+
+### Views
 ```sh
-    $ stripe extension generate view # Follow the prompts that appear
+$ stripe extension generate view # Follow the prompts that appear
 ```
 Views are React components (with some limits). These views are permitted to have `children` and are how entirely custom UI experiences can be built. 
 
@@ -40,11 +39,13 @@ Views are React components (with some limits). These views are permitted to have
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
 - Actions (described above) can open views
 - Views can open new views
+
 ### `ObjectView`
 Object views appear on Stripe object detail pages like `[/customers/cus_1234](https://dashboard.stripe.com/test/customers/cus_1234)` or `[/invoices/in_1234](https://dashboard.stripe.com/test/invoices/in_1234)`.
 
 *TODO:* Add screenshot from github UI.
 *TODO:* Link to Component documentation
+
 ### `FocusView` (Currently `ModalView`, update this when the name changes)
 These are opened from other Views and allow the developer to open a dedicated space for the end user to do a specific task. Examples include:
 - Enter in details to create a new entry in a database
@@ -57,7 +58,8 @@ These are opened from other Views and allow the developer to open a dedicated sp
 Configuration views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `ConfigurationView` to collect what Zendesk instance the app should communicate with from the administrator.
 
 *TODO:* Link to Component documentation
-## `StripeContext`
+
+### `StripeContext`
 Views have access to context about the merchant, user, and other contextual information about where the view is appearing.
 
 ### Context object
@@ -67,7 +69,8 @@ Views have access to context about the merchant, user, and other contextual info
 | `user` | The current signed in user | `id` |
 | `account` | The current signed in account | `id` |
 | `object` | Optional. In `ObjectView`s this is the current object that is being viewed in the Dashboard. `object` is the type associated with the `id` | `id`, `object` |
-### Example
+
+#### Example
 ```tsx
 import {Group, Subheading} from '@stripe/tailor-browser-sdk/sail';
 import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
@@ -85,7 +88,7 @@ const ContextPrinter = () => {
 }
 ```
 
-## [Coming soon!] Actions
+### [Coming soon!] Actions
 
 Actions appear as buttons/links or in context menus for Stripe objects that they’re attached to. For example, you could attach an action to an order object that would add “Cancel shipment in Shippo” everywhere the order is shown in the Dashboard. When that button or menu item is clicked, the extension’s JS function is called.
 
@@ -93,13 +96,13 @@ Actions appear as buttons/links or in context menus for Stripe objects that they
 ![… or in list views](https://paper-attachments.dropbox.com/s_C27D2161FFD342A8267057C070E47FA793FEB48DACF36751117C1EAA76520361_1623348994767_image.png)
 
 
-### Create stub file
+#### Create stub file
 In order to have an action, the developer needs to register their action in app.json, specify which object types it supports, and write a JS or TS function that fulfills the interface. The Stripe CLI helps with all of this.
 ```sh
     $ stripe-preview app generate action # Follow the prompts that appear
 ```
 
-### Interface
+#### Interface
 ```ts
 
     type Action = {
@@ -125,7 +128,7 @@ Trigger objects allow the developer to manipulate the button or menu item as the
 | `state`   | `"idle"\|"loading"\|"error"` | Allows the developer to inspect the current state of the trigger.                                                                                                                                                      |
 
 
-### Examples
+#### Examples
 ```typescript
     // This action reflects its state in the button or menu item that triggered it
     export create_case = {
@@ -157,14 +160,14 @@ Trigger objects allow the developer to manipulate the button or menu item as the
     };
 ```
 
-## Calling HTTP APIs
+### Calling HTTP APIs
 
-### Calling Stripe
+#### Calling Stripe
 **Calls made to the Stripe API will be made as the _user_ and tagged with the app making the call.** If the user does not have permission to make the call requested, the call will throw a `StripePermissionError`.
 
 Extensions can make calls to the Stripe API with the standard [Stripe JS API client](https://github.com/stripe/stripe-node).
 
-#### Example
+##### Example
 ```typescript
 import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
 import Stripe from 'stripe';
@@ -183,7 +186,7 @@ const makeNewCustomer = async () => {
 };
 ```
 
-### Calling a 3rd party API
+#### Calling a 3rd party API
 To call out to a 3rd party API, developers can use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Before a fetch call will succeed, the developer must explicitly allow the UI extension to call the desired URL.
 
 1. Add the path you wish to call to the [tailor.json file](../tailor.json.md#CSPRequest)
@@ -203,7 +206,7 @@ const makeRequestToService = (endpoint, method, requestData) => {
 };
 ```
 
-### [Coming soon!] Calling your own servers
+#### [Coming soon!] Calling your own servers
 To call servers that you have control of, you additionally can ensure that the caller is your Stripe Dashboard UI Extension by adding a provided signed secret to the request.
 
 1. Follow the [steps for calling out to any third party](#calling-a-3rd-party-api)
