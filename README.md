@@ -4,11 +4,12 @@
   <br>
   Stripe Project Tailor
   <br>
+  <br>
 </h1>
 
-Welcome to the preview of Stripe Project Tailor 👋
+<h4 align="center">Extend the functionality of Stripe with Apps</h4>
 
-In this repository you'll find all the information you need to get started building apps for Stripe.
+In this repository you'll find all the information you need to get started with Project Tailor and building apps for Stripe.
 
 ## Docs
 
