@@ -43,4 +43,4 @@ This will open the Stripe Dashboard and prompt to enable developer mode, and cau
 
 ## Next steps
 
-[Learn more about building apps with UI extensions for Dashboard](../ui-extensions/index.md)
+[Learn more about building apps with UI extensions for Dashboard](../ui-extensions/README.md)

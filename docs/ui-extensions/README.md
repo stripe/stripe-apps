@@ -12,7 +12,7 @@ UI extensions for Dashboard enable developers to create custom UI for the Stripe
 - Once the extension is ready for others to use, developers use the Stripe CLI to build the extension and push it to Stripe for publication.
 
 ## Getting started
-If you haven't already created an app, see [Creating a new app](../create/index.md).
+If you haven't already created an app, see [Creating a new app](../create/README.md).
 
 ```sh
 $ stripe-preview tailor generate view # Walk through wizard for configuring the view, including which stripe object is being extended

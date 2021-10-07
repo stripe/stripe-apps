@@ -14,7 +14,7 @@ In this repository you'll find all the information you need to get started with 
 
 ## Docs
 
-Our preview documentation is available in [/docs](./docs/index.md)
+Our preview documentation is available in [/docs](./docs/README.md)
 
 ## Sample Apps
 

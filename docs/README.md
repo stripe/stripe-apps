@@ -21,13 +21,13 @@ Stripe Apps leverages the capabilities of the Stripe Platform, and on a high-lev
 
 Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our app manifest format, and are packaged along with any supporting materials as a single artifact that you submit to Stripe for consumption.
 
-[Learn more the app manifest](./manifest/index.md)
+[Learn more the app manifest](./manifest/README.md)
 
 ## Capabilities
 
 The capabilities provided by Stripe is:
 
-1. [**🧩 UI extensions for Dashboard**](./ui-extensions/index.md) enables developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard. 
+1. [**🧩 UI extensions for Dashboard**](./ui-extensions/README.md) enables developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard. 
 
 
 1. **💾 Custom Data [Coming soon]** enables developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
@@ -40,8 +40,8 @@ The Stripe Secret Store will allow developers to securely store cryptographic ma
 
 ## Getting started
 
-[Learn how to create your first app](./create/index.md)
+[Learn how to create your first app](./create/README.md)
 
 ## Distribute your app
 
-[Learn more about app distribution](./distribution/index.md)
+[Learn more about app distribution](./distribution/README.md)
