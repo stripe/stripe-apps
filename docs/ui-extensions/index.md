@@ -15,8 +15,8 @@ UI extensions for Dashboard enable developers to create custom UI for the Stripe
 If you haven't already created an app, see [Creating a new app](../create/index.md).
 
 ```sh
-$ stripe-preview app generate view # Walk through wizard for configuring the view, including which stripe object is being extended
-$ stripe-preview app serve # This starts a local server with the extension
+$ stripe-preview tailor generate view # Walk through wizard for configuring the view, including which stripe object is being extended
+$ stripe-preview tailor serve # This starts a local server with the extension
 ```
 
 - `stripe-preview app serve` will open the Stripe Dashboard and prompt to enable developer mode.
@@ -30,7 +30,7 @@ The “extension SDK” is the set of interfaces that Stripe supports for inject
 
 ### Views
 ```sh
-$ stripe extension generate view # Follow the prompts that appear
+$ stripe-preview tailor generate view # Follow the prompts that appear
 ```
 Views are React components (with some limits). These views are permitted to have `children` and are how entirely custom UI experiences can be built. 
 
