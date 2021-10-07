@@ -1,9 +1,10 @@
 ## App Manifest
 
-Every Stripe App needs a manifest file `app.json` at the root of the apps directory structure.
+The tailor.json file is an app manifest, that is it describes how applications integrate with the Stripe platform. Every Stripe App needs a manifest file `tailor.json` at the root of the apps directory structure.
 
+To bootstrap a new application with a default tailor.json file, see the Getting Started guide.
 
-### app.json example
+### tailor.json example
 ```
 {
   "id": "com.shippo.invoicing",
@@ -61,9 +62,9 @@ Every Stripe App needs a manifest file `app.json` at the root of the apps direct
 
 
 
-## Schema
+## Reference
 
-`app.json`
+`tailor.json`
 | Field name                | Type                           | Description                                                                                                                                                                                     | P  | Examples                  |
 | ------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ------------------------- |
 | `id`                      | `slug`                         | [discussion ongoing] A globally unique identifier for the application, chosen by the developer and validated upon initial submission                                                            | P0 |                           |
