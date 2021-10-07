@@ -1,0 +1,24 @@
+{
+  "id": "com.shippo.best-rate",
+  "version": "0.0.1",
+  "name": "Shippo Rate Selector",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.invoice.main",
+        "view": "AddShipping"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [
+        "https://shippo-static.s3.amazonaws.com/providers/*",
+        "https://api.goshippo.com/"
+      ],
+      "purpose": ""
+    }
+  }
+}
