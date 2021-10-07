@@ -1,4 +1,4 @@
-# Introduction to UI extensions for Dashboard 
+# UI extensions for Dashboard 
 
 UI extensions for Dashboard enable developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
 

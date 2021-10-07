@@ -27,7 +27,7 @@ Apps are the package of capabilities used to build a new experience for Stripe. 
 
 The capabilities provided by Stripe is:
 
-1. **🧩 UI extensions for Dashboard** enables developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard. 
+1. [**🧩 UI extensions for Dashboard**](./ui-extensions/index.md) enables developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard. 
 
 
 1. **💾 Custom Data [Coming soon]** enables developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
