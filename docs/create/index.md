@@ -6,14 +6,15 @@ In this doc, you'll use Stripe CLI to create an app and generate the boilerplate
 
 You want to build an App, that is using the `UI extension` capability to extend the Stripe Dashboard. Since this is your first time creating a Stripe app, you want to start with boilerplate code that makes your programming experience easier and more efficient.
 
-You can look through some [example apps](../examples) to get a better idea of the different things that are possible.
+You can look through some [example apps](../../examples) to get a better idea of the different things that are possible.
 
 ## Step 1: Flag yourself into Tailor (Stripes)
 
 1. Go to https://dashboard.stripe.com/
 1. Use the developer tools to find your `merchant id`
-![](./merchant_id_1.png)
-![](./merchant_id_2.png)
+<img src="./merchant_id_1.png" width="500" />
+<img src="./merchant_id_2.png" width="500" />
+
 
 1. Go [https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions](https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions)
 1. Add your `merchant id` to the list

@@ -42,6 +42,6 @@ The Stripe Secret Store will allow developers to securely store cryptographic ma
 
 [Learn how to create your first app](./create/index.md)
 
-## Distributing your app
+## Distribute your app
 
 [Learn more about app distribution](./distribution/index.md)

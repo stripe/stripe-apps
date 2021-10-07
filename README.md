@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-    <img src="./docs/basics/thread.png" alt="logo" width="150">
+    <img src="./docs/core/thread.png" alt="logo" width="150">
   <br>
   Stripe Project Tailor
   <br>
