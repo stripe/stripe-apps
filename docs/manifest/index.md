@@ -63,7 +63,7 @@ Every Stripe App needs a manifest file `app.json` at the root of the apps direct
 
 ## Schema
 
-`tailor.json`
+`app.json`
 | Field name                | Type                           | Description                                                                                                                                                                                     | P  | Examples                  |
 | ------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ------------------------- |
 | `id`                      | `slug`                         | [discussion ongoing] A globally unique identifier for the application, chosen by the developer and validated upon initial submission                                                            | P0 |                           |
