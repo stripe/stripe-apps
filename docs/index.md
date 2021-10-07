@@ -15,14 +15,15 @@ Our Merchants are using Stripe Apps to tailor Stripe to their needs, operate the
 
 Stripe Apps leverages the capabilities of the Stripe Platform, and on a high-level enables you to:
 
-Connect with the Stripe API to make operations and listen to events on behalf of users who have installed your app
-Use the Stripe API to store your own data objects together with Stripe objects.
-Extend the UI of the Stripe Dashboard to enable your own UI-driven workflows and visualizations of data.
+1. Connect with the Stripe API to make operations and listen to events on behalf of users who have installed your app
+1. Use the Stripe API to store your own data objects together with Stripe objects.
+1. Extend the UI of the Stripe Dashboard to enable your own UI-driven workflows and visualizations of data.
 
-Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our app manifest format, and are packaged along with any supporting materials as a single artifact for consumption by Stripe.
+Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our app manifest format, and are packaged along with any supporting materials as a single artifact that you submit to Stripe for consumption.
 
 [Learn more the app manifest](./manifest/index.md)
 
+## Capabilities
 
 The capabilities provided by Stripe is:
 
@@ -45,12 +46,4 @@ The Stripe Secret Store will allow developers to securely store cryptographic ma
 
 ## Distributing your app
 
-As an app developer, you have two options to distribute your app. You can choose to distribute your app as a `private app` where only your organization have access to the team, or you can choose to publish your app to the Stripe App Marketplace, where you can reach millions of entrepreneurs around the world.
-
-### Private apps
-
-[Coming soon]
-
-### App Marketplace
-
-[Coming soon]
+[Learn more about app distribution](./distribution/index.md)

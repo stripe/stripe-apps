@@ -7,13 +7,14 @@
   <br>
 </h1>
 
-<h4 align="center">Extend the functionality of Stripe with Apps</h4>
+<h4 align="center">Extend the functionality of Stripe</h4>
 
-In this repository you'll find all the information you need to get started with Project Tailor and building apps for Stripe.
+In this repository you'll find all the information you need to get started with Project Tailor and get to building apps for Stripe.
+
 
 ## Docs
 
-Our preview documentation is available in [/docs](/docs)
+Our preview documentation is available in [/docs](./docs/index.md)
 
 ## Sample Apps
 
