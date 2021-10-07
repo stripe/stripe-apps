@@ -62,7 +62,7 @@ To bootstrap a new application with a default tailor.json file, see the Getting 
 
 
 
-## Reference
+## Schema
 
 `tailor.json`
 | Field name                | Type                           | Description                                                                                                                                                                                     | P  | Examples                  |
