@@ -21,7 +21,7 @@ You can look through some [example apps](../../examples) to get a better idea of
 1. Get a member of the `Tailor App Platform team` to approve
 
 ## Step 2: Get the forked Stripe CLI 
-1. Get a build of the [Stripe CLI from the tailor-preview repository](../cli/stripe-preview)
+1. Get a build of the [Stripe CLI from the tailor-preview repository](../../cli)
 1. Download it to a convenient location.
 1. Move the file to your `/Users/<username>/stripe` folder to avoid getting a warning from Santa.
 1. If you are getting an untrusted warning from MacOS due to the lack of signing, run the `xattr -r -d com.apple.quarantine /Users/<username>/stripe/stripe-preview` and it will remove the flag. See [more for details](https://apple.stackexchange.com/questions/337268/how-can-i-remove-the-downloaded-from-the-internet-security-from-all-files-in-a).
