@@ -1,0 +1,21 @@
+{
+  "id": "com.hkmousetraps.couponer",
+  "version": "0.0.1",
+  "name": "HK Mousetraps Couponer",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.product.main",
+        "view": "couponer"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}
