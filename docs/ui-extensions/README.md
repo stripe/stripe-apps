@@ -48,6 +48,8 @@ The "Hello world" extension will appear right above the Metadata section.
 
 Modify the view that was generated above and observe that changes are reflected in the Dashboard
 
+**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
+
 ## Extension SDK API reference
 The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Actions (coming soon!) and Views.
 
@@ -64,6 +66,7 @@ Views are React components (with some limits). These views are permitted to have
 - Views can be instantiated in Modals (or perhaps Drawers, TBD)
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
 
+**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
 ### `EmbedView`
 Embedded views appear on Stripe object detail pages like `[/customers/cus_1234](https://dashboard.stripe.com/test/customers/cus_1234)` or `[/invoices/in_1234](https://dashboard.stripe.com/test/invoices/in_1234)`.
 
