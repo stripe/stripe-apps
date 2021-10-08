@@ -97,9 +97,55 @@ These are opened from other Views and allow the developer to open a dedicated sp
 - Go through a wizard to decide on next steps
 - Confirm that the user wants to take the action they indicated
 
-*TODO:* Link to Component documentation
+#### Props
+| Field     | Type                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                      | Required           |
+|-----------|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `title`   | `string`                                             | The title of the view. This is displayed to users and should orient the user to what the intention of the view is.                                                                                                                                                                                                                                                                               | Yes                |
+| `shown`   | `boolean`                                            | Whether the view should be shown or not. This is the property that would be maintained by another view (like the `EmbedView`) to decide when to enter the focused state.                                                                                                                                                                                                                         | Yes                |
+| `actions` | `React.Element<typeof Button \| typeof ButtonGroup>` | Either a single [`Button`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-button--basic) or a [`ButtonGroup`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-buttongroup--basic) that contains buttons to place in the footer of the view. IE a "Save" or "Continue" button. | Yes (due to a bug) |
+| `width`   | `'small' \| 'medium' \| 'large' \| 'xlarge'`         | The width of the view. Defaults to `medium`                                                                                                                                                                                                                                                                                                                                                      | No                 |
+| `onClose` | `() => void`                                         | If the user clicks out of the `FocusView` or presses the escape button, this will be called to inform the extension that the user has closed the view.                                                                                                                                                                                                                                           | No                 |
 
 #### Example
+```tsx
+import {useState} from 'react';
+import {
+  Button,
+  BodyExtra,
+  EmbedView,
+  Select,
+  SelectOption,
+} from '@stripe-internal/extensions-sail';
+
+type Mood = 'Happy' | 'Sad';
+
+const MoodView = () => {
+  const [mood, setMood] = useState<Mood>('Happy');
+  const [picker, setPicker] = useState<boolean>(false)
+  const updateMood = (newMood) => {
+    setMood(newMood);
+    setPicker(false);
+  };
+  return (
+    <EmbedView title="Mood picker" description="This section communicates my extension's feelings">
+      <ModalView
+        shown={picker}
+        onClose={setPicker(false)}
+        actions={
+          <Button label="Cancel" onClick={() => setPicker(false)} />
+        }
+      >
+        <Select onChange={updateMood}>
+          <SelectOption label="Happy" value="Happy">
+          <SelectOption label="Sad" value="Sad">
+        </Select>
+      </ModalView>
+      <BodyExtra>Happy</BodyExtra>
+      <Button label="Change mood" onClick={() => setPicker(true)} />
+    </EmbedView>
+  );
+}
+```
 
 ### [Coming soon!] `SettingsView`
 Settings views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `SettingsView` to collect what Zendesk instance the app should communicate with from the administrator.
