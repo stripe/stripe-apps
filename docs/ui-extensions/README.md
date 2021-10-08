@@ -60,7 +60,7 @@ Every "view" that a UI extension exports must return one of the Stripe-provided 
 
 Views are React components (with some limits). These views are permitted to have `children` and are how entirely custom UI experiences can be built. 
 
-- The first child of a View must be a Stripe-provided view container (ie [`EmbedView`](#EmbedView))
+- The first child of a View must be a Stripe-provided view container (ie `EmbedView`)
 - The UI Components available are based on Stripe's internal design system, Sail
 - Views can be instantiated in Modals (or perhaps Drawers, TBD)
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
@@ -103,7 +103,7 @@ These are opened from other Views and allow the developer to open a dedicated sp
 | Field     | Type                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                      | Required           |
 |-----------|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
 | `title`   | `string`                                             | The title of the view. This is displayed to users and should orient the user to what the intention of the view is.                                                                                                                                                                                                                                                                               | Yes                |
-| `shown`   | `boolean`                                            | Whether the view should be shown or not. This is the property that would be maintained by another view (like the [`EmbedView`](#EmbedView)) to decide when to enter the focused state.                                                                                                                                                                                                                         | Yes                |
+| `shown`   | `boolean`                                            | Whether the view should be shown or not. This is the property that would be maintained by another view (like the `EmbedView`) to decide when to enter the focused state.                                                                                                                                                                                                                         | Yes                |
 | `actions` | `React.Element<typeof Button \| typeof ButtonGroup>` | Either a single [`Button`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-button--basic) or a [`ButtonGroup`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-buttongroup--basic) that contains buttons to place in the footer of the view. IE a "Save" or "Continue" button. | Yes (due to a bug) |
 | `width`   | `'small' \| 'medium' \| 'large' \| 'xlarge'`         | The width of the view. Defaults to `medium`                                                                                                                                                                                                                                                                                                                                                      | No                 |
 | `onClose` | `() => void`                                         | If the user clicks out of the `FocusView` or presses the escape button, this will be called to inform the extension that the user has closed the view.                                                                                                                                                                                                                                           | No                 |
@@ -281,12 +281,31 @@ const makeNewCustomer = async () => {
 ```
 
 #### Calling a 3rd party API
-To call out to a 3rd party API, developers can use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Before a fetch call will succeed, the developer must explicitly allow the UI extension to call the desired URL.
+To call out to a 3rd party API, developers can use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), as seen in the code example below. Before a fetch call will succeed, the developer must explicitly allow the UI extension to call the desired URL. Developers can do this by adding this URL to `connect-src` array in the `content_security_policy` configuration in the [App Manifest](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/getting-started-app-manifest--page). You can read more about Content Security Policy [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 
-1. Add the path you wish to call to the [tailor.json file](../tailor.json.md#CSPRequest)
-1. Start or restart your development server. — `$ stripe-preview tailor serve`
-1. Now you can use `fetch` in order to call the URL you configured in step 1.
-  1. If the API in question has a JS client library that may work as well if it supports running in a browser context. Simply add the dependency to your extension using `npm add`
+
+**A URL added to `connect-src` must:**
+1. use secure https protocal
+2. not be not stripe-owned 
+3. contain a path
+4. only contain a wildcard (*) in the left-most DNS label
+
+Some examples of valid URLs include: 
+- https://www.example.com/api/users -> contains secure protocol and a path
+- https://*.example.com/api/users/ -> contains a wildcard in the left-most DNS label
+
+Some examples of invalid URLS include:
+- http://www.example.com/ ->  does not contain secure protocol and is missing a path
+- https://api.stripe.com/v1/charges/ -< this is a stripe-owned API
+- https://www.*.example.com/api/users/ -> wildcard is not in the left-most DNS label
+
+
+
+Follow these steps to enable your UI extension to hit your 3rd party API:
+1. Add the URL you wish to call to the [tailor.json file](../tailor.json.md#CSPRequest)
+2. Start or restart your development server. — `$ stripe-preview tailor serve`
+3. Now you can use `fetch` in order to call the URL you configured in step 1.
+4. If the API in question has a JS client library that may work as well if it supports running in a browser context. Simply add the dependency to your extension using `npm add`
 
 ```typescript
 const makeRequestToService = (endpoint, method, requestData) => {
