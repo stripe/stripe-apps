@@ -67,7 +67,7 @@ Views are React components (with some limits). These views are permitted to have
 
 **Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
 ### `EmbedView`
-Embedded views appear on Stripe object detail pages like `[/customers/cus_1234](https://dashboard.stripe.com/test/customers/cus_1234)` or `[/invoices/in_1234](https://dashboard.stripe.com/test/invoices/in_1234)`.
+Embedded views appear on Stripe object detail pages like [`/customers/cus_1234`](https://dashboard.stripe.com/test/customers/cus_1234) or [`/invoices/in_1234`](https://dashboard.stripe.com/test/invoices/in_1234).
 
 For now they always appear above the Metadata section. On the customer page, the view will appear between pending invoice items and orders.
 
