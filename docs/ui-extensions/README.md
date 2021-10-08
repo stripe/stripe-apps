@@ -2,7 +2,7 @@
 
 UI extensions for Dashboard enable developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
 
-## How it works
+## How it all works
 - Using the Stripe CLI, developers can set up a new extension, configure their extension, and generate boilerplate for fulfilling Stripe’s interfaces
 - Developers write TypeScript React components (called "Views") the Stripe Dashboard will render
     - There are a number of "viewports" exposed in the Dashboard where extension developers can insert their functionality.
@@ -12,18 +12,29 @@ UI extensions for Dashboard enable developers to create custom UI for the Stripe
 - Once the extension is ready for others to use, developers use the Stripe CLI to build the extension and push it to Stripe for publication.
 
 ## Getting started
-If you haven't already created an app, see [Creating a new app](../create/README.md).
+### Step 1: Generate a view
+If you haven't already created an app, see [Creating a new app](../create/README.md). Once you have setup your basic app, you can use the Stripe CLI to generate your first view that extends a part of the Dashboard.
 
 ```sh
-$ stripe-preview tailor generate view # Walk through wizard for configuring the view, including which stripe object is being extended
-$ stripe-preview tailor serve # This starts a local server with the extension
+$ stripe-preview tailor generate view
 ```
 
-- `stripe-preview app serve` will open the Stripe Dashboard and prompt to enable developer mode.
-  - This will cause the Dashboard to load your extension from your local machine.
-- Go to the Stripe Dashboard and navigate to where the view is configured to appear (for example, [a product page](https://dashboard.stripe.com/products))
-- The "Hello world" extension will appear right above the Metadata section
-- Modify the view that was generated above and observe that changes are reflected in the Dashboard
+Follow the wizard in the CLI, and once that's done it's time for you to serve up the apps locally from your machine.
+
+
+### Step 2: Serve your app from your local machine
+```sh
+$ stripe-preview tailor serve 
+```
+
+This command open the Stripe Dashboard and prompt to enable developer mode. Once you are in developer mode the Dashboard will load your extension from your local machine.
+
+### Step 3: See your app in action
+Go to the Stripe Dashboard and navigate to where the view is configured to appear (for example, [a product page](https://dashboard.stripe.com/products))
+
+The "Hello world" extension will appear right above the Metadata section.
+
+Modify the view that was generated above and observe that changes are reflected in the Dashboard
 
 ## Extension SDK API reference
 The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Actions (coming soon!) and Views.

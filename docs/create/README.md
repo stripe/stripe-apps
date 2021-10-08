@@ -37,14 +37,14 @@ $ stripe-preview tailor new [name]
 
 This will create a new, minimal tailor.json file.
 
-## Step 4: Serve your app in development mode
+## Step 4: Now time to use some capabilities
 
-```sh
-$ stripe-preview tailor serve
-```
+Your basic app has now been bootstrapped, but it does not do much yet. Next for you is to use some of the platform capabilities to add functionality.  
 
-This will open the Stripe Dashboard and prompt to enable developer mode, and cause the Dashboard to load your extension from your local machine.
-
-## Next steps
+We recommend you to continue with UI extensions for Dashboard.
 
 [Learn more about building apps with UI extensions for Dashboard](../ui-extensions/README.md)
+
+
+
+
