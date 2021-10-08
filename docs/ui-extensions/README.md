@@ -55,19 +55,41 @@ The “extension SDK” is the set of interfaces that Stripe supports for inject
 ```sh
 $ stripe-preview tailor generate view # Follow the prompts that appear
 ```
+Every "view" that a UI extension exports must return one of the Stripe-provided base views below.
+
 Views are React components (with some limits). These views are permitted to have `children` and are how entirely custom UI experiences can be built. 
 
-- The UI Components available are based on Stripe's internal design system, Sail (*TODO:* link)
-- Views can be instantiated in Modals
+- The first child of a View must be a Stripe-provided view container (ie `EmbedView`)
+- The UI Components available are based on Stripe's internal design system, Sail
+- Views can be instantiated in Modals (or perhaps Drawers, TBD)
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
-- Actions (described above) can open views
-- Views can open new views
 
-### `ObjectView`
-Object views appear on Stripe object detail pages like `[/customers/cus_1234](https://dashboard.stripe.com/test/customers/cus_1234)` or `[/invoices/in_1234](https://dashboard.stripe.com/test/invoices/in_1234)`.
+### `EmbedView`
+Embedded views appear on Stripe object detail pages like `[/customers/cus_1234](https://dashboard.stripe.com/test/customers/cus_1234)` or `[/invoices/in_1234](https://dashboard.stripe.com/test/invoices/in_1234)`.
 
-*TODO:* Add screenshot from github UI.
-*TODO:* Link to Component documentation
+For now they always appear above the Metadata section. On the customer page, the view will appear between pending invoice items and orders.
+
+![Hello World on the customer page](./customer_hello.jpg)
+
+#### Props
+| Field         | Type     | Description                                                                                                        | Required |
+|---------------|----------|--------------------------------------------------------------------------------------------------------------------|----------|
+| `title`       | `string` | The title of the view. This is displayed to users and should orient the user to what the intention of the view is. | Yes      |
+| `description` | `string` | A longer form description of what the view does. This will be displayed under the title.                           | No       |
+
+#### Example
+```tsx
+import {
+  BodyExtra,
+  EmbedView,
+} from '@stripe-internal/extensions-sail';
+
+const HappyView = () => (
+  <EmbedView title="Simple stuff" description="This section communicates my extension's feelings">
+    <BodyExtra>Happy</BodyExtra>
+  </EmbedView>
+)
+```
 
 ### `FocusView` (Currently `ModalView`, update this when the name changes)
 These are opened from other Views and allow the developer to open a dedicated space for the end user to do a specific task. Examples include:
@@ -77,8 +99,10 @@ These are opened from other Views and allow the developer to open a dedicated sp
 
 *TODO:* Link to Component documentation
 
-### `ConfigurationView`
-Configuration views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `ConfigurationView` to collect what Zendesk instance the app should communicate with from the administrator.
+#### Example
+
+### [Coming soon!] `SettingsView`
+Settings views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `SettingsView` to collect what Zendesk instance the app should communicate with from the administrator.
 
 *TODO:* Link to Component documentation
 
