@@ -195,7 +195,7 @@ Actions appear as buttons/links or in context menus for Stripe objects that they
 #### Create stub file
 In order to have an action, the developer needs to register their action in app.json, specify which object types it supports, and write a JS or TS function that fulfills the interface. The Stripe CLI helps with all of this.
 ```sh
-    $ stripe-preview app generate action # Follow the prompts that appear
+    $ stripe-preview tailor generate action # Follow the prompts that appear
 ```
 
 #### Interface
@@ -286,7 +286,7 @@ const makeNewCustomer = async () => {
 To call out to a 3rd party API, developers can use [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Before a fetch call will succeed, the developer must explicitly allow the UI extension to call the desired URL.
 
 1. Add the path you wish to call to the [tailor.json file](../tailor.json.md#CSPRequest)
-1. Start or restart your development server. — `$ stripe-preview app serve`
+1. Start or restart your development server. — `$ stripe-preview tailor serve`
 1. Now you can use `fetch` in order to call the URL you configured in step 1.
   1. If the API in question has a JS client library that may work as well if it supports running in a browser context. Simply add the dependency to your extension using `npm add`
 
