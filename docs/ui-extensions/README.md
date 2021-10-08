@@ -165,7 +165,7 @@ Views have access to context about the merchant, user, and other contextual info
 
 #### Example
 ```tsx
-import {Group, Subheading} from '@stripe/tailor-browser-sdk/sail';
+import {Group, Subheading} from '@stripe-internal/extensions-sail';
 import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
 
 const ContextPrinter = () => {
