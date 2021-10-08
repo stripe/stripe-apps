@@ -19,8 +19,18 @@ If you haven't already created an app, see [Creating a new app](../create/README
 $ stripe-preview tailor generate view
 ```
 
-Follow the wizard in the CLI, and once that's done it's time for you to serve up the apps locally from your machine.
+Follow the wizard in the CLI. The most important question you'll need to answer is where your view will appear in the Dashboard. Currently we only support `EmbedView`s, or UI extension views that are embedded on a Stripe object detail page.
 
+`stripe.dashboard.customer.main`
+: View will appear on the customer page
+
+`stripe.dashboard.invoice.main`
+: View will appear on the invoice page
+
+`stripe.dashboard.product.main`
+: View will appear on the product page
+
+Once all that is done it's time for you to serve up the apps locally from your machine.
 
 ### Step 2: Serve your app from your local machine
 ```sh
