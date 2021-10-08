@@ -158,7 +158,6 @@ Settings views appear in Settings and allow end-users to configure specific deta
 ### `StripeContext`
 Views have access to context about the merchant, user, and other contextual information about where the view is appearing.
 
-### Context object
 `useStripeContext` returns an object with all the context that's available.
 | Field  | Description | Properties |
 |--------|-------------|------------|
