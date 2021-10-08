@@ -1,0 +1,13 @@
+{
+  "name": "com.example.gravatar",
+  "version": "0.0.1",
+  "description": "Gravatar for Stripe",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe-internal/extensions-sail": "^0.0.7",
+    "gravatar-api": "^1.5.0",
+    "react": "^17.0.2",
+    "stripe": "^8.170.0"
+  }
+}

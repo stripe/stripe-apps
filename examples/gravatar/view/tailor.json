@@ -1,0 +1,16 @@
+{
+  "id": "com.example.view",
+  "version": "0.0.1",
+  "name": "",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}

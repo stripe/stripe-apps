@@ -1,0 +1,21 @@
+{
+  "id": "com.example.gravatar",
+  "version": "0.0.1",
+  "name": "Gravatar for Stripe",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.main",
+        "view": "gravatar"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [],
+      "purpose": ""
+    }    
+  }
+}
