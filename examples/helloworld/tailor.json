@@ -1,0 +1,21 @@
+{
+  "id": "com.stripe.helloworld",
+  "version": "0.0.1",
+  "name": "Hello World!",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.main",
+        "view": "Hi"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}

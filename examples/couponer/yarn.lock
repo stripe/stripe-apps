@@ -47,10 +47,10 @@
   dependencies:
     "@remote-ui/rpc" "^1.2.2"
 
-"@stripe-internal/extensions-sail@^0.0.5":
-  version "0.0.5"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm-internal/@stripe-internal/extensions-sail/-/extensions-sail-0.0.5.tgz#4980da12956f70c164786a2a66293078d6a921d7"
-  integrity sha1-SYDaEpVvcMFkeGoqZikweNapIdc=
+"@stripe-internal/extensions-sail@^0.0.7":
+  version "0.0.7"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm-internal/@stripe-internal/extensions-sail/-/extensions-sail-0.0.7.tgz#d63be1150f3e2b2e4d8f7bbd4fc19681471ea705"
+  integrity sha1-1jvhFQ8+Ky5Nj3u9T8GWgUcepwU=
   dependencies:
     "@remote-ui/react" "^4.1.0"
 
