@@ -34,6 +34,7 @@ Follow the wizard in the CLI. The most important question you'll need to answer 
 
 Once all that is done it's time for you to serve up the apps locally from your machine.
 
+**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
 ### Step 2: Serve your app from your local machine
 ```sh
 $ stripe-preview tailor serve 
@@ -47,8 +48,6 @@ Go to the Stripe Dashboard and navigate to where the view is configured to appea
 The "Hello world" extension will appear right above the Metadata section.
 
 Modify the view that was generated above and observe that changes are reflected in the Dashboard
-
-**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
 
 ## Extension SDK API reference
 The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Actions (coming soon!) and Views.
