@@ -69,7 +69,7 @@ Views are React components (with some limits). These views are permitted to have
 ### `EmbedView`
 Embedded views appear on Stripe object detail pages like [`/customers/cus_1234`](https://dashboard.stripe.com/test/customers/cus_1234) or [`/invoices/in_1234`](https://dashboard.stripe.com/test/invoices/in_1234).
 
-For now they always appear above the Metadata section. On the customer page, the view will appear between pending invoice items and orders.
+For now they always appear above the Metadata section. On the customer page, the view will appear between pending invoice items and quotes.
 
 ![Hello World on the customer page](./customer_hello.jpg)
 
