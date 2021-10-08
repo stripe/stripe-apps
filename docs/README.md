@@ -21,7 +21,7 @@ Stripe Apps leverages the capabilities of the Stripe Platform, and on a high-lev
 
 Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our app manifest format, and are packaged along with any supporting materials as a single artifact that you submit to Stripe for consumption.
 
-[Learn more the app manifest](./manifest/README.md)
+[Learn more about the app manifest](./manifest/README.md)
 
 ## Capabilities
 
