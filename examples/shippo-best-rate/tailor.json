@@ -9,7 +9,7 @@
     "views": [
       {
         "viewport": "stripe.dashboard.invoice.main",
-        "view": "AddShipping"
+        "component": "AddShipping"
       }
     ],
     "actions": [],
