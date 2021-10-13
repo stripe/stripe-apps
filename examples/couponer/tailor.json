@@ -9,7 +9,7 @@
     "views": [
       {
         "viewport": "stripe.dashboard.product.main",
-        "view": "couponer"
+        "component": "couponer"
       }
     ],
     "actions": [],

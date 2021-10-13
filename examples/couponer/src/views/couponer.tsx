@@ -104,8 +104,8 @@ const Couponer = () => {
       title="Couponer"
       description="Enable HK Mousetrap's standard coupons for this product."
     >
-      <FormLayout layout={'inline'} background="white">
-        <FormBlock divider={'show'}>
+      <FormLayout layout={'inline'} background="white" divider={false}>
+        <FormBlock>
           {options.map(({value, description, label}) => (
             <FormRow key={value}>
               <FormField>

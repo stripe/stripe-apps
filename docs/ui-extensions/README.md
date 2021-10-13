@@ -138,8 +138,8 @@ const MoodView = () => {
         }
       >
         <Select onChange={updateMood}>
-          <SelectOption label="Happy" value="Happy">
-          <SelectOption label="Sad" value="Sad">
+          <SelectOption label="Happy" value="Happy" />
+          <SelectOption label="Sad" value="Sad" />
         </Select>
       </ModalView>
       <BodyExtra>Happy</BodyExtra>
