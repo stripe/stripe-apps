@@ -5,7 +5,7 @@ import {
   Body,
   Card,
   ModalView,
-} from '@stripe-internal/extensions-sail';
+} from '@stripe/tailor-browser-sdk/ui';
 
 import {useState, useCallback} from 'react';
 

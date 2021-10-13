@@ -6,7 +6,7 @@ import {
   ContentListItem,
   ContentList,
   LoadingState,
-} from '@stripe-internal/extensions-sail';
+} from '@stripe/tailor-browser-sdk/ui';
 
 import {useCallback, useEffect, useState} from 'react';
 import Stripe from 'stripe';

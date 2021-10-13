@@ -1,8 +1,8 @@
 import {
   LoadingState,
   EmbedView,
-} from '@stripe-internal/extensions-sail';
-import {useStripeContext} from '@stripe/tailor-browser-sdk';
+} from '@stripe/tailor-browser-sdk/ui';
+import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
 
 import {useEffect, useState, useCallback} from 'react';
 
@@ -15,6 +15,8 @@ import Stripe from 'stripe';
 const logo = require('../shippo-logo.svg') as string;
 
 const AddShipping = () => {
+  const {object, account, user} = useStripeContext();
+  console.log(object, account, user);
   const {object: {id: invoiceId}} = useStripeContext();
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata>();
   const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
