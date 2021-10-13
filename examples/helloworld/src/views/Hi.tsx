@@ -11,7 +11,7 @@ import {
 	Body,
 	BodyMono,
 	Heading,
-  } from '@stripe-internal/extensions-sail';
+  } from '@stripe/tailor-browser-sdk/ui';
 
 const Hi = () => (
   <EmbedView
