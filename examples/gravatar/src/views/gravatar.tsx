@@ -1,14 +1,16 @@
 import {
   Notice,
 	Group,
-} from '@stripe-internal/extensions-sail';
-import {useStripeContext, createHttpClient} from '@stripe/tailor-browser-sdk';
+} from '@stripe/tailor-browser-sdk/ui';
+import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
+import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client'
 import gravatar from 'gravatar-api';
 import Stripe from 'stripe';
 import {useState} from 'react';
 
-const stripe = Stripe(process.env.STRIPE_API_KEY, {
-  httpClient: createHttpClient()
+const stripe = new Stripe(process.env.STRIPE_API_KEY, {
+  httpClient: createHttpClient(),
+  apiVersion: '2020-08-27',
 })
 
 const Gravatar = () => {
