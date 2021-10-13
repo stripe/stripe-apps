@@ -16,7 +16,7 @@ import {
     TextArea,
     TruncatedText,
     Avatar
-  } from '@stripe-internal/extensions-sail';
+  } from '@stripe/tailor-browser-sdk/ui';
 import {capitalize} from './utils';
 
 
@@ -47,10 +47,10 @@ const fetchTicketConversation = (ticket_id) => {
 
 type Props = {
   ticket: any,
-  children?: React.Node,
+  children?: React.ReactNode,
 };
 
-const TicketDetails = ({ticket, children}: Props): React.Node => {
+const TicketDetails = ({ticket, children}: Props): JSX.Element => {
   const submitter = lookupZendeskUser(ticket.submitter_id) || {};
   const assignee = lookupZendeskUser(ticket.assignee_id) || {};
 

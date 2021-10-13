@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { useStripeContext } from "@stripe/tailor-browser-sdk";
-import { Button, LoadingState } from "@stripe-internal/extensions-sail";
+import { useStripeContext } from "@stripe/tailor-browser-sdk/context";
+import { Button, LoadingState } from "@stripe/tailor-browser-sdk/ui";
 
 import AuthClient from "../clients/auth";
 import ZendeskClient from "../clients/zendesk";

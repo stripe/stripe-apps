@@ -47,12 +47,15 @@
   dependencies:
     "@remote-ui/rpc" "^1.2.4"
 
-"@stripe-internal/extensions-sail@^0.0.7":
-  version "0.0.7"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm-internal/@stripe-internal/extensions-sail/-/extensions-sail-0.0.7.tgz#d63be1150f3e2b2e4d8f7bbd4fc19681471ea705"
-  integrity sha1-1jvhFQ8+Ky5Nj3u9T8GWgUcepwU=
+"@stripe/tailor-browser-sdk@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-0.0.5.tgz#7d1c5a9aa9c061e5f799680a8cf5edd3d5cb5fda"
+  integrity sha512-M9cIhZn4zufEaR+JdARlcL9AiI3V+CX0N0DNcS4MuBe3kuXGmR3d3Aie8suPlR1NOIMNEoIAYyFnbH2dS6S0cA==
   dependencies:
     "@remote-ui/react" "^4.1.0"
+    invariant "^2.2.4"
+    react "^17.0.2"
+    stripe "^8.174.0"
 
 "@types/node-zendesk@^2.0.3":
   version "2.0.3"
@@ -136,12 +139,19 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+invariant@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
+  dependencies:
+    loose-envify "^1.0.0"
+
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
   resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-loose-envify@^1.1.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0:
   version "1.4.0"
   resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -203,6 +213,14 @@ stripe@^8.170.0:
   version "8.170.0"
   resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/stripe/-/stripe-8.170.0.tgz#5b2a84673663bf5029bd8a7c62eda945700d3ecb"
   integrity sha512-1fM9K+WHCHIGAurcf5UYqqUP7LRR+FBcjx4JA+MoH4YqH6/Bi2Xm50O0lMbf3C/iuUg+tuGlFzeqVBsnqIZuEA==
+  dependencies:
+    "@types/node" ">=8.1.0"
+    qs "^6.6.0"
+
+stripe@^8.174.0:
+  version "8.181.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.181.0.tgz#e49514b10c54d146cc5306204410658c2d689386"
+  integrity sha512-yEKT+/a/5OMYqGPhI/4jy/kiKHKeew1n9BvNtHbOA9lQDM8yVIYDx0nbQMj5rMowivAMqY67mejDJeSBlcPASA==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
