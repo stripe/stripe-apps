@@ -9,7 +9,7 @@
     "views": [
       {
         "viewport": "stripe.dashboard.customer.main",
-        "view": "Hi"
+        "component": "Hi"
       }
     ],
     "actions": [],
