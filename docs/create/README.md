@@ -1,14 +1,15 @@
 # Create an App
 
-In this doc, you'll use Stripe CLI to create an app and generate the boilerplate code for building your app and automates many common development tasks.
+In this doc, you'll use Stripe CLI to create an app, generate the boilerplate code for building your app, and automate many common development tasks.
 
 ## Scenario
 
 You want to build an App, that is using the `UI extension` capability to extend the Stripe Dashboard. Since this is your first time creating a Stripe app, you want to start with boilerplate code that makes your programming experience easier and more efficient.
+You can look through some example apps to get a better idea of the different things that are possible.
 
 You can look through some [example apps](../../examples) to get a better idea of the different things that are possible.
 
-## Step 1: Flag yourself into Tailor (Stripes)
+## Step 1: Flag yourself into Tailor (for internal Stripes)
 
 1. Go to https://dashboard.stripe.com/
 1. Use the developer tools to find your `merchant id`
