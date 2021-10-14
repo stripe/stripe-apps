@@ -25,3 +25,7 @@ Our preview documentation is available in [/docs](./docs/README.md)
 We have built a range of sample applications that demonstrates the capabilities of the platform. 
 
 You can find examples in [/examples](/examples)
+
+## Issues
+
+We are using this repo's Issue tracker to track known issues, and we encourage you to open issues as you find them. https://github.com/stripe/tailor-preview/issues
