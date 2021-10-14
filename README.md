@@ -7,14 +7,13 @@
   <br>
 </h1>
 
-<hr>
-
 <h4 align="center">Extend the functionality of Stripe</h4>
 
 🚨 This project is strictly confidential, and any information provided to you are covered under your **Unilateral NDA with Stripe**. 🚨
 
-In these docs, you'll find all the information you need to get started with Project Tailor and building apps for Stripe.
+<hr>
 
+In these docs, you'll find all the information you need to get started with Project Tailor and building apps for Stripe.
 
 ## Docs
 
