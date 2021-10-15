@@ -93,7 +93,7 @@ const HappyView = () => (
 )
 ```
 
-### `FocusView` (Currently `ModalView`, update this when the name changes)
+### [Coming soon!]  `FocusView`
 These are opened from other Views and allow the developer to open a dedicated space for the end user to do a specific task. Examples include:
 - Enter in details to create a new entry in a database
 - Go through a wizard to decide on next steps
@@ -115,6 +115,7 @@ import {
   Button,
   BodyExtra,
   EmbedView,
+  FocusView,
   Select,
   SelectOption,
 } from '@stripe-internal/extensions-sail';
@@ -130,7 +131,7 @@ const MoodView = () => {
   };
   return (
     <EmbedView title="Mood picker" description="This section communicates my extension's feelings">
-      <ModalView
+      <FocusView
         shown={picker}
         onClose={setPicker(false)}
         actions={
@@ -141,7 +142,7 @@ const MoodView = () => {
           <SelectOption label="Happy" value="Happy" />
           <SelectOption label="Sad" value="Sad" />
         </Select>
-      </ModalView>
+      </FocusView>
       <BodyExtra>Happy</BodyExtra>
       <Button label="Change mood" onClick={() => setPicker(true)} />
     </EmbedView>
