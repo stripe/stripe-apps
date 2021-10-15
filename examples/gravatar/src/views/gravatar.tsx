@@ -2,7 +2,7 @@ import {
   Notice,
 	Group,
 } from '@stripe/tailor-browser-sdk/ui';
-import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
+import {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
 import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client'
 import gravatar from 'gravatar-api';
 import Stripe from 'stripe';
@@ -13,13 +13,12 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY, {
   apiVersion: '2020-08-27',
 })
 
-const Gravatar = () => {
+const Gravatar = ({object}: TailorExtensionContextValue) => {
 
-  const stripeCtx = useStripeContext();
   const [imageUrl, setImageUrl] = useState("");
 
   try {
-    stripe.customers.retrieve(stripeCtx.object.id).then((customer) => {
+    stripe.customers.retrieve(object.id).then((customer) => {
       setImageUrl(gravatar.imageUrl({
         email: customer.email
       }))    

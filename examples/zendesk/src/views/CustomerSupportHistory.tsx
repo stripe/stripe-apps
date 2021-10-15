@@ -8,17 +8,14 @@ import {
   BodyMono,
   Heading,
 } from "@stripe/tailor-browser-sdk/ui";
-import { useStripeContext } from "@stripe/tailor-browser-sdk/context";
+import { TailorExtensionContextValue} from "@stripe/tailor-browser-sdk/context";
 import { Tickets } from "node-zendesk";
 import { useEffect, useState } from "react";
 
 import stripeClient from "../clients/stripe";
 import AuthWall, { useZendeskContext } from "../components/AuthWall";
 
-const CustomerSupportHistory = () => {
-  const {
-    object: { id: customerId },
-  } = useStripeContext();
+const CustomerSupportHistory = ({object: {id: customerId}}) => {
   const zendeskClient = useZendeskContext();
 
   const [tickets, setTickets] = useState<Tickets.ListPayload>();
@@ -76,10 +73,10 @@ const CustomerSupportHistory = () => {
   );
 };
 
-export default () => {
+export default ({account, user, object}: TailorExtensionContextValue) => {
   return (
-    <AuthWall>
-      <CustomerSupportHistory />
+    <AuthWall account={account} object={object}>
+      <CustomerSupportHistory object={object}/>
     </AuthWall>
   );
 };
