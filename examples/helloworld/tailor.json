@@ -8,7 +8,7 @@
   "ui_extension": {
     "views": [
       {
-        "viewport": "stripe.dashboard.product.main",
+        "viewport": "stripe.dashboard.customer.main",
         "component": "Hi"
       }
     ],

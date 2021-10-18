@@ -1,44 +1,34 @@
-# 🧵 Stripe Project Tailor
+# 🧵 Get started
 
-Welcome to the early documentation for Project Tailor 👋
+A quick introduction to Project Tailor 👋
 
 ## What is a Stripe App?
-Stripe Apps extend the functionality of Stripe. Most apps are built by 3rd party developers in our ecosystem, but we also use Stripe Apps internally to bring you new features for Stripe.
-
-As a developer you can build apps that add new features to Stripe by adding UI Modules to Stripe Dashboard, store data with Stripe, make Stripe API requests on behalf of users, or integrate with 3rd party services. You are free to mix and match the capabilities of the Stripe platform to build new experiences for Stripe.
-
-Our Merchants are using Stripe Apps to tailor Stripe to their needs, operate their business more efficiently, integrate Stripe with external services and add new features to their specific Stripe account.
+Stripe Apps extend the functionality of Stripe for developers and end users. Most apps are built by 3rd party developers for public distribution or private use, but Stripe developers also build apps internally to deliver new features and functionality for Stripe users.
 
 ![Overview](./core/app_overview.png)
 
-## Concepts and terminology
+As a developer, there are four primary ways to build new experiences on the Stripe platform: 
+ 
+- Use our library of UI components and modules to add new features to the Stripe Dashboard 
+- Store data with Stripe
+- Make Stripe API requests on behalf of users
+- Integrate with 3rd party services. 
 
-Stripe Apps leverages the capabilities of the Stripe Platform, and on a high-level enables you to:
+## Capabilities and Concepts
 
-1. Connect with the Stripe API to make operations and listen to events on behalf of users who have installed your app
-1. Use the Stripe API to store your own data objects together with Stripe objects.
-1. Extend the UI of the Stripe Dashboard to enable your own UI-driven workflows and visualizations of data.
+Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our [app manifest format](./manifest/README.md), and are packaged along with any supporting materials as a single artifact that you submit to Stripe for distribution.
 
-Apps are the package of capabilities used to build a new experience for Stripe. Apps are declaratively defined via our app manifest format, and are packaged along with any supporting materials as a single artifact that you submit to Stripe for consumption.
+The capabilities provided by Stripe are:
 
-[Learn more about the app manifest](./manifest/README.md)
+1. [**🧩 UI extensions for Dashboard**](./ui-extensions/README.md) enable developers to build new features and functionality directly into the Stripe Dashboard. UI Extensions can be used to augment existing Stripe workflows as well as create entirely new features. These extensions are hosted within the Dashboard and  take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
 
-## Capabilities
+1. **🖥 App Backend [Coming soon]** enable developers to use their own backends, hosted outside of Stripe, to make Stripe API calls and listen to webhook events from Stripe on behalf of a Stripe user
 
-The capabilities provided by Stripe is:
+1. **🤐 Secret Store [Coming soon]** enable developers to securely store cryptographic material in order to authenticate and communicate with external services.
 
-1. [**🧩 UI extensions for Dashboard**](./ui-extensions/README.md) enables developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard. 
+1. **💾 Custom Data [Coming soon]** enable developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
 
-
-1. **💾 Custom Data [Coming soon]** enables developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
-
-
-1. **🖥 App Backend [Coming soon]** enable developers to act on behalf of a Stripe user by making Stripe API calls and listening to webhook events from Stripe from their own backends hosted outside of Stripe.
-
-1. **🤐 Secret Store [Coming soon]** 
-The Stripe Secret Store will allow developers to securely store cryptographic material in order to authenticate and communicate with external services.
-
-## Getting started
+## Create an app
 
 [Learn how to create your first app](./create/README.md)
 
