@@ -2,6 +2,8 @@
 
 UI extensions for Dashboard enable developers to create custom UI for the Stripe Dashboard. These can be used to augment existing Stripe workflows as well as create entirely new features hosted within the Dashboard that take advantage of the UI toolkit, teams, permissions, security, and hosting already built into the Dashboard.
 
+**Note:** While UI extensions are in private preview, you'll need to be added to the Stripe NPM organization in order to have access to the SDK. Send your npm username to the Stripe team to have them add you.
+
 ## How it all works
 - Using the Stripe CLI, developers can set up a new extension, configure their extension, and generate boilerplate for fulfilling Stripe’s interfaces
 - Developers write TypeScript React components (called "Views") the Stripe Dashboard will render

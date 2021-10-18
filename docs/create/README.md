@@ -9,17 +9,12 @@ You can look through some example apps to get a better idea of the different thi
 
 You can look through some [example apps](../../examples) to get a better idea of the different things that are possible.
 
-## Step 1: Flag yourself into Tailor (for internal Stripes)
+## Step 1: Get your account into the preview
 
-1. Go to https://dashboard.stripe.com/
-1. Use the developer tools to find your `merchant id`
-<img src="./merchant_id_1.png" width="500" />
-<img src="./merchant_id_2.png" width="500" />
-
-
-1. Go [https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions](https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions)
-1. Add your `merchant id` to the list
-1. Get a member of the `Tailor App Platform team` to approve
+1. Go to [Stripe's account settings page in the Dashboard](https://dashboard.stripe.com/settings/account)
+1. Copy your account ID from the top right corner of the Account settings panel.
+<img src="./acct_settings.jpg" width="500" />
+1. Send your account ID to your Stripe contact and ask them to enable Tailor Apps on your account.
 
 ## Step 2: Get the forked Stripe CLI 
 1. Get a build of the [Stripe CLI from the tailor-preview repository](../../cli)
