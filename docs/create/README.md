@@ -9,19 +9,7 @@ You can look through some example apps to get a better idea of the different thi
 
 You can look through some [example apps](../../examples) to get a better idea of the different things that are possible.
 
-## Step 1: Flag yourself into Tailor (for internal Stripes)
-
-1. Go to https://dashboard.stripe.com/
-1. Use the developer tools to find your `merchant id`
-<img src="./merchant_id_1.png" width="500" />
-<img src="./merchant_id_2.png" width="500" />
-
-
-1. Go [https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions](https://amp.corp.stripe.com/feature-flags/flag/tailor_ui_extensions)
-1. Add your `merchant id` to the list
-1. Get a member of the `Tailor App Platform team` to approve
-
-## Step 2: Get the forked Stripe CLI 
+## Step 1: Get the forked Stripe CLI 
 1. Get a build of the [Stripe CLI from the tailor-preview repository](../../cli)
 1. Download it to a convenient location.
 1. Move the file to your `/Users/<username>/stripe` folder to avoid getting a warning from Santa.
@@ -31,14 +19,14 @@ You can look through some [example apps](../../examples) to get a better idea of
 alias stripe-preview=/Users/<user>/stripe/stripe-preview
 ```
 
-## Step 3: Bootstrap your app
+## Step 2: Bootstrap your app
 ```sh
 $ stripe-preview tailor create [name]
 ```
 
 This will create a new, minimal tailor.json file.
 
-## Step 4: Now time to use some capabilities
+## Step 3: Now time to use some capabilities
 
 Your basic app has now been bootstrapped, but it does not do much yet. Next for you is to use some of the platform capabilities to add functionality.  
 
