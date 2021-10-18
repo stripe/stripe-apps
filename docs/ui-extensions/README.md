@@ -34,7 +34,6 @@ Follow the wizard in the CLI. The most important question you'll need to answer 
 
 Once all that is done it's time for you to serve up the apps locally from your machine.
 
-**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
 ### Step 2: Serve your app from your local machine
 ```sh
 $ stripe-preview tailor serve 
@@ -65,7 +64,15 @@ Views are React components (with some limits). These views are permitted to have
 - Views can be instantiated in Modals (or perhaps Drawers, TBD)
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
 
-**Note:** Currently imports from `@stripe/tailor-browser-sdk` will show up as errors in VSCode. This is temporary and it will work due to the SDK being injected at runtime.
+#### Props
+Views are passed props that the extension can use for context on where the extension is being displayed.
+
+| Field  | Description | Properties |
+|--------|-------------|------------|
+| `user` | The current signed in user | `id` |
+| `account` | The current signed in account | `id` |
+| `object` | Optional. In `ObjectView`s this is the current object that is being viewed in the Dashboard. `object` is the type associated with the `id` | `id`, `object` |
+
 ### `EmbedView`
 Embedded views appear on Stripe object detail pages like [`/customers/cus_1234`](https://dashboard.stripe.com/test/customers/cus_1234) or [`/invoices/in_1234`](https://dashboard.stripe.com/test/invoices/in_1234).
 
@@ -153,34 +160,6 @@ const MoodView = () => {
 Settings views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `SettingsView` to collect what Zendesk instance the app should communicate with from the administrator.
 
 *TODO:* Link to Component documentation
-
-### `StripeContext`
-Views have access to context about the merchant, user, and other contextual information about where the view is appearing.
-
-`useStripeContext` returns an object with all the context that's available.
-| Field  | Description | Properties |
-|--------|-------------|------------|
-| `user` | The current signed in user | `id` |
-| `account` | The current signed in account | `id` |
-| `object` | Optional. In `ObjectView`s this is the current object that is being viewed in the Dashboard. `object` is the type associated with the `id` | `id`, `object` |
-
-#### Example
-```tsx
-import {Group, Subheading} from '@stripe-internal/extensions-sail';
-import {useStripeContext} from '@stripe/tailor-browser-sdk/context';
-
-const ContextPrinter = () => {
-  const stripeCtx = useStripeContext();
-  return (
-    <Group>
-      <Subheading>{stripeCtx.user.id}</Subheading>
-      <Subheading>{stripeCtx.merchant.id}</Subheading>
-      <Subheading>{stripeCtx.object.id}</Subheading>
-      <Subheading>{stripeCtx.object.object}</Subheading>
-    </Group>
-  );
-}
-```
 
 ### [Coming soon!] Actions
 
