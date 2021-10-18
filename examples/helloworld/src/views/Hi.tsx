@@ -11,9 +11,10 @@ import {
 	Body,
 	BodyMono,
 	Heading,
-  } from '@stripe-internal/extensions-sail';
+  } from '@stripe/tailor-browser-sdk/ui';
+import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
 
-const Hi = () => (
+const Hi = ({object, user, account}: TailorExtensionContextValue) => (
   <EmbedView
     title="🧩 This is Hi!"
     description="Make a change to Hi.tsx and reload to see your change here."

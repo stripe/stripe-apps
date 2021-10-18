@@ -1,6 +1,5 @@
 import {
   AlignBox,
-  Button,
   ContentBlock,
   ContentHeader,
   Group,
@@ -8,19 +7,15 @@ import {
   Body,
   BodyMono,
   Heading,
-  HeadingTextProps,
-} from "@stripe-internal/extensions-sail";
-import { useStripeContext } from "@stripe/tailor-browser-sdk";
-import { Tickets } from "@types/node-zendesk";
+} from "@stripe/tailor-browser-sdk/ui";
+import { TailorExtensionContextValue} from "@stripe/tailor-browser-sdk/context";
+import { Tickets } from "node-zendesk";
 import { useEffect, useState } from "react";
 
 import stripeClient from "../clients/stripe";
 import AuthWall, { useZendeskContext } from "../components/AuthWall";
 
-const CustomerSupportHistory = () => {
-  const {
-    object: { id: customerId },
-  } = useStripeContext();
+const CustomerSupportHistory = ({object: {id: customerId}}) => {
   const zendeskClient = useZendeskContext();
 
   const [tickets, setTickets] = useState<Tickets.ListPayload>();
@@ -46,21 +41,21 @@ const CustomerSupportHistory = () => {
       />
       <ContentBlock padding={32}>
         <Group direction="horizontal" spacing={20}>
-          <AlignBox reference={HeadingTextProps} flex={{ direction: "row" }}>
+          <AlignBox flex={{ direction: "row" }}>
             <Icon icon="review" size={16} />
             <Group padding={{ left: 12 }} spacing={4}>
               <Heading>Views</Heading>
               <Body>{JSON.stringify(tickets)}</Body>
             </Group>
           </AlignBox>
-          <AlignBox reference={HeadingTextProps} flex={{ direction: "row" }}>
+          <AlignBox flex={{ direction: "row" }}>
             <Icon icon="change" size={16} />
             <Group padding={{ left: 12 }} spacing={4}>
               <Heading>Actions</Heading>
               <Body>These aren't implemented yet. </Body>
             </Group>
           </AlignBox>
-          <AlignBox reference={HeadingTextProps} flex={{ direction: "row" }}>
+          <AlignBox flex={{ direction: "row" }}>
             <Icon icon="api" size={16} />
             <Group padding={{ left: 12 }} spacing={4}>
               <Heading>Stripe CLI</Heading>
@@ -78,10 +73,10 @@ const CustomerSupportHistory = () => {
   );
 };
 
-export default () => {
+export default ({account, user, object}: TailorExtensionContextValue) => {
   return (
-    <AuthWall>
-      <CustomerSupportHistory />
+    <AuthWall account={account} object={object}>
+      <CustomerSupportHistory object={object}/>
     </AuthWall>
   );
 };

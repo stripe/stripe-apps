@@ -1,7 +1,7 @@
 {
-  "id": "com.stripe.helloworld",
+  "id": "com.example.helloworld",
   "version": "0.0.1",
-  "name": "Hello World!",
+  "name": "Hello world",
   "icon": "",
   "permissions": [],
   "app_backend": {},

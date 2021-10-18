@@ -5,6 +5,6 @@ export const statusColorMap = {
   solved: 'gray',
 };
   
-export const capitalize = (string) => {
+export const capitalize = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };

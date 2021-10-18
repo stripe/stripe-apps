@@ -1,6 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { useStripeContext } from "@stripe/tailor-browser-sdk";
-import { Button, LoadingState } from "@stripe-internal/extensions-sail";
+import { Button, LoadingState } from "@stripe/tailor-browser-sdk/ui";
 
 import AuthClient from "../clients/auth";
 import ZendeskClient from "../clients/zendesk";
@@ -13,18 +12,13 @@ export function useZendeskContext() {
 
 type TokenFetchState = "init" | "success" | "not_found" | "error" | "no_config";
 
-export const AuthWall = ({ children }) => {
-  const {
-    account: { id: stripeAccountId },
-    object: { id: objectId, object: objectType },
-  } = useStripeContext();
-
+export const AuthWall = ({ children, account, object }) => {
   const zendeskSubdomain = "htheodore-stripe-test";
   const zendeskClientId = "tailor-zendesk-srv";
 
-  const authClient = new AuthClient(stripeAccountId, zendeskSubdomain);
+  const authClient = new AuthClient(account.id, zendeskSubdomain);
   const [zendeskClient, setZendeskClient] = useState(
-    new ZendeskClient(zendeskSubdomain, zendeskClientId, stripeAccountId)
+    new ZendeskClient(zendeskSubdomain, zendeskClientId, account.id)
   );
 
   const [tokenFetchState, setTokenFetchState] =
@@ -33,8 +27,8 @@ export const AuthWall = ({ children }) => {
   const redirectUri = authClient.getRedirectUri();
   const zendeskAuthHref = zendeskClient.getAuthUrl(
     redirectUri,
-    objectType,
-    objectId
+    object.object,
+    object.id,
   );
 
   const fetchZendeskToken = async () => {

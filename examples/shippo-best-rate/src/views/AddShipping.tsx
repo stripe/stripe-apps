@@ -1,8 +1,7 @@
 import {
   LoadingState,
   EmbedView,
-} from '@stripe-internal/extensions-sail';
-import {useStripeContext} from '@stripe/tailor-browser-sdk';
+} from '@stripe/tailor-browser-sdk/ui';
 
 import {useEffect, useState, useCallback} from 'react';
 
@@ -11,11 +10,12 @@ import type {ShippingDetailsMetadata} from './ShippingDetails';
 import ShippingDetails from './ShippingDetails';
 import stripeClient from './stripe_client';
 import Stripe from 'stripe';
+import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
 
 const logo = require('../shippo-logo.svg') as string;
 
-const AddShipping = () => {
-  const {object: {id: invoiceId}} = useStripeContext();
+const AddShipping = ({object, user, account}: TailorExtensionContextValue) => {
+  const {id: invoiceId} = object;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata>();
   const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
   const loadShippingDetails = async (invoiceId: string) => {

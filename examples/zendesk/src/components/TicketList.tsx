@@ -13,8 +13,8 @@ import {
     Section,
     Text,
     TruncatedText
-    } from '@stripe-internal/extensions-sail';
-import { Tickets } from '@types/node-zendesk';
+    } from '@stripe/tailor-browser-sdk/ui';
+import { Tickets } from 'node-zendesk';
 import {useEffect, useState} from 'react';
 import { useZendeskContext } from "../components/AuthWall";
 
@@ -22,7 +22,7 @@ import TicketDetails from './TicketDetails';
 import {statusColorMap, capitalize} from './utils';
 
 
-const TicketList = (): React.Node => {
+const TicketList = (): JSX.Element => {
   const [ticketData, setTicketData] = useState<Tickets.ListPayload>();
   const [currentPage, setCurrentPage] = useState<Number>(0);
   const [modalState, setModalState] = useState<'hidden'|'visible'|'pending'>('hidden');
@@ -39,7 +39,7 @@ const TicketList = (): React.Node => {
       setModalState('hidden');
   }
 
-  const DetailModal = (): React.Node => {
+  const DetailModal = (): JSX.Element => {
     const modalContent = modalTicket ? <TicketDetails ticket={modalTicket}></TicketDetails> : null;
 
     return (

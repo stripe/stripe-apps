@@ -1,13 +1,12 @@
 import {
-  ContentHeader,
   FormLayout,
   Switch,
   FormBlock,
   FormRow,
   FormField,
   EmbedView,
-} from '@stripe-internal/extensions-sail';
-import {createHttpClient} from '@stripe/tailor-browser-sdk';
+} from '@stripe/tailor-browser-sdk/ui';
+import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
 
 import {useCallback, useState} from 'react';
 import Stripe from 'stripe';
