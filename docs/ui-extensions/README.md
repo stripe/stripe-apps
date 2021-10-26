@@ -159,10 +159,120 @@ const MoodView = () => {
 }
 ```
 
-### [Coming soon!] `SettingsView`
+### `SettingsView`
 Settings views appear in Settings and allow end-users to configure specific details about how the app should work with their specific account. For instance, a Zendesk app would need a `SettingsView` to collect what Zendesk instance the app should communicate with from the administrator.
 
-*TODO:* Link to Component documentation
+The SettingsView is a bit different from the other views in that it is not tied to a specific object. The Settings view will have predefined locations in which it will be available. For now, the SettingsView appears when we enable Developer Mode for our application but it will have more locations in the future. 
+
+To define a SettingsView, you must add a view with the `settings` viewport. An application with a settings view would have a `tailor.json` that looks something like this: 
+```json
+{
+  ...,
+  "ui_extension": {
+    "views": [
+      ...,
+      {
+        "viewport": "settings",
+        "component": "AppSettings"
+      }
+    ],
+  }
+}
+```
+
+#### Props
+
+| Field | Type | Description | Required |
+| ----- | ----- | ----- | ----- | 
+| `header` | `string` | A string to display as the settings header | No |
+| `subheader` | `string` | A string to display as the subheader | No |
+| `onSave` | `(values: {[key: string]: any}) => void` | An action to run when a user hits the save button | Yes |
+| `statusMessage` | `string` | A string to communicate a status message to the user | No |
+
+#### Example
+
+An example using provided components for styling forms. 
+
+```tsx
+import {useState, useCallback} from 'react';
+import {
+  FormLayout,
+  FormBlock,
+  FormRow,
+  FormField,
+  TextInput,
+  SettingsView,
+} from '@stripe/tailor-browser-sdk/ui';
+
+type FormStatus = 'initial' | 'saving' | 'saved' | 'error';
+
+const AppSettings = () => {
+  const [status, setStatus] = useState<FormStatus>('initial');
+
+  const saveSettings = useCallback(async (values) => {
+    setStatus('saving');
+    try {
+      const result = await fetch(
+        'https://www.my-api.com/',
+        {
+          method: 'POST',
+          body: JSON.stringify({ 'username': values.username })
+        }
+      );
+      await result.text();
+      setStatus('saved');
+    } catch (err) {
+      console.error(error);
+      setStatus('error');
+    }
+  }, []);
+
+  const getStatusLabel = useCallback(() => {
+    switch(status) {
+      case 'saving':
+        return 'Saving...';
+      case 'saved':
+        return 'Saved!';
+      case 'error':
+        return 'Error: There was an error saving your settings.';
+      case 'initial':
+      default:
+        return '';
+    }
+  }, [status]) 
+  const statusLabel = getStatusLabel();
+
+  return (
+   <SettingsView 
+    header="My app settings" 
+    subheader="A place to add my application settings."
+    statusMessage={statusLabel}
+    onSave={saveSettings}
+  >
+      <FormLayout title="Set a greeting">
+        <FormBlock>
+          <FormRow name="username" label="My setting option">
+            <FormField
+              label="Name"
+              description="Please enter your name"
+            >
+              <TextInput
+                name="username"
+                id="username"
+              />
+            </FormField>
+          </FormRow>
+        </FormBlock>
+      </FormLayout>
+    </SettingsView>
+  );
+}
+export default AppSettings;
+
+```
+
+The above example renders in the UI as follows:
+![SettingsView when enabling Developer Mode](./settings_view_example.png)
 
 ### [Coming soon!] Actions
 
