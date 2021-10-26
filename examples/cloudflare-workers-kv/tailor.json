@@ -1,0 +1,28 @@
+{
+  "id": "com.example.settings-demo-v2",
+  "version": "0.0.1",
+  "name": "SettingsViewDemo",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.product.main",
+        "component": "Greetings"
+      },
+      {
+        "viewport": "settings",
+        "component": "AppSettings"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [
+        "https://restless-bread.ng-stripe.workers.dev/greeting/",
+        "https://restless-bread.ng-stripe.workers.dev/greeting/101"
+      ],
+      "purpose": "Cloudflare worker with key-value store"
+    }
+  }
+}
