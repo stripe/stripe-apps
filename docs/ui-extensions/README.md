@@ -186,8 +186,8 @@ To define a SettingsView, you must add a view with the `settings` viewport. An a
 | ----- | ----- | ----- | ----- | 
 | `header` | `string` | A string to display as the settings header | No |
 | `subheader` | `string` | A string to display as the subheader | No |
-| `onSave` | `(values: {[key: string]: any}) => void` | An action to run when a user hits the save button | Yes |
-| `statusMessage` | `string` | A string to communicate a status message to the user | No |
+| `onSave` | `(values: {[key: string]: any}) => void` | A callback function to run when a user hits the save button | Yes |
+| `statusMessage` | `string` | A string to communicate a status message to the user - useful for displaying errors and success messages | No |
 
 #### Example
 
