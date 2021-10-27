@@ -216,7 +216,7 @@ const AppSettings = () => {
         'https://www.my-api.com/',
         {
           method: 'POST',
-          body: JSON.stringify({ 'username': values.username })
+          body: JSON.stringify(values)
         }
       );
       await result.text();
