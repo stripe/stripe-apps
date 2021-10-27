@@ -1,0 +1,25 @@
+{
+  "id": "com.example.metadata-storage",
+  "version": "0.0.1",
+  "name": "Metadata Storage Demo",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.main",
+        "component": "MetadataStorage"
+      },
+      {
+        "viewport": "settings",
+        "component": "AppSettings"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}
