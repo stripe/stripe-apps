@@ -164,7 +164,7 @@ Settings views appear in Settings and allow end-users to configure specific deta
 
 The SettingsView is a bit different from the other views in that it is not tied to a specific object. The Settings view will have predefined locations in which it will be available. For now, the SettingsView appears when we enable Developer Mode for our application but it will have more locations in the future. 
 
-To define a SettingsView, you must add a view with the `settings` viewport. An application with a settings view would have a `tailor.json` that looks something like this: 
+To define a SettingsView, you must add a view with the `settings` viewport to your app manifest. An application with a settings view would have an app manifest with a `ui_extension` field that would look something like this:
 ```json
 {
   ...,
