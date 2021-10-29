@@ -1,0 +1,12 @@
+{
+  "name": "com.example.metadata-storage",
+  "version": "0.0.1",
+  "description": "Metadata Storage Demo",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/tailor-browser-sdk": "^0.0.11",
+    "react": "^17.0.2",
+    "stripe": "^8.170.0"
+  }
+}

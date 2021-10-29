@@ -1,0 +1,12 @@
+{
+  "name": "com.example.settings-demo-v2",
+  "version": "0.0.1",
+  "description": "SettingsViewDemo",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/tailor-browser-sdk": "^0.0.11",
+    "react": "^17.0.2",
+    "stripe": "^8.170.0"
+  }
+}
