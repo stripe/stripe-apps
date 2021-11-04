@@ -26,7 +26,7 @@ The capabilities provided by Stripe are:
 
 1. **🤐 Secret Store [Coming soon]** enable developers to securely store cryptographic material in order to authenticate and communicate with external services.
 
-1. **💾 Custom Data [Coming soon]** enable developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
+1. **💾 Custom Objects [Coming soon]** enable developers to use the Stripe platform to store their own data in their own namespace within Stripe and associate data with Stripe objects, so it's easily discoverable and mappable.
 
 ## Create an app
 
