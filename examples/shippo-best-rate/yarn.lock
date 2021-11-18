@@ -47,10 +47,10 @@
   dependencies:
     "@remote-ui/rpc" "^1.2.5"
 
-"@stripe/tailor-browser-sdk@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-0.0.10.tgz#3e9bf17aec5ece8578e384b7658f1f028261a065"
-  integrity sha512-RZ8R15KbTlmnpdp+l81CSFwYRTWW76QBAZRI2ToxfdVmcu52h3NcWxD4rF7vqd7WRwiFdAJPz1NKETWF8Mw+8Q==
+"@stripe/tailor-browser-sdk@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-0.0.12.tgz#a5552537dbfd9209dc3156bbca17a5219494eac4"
+  integrity sha512-S4fpHhvHmyCZMsKw1QG/W/CI/ChAGTP9yjSrBuS/0Z4AgSHrYmFn2JpHs4N/42/9nr9BOJud+5nm8Ave0sxOig==
   dependencies:
     "@remote-ui/react" "^4.1.0"
     invariant "^2.2.4"
