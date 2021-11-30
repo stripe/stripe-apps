@@ -1,0 +1,21 @@
+{
+  "id": "com.example.tailor-messaging",
+  "version": "0.0.1",
+  "name": "Messaging",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.main",
+        "component": "Messaging"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}
