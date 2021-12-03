@@ -9,14 +9,18 @@ You can look through some example apps to get a better idea of the different thi
 
 You can look through some [example apps](../../examples) to get a better idea of the different things that are possible.
 
-## Step 1: Get your account into the preview
 
-1. Go to [Stripe's account settings page in the Dashboard](https://dashboard.stripe.com/settings/account)
-1. Copy your account ID from the top right corner of the Account settings panel.
+## Before you begin
+
+### Get your account into the preview
+
+Enable access to the Stripe preview CLI by sending your account ID to your Stripe contact and requesting access.
+ 
+You can find your account ID in the top right corner of the [**Account settings** section](https://dashboard.stripe.com/settings/account) in the Dashboard, as shown below:
+
 <img src="./acct_settings.jpg" width="500" />
-1. Send your account ID to your Stripe contact and ask them to enable Tailor Apps on your account.
 
-## Step 2: Get the forked Stripe CLI 
+### Get the forked Stripe CLI 
 1. Get the latest build of the Stripe CLI from https://github.com/stripe/tailor-preview/releases/latest.
 1. Download it to a convenient location.
 1. Move the file to your `/Users/<username>/stripe` folder to avoid getting a warning from Santa.
@@ -26,14 +30,14 @@ You can look through some [example apps](../../examples) to get a better idea of
 alias stripe-preview=/Users/<user>/stripe/stripe-preview
 ```
 
-## Step 3: Bootstrap your app
+## Bootstrap your app
 ```sh
 $ stripe-preview tailor create [name]
 ```
 
 This will create a new, minimal tailor.json file.
 
-## Step 4: Now time to use some capabilities
+## Now time to use some capabilities
 
 Your basic app has now been bootstrapped, but it does not do much yet. Next for you is to use some of the platform capabilities to add functionality.  
 
