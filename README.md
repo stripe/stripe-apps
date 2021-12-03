@@ -25,9 +25,23 @@ We have built a range of sample applications that demonstrates the capabilities 
 
 You can find examples in [/examples](/examples)
 
-## Known Issues and feedback
+## Browsing Issues
+Issues are labeled as 'Bug', 'Feature Request', 'Enhancement', 'Question' or 'Documentation'. In addition they are labeled with a relevant owning team. 
+We use the reactions on feature requests and enhancements to gauge interest, so please feel free to upvote, downvote, and comment on what is the most meaningful for your app.
 
-See [known_issues](./known_issues.md) for a list of know issues.
+## Raising Issues
+If you would like to raise an issue, there are several issue templates available. Choose the one that makes the most sense to you from the following:
+
+| Type             | “Think”                    |
+| ---------------- | -------------------------- |
+| Bug              | “This is broken…”          |
+| Feature Request  | “Wouldn’t it be cool if…?” |
+| Enhancement      | “It would be easier if…”   |
+| Documentation    | “I can’t find how to…”     |
+| Question         | “What am I doing wrong?”   |
+
+
+## Friction Logs
 
 We encourage you to share feedback through a format that we call for Friction logs. Friction logs are documents that describe the frustrations and delights of a product, focused around a specific use case. They're also intended to be brutally honest - feel free to vent or to praise!
 
