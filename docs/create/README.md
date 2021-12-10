@@ -32,7 +32,7 @@ alias stripe-preview=/Users/<user>/stripe/stripe-preview
 
 ## Bootstrap your app
 ```sh
-$ stripe-preview tailor create [name]
+$ stripe-preview tailor apps [name]
 ```
 
 This will create a new, minimal tailor.json file.
