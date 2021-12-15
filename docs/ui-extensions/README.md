@@ -13,15 +13,15 @@ UI extensions for Dashboard enable developers to create custom UI for the Stripe
 - Developers test their changes in the live Stripe Dashboard by running a development server locally with the Stripe CLI
 - Once the extension is ready for others to use, developers use the Stripe CLI to build the extension and push it to Stripe for publication.
 
-## Getting started
-### Step 1: Generate a view
-If you haven't already created an app, see [Creating a new app](../create/README.md). Once you have setup your basic app, you can use the Stripe CLI to generate your first view that extends a part of the Dashboard.
+## Extension SDK API reference
+The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Views and Actions (coming soon!).
 
+### Views
+If you haven't already created an app, see [Creating a new app](../create/README.md). Once you have setup your basic app, you can use the Stripe CLI to generate additional views that extend the Dashboard.
 ```sh
-$ stripe-preview tailor generate view
+$ stripe-preview apps generate view # Follow the prompts that appear
 ```
-
-Follow the wizard in the CLI. The most important question you'll need to answer is where your view will appear in the Dashboard. Currently we only support `EmbedView`s, or UI extension views that are embedded on a Stripe object detail page.
+Follow the wizard in the CLI. The most important question you'll need to answer is where your view will appear in the Dashboard. Currently we only support `ContextView`s, or UI extension views that are embedded on a Stripe object detail page.
 
 <dl>
   <dt>`stripe.dashboard.customer.main`</dt>
@@ -34,34 +34,11 @@ Follow the wizard in the CLI. The most important question you'll need to answer 
   <dd>View will appear on the product page</dd>
 </dl>
 
-Once all that is done it's time for you to serve up the apps locally from your machine.
-
-### Step 2: Serve your app from your local machine
-```sh
-$ stripe-preview tailor serve 
-```
-
-This command open the Stripe Dashboard and prompt to enable developer mode. Once you are in developer mode the Dashboard will load your extension from your local machine.
-
-### Step 3: See your app in action
-Go to the Stripe Dashboard and navigate to where the view is configured to appear (for example, [a product page](https://dashboard.stripe.com/products))
-
-The "Hello world" extension will appear right above the Metadata section.
-
-Modify the view that was generated above and observe that changes are reflected in the Dashboard
-
-## Extension SDK API reference
-The “extension SDK” is the set of interfaces that Stripe supports for injecting new functionality into the Stripe Dashboard. The two ways of doing this are using Actions (coming soon!) and Views.
-
-### Views
-```sh
-$ stripe-preview tailor generate view # Follow the prompts that appear
-```
 Every "view" that a UI extension exports must return one of the Stripe-provided base views below.
 
 Views are React components (with some limits). These views are permitted to have `children` and are how entirely custom UI experiences can be built. 
 
-- The first child of a View must be a Stripe-provided view container (ie `EmbedView`)
+- The first child of a View must be a Stripe-provided view container (ie `ContextView`)
 - The UI Components available are based on Stripe's internal design system, Sail
 - Views can be instantiated in Modals (or perhaps Drawers, TBD)
   - Eventually developers will be able to make entire custom Dashboard pages that appear in the Dashboard navigation. Please let us know if this is critical to your use case.
@@ -75,12 +52,12 @@ Views are passed props that the extension can use for context on where the exten
 | `account` | The current signed in account | `id` |
 | `object` | Optional. In `ObjectView`s this is the current object that is being viewed in the Dashboard. `object` is the type associated with the `id` | `id`, `object` |
 
-### `EmbedView`
-Embedded views appear on Stripe object detail pages like [`/customers/cus_1234`](https://dashboard.stripe.com/test/customers/cus_1234) or [`/invoices/in_1234`](https://dashboard.stripe.com/test/invoices/in_1234).
+### `ContextView`
+Context views appear on Stripe object detail pages like [`/customers/cus_1234`](https://dashboard.stripe.com/test/customers/cus_1234) or [`/invoices/in_1234`](https://dashboard.stripe.com/test/invoices/in_1234).
 
-For now they always appear above the Metadata section. On the customer page, the view will appear between pending invoice items and quotes.
+They always appear at the right side of the page.
 
-![Hello World on the customer page](./customer_hello.jpg)
+![Hello World on the customer page](./customer_hello.png)
 
 #### Props
 | Field         | Type     | Description                                                                                                        | Required |
@@ -92,13 +69,13 @@ For now they always appear above the Metadata section. On the customer page, the
 ```tsx
 import {
   BodyExtra,
-  EmbedView,
+  ContextView,
 } from '@stripe-internal/extensions-sail';
 
 const HappyView = () => (
-  <EmbedView title="Simple stuff" description="This section communicates my extension's feelings">
+  <ContextView title="Simple stuff" description="This section communicates my extension's feelings">
     <BodyExtra>Happy</BodyExtra>
-  </EmbedView>
+  </ContextView>
 )
 ```
 
@@ -112,7 +89,7 @@ These are opened from other Views and allow the developer to open a dedicated sp
 | Field     | Type                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                      | Required           |
 |-----------|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
 | `title`   | `string`                                             | The title of the view. This is displayed to users and should orient the user to what the intention of the view is.                                                                                                                                                                                                                                                                               | Yes                |
-| `shown`   | `boolean`                                            | Whether the view should be shown or not. This is the property that would be maintained by another view (like the `EmbedView`) to decide when to enter the focused state.                                                                                                                                                                                                                         | Yes                |
+| `shown`   | `boolean`                                            | Whether the view should be shown or not. This is the property that would be maintained by another view (like the `ContextView`) to decide when to enter the focused state.                                                                                                                                                                                                                         | Yes                |
 | `actions` | `React.Element<typeof Button \| typeof ButtonGroup>` | Either a single [`Button`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-button--basic) or a [`ButtonGroup`](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/components-actions-navigation-buttongroup--basic) that contains buttons to place in the footer of the view. IE a "Save" or "Continue" button. | Yes (due to a bug) |
 | `width`   | `'small' \| 'medium' \| 'large' \| 'xlarge'`         | The width of the view. Defaults to `medium`                                                                                                                                                                                                                                                                                                                                                      | No                 |
 | `onClose` | `() => void`                                         | If the user clicks out of the `FocusView` or presses the escape button, this will be called to inform the extension that the user has closed the view.                                                                                                                                                                                                                                           | No                 |
@@ -123,7 +100,7 @@ import {useState} from 'react';
 import {
   Button,
   BodyExtra,
-  EmbedView,
+  ContextView,
   FocusView,
   Select,
   SelectOption,
@@ -139,7 +116,7 @@ const MoodView = () => {
     setPicker(false);
   };
   return (
-    <EmbedView title="Mood picker" description="This section communicates my extension's feelings">
+    <ContextView title="Mood picker" description="This section communicates my extension's feelings">
       <FocusView
         shown={picker}
         onClose={setPicker(false)}
@@ -154,7 +131,7 @@ const MoodView = () => {
       </FocusView>
       <BodyExtra>Happy</BodyExtra>
       <Button label="Change mood" onClick={() => setPicker(true)} />
-    </EmbedView>
+    </ContextView>
   );
 }
 ```
@@ -285,7 +262,7 @@ Actions appear as buttons/links or in context menus for Stripe objects that they
 #### Create stub file
 In order to have an action, the developer needs to register their action in app.json, specify which object types it supports, and write a JS or TS function that fulfills the interface. The Stripe CLI helps with all of this.
 ```sh
-    $ stripe-preview tailor generate action # Follow the prompts that appear
+    $ stripe-preview apps generate action # Follow the prompts that appear
 ```
 
 #### Interface
@@ -395,7 +372,7 @@ Some examples of invalid URLS include:
 
 Follow these steps to enable your UI extension to hit your 3rd party API:
 1. Add the URL you wish to call to the [tailor.json file](../tailor.json.md#CSPRequest)
-2. Start or restart your development server. — `$ stripe-preview tailor serve`
+2. Start or restart your development server. — `$ stripe-preview apps start`
 3. Now you can use `fetch` in order to call the URL you configured in step 1.
 4. If the API in question has a JS client library that may work as well if it supports running in a browser context. Simply add the dependency to your extension using `npm add`
 
