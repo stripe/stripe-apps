@@ -1,13 +1,11 @@
 import {
   FormLayout,
   Switch,
-  FormBlock,
   FormRow,
   FormField,
-  EmbedView,
+  ContextView,
 } from '@stripe/tailor-browser-sdk/ui';
 import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
-
 import {useCallback, useState} from 'react';
 import Stripe from 'stripe';
 
@@ -33,6 +31,7 @@ const descriptionTable = {
 
 const stripeClient = new Stripe('DUMMY_API_KEY', {
   httpClient: createHttpClient(),
+  apiVersion: '2020-08-27',
 });
 
 const updateProductCouponMetadata = async (newCouponState: CouponState) =>
@@ -63,7 +62,9 @@ const Couponer = () => {
       description: descriptionTable.repeat,
     },
   ];
+
   const [couponState, setCouponState] = useState({});
+
   const handleCouponChange = useCallback(
     async (value: string, on: boolean) => {
       setCouponState({
@@ -71,7 +72,6 @@ const Couponer = () => {
         [value]: 'pending',
       });
       if (on) {
-        let percent_off = 10;
         // Ceate coupon for this product
         const coupon = await stripeClient.coupons.create({
           name: `Mousetraps B — ${value}`,
@@ -99,30 +99,29 @@ const Couponer = () => {
     },
     [couponState],
   );
+
   return (
-    <EmbedView
+    <ContextView
       title="Couponer"
       description="Enable HK Mousetrap's standard coupons for this product."
     >
       <FormLayout layout={'inline'} background="white" divider={false}>
-        <FormBlock>
-          {options.map(({value, description, label}) => (
-            <FormRow key={value}>
-              <FormField>
-                <Switch
-                  id={value}
-                  description={description}
-                  label={label}
-                  disabled={couponState[value] === 'pending'}
-                  value={couponState[value]}
-                  onChange={(on: boolean) => handleCouponChange(value, on)}
-                />
-              </FormField>
-            </FormRow>
-          ))}
-        </FormBlock>
+        {options.map(({value, description, label}) => (
+          <FormRow key={value}>
+            <FormField>
+              <Switch
+                id={value}
+                description={description}
+                label={label}
+                disabled={couponState[value] === 'pending'}
+                value={couponState[value]}
+                onChange={(on: boolean) => handleCouponChange(value, on)}
+              />
+            </FormField>
+          </FormRow>
+        ))}
       </FormLayout>
-    </EmbedView>
+    </ContextView>
   );
 };
 

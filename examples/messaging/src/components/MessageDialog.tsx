@@ -8,13 +8,17 @@ import {
   ModalLayer,
 } from '@stripe/tailor-browser-sdk/ui';
 
-import { Message } from "../types";
-import { getEpochMsDisplayText } from '../utils/time';
+import {Message} from '../types';
+import {getEpochMsDisplayText} from '../utils/time';
 
 const padding = {horizontal: 20, vertical: 20};
 
-const MessageDialog = ({message, open, setOpen}: {
-  message: Message;
+const MessageDialog = ({
+  message,
+  open,
+  setOpen,
+}: {
+  message: Message,
   open: boolean,
   setOpen: (open: boolean) => void,
 }) => (
@@ -33,7 +37,7 @@ const MessageDialog = ({message, open, setOpen}: {
             <Badge label={`To: ${message.to}`} />
           </Group>
         </ContentBlock>
-        <ContentBlock padding={padding} style={{ whiteSpace: 'pre-wrap' }}>
+        <ContentBlock padding={padding} style={{whiteSpace: 'pre-wrap'}}>
           {message.body}
         </ContentBlock>
         <ContentHeader
@@ -41,7 +45,11 @@ const MessageDialog = ({message, open, setOpen}: {
           background="offset"
           end={
             <Group direction="horizontal" spacing={12}>
-              <Button label="View in Messaging" icon="external" iconPosition="right" />
+              <Button
+                label="View in Messaging"
+                icon="external"
+                iconPosition="right"
+              />
               <Button onClick={() => setOpen(false)} label="Close" />
             </Group>
           }

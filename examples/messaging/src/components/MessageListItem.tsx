@@ -1,21 +1,23 @@
 import React from 'react';
-import {
-  ContentListItem,
-  Badge,
-} from '@stripe/tailor-browser-sdk/ui';
+import {ContentListItem, Badge, Group} from '@stripe/tailor-browser-sdk/ui';
 
-import { Message } from '../types';
+import {Message} from '../types';
 import MessageDialog from './MessageDialog';
-import { getEpochMsDisplayText } from '../utils/time';
+import {getEpochMsDisplayText} from '../utils/time';
 
 const MessageListItem = ({message}: {message: Message}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <ContentListItem
-      start={<Badge label={getEpochMsDisplayText(message.date)} color="blue" />}
+      title={
+        <Group style={{marginBottom: '4px'}}>
+          {message.subject}
+          <Badge label={getEpochMsDisplayText(message.date)} color="blue" />
+        </Group>
+      }
       end={<MessageDialog message={message} open={open} setOpen={setOpen} />}
-      title={message.subject}
+      endAlign="center"
       description={message.snippet}
       onClick={() => setOpen(true)}
     />
