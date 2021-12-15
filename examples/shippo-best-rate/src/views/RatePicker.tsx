@@ -90,6 +90,7 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
           invoice.customer,
         );
         if (customer.deleted === true) throw new Error('Customer is deleted');
+        if (!customer.address) throw new Error('Missing customer address');
         setCustomer(customer);
         const resp = await shippoRequest(
           'shipments',

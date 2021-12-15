@@ -1,6 +1,6 @@
 import {
   LoadingState,
-  EmbedView,
+  ContextView,
 } from '@stripe/tailor-browser-sdk/ui';
 
 import {useEffect, useState, useCallback} from 'react';
@@ -72,7 +72,7 @@ const AddShipping = ({object, user, account}: TailorExtensionContextValue) => {
   } else {
     content = <RatePicker invoice={invoice} onRatePicked={setShippingDetails} />;
   }
-  return <EmbedView title="Shippo">{content}</EmbedView>;
+  return <ContextView title="Shippo">{content}</ContextView>;
 };
 
 export default AddShipping;
