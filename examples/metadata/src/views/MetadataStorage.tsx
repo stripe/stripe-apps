@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import {
-	EmbedView,
-	Group,
-	Text,
-} from '@stripe/tailor-browser-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
+import {useEffect, useState} from 'react';
+import {ContextView, Group, Text} from '@stripe/tailor-browser-sdk/ui';
+import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
 import stripeClient from '../clients/stripe';
 
 const MetadataStorage = ({object}: TailorExtensionContextValue) => {
@@ -14,15 +10,15 @@ const MetadataStorage = ({object}: TailorExtensionContextValue) => {
   // retrieve information from customer metadata.
   const retrieveMetadata = async (customerId: string) => {
     try {
-      const customer = await stripeClient.customers.retrieve(customerId)
-      if (customer.deleted === true) throw new Error("Customer is deleted");
-      console.log('fetched customer: ', customer)
-      const { favorite_color } = customer.metadata;
+      const customer = await stripeClient.customers.retrieve(customerId);
+      if (customer.deleted === true) throw new Error('Customer is deleted');
+      console.log('fetched customer: ', customer);
+      const {favorite_color} = customer.metadata;
       if (favorite_color) {
         setFavoriteColor(favorite_color);
       }
     } catch (error) {
-      console.error('error fetching customer: ', error)
+      console.error('error fetching customer: ', error);
     }
     setIsLoading(false);
   };
@@ -31,25 +27,23 @@ const MetadataStorage = ({object}: TailorExtensionContextValue) => {
     retrieveMetadata(object.id);
   }, [object.id]);
 
-  return(
-    <EmbedView
+  return (
+    <ContextView
       title="Metadata Demo"
       description="What is this customer's favorite color?"
     >
       <Group direction="horizontal" spacing={20}>
-        { isLoading 
-          ? <Text>Loading...</Text> 
-          : (
-            <Text color={favoriteColor} size={16}>
-              { favoriteColor 
-                ? `This customer's favorite color is ${favoriteColor}`
-                : 'A favorite color has not been set for this customer.' 
-              }
-            </Text>
-          ) 
-        }
+        {isLoading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <Text color={favoriteColor} size={16}>
+            {favoriteColor
+              ? `This customer's favorite color is ${favoriteColor}`
+              : 'A favorite color has not been set for this customer.'}
+          </Text>
+        )}
       </Group>
-    </EmbedView>
+    </ContextView>
   );
 };
 
