@@ -1,11 +1,8 @@
 import {
-  AlignBox,
   Badge,
-  BodyAltMono,
-  ErrorState,
-  ContentListItem,
-  ContentList,
-  LoadingState,
+  SectionList,
+  SectionListItem,
+  View,
 } from '@stripe/tailor-browser-sdk/ui';
 
 import {useCallback, useEffect, useState} from 'react';
@@ -151,44 +148,39 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   }, []);
 
   if (errorMessage) {
-    return <ErrorState size="medium" title={errorMessage} />;
+    return <View>{errorMessage}</View>;
   }
   if (!customer) {
-    return <LoadingState size="medium" title="Getting customer address" />;
+    return <View>Getting customer address</View>;
   }
   if (!shipment) {
-    return (
-      <LoadingState size="medium" title="Loading shipping rates from Shippo" />
-    );
+    return <View>Loading shipping rates from Shippo</View>;
   }
   if (creatingLabel) {
-    return <LoadingState size="medium" title="Creating shipping label" />;
+    return <View>Creating shipping label</View>
   }
   const rateItems = shipment.rates.map((rate) => {
     const attributePills = rate.attributes.map((attr, i) => (
       <Badge key={i} color="blue" label={attr} />
     ));
     return (
-      <ContentListItem
+      <SectionListItem
         key={rate.object_id}
-        start={<img width="20" src={rate.provider_image_75} />}
-        startAlign="center"
-        onClick={() => handleRatePicked(invoice, rate, shipment)}
-        title={`${rate.provider} ${rate.servicelevel.name}`}
-        description={rate.duration_terms}
-        end={
-          <AlignBox>
-            {attributePills}
-            <BodyAltMono style={{paddingLeft: '20px'}}>
-              ${rate.amount}
-            </BodyAltMono>
-          </AlignBox>
-        }
-        endAlign="center"
-      />
+        value={rate.amount}
+        size="large"
+      >
+        <View slot="icon"><img width="20" src={rate.provider_image_75} /></View>
+        <View>{`${rate.provider} ${rate.servicelevel.name}`}</View>
+        <View slot="description">{rate.duration_terms}</View>
+      </SectionListItem>
     );
   });
-  return <ContentList>{rateItems}</ContentList>;
+  return <SectionList onAction={(key) => {
+    // There's a bug with onAction so just picking a random rate for now
+    const rate = shipment.rates[Math.round(Math.random() * shipment.rates.length)]
+    handleRatePicked(invoice, rate, shipment)}
+  }>{rateItems}</SectionList>;
+        
 };
 
 export default RatePicker;

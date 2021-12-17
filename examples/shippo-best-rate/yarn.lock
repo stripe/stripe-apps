@@ -17,15 +17,14 @@
     "@remote-ui/rpc" "^1.2.5"
     "@remote-ui/types" "^1.1.1"
 
-"@remote-ui/react@^4.1.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.2.3.tgz#aff3cd61db8ca69575750ea0b8102ff7d3338953"
-  integrity sha512-8cOyEW6M3h+yjuTt3LRv8yCpqpABHLbiBu9zHt2wi+fhUJ0cs28+0DahJ9OCfp81fJHpChzJ46+fL5CYVk5hZg==
+"@remote-ui/react@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.3.0.tgz#5f1ed2482cb1f0e920fcfc2479b2a1cee72ea101"
+  integrity sha512-FOTzF2PZIUJqJQwyzUFboDg+EyDilJjcjwOpKl84/izvewD0HcM+4E7xD5yx7CRES1jYSVGiMxxRuL7SQ4wF4w==
   dependencies:
     "@remote-ui/async-subscription" "^2.1.7"
     "@remote-ui/core" "^2.1.6"
     "@remote-ui/rpc" "^1.2.5"
-    "@remote-ui/web-workers" "^1.5.7"
     "@types/react" ">=17.0.0 <18.0.0"
     "@types/react-reconciler" "^0.26.0"
     react-reconciler ">=0.26.0 <1.0.0"
@@ -40,19 +39,12 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
   integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
 
-"@remote-ui/web-workers@^1.5.7":
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/@remote-ui/web-workers/-/web-workers-1.5.7.tgz#70abaf6c3289cae98c90e5fa2e412fe0b9b4647d"
-  integrity sha512-VTK9XWpuXoJIdj7YQ3sLyvbx4otuGvAoiF0Lb7kTHktTL8LnaoY6jZJPj+QYbz165TYSlwEHs3HPj+JROvAUtQ==
+"@stripe/tailor-browser-sdk@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-1.0.0.tgz#18c69742f24c9ced251b52116a467b445bba1901"
+  integrity sha512-dRWRhoBbTPdCUJINIUlBXTx+OyDuTb94Wyh/2nx74ocpU3IaYiwhfDXDYHbeKwZM6f9m16uWf0Tx2arPAey4VQ==
   dependencies:
-    "@remote-ui/rpc" "^1.2.5"
-
-"@stripe/tailor-browser-sdk@^0.0.13":
-  version "0.0.13"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-0.0.13.tgz#cc4cbbf39633e3dba899a66528d8475ff2b1e356"
-  integrity sha512-78PeWC/o07h3d3RUjBsJmvSwxnyyZMU6KwGojARdvCSv4WmQ3TEzNFrJkbW7vrlcrKGDeHujpwXdj4DHU5AeEw==
-  dependencies:
-    "@remote-ui/react" "^4.1.0"
+    "@remote-ui/react" "^4.3.0"
     invariant "^2.2.4"
     react "^17.0.2"
     stripe "^8.174.0"

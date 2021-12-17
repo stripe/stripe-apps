@@ -1,6 +1,6 @@
 import {
-  LoadingState,
   ContextView,
+  View,
 } from '@stripe/tailor-browser-sdk/ui';
 
 import {useEffect, useState, useCallback} from 'react';
@@ -14,7 +14,7 @@ import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/con
 
 const logo = require('../shippo-logo.svg') as string;
 
-const AddShipping = ({object, user, account}: TailorExtensionContextValue) => {
+const AddShipping = ({environment, object}: TailorExtensionContextValue) => {
   const {id: invoiceId} = object;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata>();
   const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
@@ -63,7 +63,7 @@ const AddShipping = ({object, user, account}: TailorExtensionContextValue) => {
   }, [invoiceId]);
   let content: JSX.Element;
   if (!invoice) {
-    content = <LoadingState size="medium" title="Loading shipping details" />;
+    content = <View>Loading shipping details...</View>
   } else if(shippingDetails) {
     content = <ShippingDetails
       onResetShippingDetails={handleResetShippingDetails}
