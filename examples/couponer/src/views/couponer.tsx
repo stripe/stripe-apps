@@ -1,9 +1,7 @@
 import {
-  FormLayout,
-  Switch,
-  FormRow,
-  FormField,
   ContextView,
+  Switch,
+  View,
 } from '@stripe/tailor-browser-sdk/ui';
 import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
 import {useCallback, useState} from 'react';
@@ -105,11 +103,11 @@ const Couponer = () => {
       title="Couponer"
       description="Enable HK Mousetrap's standard coupons for this product."
     >
-      <FormLayout layout={'inline'} background="white" divider={false}>
-        {options.map(({value, description, label}) => (
-          <FormRow key={value}>
-            <FormField>
+        <View css={{gap: 'medium'}}>
+          {options.map(({value, description, label}) => (
+            <View>
               <Switch
+                key={value}
                 id={value}
                 description={description}
                 label={label}
@@ -117,10 +115,9 @@ const Couponer = () => {
                 value={couponState[value]}
                 onChange={(on: boolean) => handleCouponChange(value, on)}
               />
-            </FormField>
-          </FormRow>
-        ))}
-      </FormLayout>
+            </View>
+          ))}
+      </View>
     </ContextView>
   );
 };
