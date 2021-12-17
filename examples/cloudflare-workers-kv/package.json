@@ -1,12 +1,12 @@
 {
-  "name": "com.example.settings-demo-v2",
-  "version": "0.0.1",
-  "description": "SettingsViewDemo",
+  "name": "com.example.cloudflare-workers-demo",
+  "version": "0.1.0",
+  "description": "Cloudflare Workers Demo",
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/tailor-browser-sdk": "^0.0.13",
+    "@stripe/tailor-browser-sdk": "^1.0.0",
     "react": "^17.0.2",
-    "stripe": "^8.170.0"
+    "stripe": "^8.194.0"
   }
 }

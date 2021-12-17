@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
-import {ContextView, Text} from '@stripe/tailor-browser-sdk/ui';
+import {ContextView, View} from '@stripe/tailor-browser-sdk/ui';
 
-const Greetings = (props) => {
-  const [greeting, setGreeting] = useState(null);
+const Greetings = () => {
+  const [greeting, setGreeting] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   // This can be an account id (`props.account.id`) to make this unique to each install -
@@ -10,7 +10,7 @@ const Greetings = (props) => {
   const greetingKey = 101;
 
   useEffect(() => {
-    const fetchSavedGreeting = async (key) => {
+    const fetchSavedGreeting = async (key: number) => {
       try {
         const response = await fetch(
           `https://restless-bread.ng-stripe.workers.dev/greeting/${key}`,
@@ -32,10 +32,13 @@ const Greetings = (props) => {
   return (
     <ContextView title="Greetings" description="Display a saved greeting">
       {!loading && (
-        <Text size={48} color="green">
+        <View css={{
+            font: 'title',
+            color: "green"
+        }}>
           {greeting ||
             'Please configure a greeting in the application settings.'}
-        </Text>
+        </View>
       )}
     </ContextView>
   );

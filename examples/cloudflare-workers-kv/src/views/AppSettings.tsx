@@ -1,23 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-    FormLayout,
-    FormBlock,
-    FormRow,
-    FormField,
-    TextInput,
+    View,
+    TextField,
     SettingsView
 } from '@stripe/tailor-browser-sdk/ui';
 
 const AppSettings = () => {
-    const [storedValue, setStoredValue] = useState(null)
-    const [hasSaved, setHasSaved] = useState(false)
-    const [isSaving, setIsSaving] = useState(false)
-    const [error, setError] = useState(false)
+    const [storedValue, setStoredValue] = useState<string>('');
+    const [hasSaved, setHasSaved] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [error, setError] = useState(false);
 
-    const greetingKey = 101 // this can be a userID that is populated from props or useTailorContext
+    const greetingKey = 101; // this can be a userID that is populated from props or useTailorContext
 
     useEffect(() => {
-        const fetchSavedGreeting = async (key) => {
+        const fetchSavedGreeting = async (key: number) => {
             try {
                 const response = await fetch(`https://restless-bread.ng-stripe.workers.dev/greeting/${key}`)
                 const savedGreeting = await response.text()
@@ -29,11 +26,11 @@ const AppSettings = () => {
             }
         };
         fetchSavedGreeting(greetingKey);
-    }, [greetingKey])
+    }, [greetingKey]);
 
     const saveSettings = useCallback(async (values) => {
-        setIsSaving(true)
-        const { greeting } = values
+        setIsSaving(true);
+        const { greeting } = values;
         if (greeting) {
             try {
                 const result = await fetch(
@@ -43,50 +40,66 @@ const AppSettings = () => {
                         body: JSON.stringify({ key: greetingKey, greeting })
                     }
                 );
-                await result.text()
-                setHasSaved(true)
-            } catch (err) {
+                await result.text();
+                setStoredValue(greeting);
+                setHasSaved(true);
+            } catch (err: any) {
                 setError(err.message);
             }
         }
-        setIsSaving(false)
+        setIsSaving(false);
     }, []);
 
     const determineStatusLabel = () => {
         if (isSaving) {
-            return 'Saving...'
+            return 'Saving...';
         }
         if (hasSaved) {
-            return 'Saved!'
+            return 'Saved!';
         }
         if (error) {
-            return `Error saving data: ${error}`
+            return `Error saving data: ${error}`;
         }
-        return ''
-    }
+        return '';
+    };
 
-    const statusLabel = determineStatusLabel()
+    const statusLabel = determineStatusLabel();
 
     return (
-        <SettingsView onSave={saveSettings} statusMessage={statusLabel} header="Set a Greeting" >
-            <FormLayout title="Set a greeting">
-                <FormBlock>
-                    <FormRow name="greeting" label="A greeting to display">
-                        <FormField
-                            label="Greeting"
-                            description="Please enter a greeting"
-                        >
-                            <TextInput
-                                name="greeting"
-                                id="greeting"
-                                placeholder={ storedValue || "hello" }
-                            />
-                        </FormField>
-                    </FormRow>
-                </FormBlock>
-            </FormLayout>
+        <SettingsView onSave={saveSettings} statusMessage={statusLabel} header="Set a Greeting">
+            <View css={{
+                padding:'medium',
+                backgroundColor: 'container',
+            }}>
+                <View 
+                    type="span"
+                    css={{
+                        font: 'lead'
+                    }}
+                >
+                    Please enter a greeting
+                </View>
+                <View 
+                    css={{
+                        marginBottom: 'medium',
+                        font: 'caption'
+                    }}
+                >
+                    Saved Greeting: {storedValue || 'None'}
+                </View>
+                <TextField
+                    id="greeting"
+                    name="greeting"
+                    type="text"
+                    label="Greeting:"
+                    size="medium"
+                    css={{
+                        marginBottom: 'medium'
+                    }}
+                />
+            </View>
         </SettingsView>
-    )
+    );
 }
 
-export default AppSettings
+export default AppSettings;

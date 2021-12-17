@@ -1,7 +1,7 @@
 {
-  "id": "com.example.settings-demo-v2",
-  "version": "0.0.1",
-  "name": "SettingsViewDemo",
+  "id": "com.example.cloudflare-workers-demo",
+  "version": "0.1.0",
+  "name": "Cloudflare Workers Demo",
   "icon": "",
   "permissions": [],
   "app_backend": {},
