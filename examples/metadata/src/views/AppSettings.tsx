@@ -1,21 +1,16 @@
 import {useState, useCallback, useEffect} from 'react';
 import {
-    FormLayout,
-    FormBlock,
-    FormRow,
-    FormField,
-    Group,
+    View,
     SettingsView,
-    Select,
-    SelectOption,
-    Spinner
+    Select
 } from '@stripe/tailor-browser-sdk/ui';
 import stripeClient from '../clients/stripe';
 import Stripe from 'stripe';
+import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
 
 type FormStatus = 'initial' | 'saving' | 'saved' | 'error';
 
-const AppSettings = ({ account }) => {
+const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
     const [status, setStatus] = useState<FormStatus>('initial');
     const [customers, setCustomers] = useState<Array<Stripe.Customer>>([]);
 
@@ -29,7 +24,7 @@ const AppSettings = ({ account }) => {
         getCustomers();
     }, []);
 
-    const saveSettings = useCallback(async (values) => {
+    const saveSettings = async (values: any) => {
         const { favorite_color, customer } = values;
         if (customer && favorite_color) {
             setStatus('saving');
@@ -43,7 +38,7 @@ const AppSettings = ({ account }) => {
                 console.error('error saving account: ', error);
             }
         }
-    }, [account]);
+    };
 
     const getStatusLabel = useCallback( () => {
         switch(status) {
@@ -67,62 +62,69 @@ const AppSettings = ({ account }) => {
             statusMessage={statusLabel}
             onSave={saveSettings}
         >
-            <FormLayout>
+           <View css={{
+                padding:'medium',
+                backgroundColor: 'container',
+            }}>
                 { customers.length ? (
-                    <FormBlock>
-                        <FormRow name="customer" label="Customer">
-                            <FormField>
-                                <Select 
-                                    name="customer" 
-                                    label="Customer" 
-                                    description="Select a customer"
-                                >
-                                    { customers.map(customer => 
-                                        <SelectOption 
-                                            key={customer.id}
-                                            label={customer.name} 
-                                            value={customer.id} 
-                                        />
-                                    ) }
-                                </Select>
-                            </FormField>
-                        </FormRow>
-                        <FormRow name="favorite_color" label="Favorite Color">
-                            <FormField
-                                label="Favorite Color"
-                                description="What is their favorite color?"
+                    <View>
+                        <View css={{marginBottom: 'medium'}}>
+                            <View 
+                                css={{
+                                    marginBottom: 'small',
+                                    font: 'lead'
+                                }}
                             >
-                                <Select 
-                                    name="favorite_color" 
-                                    id="favorite_color"
-                                    label="Favorite Color" 
-                                >
-                                    <SelectOption label="Select a color" value="" />
-                                    <SelectOption label="Red" value="red" />
-                                    <SelectOption label="Blue" value="blue" />
-                                    <SelectOption label="Green" value="green" />
-                                    <SelectOption label="Yellow" value="yellow" />
-                                    <SelectOption label="Purple" value="purple" />
-                                    <SelectOption label="Orange" value="orange" />
-                                    <SelectOption label="Pink" value="pink" />
-                                    <SelectOption label="Black" value="black" />
-                                    <SelectOption label="White" value="white" />
-                                    <SelectOption label="Brown" value="brown" />
-                                    <SelectOption label="Gray" value="gray" />
-                                </Select>
-                            </FormField>
-                        </FormRow>
-                    </FormBlock>
+                                Select a customer
+                            </View>
+                            <Select 
+                                name="customer" 
+                                label="&nbsp;Customer" 
+                            >
+                                { customers.map(customer => 
+                                    <option 
+                                        key={customer.id}
+                                        label={customer.name || ''} 
+                                        value={customer.id} 
+                                    />
+                                ) }
+                            </Select>
+                        </View>
+                       
+                        <View css={{marginBottom: 'medium'}}>
+                            <View 
+                                css={{
+                                    marginBottom: 'small',
+                                    font: 'lead'
+                                }}
+                            >
+                                What is their favorite color?
+                            </View>
+                            <Select 
+                                name="favorite_color" 
+                                id="favorite_color"
+                                label="&nbsp;Favorite Color" 
+                            >
+                                <option label="Select a color" value="" />
+                                <option label="Red" value="red" />
+                                <option label="Blue" value="blue" />
+                                <option label="Green" value="green" />
+                                <option label="Yellow" value="yellow" />
+                                <option label="Purple" value="purple" />
+                                <option label="Orange" value="orange" />
+                                <option label="Pink" value="pink" />
+                                <option label="Black" value="black" />
+                                <option label="White" value="white" />
+                                <option label="Brown" value="brown" />
+                                <option label="Gray" value="gray" />
+                            </Select>
+                        </View>
+
+                    </View>
                 ) : 
-                    <Group 
-                        padding={24} 
-                        alignItems="center" 
-                        justifyContent="center"
-                    >
-                        <Spinner />
-                    </Group>
+                    <View>Loading...</View>
                 }
-            </FormLayout>
+            </View>
         </SettingsView>
     );
 }
