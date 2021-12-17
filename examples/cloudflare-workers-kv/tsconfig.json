@@ -5,6 +5,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,

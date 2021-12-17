@@ -1,10 +1,11 @@
 import {
-  ContentList,
-  ContentState,
   ContextView,
-  Caption,
-  CaptionAlt,
-  ContentBlock,
+  Table,
+  TableBody,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+  View,
 } from '@stripe/tailor-browser-sdk/ui';
 import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
 
@@ -12,28 +13,41 @@ import MessageListItem from '../components/MessageListItem';
 import {fakeUserMessages} from '../fakeData';
 import {useCustomer} from '../utils/stripeApi';
 
-const Messaging = ({object}: TailorExtensionContextValue) => {
-  const customer = useCustomer(object.id);
+const Messaging = ({environment}: TailorExtensionContextValue) => {
+  const customer = useCustomer(environment?.objectContext?.id);
 
   return (
     <ContextView title="Recent Messages">
       {fakeUserMessages.length ? (
-        <ContentList>
-          {fakeUserMessages.map((message) => (
-            <MessageListItem key={message.id} message={message} />
-          ))}
-        </ContentList>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Subject</TableHeaderCell>
+              <TableHeaderCell>Date</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {fakeUserMessages.map((message) => (
+              <MessageListItem key={message.id} message={message} />
+            ))}
+          </TableBody>
+        </Table>
       ) : (
-        <ContentState title="No messages found." />
+        <View>
+          No messages found.
+        </View>
       )}
-      {!!customer?.email && (
-        <ContentBlock padding={{top: 20}} divider={false}>
-          <Caption display="block" color="gray">
-            Displaying messages between{' '}
-            <CaptionAlt>{customer.email}</CaptionAlt> and{' '}
-            <CaptionAlt>some.merchant@example.com</CaptionAlt>.
-          </Caption>
-        </ContentBlock>
+      {!!customer && 'email' in customer && !!customer.email && (
+        <View
+          css={{
+            fontSize: '10px',
+            lineHeight: '1.5',
+            color: 'secondary',
+            paddingY: 'medium',
+          }}
+        >
+          Displaying messages between {customer.email} and some.merchant@example.com.
+        </View>
       )}
     </ContextView>
   );
