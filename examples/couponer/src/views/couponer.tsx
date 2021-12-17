@@ -1,13 +1,7 @@
 import {
+  ContextView,
   Switch,
-<<<<<<< HEAD
-  ContextView,
   View,
-=======
-  FormRow,
-  FormField,
-  ContextView,
->>>>>>> 26bf7f58fb1bf1b152fd04b07e44de03c20fe559
 } from '@stripe/tailor-browser-sdk/ui';
 import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
 import {useCallback, useState} from 'react';
