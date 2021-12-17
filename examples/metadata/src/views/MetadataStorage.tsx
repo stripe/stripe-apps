@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
-import {ContextView, Group, Text} from '@stripe/tailor-browser-sdk/ui';
+import {ContextView, View} from '@stripe/tailor-browser-sdk/ui';
 import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
 import stripeClient from '../clients/stripe';
 
-const MetadataStorage = ({object}: TailorExtensionContextValue) => {
-  const [favoriteColor, setFavoriteColor] = useState(null);
+const MetadataStorage = ({object}: any) => {
+  // const customerContext = environment?.objectContext;
+  const [favoriteColor, setFavoriteColor] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
   // retrieve information from customer metadata.
@@ -24,25 +25,29 @@ const MetadataStorage = ({object}: TailorExtensionContextValue) => {
   };
 
   useEffect(() => {
+    console.log(object)
     retrieveMetadata(object.id);
-  }, [object.id]);
+  }, [object]);
 
   return (
     <ContextView
       title="Metadata Demo"
       description="What is this customer's favorite color?"
     >
-      <Group direction="horizontal" spacing={20}>
+      <View css={{display: 'flex', padding: 'medium'}}>
         {isLoading ? (
-          <Text>Loading...</Text>
+            <View  type="span" css={{ font: 'lead' }}>Loading...</View>
         ) : (
-          <Text color={favoriteColor} size={16}>
+          <View css={{
+            color: favoriteColor,
+            font: favoriteColor ? 'subtitle' : 'lead',
+          }}>
             {favoriteColor
               ? `This customer's favorite color is ${favoriteColor}`
               : 'A favorite color has not been set for this customer.'}
-          </Text>
+          </View>
         )}
-      </Group>
+      </View>
     </ContextView>
   );
 };
