@@ -13,7 +13,6 @@ const MetadataStorage = ({object}: any) => {
     try {
       const customer = await stripeClient.customers.retrieve(customerId);
       if (customer.deleted === true) throw new Error('Customer is deleted');
-      console.log('fetched customer: ', customer);
       const {favorite_color} = customer.metadata;
       if (favorite_color) {
         setFavoriteColor(favorite_color);
@@ -25,7 +24,6 @@ const MetadataStorage = ({object}: any) => {
   };
 
   useEffect(() => {
-    console.log(object)
     retrieveMetadata(object.id);
   }, [object]);
 

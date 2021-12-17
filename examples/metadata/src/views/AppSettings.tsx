@@ -17,7 +17,6 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
     const getCustomers = useCallback(async () => {
         const response = await stripeClient.customers.list();
         const customers = response.data;
-        console.log('customers: ', customers);
         setCustomers(customers);
     }, [])
 
@@ -120,7 +119,7 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
                                 <option label="Gray" value="gray" />
                             </Select>
                         </View>
-                        
+
                     </View>
                 ) : 
                     <View>Loading...</View>
