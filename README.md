@@ -26,8 +26,8 @@ We have built a range of sample applications that demonstrates the capabilities 
 You can find examples in [/examples](/examples)
 
 ## Browsing Issues
-Issues are labeled as 'Bug', 'Feature Request', 'Enhancement', 'Question' or 'Documentation'. In addition they are labeled with a relevant owning team. 
-We use the reactions on feature requests and enhancements to gauge interest, so please feel free to upvote, downvote, and comment on what is the most meaningful for your app.
+Issues are labeled as 'Bug', 'Feature Request', 'Enhancement', or 'Documentation'. In addition they are labeled with a relevant owning team. 
+We use the reactions on feature requests and enhancements to gauge interest, so please feel free to upvote, downvote, and comment on what is the most meaningful for your app. *We will regularly reporioritize issues based on your feedback.*
 
 ## Raising Issues
 If you would like to raise an issue, there are several issue templates available. Choose the one that makes the most sense to you from the following:
@@ -38,7 +38,6 @@ If you would like to raise an issue, there are several issue templates available
 | Feature Request  | “Wouldn’t it be cool if…?” |
 | Enhancement      | “It would be easier if…”   |
 | Documentation    | “I can’t find how to…”     |
-| Question         | “What am I doing wrong?”   |
 
 
 ## Friction Logs
