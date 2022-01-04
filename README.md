@@ -2,7 +2,7 @@
   <br>
     <img src="./docs/core/thread.png" alt="logo" width="150">
   <br>
-  Stripe Project Tailor
+  Stripe Apps
   <br>
   <br>
 </h1>
@@ -13,11 +13,11 @@
 
 <hr>
 
-In these docs, you'll find all the information you need to get started with Project Tailor and building apps for Stripe.
+In these docs, you'll find all the information you need to get started building apps for Stripe.
 
 ## Docs
 
-Our preview documentation is available in [/docs](./docs/README.md)
+The documentation is available at [https://stripe.com/docs/stripe-apps](https://stripe.com/docs/stripe-apps)
 
 ## Sample Apps
 
@@ -39,6 +39,7 @@ If you would like to raise an issue, there are several issue templates available
 | Enhancement      | “It would be easier if…”   |
 | Documentation    | “I can’t find how to…”     |
 
+General questions should be asked in the Stripe private beta [Discord](https://discord.gg/yngQS3TC). Please do not share the discord link with external users.
 
 ## Friction Logs
 
