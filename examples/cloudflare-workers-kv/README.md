@@ -2,7 +2,7 @@
 
 An example Tailor UI Extension that fetches and displays data from a Cloudflare Worker and key value store.
 
-To run this application, ensure you are setup by following the [UI Extension docs](https://stripe.dev/tailor-preview/super-secret-private-ui-docs/?path=/docs/getting-started-ui-extensions--page)
+To run this application, ensure you are setup by following the [UI Extension docs](https://stripe.com/docs/stripe-apps)
 
 Once you have the `stripe-preview` CLI fork available, run the start command from the application directory:
 
