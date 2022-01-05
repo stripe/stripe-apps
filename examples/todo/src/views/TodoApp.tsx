@@ -4,18 +4,18 @@ import {
   View,
   TextField,
   Button,
-  Select,
   MenuItem,
   Menu,
   MenuTrigger,
 } from '@stripe/tailor-browser-sdk/ui';
 import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
 
-import { useState, useEffect, ChangeEventHandler, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
 import { createHttpClient } from '@stripe/tailor-browser-sdk/http_client';
 import Stripe from 'stripe';
 
+// A key isn't necessary, since behind the scenes the app uses the dashboard credentials to make requests
 const stripe = new Stripe('', {
   httpClient: createHttpClient() as Stripe.HttpClient,
   apiVersion: '2020-08-27',
@@ -36,17 +36,18 @@ enum Mode {
   Uncompleted = 'Uncompleted',
 }
 
+// Stripe metadata is portrayed as key -> value, where value is a string.
+// We stringify/parse our todos to be able to store them as a string in the metadata.
 const parseCustomerMetadata = (metadata: any) => {
   if (!metadata.hasOwnProperty('todos')) {
     return [];
   }
 
-  const parsed = JSON.parse(metadata.todos);
-  return parsed === '' ? [] : parsed;
+  return JSON.parse(metadata.todos);
 }
 
 const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
-  const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState('');
+  const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState<string>('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [customer, setCustomer] = useState<Stripe.Customer>();
   const [mode, setMode] = useState<string>(Mode.Uncompleted);
@@ -96,14 +97,14 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
     setMode(Mode.Uncompleted);
 
     // Update the customer to reflect the new todo list
-    const cust = await updateCustomerTodoList(newMetadata);
+    const cust: Stripe.Customer = await updateCustomerTodoList(newMetadata) as Stripe.Customer;
 
     // Set the new state of the customer
     setCustomer(cust);
   };
 
   const completeTodo = async (todo: Todo) => {
-    const newTodoList = todoList.concat();
+    const newTodoList: Todo[] = todoList.concat();
     for (let i = 0; i < newTodoList.length; i++) {
       if (todo.created === newTodoList[i].created) {
         newTodoList[i].completed = true;
@@ -113,14 +114,14 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
 
     setTodoList(newTodoList);
 
-    const cust = await updateCustomerTodoList({
+    const cust: Stripe.Customer = await updateCustomerTodoList({
       todos: JSON.stringify(newTodoList),
-    });
+    }) as Stripe.Customer;
     setCustomer(cust);
   };
 
   const deleteTodo = async (todo: Todo) => {
-    let newTodoList = todoList.concat();
+    let newTodoList: Todo[] = todoList.concat();
 
     for (let i = 0; i < newTodoList.length; i++) {
       if (todo.created === newTodoList[i].created) {
@@ -131,9 +132,9 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
 
     setTodoList(newTodoList);
 
-    const cust = await updateCustomerTodoList({
+    const cust: Stripe.Customer = await updateCustomerTodoList({
       todos: JSON.stringify(newTodoList),
-    });
+    }) as Stripe.Customer;
     setCustomer(cust);
   };
 
