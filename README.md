@@ -1,7 +1,4 @@
 <h1 align="center">
-  <br>
-    <img src="./docs/core/thread.png" alt="logo" width="150">
-  <br>
   Stripe Apps
   <br>
   <br>
