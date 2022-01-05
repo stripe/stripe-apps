@@ -45,7 +45,7 @@ const parseCustomerMetadata = (metadata: any) => {
   return parsed === '' ? [] : parsed;
 }
 
-const App = ({userContext, environment}: TailorExtensionContextValue) => {
+const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
   const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [customer, setCustomer] = useState<Stripe.Customer>();
@@ -153,14 +153,10 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
   return (
     <ContextView title="Todos">
       <View>
-        {/* <Select name="mode-selector" label="Showing">
-          <option value="">Completed</option>
-          <option value="bar">Uncompleted</option>
-        </Select> */}
         <MenuTrigger>
           Showing
           <Button css={{padding: '10px'}}>{mode}</Button>
-          todos
+          tasks
           <Menu slot="menu" >
             <MenuItem onAction={() => setMode(Mode.Completed)}>{Mode.Completed}</MenuItem>
             <MenuItem onAction={() => setMode(Mode.Uncompleted)}>{Mode.Uncompleted}</MenuItem>
@@ -170,7 +166,7 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
       <View css={{ padding: 'medium' }}>
         <TextField type="text" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
         <Button size="medium" type="primary" onPress={() => addTodo()}>
-          + Add todo
+          + Add task
         </Button>
       </View>
       <View
@@ -194,4 +190,4 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
   );
 };
 
-export default App;
+export default TodoApp;

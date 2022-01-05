@@ -9,7 +9,7 @@
     "views": [
       {
         "viewport": "stripe.dashboard.customer.main",
-        "component": "App"
+        "component": "TodoApp"
       }
     ],
     "actions": [],
