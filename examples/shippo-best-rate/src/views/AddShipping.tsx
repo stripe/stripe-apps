@@ -1,7 +1,7 @@
 import {
   ContextView,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 import {useEffect, useState, useCallback} from 'react';
 
@@ -10,7 +10,7 @@ import type {ShippingDetailsMetadata} from './ShippingDetails';
 import ShippingDetails from './ShippingDetails';
 import stripeClient from './stripe_client';
 import Stripe from 'stripe';
-import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
+import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 const logo = require('../shippo-logo.svg') as string;
 

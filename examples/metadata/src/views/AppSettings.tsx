@@ -3,10 +3,10 @@ import {
     View,
     SettingsView,
     Select
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 import stripeClient from '../clients/stripe';
 import Stripe from 'stripe';
-import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
+import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
 type FormStatus = 'initial' | 'saving' | 'saved' | 'error';
 

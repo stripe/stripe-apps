@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {ContextView, View} from '@stripe/tailor-browser-sdk/ui';
-import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
+import {ContextView, View} from '@stripe/ui-extension-sdk/ui';
+import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import stripeClient from '../clients/stripe';
 
 const MetadataStorage = ({object}: any) => {

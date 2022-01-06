@@ -3,7 +3,7 @@ import {
   SectionList,
   SectionListItem,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 import {useCallback, useEffect, useState} from 'react';
 import Stripe from 'stripe';

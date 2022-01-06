@@ -2,8 +2,8 @@ import {
   ContextView,
   Link,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
+} from '@stripe/ui-extension-sdk/ui';
+import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 const Hi = ({userContext, environment}: TailorExtensionContextValue) => {
   return (

@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
+import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
 
 const stripeClient = new Stripe(
   process.env.STRIPE_API_KEY,

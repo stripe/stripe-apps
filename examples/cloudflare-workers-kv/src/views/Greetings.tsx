@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {ContextView, View} from '@stripe/tailor-browser-sdk/ui';
+import {ContextView, View} from '@stripe/ui-extension-sdk/ui';
 
 const Greetings = () => {
   const [greeting, setGreeting] = useState<string>('');

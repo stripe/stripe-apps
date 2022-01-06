@@ -2,8 +2,8 @@ import {
   ContextView,
   Switch,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
-import {createHttpClient} from '@stripe/tailor-browser-sdk/http_client';
+} from '@stripe/ui-extension-sdk/ui';
+import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
 import {useCallback, useState} from 'react';
 import Stripe from 'stripe';
 
