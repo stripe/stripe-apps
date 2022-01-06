@@ -4,9 +4,7 @@ import {
   View,
   TextField,
   Button,
-  MenuItem,
-  Menu,
-  MenuTrigger,
+  Switch,
 } from '@stripe/tailor-browser-sdk/ui';
 import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
 
@@ -101,6 +99,9 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
 
     // Set the new state of the customer
     setCustomer(cust);
+
+    // Reset the new todo text field
+    setNewTodoTextFieldValue('');
   };
 
   const completeTodo = async (todo: Todo) => {
@@ -153,39 +154,47 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
 
   return (
     <ContextView title="Todos">
-      <View>
-        <MenuTrigger>
-          Showing
-          <Button css={{padding: '10px'}}>{mode}</Button>
-          tasks
-          <Menu slot="menu" >
-            <MenuItem onAction={() => setMode(Mode.Completed)}>{Mode.Completed}</MenuItem>
-            <MenuItem onAction={() => setMode(Mode.Uncompleted)}>{Mode.Uncompleted}</MenuItem>
-          </Menu>
-        </MenuTrigger>
-      </View>
-      <View css={{ padding: 'medium' }}>
-        <TextField type="text" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
+      <View
+        css={{
+          layout: 'row',
+          gap: 'medium',
+        }}
+      >
+        <TextField type="text" size="small" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
         <Button size="medium" type="primary" onPress={() => addTodo()}>
           + Add task
         </Button>
       </View>
       <View
         css={{
-          padding: 'medium',
+          paddingY: 'medium',
+          layout: 'column',
+          gap: 'medium',
         }}
       >
         {todoList.map((todo: Todo) => {
           // Only show the todos for the selected mode
           if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
             return (
-              <Section title={todo.text}>
-                <Button slot="action" type="primary" onPress={() => completeTodo(todo)} >Complete</Button>
-                <Button slot="action" type="destructive" onPress={() => deleteTodo(todo)}>Delete</Button>
+              <Section title={todo.text} size="small">
+                {
+                  mode === Mode.Uncompleted ?
+                    <Button slot="action" size="small" type="primary" onPress={() => completeTodo(todo)} >✓</Button> :
+                    null
+                }
+                <Button slot="action" size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
               </Section>
             );
           }
         })}
+      </View>
+      <View css={{margin: 'medium'}}>
+        <Switch
+          id="mode-switch"
+          value={mode === Mode.Completed}
+          onChange={() => setMode(mode === Mode.Completed ? Mode.Uncompleted : Mode.Completed)}
+          label="Show completed tasks"
+        />
       </View>
     </ContextView>
   );
