@@ -174,12 +174,13 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
       >
         {todoList.map((todo: Todo) => {
           // Only show the todos for the selected mode
+          // Also hide the "Complete" button if the task is already completed
           if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
             return (
-              <Section title={todo.text} size="small">
+              <Section title={todo.text}>
                 {
                   mode === Mode.Uncompleted ?
-                    <Button slot="action" size="small" type="primary" onPress={() => completeTodo(todo)} >✓</Button> :
+                    <Button slot="action" size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
                     null
                 }
                 <Button slot="action" size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
