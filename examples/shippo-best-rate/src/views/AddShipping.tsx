@@ -14,8 +14,8 @@ import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/conte
 
 const logo = require('../shippo-logo.svg') as string;
 
-const AddShipping = ({environment, object}: TailorExtensionContextValue) => {
-  const {id: invoiceId} = object;
+const AddShipping = ({environment}: TailorExtensionContextValue) => {
+  const {objectContext: {id: invoiceId}} = environment;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata>();
   const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
   const loadShippingDetails = async (invoiceId: string) => {

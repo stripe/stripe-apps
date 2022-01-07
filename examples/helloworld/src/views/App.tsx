@@ -5,7 +5,7 @@ import {
 } from '@stripe/ui-extension-sdk/ui';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
-const Hi = ({userContext, environment}: TailorExtensionContextValue) => {
+const App = ({userContext, environment}: TailorExtensionContextValue) => {
   return (
     <ContextView title="Get started with Stripe Apps">
       <View
@@ -22,10 +22,10 @@ const Hi = ({userContext, environment}: TailorExtensionContextValue) => {
               marginBottom: 'large',
             }}
           >
-            Edit src/views/Hi.tsx and save to reload this view
+            Edit src/views/App.tsx and save to reload this view
           </View>
           <Link
-            href="https://go/ui-docs"
+            href="https://stripe.com/docs/stripe-apps/ui-toolkit/components"
             target="_blank"
           >
             Go to UI documentation
@@ -36,4 +36,4 @@ const Hi = ({userContext, environment}: TailorExtensionContextValue) => {
   );
 };
 
-export default Hi;
+export default App;

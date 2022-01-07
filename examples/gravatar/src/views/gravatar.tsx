@@ -10,8 +10,9 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY, {
   apiVersion: '2020-08-27',
 });
 
-const Gravatar = ({object}: TailorExtensionContextValue) => {
+const Gravatar = ({environment}: TailorExtensionContextValue) => {
   const [imageUrl, setImageUrl] = useState('');
+  const object = environment?.objectContext;
 
   try {
     stripe.customers.retrieve(object.id).then((customer) => {

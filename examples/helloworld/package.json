@@ -1,12 +1,15 @@
 {
-  "name": "com.example.helloworld",
+  "name": "com.example.glossopharyngeal-palated",
   "version": "0.0.1",
-  "description": "Hello World",
+  "description": "Hello world",
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^1.0.0",
+    "@stripe/ui-extension-sdk": "^1.0.4",
     "react": "^17.0.2",
-    "stripe": "^8.170.0"
+    "stripe": "^8.195.0"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

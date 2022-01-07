@@ -26,7 +26,7 @@ const addShippingLineItem = async (rate, invoiceId, customerId) => {
 };
 
 const shippoRequest = (endpoint, method, requestData) => {
-  return fetch(`https://api.goshippo.com/${endpoint}/`, {
+  return fetch(`https://api.goshippo.com/${endpoint}`, {
     method,
     headers: {
       Authorization: SHIPPO_TOKEN,

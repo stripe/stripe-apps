@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
   integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
 
-"@stripe/tailor-browser-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-1.0.0.tgz#18c69742f24c9ced251b52116a467b445bba1901"
-  integrity sha512-dRWRhoBbTPdCUJINIUlBXTx+OyDuTb94Wyh/2nx74ocpU3IaYiwhfDXDYHbeKwZM6f9m16uWf0Tx2arPAey4VQ==
+"@stripe/ui-extension-sdk@^1.0.0":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.0.4.tgz#580d46bc1e2d047bfbd0801dd77f2e0d020bab63"
+  integrity sha512-S2QY/FFdfHVYswCsGuarEfvcvNN36BUau3jBpe7SJFMAMpESLwH7VfMRIn1WvE4+yjr93YFAOAIUjynJIQECzQ==
   dependencies:
     "@remote-ui/react" "^4.3.0"
     invariant "^2.2.4"

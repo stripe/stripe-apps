@@ -19,7 +19,7 @@
 
 "@remote-ui/react@^4.3.0":
   version "4.3.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/react/-/react-4.3.0.tgz#5f1ed2482cb1f0e920fcfc2479b2a1cee72ea101"
+  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.3.0.tgz#5f1ed2482cb1f0e920fcfc2479b2a1cee72ea101"
   integrity sha512-FOTzF2PZIUJqJQwyzUFboDg+EyDilJjcjwOpKl84/izvewD0HcM+4E7xD5yx7CRES1jYSVGiMxxRuL7SQ4wF4w==
   dependencies:
     "@remote-ui/async-subscription" "^2.1.7"
@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
   integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
 
-"@stripe/tailor-browser-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/tailor-browser-sdk/-/tailor-browser-sdk-1.0.0.tgz#18c69742f24c9ced251b52116a467b445bba1901"
-  integrity sha512-dRWRhoBbTPdCUJINIUlBXTx+OyDuTb94Wyh/2nx74ocpU3IaYiwhfDXDYHbeKwZM6f9m16uWf0Tx2arPAey4VQ==
+"@stripe/ui-extension-sdk@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.0.4.tgz#580d46bc1e2d047bfbd0801dd77f2e0d020bab63"
+  integrity sha512-S2QY/FFdfHVYswCsGuarEfvcvNN36BUau3jBpe7SJFMAMpESLwH7VfMRIn1WvE4+yjr93YFAOAIUjynJIQECzQ==
   dependencies:
     "@remote-ui/react" "^4.3.0"
     invariant "^2.2.4"
@@ -50,9 +50,9 @@
     stripe "^8.174.0"
 
 "@types/node@>=8.1.0":
-  version "16.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.7.tgz#36820945061326978c42a01e56b61cd223dfdc42"
-  integrity sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==
+  version "17.0.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.8.tgz#50d680c8a8a78fe30abe6906453b21ad8ab0ad7b"
+  integrity sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg==
 
 "@types/prop-types@*":
   version "15.7.4"
@@ -67,9 +67,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@>=17.0.0 <18.0.0":
-  version "17.0.35"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.35.tgz#217164cf830267d56cd1aec09dcf25a541eedd4c"
-  integrity sha512-r3C8/TJuri/SLZiiwwxQoLAoavaczARfT9up9b4Jr65+ErAUX3MIkU0oMOQnrpfgHme8zIqZLX7O5nnjm5Wayw==
+  version "17.0.38"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.38.tgz#f24249fefd89357d5fa71f739a686b8d7c7202bd"
+  integrity sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -144,14 +144,14 @@ object-assign@^4.1.1:
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 object-inspect@^1.9.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.11.0.tgz#9dceb146cedd4148a0d9e51ab88d34cf509922b1"
-  integrity sha512-jp7ikS6Sd3GxQfZJPyH3cjcbJF6GZPClgdV+EFygjFLQ5FmW/dRUnTd9PQ9k0JhoNDabWFbpF1yCdSWCC6gexg==
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.0.tgz#6e2c120e868fd1fd18cb4f18c31741d0d6e776f0"
+  integrity sha512-Ho2z80bVIvJloH+YzRmpZVQe87+qASmBUKZDWgx9cu+KDrX2ZDH/3tMy+gXbZETVGs2M8YdxObOh7XAtim9Y0g==
 
 qs@^6.6.0:
-  version "6.10.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
-  integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
+  version "6.10.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.2.tgz#c1431bea37fc5b24c5bdbafa20f16bdf2a4b9ffe"
+  integrity sha512-mSIdjzqznWgfd4pMii7sHtaYF8rx8861hBO80SraY5GT0XQibWZWJSid0avzHGkDIZLImux2S5mXO0Hfct2QCw==
   dependencies:
     side-channel "^1.0.4"
 
@@ -189,10 +189,10 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
-stripe@^8.170.0, stripe@^8.174.0:
-  version "8.190.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.190.0.tgz#42a21206e1835a5cbbe8070565652b71c4e27a60"
-  integrity sha512-TarLvQhwsoXaNlr1qLqXNqaUJj6XBlC73DEscNj80XPOIswLLiLw40WEw8Rj50dAqbVAQ+zILDfN1j3tP8t8DA==
+stripe@^8.174.0, stripe@^8.195.0:
+  version "8.195.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.195.0.tgz#4d253e247aadb64d972488da9481fff743b58a11"
+  integrity sha512-pXEZFNJb4p9uZ69+B4A+zJEmBiFw3BzNG51ctPxUZij7ghFTnk2/RuUHmSGto2XVCcC46uG75czXVAvCUkOGtQ==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
