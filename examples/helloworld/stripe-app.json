@@ -1,7 +1,7 @@
 {
-  "id": "com.example.helloworld",
+  "id": "com.example.glossopharyngeal-palated",
   "version": "0.0.1",
-  "name": "Hello World",
+  "name": "Hello world",
   "icon": "",
   "permissions": [],
   "app_backend": {},
@@ -9,7 +9,7 @@
     "views": [
       {
         "viewport": "stripe.dashboard.customer.detail",
-        "component": "Hi"
+        "component": "App"
       }
     ],
     "actions": [],

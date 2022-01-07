@@ -3,7 +3,7 @@ import {
   SectionList,
   SectionListItem,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 import {useCallback, useEffect, useState} from 'react';
 import Stripe from 'stripe';
@@ -26,7 +26,7 @@ const addShippingLineItem = async (rate, invoiceId, customerId) => {
 };
 
 const shippoRequest = (endpoint, method, requestData) => {
-  return fetch(`https://api.goshippo.com/${endpoint}/`, {
+  return fetch(`https://api.goshippo.com/${endpoint}`, {
     method,
     headers: {
       Authorization: SHIPPO_TOKEN,

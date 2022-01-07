@@ -3,7 +3,7 @@ import {
     View,
     TextField,
     SettingsView
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 const AppSettings = () => {
     const [storedValue, setStoredValue] = useState<string>('');

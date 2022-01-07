@@ -1,7 +1,7 @@
 import {
   Button,
   View,
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 import {useState, useCallback} from 'react';
 

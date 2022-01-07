@@ -3,7 +3,7 @@ import {
   TableRow,
   TableCell,
   Link,
-} from '@stripe/tailor-browser-sdk/ui';
+} from '@stripe/ui-extension-sdk/ui';
 
 import {Message} from '../types';
 import {getEpochMsDisplayText} from '../utils/time';

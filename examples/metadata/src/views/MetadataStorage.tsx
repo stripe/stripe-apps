@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import {ContextView, View} from '@stripe/tailor-browser-sdk/ui';
-import type {TailorExtensionContextValue} from '@stripe/tailor-browser-sdk/context';
+import {ContextView, View} from '@stripe/ui-extension-sdk/ui';
+import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import stripeClient from '../clients/stripe';
 
-const MetadataStorage = ({object}: any) => {
-  // const customerContext = environment?.objectContext;
+const MetadataStorage = ({ environment }: TailorExtensionContextValue) => {
+  const object = environment?.objectContext;
   const [favoriteColor, setFavoriteColor] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,8 +24,10 @@ const MetadataStorage = ({object}: any) => {
   };
 
   useEffect(() => {
-    retrieveMetadata(object.id);
-  }, [object]);
+    if (object) {
+      retrieveMetadata(object.id);
+    }
+}, [object]);
 
   return (
     <ContextView
