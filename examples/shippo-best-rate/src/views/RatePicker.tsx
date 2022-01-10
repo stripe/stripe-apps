@@ -1,17 +1,15 @@
 import {
-  Badge,
-  Inline,
+  Badge, Box, Inline,
   List,
-  ListItem,
-  Box,
+  ListItem
 } from '@stripe/ui-extension-sdk/ui';
-
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Stripe from 'stripe';
-
-import type {ShippingDetailsMetadata} from './ShippingDetails';
-import type {Shipment, Rate} from './shippo_types';
+import type { ShippingDetailsMetadata } from './ShippingDetails';
+import type { Rate, Shipment } from './shippo_types';
 import stripeClient from './stripe_client';
+
+
 
 const SHIPPO_TOKEN =
   'ShippoToken shippo_test_ccc7f1c4ed9ef8beaa43c07b2941e2260f40fd72';
@@ -152,13 +150,13 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
     return <Box>{errorMessage}</Box>;
   }
   if (!customer) {
-    return <Box>Getting customer address</Box>;
+    return <Box>Getting customer address&hellip;</Box>;
   }
   if (!shipment) {
-    return <Box>Loading shipping rates from Shippo</Box>;
+    return <Box>Loading shipping rates from Shippo&hellip;</Box>;
   }
   if (creatingLabel) {
-    return <Box>Creating shipping label</Box>
+    return <Box>Creating shipping label&hellip;</Box>
   }
   const rateMap = {};
   const rateItems = shipment.rates.map((rate) => {
