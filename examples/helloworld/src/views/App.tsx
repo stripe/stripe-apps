@@ -10,20 +10,17 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
     <ContextView title="Get started with Stripe Apps">
       <Box
         css={{
-          padding: 'medium',
-          paddingY: 200,
+          padding: 'large',
           backgroundColor: 'container',
+          fontFamily: 'monospace',
+          borderRadius: 'small',
         }}
       >
-        <Box>
-          <Box
-            css={{
-              fontFamily: 'monospace',
-              marginBottom: 'large',
-            }}
-          >
-            Edit src/views/App.tsx and save to reload this view
-          </Box>
+        <Box css={{paddingY: 'xxlarge', marginY: 'xxlarge'}} />
+        <Box css={{paddingTop: 'large', marginBottom: 'large'}}>
+          Edit src/views/App.tsx and save to reload this view
+        </Box>
+        <Box css={{paddingBottom: 'xlarge'}}>
           <Link
             href="https://stripe.com/docs/stripe-apps/ui-toolkit/components"
             target="_blank"
@@ -31,6 +28,7 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
             Go to UI documentation
           </Link>
         </Box>
+        <Box css={{paddingY: 'xxlarge', marginY: 'xxlarge'}} />
       </Box>
     </ContextView>
   );
