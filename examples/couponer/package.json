@@ -7,6 +7,6 @@
   "dependencies": {
     "@stripe/ui-extension-sdk": "^1.1.4",
     "react": "^17.0.2",
-    "stripe": "^8.170.0"
+    "stripe": "^8.195.0"
   }
 }

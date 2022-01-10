@@ -6,10 +6,7 @@ import {
 import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
 import {useCallback, useState} from 'react';
 import Stripe from 'stripe';
-
-type CouponState = {
-  [key: string]: null | 'pending' | string,
-};
+import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 enum Discounts {
   industry = 'industry',
@@ -17,6 +14,10 @@ enum Discounts {
   senior = 'senior',
   repeat = 'repeat',
 }
+
+type CouponState = {
+  [key in Discounts as string]?: null | 'pending' | string;
+};
 
 const discountTable: {[key in Discounts as string]?: number}= {
   industry: 10,
@@ -32,17 +33,18 @@ const descriptionTable: {[key in Discounts as string]?: string} = {
   repeat: '10% off for somebody buying this product for a third time',
 };
 
-const stripeClient = new Stripe('DUMMY_API_KEY', {
+const stripeClient = new Stripe(process.env.STRIPE_API_KEY!, {
   httpClient: createHttpClient(),
   apiVersion: '2020-08-27',
 });
 
 const updateProductCouponMetadata = async (productId: string, newCouponState: CouponState) =>
   await stripeClient.products.update(productId, {
-    metadata: newCouponState,
+    metadata: newCouponState as {[key: string]: string},
   });
 
-const Couponer = ({object: {id: productId}}) => {
+const Couponer = ({environment}: TailorExtensionContextValue) => {
+  const productId = environment!.objectContext.id;
   const options = [
     {
       value: 'industry',
@@ -66,7 +68,7 @@ const Couponer = ({object: {id: productId}}) => {
     },
   ];
 
-  const [couponState, setCouponState] = useState({});
+  const [couponState, setCouponState] = useState<CouponState>({});
 
   const handleCouponChange = useCallback(
     async (value: string, on: boolean) => {
@@ -115,7 +117,7 @@ const Couponer = ({object: {id: productId}}) => {
               id={value}
               label={label}
               disabled={couponState[value] === 'pending'}
-              value={couponState[value]}
+              checked={!!couponState[value]}
               onChange={(e) => handleCouponChange(value, e.target.checked)}
             />
           ))}
