@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-    View,
+    Box,
     TextField,
     SettingsView
 } from '@stripe/ui-extension-sdk/ui';
@@ -67,28 +67,28 @@ const AppSettings = () => {
 
     return (
         <SettingsView onSave={saveSettings} statusMessage={statusLabel} header="Set a Greeting">
-            <View css={{
+            <Box css={{
                 padding:'medium',
                 backgroundColor: 'container',
             }}>
-                <View 
-                    type="span"
+                <Box 
                     css={{
                         font: 'lead'
                     }}
                 >
                     Please enter a greeting
-                </View>
-                <View 
+                </Box>
+                <Box 
                     css={{
                         marginBottom: 'medium',
                         font: 'caption'
                     }}
                 >
                     Saved Greeting: {storedValue || 'None'}
-                </View>
+                </Box>
                 <TextField
                     id="greeting"
+                    // @ts-ignore
                     name="greeting"
                     type="text"
                     label="Greeting:"
@@ -97,7 +97,7 @@ const AppSettings = () => {
                         marginBottom: 'medium'
                     }}
                 />
-            </View>
+            </Box>
         </SettingsView>
     );
 }

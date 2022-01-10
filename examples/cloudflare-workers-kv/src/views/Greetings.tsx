@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {ContextView, View} from '@stripe/ui-extension-sdk/ui';
+import {ContextView, Box} from '@stripe/ui-extension-sdk/ui';
 
 const Greetings = () => {
   const [greeting, setGreeting] = useState<string>('');
@@ -32,13 +32,13 @@ const Greetings = () => {
   return (
     <ContextView title="Greetings" description="Display a saved greeting">
       {!loading && (
-        <View css={{
+        <Box css={{
             font: 'title',
-            color: "green"
+            color: "success"
         }}>
           {greeting ||
             'Please configure a greeting in the application settings.'}
-        </View>
+        </Box>
       )}
     </ContextView>
   );

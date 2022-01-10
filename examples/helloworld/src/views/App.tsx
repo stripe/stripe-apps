@@ -1,37 +1,37 @@
 import {
   ContextView,
   Link,
-  View,
+  Box,
 } from '@stripe/ui-extension-sdk/ui';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 const App = ({userContext, environment}: TailorExtensionContextValue) => {
   return (
     <ContextView title="Get started with Stripe Apps">
-      <View
+      <Box
         css={{
           padding: 'medium',
-          paddingY: '200px',
+          paddingY: 200,
           backgroundColor: 'container',
         }}
       >
-        <View css={{textAlign: 'center'}}>
-          <View
+        <Box>
+          <Box
             css={{
               fontFamily: 'monospace',
               marginBottom: 'large',
             }}
           >
             Edit src/views/App.tsx and save to reload this view
-          </View>
+          </Box>
           <Link
             href="https://stripe.com/docs/stripe-apps/ui-toolkit/components"
             target="_blank"
           >
             Go to UI documentation
           </Link>
-        </View>
-      </View>
+        </Box>
+      </Box>
     </ContextView>
   );
 };
