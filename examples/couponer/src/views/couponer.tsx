@@ -6,6 +6,7 @@ import {
 import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
 import {useCallback, useState} from 'react';
 import Stripe from 'stripe';
+import { useRefreshDashboardData } from '@stripe/ui-extension-sdk/context';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 enum Discounts {
@@ -44,6 +45,7 @@ const updateProductCouponMetadata = async (productId: string, newCouponState: Co
   });
 
 const Couponer = ({environment}: TailorExtensionContextValue) => {
+  const refresh = useRefreshDashboardData();
   const productId = environment!.objectContext.id;
   const options = [
     {
@@ -101,6 +103,7 @@ const Couponer = ({environment}: TailorExtensionContextValue) => {
         await updateProductCouponMetadata(productId, newCouponState);
         setCouponState(newCouponState);
       }
+      refresh();
     },
     [couponState],
   );
