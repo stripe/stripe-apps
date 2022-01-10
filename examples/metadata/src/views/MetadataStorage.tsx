@@ -1,11 +1,14 @@
 import {useEffect, useState} from 'react';
-import {ContextView, View} from '@stripe/ui-extension-sdk/ui';
+import {ContextView, Box} from '@stripe/ui-extension-sdk/ui';
 import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import stripeClient from '../clients/stripe';
 
+type ColorOption = "critical" | "primary" | "disabled" | "brand" | "info" | "success" | "attention" | null;
+const ColorOptions = [ "critical", "primary", "disabled", "brand", "info", "success", "attention" ];
+
 const MetadataStorage = ({ environment }: TailorExtensionContextValue) => {
   const object = environment?.objectContext;
-  const [favoriteColor, setFavoriteColor] = useState<string>('');
+  const [favoriteColor, setFavoriteColor] = useState<ColorOption>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // retrieve information from customer metadata.
@@ -14,8 +17,8 @@ const MetadataStorage = ({ environment }: TailorExtensionContextValue) => {
       const customer = await stripeClient.customers.retrieve(customerId);
       if (customer.deleted === true) throw new Error('Customer is deleted');
       const {favorite_color} = customer.metadata;
-      if (favorite_color) {
-        setFavoriteColor(favorite_color);
+      if (favorite_color && ColorOptions.includes(favorite_color)) {
+        setFavoriteColor(favorite_color as ColorOption);
       }
     } catch (error) {
       console.error('error fetching customer: ', error);
@@ -34,20 +37,20 @@ const MetadataStorage = ({ environment }: TailorExtensionContextValue) => {
       title="Metadata Demo"
       description="What is this customer's favorite color?"
     >
-      <View css={{display: 'flex', padding: 'medium'}}>
+      <Box css={{ layout: 'row', padding: 'medium'}}>
         {isLoading ? (
-            <View  type="span" css={{ font: 'lead' }}>Loading...</View>
+            <Box css={{ font: 'lead' }}>Loading...</Box>
         ) : (
-          <View css={{
-            color: favoriteColor,
+          <Box css={{
+            color: favoriteColor || 'primary',
             font: favoriteColor ? 'subtitle' : 'lead',
           }}>
             {favoriteColor
               ? `This customer's favorite color is ${favoriteColor}`
               : 'A favorite color has not been set for this customer.'}
-          </View>
+          </Box>
         )}
-      </View>
+      </Box>
     </ContextView>
   );
 };

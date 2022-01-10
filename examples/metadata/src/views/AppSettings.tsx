@@ -1,8 +1,8 @@
 import {useState, useCallback, useEffect} from 'react';
 import {
-    View,
+    Box,
     SettingsView,
-    Select
+    Select,
 } from '@stripe/ui-extension-sdk/ui';
 import stripeClient from '../clients/stripe';
 import Stripe from 'stripe';
@@ -17,6 +17,7 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
     const getCustomers = useCallback(async () => {
         const response = await stripeClient.customers.list();
         const customers = response.data;
+        console.log('customers: ', customers)
         setCustomers(customers);
     }, [])
 
@@ -62,69 +63,68 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
             statusMessage={statusLabel}
             onSave={saveSettings}
         >
-           <View css={{
+           <Box css={{
                 padding:'medium',
                 backgroundColor: 'container',
             }}>
                 { customers.length ? (
-                    <View>
-                        <View css={{marginBottom: 'medium'}}>
-                            <View 
+                    <Box key={1}>
+                        <Box css={{marginBottom: 'medium'}}>
+                            <Box 
                                 css={{
                                     marginBottom: 'small',
                                     font: 'lead'
                                 }}
                             >
                                 Select a customer
-                            </View>
+                            </Box>
                             <Select 
                                 name="customer" 
                                 label="&nbsp;Customer" 
-                            >
+                            >   
+                                <option 
+                                    key={0}
+                                    value="" 
+                                >
+                                    Select a Customer
+                                </option>
                                 { customers.map(customer => 
                                     <option 
                                         key={customer.id}
-                                        label={customer.name || ''} 
                                         value={customer.id} 
-                                    />
+                                    >
+                                        {customer.name || ''} 
+                                    </option>
                                 ) }
                             </Select>
-                        </View>
-                       
-                        <View css={{marginBottom: 'medium'}}>
-                            <View 
+                        </Box>
+                        <Box css={{marginBottom: 'medium'}}>
+                            <Box 
                                 css={{
                                     marginBottom: 'small',
                                     font: 'lead'
                                 }}
                             >
                                 What is their favorite color?
-                            </View>
-                            <Select 
-                                name="favorite_color" 
-                                id="favorite_color"
-                                label="&nbsp;Favorite Color" 
-                            >
-                                <option label="Select a color" value="" />
-                                <option label="Red" value="red" />
-                                <option label="Blue" value="blue" />
-                                <option label="Green" value="green" />
-                                <option label="Yellow" value="yellow" />
-                                <option label="Purple" value="purple" />
-                                <option label="Orange" value="orange" />
-                                <option label="Pink" value="pink" />
-                                <option label="Black" value="black" />
-                                <option label="White" value="white" />
-                                <option label="Brown" value="brown" />
-                                <option label="Gray" value="gray" />
-                            </Select>
-                        </View>
-
-                    </View>
-                ) : 
-                    <View>Loading...</View>
-                }
-            </View>
+                                <Select 
+                                    name="favorite_color" 
+                                    id="favorite_color"
+                                    label="&nbsp;Favorite Color" 
+                                >
+                                    <option value="">Select a color</option>
+                                    <option value="critical">Red</option>
+                                    <option value="info">Blue</option>
+                                    <option value="success">Green</option>
+                                    <option value="brand">Purple</option>
+                                    <option value="attention">Orange</option>
+                                    <option value="primary">Black</option>
+                                    <option value="disabled">Grey</option>
+                                </Select>
+                            </Box>
+                        </Box>
+                    </Box>
+                ) :  <Box>Loading...</Box> }
+            </Box>
         </SettingsView>
     );
 }
