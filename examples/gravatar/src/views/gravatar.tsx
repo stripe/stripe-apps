@@ -16,6 +16,7 @@ const Gravatar = ({environment}: TailorExtensionContextValue) => {
 
   try {
     stripe.customers.retrieve(object.id).then((customer) => {
+      if (customer.deleted === true) throw new Error('The requested customer has been deleted.');
       setImageUrl(
         gravatar.imageUrl({
           email: customer.email,

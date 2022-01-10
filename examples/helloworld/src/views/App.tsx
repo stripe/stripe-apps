@@ -15,7 +15,7 @@ const App = ({userContext, environment}: TailorExtensionContextValue) => {
           backgroundColor: 'container',
         }}
       >
-        <Box css={{textAlign: 'center'}}>
+        <Box>
           <Box
             css={{
               fontFamily: 'monospace',
