@@ -72,7 +72,6 @@ const AppSettings = () => {
                 backgroundColor: 'container',
             }}>
                 <Box 
-                    type="span"
                     css={{
                         font: 'lead'
                     }}
