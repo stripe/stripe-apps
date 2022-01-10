@@ -59,13 +59,13 @@ const updateInvoiceMetadata = async (
 
 const FROM_ADDRESS = {
   name: 'US Mousetraps West',
-  street1: '20013 Sweetwater Springs Rd',
-  city: 'Healdsburg',
+  street1: '354 Oyster Point Blvd',
+  city: 'South San Francisco',
   state: 'CA',
-  zip: '95448',
+  zip: '94080',
   country: 'US',
   phone: '4151234567',
-  email: 'jt+mousetraps@stripe.com',
+  email: 'mousetrapper@example.com',
 };
 
 type RatePickerProps = {
@@ -164,7 +164,9 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
       <Badge key={i} type="info">{attr}</Badge>
     ));
     rateMap[rate.object_id] = rate;
-    const backgroundCSS = {
+    // This uses some undocumented CSS properties that may stop working in the future.
+    // USE AT YOUR OWN RISK!
+    const backgroundCSS: any = {
       backgroundImage: `url(${rate.provider_image_75})`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'contain',
