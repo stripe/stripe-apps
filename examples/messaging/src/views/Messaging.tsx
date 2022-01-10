@@ -1,15 +1,13 @@
 import {
+  Badge,
+  Box,
   ContextView,
-  Table,
-  TableBody,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-  View,
+  List,
+  ListItem,
 } from '@stripe/ui-extension-sdk/ui';
 import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
-import MessageListItem from '../components/MessageListItem';
+import {getEpochMsDisplayText} from '../utils/time';
 import {fakeUserMessages} from '../fakeData';
 import {useCustomer} from '../utils/stripeApi';
 
@@ -19,35 +17,29 @@ const Messaging = ({environment}: TailorExtensionContextValue) => {
   return (
     <ContextView title="Recent Messages">
       {fakeUserMessages.length ? (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeaderCell>Subject</TableHeaderCell>
-              <TableHeaderCell>Date</TableHeaderCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {fakeUserMessages.map((message) => (
-              <MessageListItem key={message.id} message={message} />
-            ))}
-          </TableBody>
-        </Table>
+        <List>
+          {fakeUserMessages.map((message) => (
+            <ListItem value={message.subject} id={message.id}>
+              <Box>
+                <Badge type="info">{getEpochMsDisplayText(message.date)}</Badge>
+              </Box>
+            </ListItem>
+          ))}
+        </List>
       ) : (
-        <View>
+        <Box>
           No messages found.
-        </View>
+        </Box>
       )}
       {!!customer && 'email' in customer && !!customer.email && (
-        <View
+        <Box
           css={{
-            fontSize: '10px',
-            lineHeight: '1.5',
             color: 'secondary',
             paddingY: 'medium',
           }}
         >
           Displaying messages between {customer.email} and some.merchant@example.com.
-        </View>
+        </Box>
       )}
     </ContextView>
   );
