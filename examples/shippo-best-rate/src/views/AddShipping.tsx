@@ -1,6 +1,6 @@
 import {
   ContextView,
-  View,
+  Box,
 } from '@stripe/ui-extension-sdk/ui';
 
 import {useEffect, useState, useCallback} from 'react';
@@ -63,7 +63,7 @@ const AddShipping = ({environment}: TailorExtensionContextValue) => {
   }, [invoiceId]);
   let content: JSX.Element;
   if (!invoice) {
-    content = <View>Loading shipping details...</View>
+    content = <Box>Loading shipping details...</Box>
   } else if(shippingDetails) {
     content = <ShippingDetails
       onResetShippingDetails={handleResetShippingDetails}

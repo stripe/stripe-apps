@@ -1,6 +1,6 @@
 import {
   Button,
-  View,
+  Box,
 } from '@stripe/ui-extension-sdk/ui';
 
 import {useState, useCallback} from 'react';
@@ -26,15 +26,14 @@ const ShippingDetails = ({service, labelUrl, trackingUrl, onResetShippingDetails
     await onResetShippingDetails();
     setConfirmingDelete('hidden')
   }
+  console.log('Tracking url', trackingUrl);
   return (
-    <View css={{layout: 'row', }}>
-      <View css={{font: 'body'}}>Invoice is shipping via {service}.</View>
-      <View css={{layout: 'row', gap: 'medium'}}>
-        <Button icon="external" iconPosition="right" label="Track shipment" href={trackingUrl} target="shippo-tracking" />
-        <Button icon="external" iconPosition="right" label="Print label" href={labelUrl} target="shippo-label" />
-        <Button icon="trash" onClick={() => handleResetShippingDetails()} label="Change shipping" hideLabel />
-      </View>
-    </View>
+    <Box css={{layout: 'column', gap: 'small'}}>
+      <Box css={{font: 'body'}}>Invoice is shipping via {service}.</Box>
+      <Button href={trackingUrl}>Track shipment</Button>
+      <Button href={labelUrl}>Print label</Button>
+      <Button onPress={() => handleResetShippingDetails()}>Change shipping</Button>
+    </Box>
   );
 }
 

@@ -1,8 +1,9 @@
 import {
   Badge,
-  SectionList,
-  SectionListItem,
-  View,
+  Inline,
+  List,
+  ListItem,
+  Box,
 } from '@stripe/ui-extension-sdk/ui';
 
 import {useCallback, useEffect, useState} from 'react';
@@ -148,38 +149,49 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   }, []);
 
   if (errorMessage) {
-    return <View>{errorMessage}</View>;
+    return <Box>{errorMessage}</Box>;
   }
   if (!customer) {
-    return <View>Getting customer address</View>;
+    return <Box>Getting customer address</Box>;
   }
   if (!shipment) {
-    return <View>Loading shipping rates from Shippo</View>;
+    return <Box>Loading shipping rates from Shippo</Box>;
   }
   if (creatingLabel) {
-    return <View>Creating shipping label</View>
+    return <Box>Creating shipping label</Box>
   }
+  const rateMap = {};
   const rateItems = shipment.rates.map((rate) => {
     const attributePills = rate.attributes.map((attr, i) => (
-      <Badge key={i} color="blue" label={attr} />
+      <Badge key={i} type="info">{attr}</Badge>
     ));
+    rateMap[rate.object_id] = rate;
+    const backgroundCSS = {
+      backgroundImage: `url(${rate.provider_image_75})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'contain',
+      backgroundPosition: 'center center',
+      height: '16px',
+      width: '16px',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      marginRight: '4px',
+    };
     return (
-      <SectionListItem
+      <ListItem
         key={rate.object_id}
+        id={rate.object_id}
         value={rate.amount}
-        size="large"
       >
-        <View slot="icon"><img width="20" src={rate.provider_image_75} /></View>
-        <View>{`${rate.provider} ${rate.servicelevel.name}`}</View>
-        <View slot="description">{rate.duration_terms}</View>
-      </SectionListItem>
+        <Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>
+        <Box slot="description">{rate.duration_terms}</Box>
+      </ListItem>
     );
   });
-  return <SectionList onAction={(key) => {
-    // There's a bug with onAction so just picking a random rate for now
-    const rate = shipment.rates[Math.round(Math.random() * shipment.rates.length)]
+  return <List onAction={(object_id) => {
+    const rate = rateMap[object_id];
     handleRatePicked(invoice, rate, shipment)}
-  }>{rateItems}</SectionList>;
+  }>{rateItems}</List>;
         
 };
 
