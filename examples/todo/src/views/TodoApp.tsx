@@ -1,16 +1,18 @@
 import {
   ContextView,
-  Section,
-  View,
+  List,
+  ListItem,
+  Inline,
+  Box,
   TextField,
   Button,
   Switch,
-} from '@stripe/tailor-browser-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/tailor-browser-sdk/context';
+} from '@stripe/ui-extension-sdk/ui';
+import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 import { useState, useEffect, ChangeEvent } from 'react';
 
-import { createHttpClient } from '@stripe/tailor-browser-sdk/http_client';
+import { createHttpClient } from '@stripe/ui-extension-sdk/http_client';
 import Stripe from 'stripe';
 
 // A key isn't necessary, since behind the scenes the app uses the dashboard credentials to make requests
@@ -154,22 +156,22 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
 
   return (
     <ContextView title="Todos">
-      <View
+      <Box
         css={{
           layout: 'row',
           gap: 'medium',
+          alignY: 'center',
         }}
       >
         <TextField type="text" size="small" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
         <Button size="medium" type="primary" onPress={() => addTodo()}>
           + Add task
         </Button>
-      </View>
-      <View
+      </Box>
+      <Box
         css={{
           paddingY: 'medium',
           layout: 'column',
-          gap: 'medium',
         }}
       >
         {todoList.map((todo: Todo) => {
@@ -177,26 +179,39 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
           // Also hide the "Complete" button if the task is already completed
           if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
             return (
-              <Section title={todo.text}>
-                {
-                  mode === Mode.Uncompleted ?
-                    <Button slot="action" size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
-                    null
-                }
-                <Button slot="action" size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
-              </Section>
+              <List>
+                <ListItem key={`todo-${todo.created}`}>
+                  <Inline css={{
+                    font: 'body',
+                    color: 'primary',
+                    fontWeight: 'semibold',
+                    layout: 'row',
+                    gap: 'small',
+                    alignX: 'end',
+                    alignY: 'center'
+                  }}>
+                    <Inline css={{width: '150px'}}>{todo.text}</Inline>
+                    {
+                      mode === Mode.Uncompleted ?
+                        <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
+                        null
+                    }
+                    <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
+                  </Inline>
+                </ListItem>
+              </List>
             );
           }
         })}
-      </View>
-      <View css={{margin: 'medium'}}>
+      </Box>
+      <Box css={{margin: 'medium'}}>
         <Switch
           id="mode-switch"
-          value={mode === Mode.Completed}
+          checked={mode === Mode.Completed}
           onChange={() => setMode(mode === Mode.Completed ? Mode.Uncompleted : Mode.Completed)}
           label="Show completed tasks"
         />
-      </View>
+      </Box>
     </ContextView>
   );
 };

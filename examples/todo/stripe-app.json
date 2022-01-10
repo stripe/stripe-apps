@@ -1,6 +1,6 @@
 {
   "id": "com.example.todo",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "name": "todo",
   "icon": "",
   "permissions": [],
@@ -8,7 +8,7 @@
   "ui_extension": {
     "views": [
       {
-        "viewport": "stripe.dashboard.customer.main",
+        "viewport": "stripe.dashboard.customer.detail",
         "component": "TodoApp"
       }
     ],
