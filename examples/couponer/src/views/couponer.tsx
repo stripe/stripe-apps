@@ -4,7 +4,7 @@ import {
   Switch,
 } from '@stripe/ui-extension-sdk/ui';
 import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
-import {useCallback, useState} from 'react';
+import {useCallback, useState, useEffect} from 'react';
 import Stripe from 'stripe';
 import { useRefreshDashboardData } from '@stripe/ui-extension-sdk/context';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
@@ -70,7 +70,12 @@ const Couponer = ({environment}: TailorExtensionContextValue) => {
     },
   ];
 
-  const [couponState, setCouponState] = useState<CouponState>({});
+  const [couponState, setCouponState] = useState<CouponState>({
+    industry: 'pending',
+    loyalty: 'pending',
+    senior: 'pending',
+    repeat: 'pending',
+  });
 
   const handleCouponChange = useCallback(
     async (value: string, on: boolean) => {
@@ -107,6 +112,16 @@ const Couponer = ({environment}: TailorExtensionContextValue) => {
     },
     [couponState],
   );
+
+  useEffect(() => {
+    (async () => {
+      const product = await stripeClient.products.retrieve(productId);
+      const {industry, loyalty, senior, repeat} = product.metadata;
+      setCouponState({
+        industry, loyalty, senior, repeat,
+      });
+    })();
+  }, [productId]);
 
   return (
     <ContextView
