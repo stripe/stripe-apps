@@ -39,10 +39,10 @@
   resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
   integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
 
-"@stripe/ui-extension-sdk@^1.0.0":
-  version "1.1.4"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.4.tgz#95d6ff8cb82a1edbdeb29b247a935c5a7d99b2af"
-  integrity sha512-j8mxcoRnWns3GjCtVYwCtPuZlceSph2HVtEJtIkoj7aT7OT4padWxs8d51gdhwswe1ijP7uXVBGLb5wj/mjdYw==
+"@stripe/ui-extension-sdk@^1.1.5":
+  version "1.1.5"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.5.tgz#3ad3ed818b972d22ba932c8ab9e9ac3d93296e03"
+  integrity sha512-phfzMsKC0U8ww1Te2M5IN72uAnaXKR9Z88vbQqHKA5PWa8OTnKlMkZtMum7yOMf84VXJZVu5zCqwzuiuiivsYA==
   dependencies:
     "@remote-ui/react" "^4.3.0"
     "@types/stylis" "^4.0.2"
@@ -51,9 +51,9 @@
     stripe "^8.174.0"
 
 "@types/node@>=8.1.0":
-  version "14.18.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/node/-/node-14.18.0.tgz#98df2397f6936bfbff4f089e40e06fa5dd88d32a"
-  integrity sha512-0GeIl2kmVMXEnx8tg1SlG6Gg8vkqirrW752KqolYo1PHevhhZN3bhJ67qHj+bQaINhX0Ra3TlWwRvMCd9iEfNQ==
+  version "16.11.12"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/node/-/node-16.11.12.tgz#ac7fb693ac587ee182c3780c26eb65546a1a3c10"
+  integrity sha512-+2Iggwg7PxoO5Kyhvsq9VarmPbIelXP070HMImEpbtGCoyWNINQj4wzjbQCXzdHTRXnqufutJb5KAURZANNBAw==
 
 "@types/prop-types@*":
   version "15.7.4"
@@ -150,14 +150,14 @@ object-assign@^4.1.1:
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 object-inspect@^1.9.0:
-  version "1.11.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/object-inspect/-/object-inspect-1.11.0.tgz#9dceb146cedd4148a0d9e51ab88d34cf509922b1"
-  integrity sha512-jp7ikS6Sd3GxQfZJPyH3cjcbJF6GZPClgdV+EFygjFLQ5FmW/dRUnTd9PQ9k0JhoNDabWFbpF1yCdSWCC6gexg==
+  version "1.11.1"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/object-inspect/-/object-inspect-1.11.1.tgz#d4bd7d7de54b9a75599f59a00bd698c1f1c6549b"
+  integrity sha512-If7BjFlpkzzBeV1cqgT3OSWT3azyoxDGajR+iGnFBfVV2EWyDyWaZZW2ERDjUaY2QM8i5jI3Sj7mhsM4DDAqWA==
 
 qs@^6.6.0:
-  version "6.10.1"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/qs/-/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
-  integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
+  version "6.10.2"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/qs/-/qs-6.10.2.tgz#c1431bea37fc5b24c5bdbafa20f16bdf2a4b9ffe"
+  integrity sha512-mSIdjzqznWgfd4pMii7sHtaYF8rx8861hBO80SraY5GT0XQibWZWJSid0avzHGkDIZLImux2S5mXO0Hfct2QCw==
   dependencies:
     side-channel "^1.0.4"
 
@@ -169,14 +169,6 @@ qs@^6.6.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
-
-react@^0.0.0-experimental-4729ff6d1-20211202:
-  version "0.0.0-experimental-4729ff6d1-20211202"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/react/-/react-0.0.0-experimental-4729ff6d1-20211202.tgz#9982634beaff58d6ffb6ebf013d987f4795d989a"
-  integrity sha512-5bA6dehAzVqzNVYHdWI7aLJVNqgVgpJUCjAew1kL015nW2X0g4E1FVfuJ3uQzK7j7Wp+uOIbAcShf7J8PRilAw==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 react@^17.0.2:
   version "17.0.2"
@@ -204,9 +196,9 @@ side-channel@^1.0.4:
     object-inspect "^1.9.0"
 
 stripe@^8.174.0, stripe@^8.191.0:
-  version "8.191.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/stripe/-/stripe-8.191.0.tgz#7bb56080dce2e2e9cc4f52dc05792626ea46bfd6"
-  integrity sha512-3oyuIbuW3WDsbGnMUtIZPkr+sOUJ3NEtEwghd81ZuWc+Tq09MrgWXGekbVnbxA3TMFwfKOILw6QoiPA7za4JUg==
+  version "8.193.0"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/stripe/-/stripe-8.193.0.tgz#875ef7e5c7ac7c57d40b73a495a1e6f50b7eb6c0"
+  integrity sha512-SkU97dWTIcBR3fXdiVZJQoUs1K62ADf4zc6DaCxDACJICPfYI78NIJoroDZBvOLI5vCSHBc4E3wYC+h8CISeBw==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
