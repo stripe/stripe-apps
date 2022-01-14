@@ -3,7 +3,7 @@ import {
   ContextView,
   Switch,
 } from '@stripe/ui-extension-sdk/ui';
-import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
+import {createHttpClient, STRIPE_API_KEY} from '@stripe/ui-extension-sdk/http_client';
 import {useCallback, useState, useEffect} from 'react';
 import Stripe from 'stripe';
 import { useRefreshDashboardData } from '@stripe/ui-extension-sdk/context';
@@ -34,7 +34,7 @@ const descriptionTable: {[key in Discounts as string]?: string} = {
   repeat: '10% off for somebody buying this product for a third time',
 };
 
-const stripeClient = new Stripe(process.env.STRIPE_API_KEY!, {
+const stripeClient = new Stripe(STRIPE_API_KEY, {
   httpClient: createHttpClient(),
   apiVersion: '2020-08-27',
 });

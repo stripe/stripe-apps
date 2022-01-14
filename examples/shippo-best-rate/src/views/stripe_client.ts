@@ -1,8 +1,8 @@
 import Stripe from 'stripe';
-import {createHttpClient} from '@stripe/ui-extension-sdk/http_client';
+import {createHttpClient, STRIPE_API_KEY} from '@stripe/ui-extension-sdk/http_client';
 
 const httpClient = createHttpClient();
-const stripeClient = new Stripe(process.env.STRIPE_API_KEY, {
+const stripeClient = new Stripe(STRIPE_API_KEY, {
   httpClient,
   apiVersion: '2020-08-27',
 });

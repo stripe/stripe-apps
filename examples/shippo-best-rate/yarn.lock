@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
   integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
 
-"@stripe/ui-extension-sdk@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.5.tgz#3ad3ed818b972d22ba932c8ab9e9ac3d93296e03"
-  integrity sha512-phfzMsKC0U8ww1Te2M5IN72uAnaXKR9Z88vbQqHKA5PWa8OTnKlMkZtMum7yOMf84VXJZVu5zCqwzuiuiivsYA==
+"@stripe/ui-extension-sdk@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.6.tgz#5cc79ade0dbb05e029775e035c77e568885d47d5"
+  integrity sha512-/MFVlo+rpEDF2fKon3w1Rfd6YIxn5NE2w6vZIS1GI5VXVMjmJU42c71MnL+ZZGMM06qoVj5jHDASjh9jnghqDw==
   dependencies:
     "@remote-ui/react" "^4.3.0"
     "@types/stylis" "^4.0.2"
