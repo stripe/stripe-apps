@@ -1,6 +1,6 @@
 # [Demo] Send custom Email using SendGrid
 
-![./screenshot.png]
+![Screenshot](./screenshot.png)
 
 This is an example to send custom email to the customer from the Stripe Dashboard.
 The application will get the `to` address and `from` address automatically.
