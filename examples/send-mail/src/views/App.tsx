@@ -15,7 +15,7 @@ const App = (props: TailorExtensionContextValue) => {
     customerLoadingErrorMessage,
     customerLoadingStatus,
     customer,
-  } = useCustomerLoader(props)
+  } = useCustomerLoader(props);
   const {
     subject,
     setSubject,
@@ -43,14 +43,14 @@ const App = (props: TailorExtensionContextValue) => {
               label="Subject"
               value={subject}
               onChange={e=>{
-                setSubject(e.target.value)
+                setSubject(e.target.value);
               }}
             />
             <TextArea
               label="Content (Text only)"
               value={text}
               onChange={(e) => {
-                setText(e.target.value)
+                setText(e.target.value);
               }}
             />
           </Box>
@@ -58,7 +58,7 @@ const App = (props: TailorExtensionContextValue) => {
             <Button
               type="primary"
               onPress={e => {
-                callSendMailAPI(customer)
+                callSendMailAPI(customer);
               }}
               disabled={sendingStatus === 'sending'}
             >
