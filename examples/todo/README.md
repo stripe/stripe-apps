@@ -1,5 +1,7 @@
 # Todo Example App
 
+![Screenshot](./screenshot.png)
+
 This is a simple Todo app built with Stripe App UI components and using Stripe Customer metadata to maintain state.
 
 ## Setup

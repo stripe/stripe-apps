@@ -12,11 +12,11 @@ import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/conte
 
 import { useState, useEffect, ChangeEvent } from 'react';
 
-import { createHttpClient } from '@stripe/ui-extension-sdk/http_client';
+import { createHttpClient, STRIPE_API_KEY } from '@stripe/ui-extension-sdk/http_client';
 import Stripe from 'stripe';
 
 // A key isn't necessary, since behind the scenes the app uses the dashboard credentials to make requests
-const stripe = new Stripe('', {
+const stripe = new Stripe(STRIPE_API_KEY, {
   httpClient: createHttpClient() as Stripe.HttpClient,
   apiVersion: '2020-08-27',
 });
