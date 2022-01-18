@@ -1,19 +1,18 @@
-const express = require("express");
-require('dotenv').config()
-const sgMail = require('@sendgrid/mail');
-const app = express();
+import express from 'express';
+import sgMail from '@sendgrid/mail';
+import 'dotenv/config';
 
-app.use(express.static("public"));
+const app = express();
 app.use(express.json());
 
 app.post("/api/email", async (request, response) => {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
     const mailData = {
         from: request.body.from,
         to:  request.body.to,
         subject:  request.body.subject,
         text:  request.body.text,
-    }
+    };
     const result = await sgMail.send(mailData);
     response.send({
         result
