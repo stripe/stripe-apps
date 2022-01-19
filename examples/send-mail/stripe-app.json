@@ -1,0 +1,21 @@
+{
+  "id": "com.example.sendmail",
+  "version": "0.0.1",
+  "name": "Easy Mail Sender",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [],
+      "purpose": ""
+    }
+  }
+}
