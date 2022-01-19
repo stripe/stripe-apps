@@ -1,0 +1,15 @@
+{
+  "name": "com.example.ceratostomella-cetene",
+  "version": "0.0.1",
+  "description": "Setting UI",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^1.1.6",
+    "react": "^17.0.2",
+    "stripe": "^8.194.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
