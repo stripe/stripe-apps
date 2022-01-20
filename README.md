@@ -27,6 +27,12 @@ You can find examples in [/examples](/examples)
 Issues are labeled as 'Bug', 'Feature Request', 'Enhancement', or 'Documentation'. In addition they are labeled with a relevant owning team.
 We use the reactions on feature requests and enhancements to gauge interest, so please feel free to upvote, downvote, and comment on what is the most meaningful for your app. _We will regularly reporioritize issues based on your feedback._
 
+**Quick Queries**
+
+[All Upcoming UI Components](https://github.com/stripe/stripe-apps/issues?q=is%3Aissue+is%3Aopen+label%3Anew-component)
+
+[All Bugs](https://github.com/stripe/stripe-apps/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
 ## Raising Issues
 
 If you would like to raise an issue, there are several issue templates available. Choose the one that makes the most sense to you from the following:
