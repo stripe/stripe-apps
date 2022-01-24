@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Switch,
+  FocusView,
 } from '@stripe/ui-extension-sdk/ui';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
@@ -25,6 +26,7 @@ type Todo = {
   text: string,
   created: Number,
   completed: boolean,
+  notes: string,
 };
 
 type Metadata = {
@@ -48,9 +50,11 @@ const parseCustomerMetadata = (metadata: any) => {
 
 const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
   const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState<string>('');
+  const [notesTextFieldValue, setNotesTextFieldValue] = useState<string>('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [customer, setCustomer] = useState<Stripe.Customer>();
   const [mode, setMode] = useState<string>(Mode.Uncompleted);
+  const [openNotes, setOpenNotes] = useState<Todo|false>(false);
 
   useEffect(() => {
     async function getTodos() {
@@ -82,6 +86,7 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
       text: newTodoTextFieldValue,
       created: Date.now(),
       completed: false,
+      notes: '',
     }
 
     // Merge this todo with existing todo list on the customer's metadata
@@ -129,6 +134,23 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
     for (let i = 0; i < newTodoList.length; i++) {
       if (todo.created === newTodoList[i].created) {
         newTodoList.splice(i, 1);
+        break;
+      }
+    }
+
+    setTodoList(newTodoList);
+
+    const cust: Stripe.Customer = await updateCustomerTodoList({
+      todos: JSON.stringify(newTodoList),
+    }) as Stripe.Customer;
+    setCustomer(cust);
+  };
+
+  const updateTodoNotes = async (todo: Todo) => {
+    const newTodoList: Todo[] = todoList.concat();
+    for (let i = 0; i < newTodoList.length; i++) {
+      if (todo.created === newTodoList[i].created) {
+        newTodoList[i].notes = notesTextFieldValue;
         break;
       }
     }
@@ -190,12 +212,16 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
                     alignX: 'end',
                     alignY: 'center'
                   }}>
-                    <Inline css={{width: '150px'}}>{todo.text}</Inline>
+                    <Inline css={{width: '115px'}}>{todo.text}</Inline>
                     {
                       mode === Mode.Uncompleted ?
                         <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
                         null
                     }
+                    <Button size="small" onPress={() => {
+                      setNotesTextFieldValue(todo.notes);
+                      setOpenNotes(todo);
+                    }}>✍️</Button>
                     <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
                   </Inline>
                 </ListItem>
@@ -212,6 +238,26 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
           label="Show completed tasks"
         />
       </Box>
+      <FocusView
+        shown={!!openNotes}
+        title={openNotes ? `Notes for: "${openNotes.text}"` : 'Loading...'}
+        onClose={() => setOpenNotes(false)}
+        footerContent="Saved changes cannot be reverted"
+        primaryAction={<Button type="primary" onPress={async () => {
+          if (openNotes) {
+            await updateTodoNotes(openNotes);
+          }
+          setOpenNotes(false);
+        }}>Save note</Button>}
+        secondaryAction={<Button onPress={() => setOpenNotes(false)}>Cancel</Button>}
+      >
+        <TextField aria-label="Notes field for this todo" label="Additional notes for this todo item:" value={notesTextFieldValue} onChange={(e: ChangeEvent) => {
+          setNotesTextFieldValue((e.target as HTMLInputElement).value);
+        }}/>
+        <Box>
+          <Box css={{alignX: 'end', layout: 'row', marginY: 'small' }}>{500-notesTextFieldValue.length}</Box>
+        </Box>
+      </FocusView>
     </ContextView>
   );
 };
