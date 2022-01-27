@@ -8,3 +8,5 @@
         - `FocusView` now supports the `footerContent` prop
         - `SettingsView` now supports the `headerActions` prop
     - Some type fixes and grammar updates.
+- Released CLI v0.1.5-apps-preview 
+    - Adds a remove command that enables developers to remove views from their UI extensions via the CLI
