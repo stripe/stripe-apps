@@ -10,3 +10,4 @@
     - Some type fixes and grammar updates.
 - Released CLI v0.1.5-apps-preview 
     - Adds a remove command that enables developers to remove views from their UI extensions via the CLI
+- [Updated Todo example with FocusView](https://github.com/stripe/stripe-apps/pull/116)
