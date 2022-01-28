@@ -14,7 +14,7 @@ import stripeClient from './stripe_client';
 const SHIPPO_TOKEN =
   'ShippoToken shippo_test_ccc7f1c4ed9ef8beaa43c07b2941e2260f40fd72';
 
-const addShippingLineItem = async (rate, invoiceId, customerId) => {
+const addShippingLineItem = async (rate: Rate, invoiceId: string, customerId: string) => {
   return stripeClient.invoiceItems.create({
     amount: Math.round(parseFloat(rate.amount) * 100),
     currency: rate.currency,
@@ -24,7 +24,7 @@ const addShippingLineItem = async (rate, invoiceId, customerId) => {
   });
 };
 
-const shippoRequest = (endpoint, method, requestData) => {
+const shippoRequest = (endpoint: string, method: 'GET' | 'POST', requestData: string) => {
   return fetch(`https://api.goshippo.com/${endpoint}`, {
     method,
     headers: {
@@ -119,7 +119,9 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
           setShipment(await resp.json());
         }
       } catch (exc) {
-        setErrorMessage(`Could not load rates: ${exc.message}`);
+        if (exc instanceof Error) {
+          setErrorMessage(`Could not load rates: ${exc?.message}`);
+        }
       }
     })();
   }, []);
@@ -158,9 +160,9 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   if (creatingLabel) {
     return <Box>Creating shipping label&hellip;</Box>
   }
-  const rateMap = {};
+  const rateMap: {[object_id: string]: Rate} = {};
   const rateItems = shipment.rates.map((rate) => {
-    const attributePills = rate.attributes.map((attr, i) => (
+    const attributePills = (rate.attributes as Array<string>).map((attr, i) => (
       <Badge key={i} type="info">{attr}</Badge>
     ));
     rateMap[rate.object_id] = rate;

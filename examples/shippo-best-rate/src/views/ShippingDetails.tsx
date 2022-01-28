@@ -22,11 +22,11 @@ type Props = ShippingDetailsMetadata & {
 }
 
 const ShippingDetails = ({service, labelUrl, trackingUrl, onResetShippingDetails}: Props) => {
-  const [confirmingDelete, setConfirmingDelete] = useState<'hidden'|'confirming'|'pending'>('hidden')
+  const [deleting, setDeleting] = useState<boolean>(false)
   const handleResetShippingDetails = async() => {
-    setConfirmingDelete('pending');
+    setDeleting(true);
     await onResetShippingDetails();
-    setConfirmingDelete('hidden')
+    setDeleting(false);
   }
   return (
     <Box css={{layout: 'column', gap: 'small'}}>
@@ -34,7 +34,7 @@ const ShippingDetails = ({service, labelUrl, trackingUrl, onResetShippingDetails
       <Divider />
       <Link href={trackingUrl} target="_blank">Track shipment</Link>
       <Link href={labelUrl} target="_blank">Print label</Link>
-      <Button onPress={() => handleResetShippingDetails()}>Change shipping</Button>
+      <Button disabled={deleting} onPress={() => handleResetShippingDetails()}>Change shipping</Button>
     </Box>
   );
 }
