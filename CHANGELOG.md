@@ -7,7 +7,14 @@
         - `MenuGroup` now supports the `title` prop
         - `FocusView` now supports the `footerContent` prop
         - `SettingsView` now supports the `headerActions` prop
-    - Some type fixes and grammar updates.
-- Released CLI v0.1.5-apps-preview 
+	- Some type fixes and grammar updates.
+- Updates to the Stripe dashboard
+    - The `onChange` handler for `TextArea` now provides `e.target.value`
+    - Checkbox on/off and other visual states are now consistent with the rest of the dashboard
+    - Checkbox no longer emits duplicate `onChange` events
+    - A select with the `multiple` prop now renders properly
+    - `baseline` alignment is fixed
+    - `ListItem` components should appear clickable
+- Released CLI v0.1.5-apps-preview
     - Adds a remove command that enables developers to remove views from their UI extensions via the CLI
 - [Updated Todo example with FocusView](https://github.com/stripe/stripe-apps/pull/116)
