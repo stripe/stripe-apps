@@ -15,6 +15,8 @@
     - A select with the `multiple` prop now renders properly
     - `baseline` alignment is fixed
     - `ListItem` components should appear clickable
-- Released CLI v0.1.5-apps-preview
+- Released CLI v0.1.6-apps-preview
     - Adds a remove command that enables developers to remove views from their UI extensions via the CLI
+    - Fixes #96
+    - When creating a new app, the CLI now adds a simple test and the dependencies required to run tests
 - [Updated Todo example with FocusView](https://github.com/stripe/stripe-apps/pull/116)
