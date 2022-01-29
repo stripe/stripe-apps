@@ -13,13 +13,11 @@ import Stripe from 'stripe';
 import invariant from 'ts-invariant';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
-const logo = require('../shippo-logo.svg') as string;
-
 const AddShipping = ({environment}: TailorExtensionContextValue) => {
   invariant(environment, 'Unexpectedly null environment');
   const {objectContext: {id: invoiceId}} = environment;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata|null>();
-  const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
+  const [invoice, setInvoice] = useState<Stripe.Invoice>();
   const loadShippingDetails = async (invoiceId: string) => {
     const invoice = await stripeClient.invoices.retrieve(invoiceId);
     const {

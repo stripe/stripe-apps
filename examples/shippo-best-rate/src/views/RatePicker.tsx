@@ -1,5 +1,7 @@
 import {
-  Badge, Box, Inline,
+  Badge,
+  Box,
+  Inline,
   List,
   ListItem
 } from '@stripe/ui-extension-sdk/ui';
@@ -69,12 +71,11 @@ const FROM_ADDRESS = {
 };
 
 type RatePickerProps = {
-  invoice: Stripe.Response<Stripe.Invoice>,
+  invoice: Stripe.Invoice,
   onRatePicked: (p: ShippingDetailsMetadata) => void,
 };
 const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   const [shipment, setShipment] = useState<Shipment>();
-  const [customer, setCustomer] = useState<Stripe.Response<Stripe.Customer>>();
   const [creatingLabel, setCreatingLabel] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   useEffect(() => {
@@ -85,22 +86,21 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
         const customer = await stripeClient.customers.retrieve(
           invoice.customer,
         );
-        if (customer.deleted === true) throw new Error('Customer is deleted');
-        if (!customer.address) throw new Error('Missing customer address');
-        setCustomer(customer);
+        const addr = invoice.customer_address;
+        if (!addr) throw new Error('Missing customer address');
         const resp = await shippoRequest(
           'shipments',
           'POST',
           JSON.stringify({
             address_from: FROM_ADDRESS,
             address_to: {
-              name: customer.name,
-              street1: customer.address.line1,
-              street2: customer.address.line2,
-              city: customer.address.city,
-              state: customer.address.state,
-              zip: customer.address.postal_code,
-              country: customer.address.country,
+              name: invoice.customer_name,
+              street1: addr.line1,
+              street2: addr.line2,
+              city: addr.city,
+              state: addr.state,
+              zip: addr.postal_code,
+              country: addr.country,
             },
             parcels: [
               {
@@ -151,9 +151,6 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   if (errorMessage) {
     return <Box>{errorMessage}</Box>;
   }
-  if (!customer) {
-    return <Box>Getting customer address&hellip;</Box>;
-  }
   if (!shipment) {
     return <Box>Loading shipping rates from Shippo&hellip;</Box>;
   }
@@ -186,6 +183,8 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
         value={rate.amount}
       >
         <Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>
+        {/*
+ // @ts-ignore */}
         <Box slot="description">{rate.duration_terms}</Box>
       </ListItem>
     );
