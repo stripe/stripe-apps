@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import type {Stripe} from "stripe";
 import stripeClient from '../clients/stripe';
 
@@ -7,8 +7,7 @@ export const useCustomer = (customerId?: string) => {
     return null;
   }
 
-  const [customer, setCustomer] =
-    React.useState<Stripe.Customer | Stripe.DeletedCustomer | null>(null);
+  const [customer, setCustomer] = useState<Stripe.Customer | Stripe.DeletedCustomer | null>(null);
 
   const loadCustomer = async () => {
     const customer = await stripeClient.customers.retrieve(customerId);
@@ -16,7 +15,7 @@ export const useCustomer = (customerId?: string) => {
     setCustomer(customer);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadCustomer();
   }, [customerId]);
 

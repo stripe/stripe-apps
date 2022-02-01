@@ -1,4 +1,4 @@
-import { Message } from "./types";
+import type { Message } from "./types";
 
 export const fakeUserMessages: Message[] = [
   {

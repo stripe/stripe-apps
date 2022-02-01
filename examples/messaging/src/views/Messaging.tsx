@@ -1,27 +1,38 @@
+import {useState} from 'react';
 import {
   Badge,
   Box,
+  Button,
   ContextView,
+  FocusView,
   List,
   ListItem,
 } from '@stripe/ui-extension-sdk/ui';
 import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
+import type { Message } from "../types";
 import {getEpochMsDisplayText} from '../utils/time';
 import {fakeUserMessages} from '../fakeData';
 import {useCustomer} from '../utils/stripeApi';
 
-const Messaging = ({environment}: TailorExtensionContextValue) => {
+const Messaging = ({environment, userContext}: TailorExtensionContextValue) => {
   const customer = useCustomer(environment?.objectContext?.id);
+  const [openMessage, setOpenMessage] = useState<Message | undefined>(undefined);
 
   return (
     <ContextView title="Recent Messages">
       {fakeUserMessages.length ? (
-        <List>
+        <List
+          onAction={(id) => setOpenMessage(fakeUserMessages.find((message) => message.id === id))}
+        >
           {fakeUserMessages.map((message) => (
-            <ListItem value={message.subject} id={message.id}>
-              <Box>
-                <Badge type="info">{getEpochMsDisplayText(message.date)}</Badge>
+            <ListItem
+              id={message.id}
+              key={message.id}
+            >
+              <Box>{message.subject}</Box>
+              <Box css={{font: 'caption', color: 'secondary'}}>
+                {getEpochMsDisplayText(message.date)}
               </Box>
             </ListItem>
           ))}
@@ -34,13 +45,25 @@ const Messaging = ({environment}: TailorExtensionContextValue) => {
       {!!customer && 'email' in customer && !!customer.email && (
         <Box
           css={{
+            font: 'caption',
             color: 'secondary',
             paddingY: 'medium',
           }}
         >
-          Displaying messages between {customer.email} and some.merchant@example.com.
+          Displaying messages between {customer.email} and {userContext?.email}.
         </Box>
       )}
+      <FocusView
+        shown={!!openMessage}
+        title={openMessage?.subject || '...'}
+        onClose={() => setOpenMessage(undefined)}
+        primaryAction={<Button onPress={() => setOpenMessage(undefined)}>Close</Button>}
+      >
+        <Box css={{paddingBottom: 'medium'}}>
+          <Badge type="info">{getEpochMsDisplayText(openMessage?.date || 0)}</Badge>
+        </Box>
+        {openMessage?.body}
+      </FocusView>
     </ContextView>
   );
 };
