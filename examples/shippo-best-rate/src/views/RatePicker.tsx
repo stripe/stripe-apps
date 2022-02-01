@@ -164,9 +164,12 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
         value={rate.amount}
       >
         <Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>
-        {/*
- // @ts-ignore */}
-        <Box slot="description">{rate.duration_terms}</Box>
+        <Box
+          // @ts-ignore - TODO: Fix bug in the SDK type definitions, "slot" exists
+          slot="description"
+        >
+          {rate.duration_terms}
+        </Box>
       </ListItem>
     );
   });
