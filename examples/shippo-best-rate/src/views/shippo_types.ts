@@ -1,12 +1,15 @@
 import type Shippo from 'shippo';
 
+// This exists because the @types/shippo package is riddled with inaccurate types
+
 type CommonAPI = {
   object_id: string,
   object_owner: string,
   object_created: string,
 };
 export type Rate = CommonAPI &
-  Omit<Shippo.Rate, 'servicelevel'> & {
+  Omit<Shippo.Rate, 'servicelevel'|'amount'> & {
+    amount: string,
     arrives_by: string | null,
     carrier_account: string,
     duration_terms: string,

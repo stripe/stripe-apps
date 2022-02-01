@@ -1,37 +1,24 @@
 import {
-  Badge, Box, Inline,
+  Box,
+  Inline,
   List,
   ListItem
 } from '@stripe/ui-extension-sdk/ui';
 import { useCallback, useEffect, useState } from 'react';
 import Stripe from 'stripe';
+import invariant from 'ts-invariant';
 import type { ShippingDetailsMetadata } from './ShippingDetails';
 import type { Rate, Shipment } from './shippo_types';
 import stripeClient from './stripe_client';
+import {request as shippoRequest} from './shippo_client';
 
-
-
-const SHIPPO_TOKEN =
-  'ShippoToken shippo_test_ccc7f1c4ed9ef8beaa43c07b2941e2260f40fd72';
-
-const addShippingLineItem = async (rate, invoiceId, customerId) => {
+const addShippingLineItem = async (rate: Rate, invoiceId: string, customerId: string) => {
   return stripeClient.invoiceItems.create({
     amount: Math.round(parseFloat(rate.amount) * 100),
     currency: rate.currency,
     description: `${rate.provider} ${rate.servicelevel.name}`,
     invoice: invoiceId,
     customer: customerId,
-  });
-};
-
-const shippoRequest = (endpoint, method, requestData) => {
-  return fetch(`https://api.goshippo.com/${endpoint}`, {
-    method,
-    headers: {
-      Authorization: SHIPPO_TOKEN,
-      'Content-Type': 'application/json',
-    },
-    body: requestData,
   });
 };
 
@@ -69,38 +56,31 @@ const FROM_ADDRESS = {
 };
 
 type RatePickerProps = {
-  invoice: Stripe.Response<Stripe.Invoice>,
+  invoice: Stripe.Invoice,
   onRatePicked: (p: ShippingDetailsMetadata) => void,
 };
 const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   const [shipment, setShipment] = useState<Shipment>();
-  const [customer, setCustomer] = useState<Stripe.Response<Stripe.Customer>>();
   const [creatingLabel, setCreatingLabel] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   useEffect(() => {
     (async () => {
       try {
-        if (typeof invoice.customer !== 'string')
-          throw new Error('Expected customer not to be expanded');
-        const customer = await stripeClient.customers.retrieve(
-          invoice.customer,
-        );
-        if (customer.deleted === true) throw new Error('Customer is deleted');
-        if (!customer.address) throw new Error('Missing customer address');
-        setCustomer(customer);
+        const addr = invoice.customer_address;
+        invariant(addr, 'Missing customer address');
         const resp = await shippoRequest(
           'shipments',
           'POST',
           JSON.stringify({
             address_from: FROM_ADDRESS,
             address_to: {
-              name: customer.name,
-              street1: customer.address.line1,
-              street2: customer.address.line2,
-              city: customer.address.city,
-              state: customer.address.state,
-              zip: customer.address.postal_code,
-              country: customer.address.country,
+              name: invoice.customer_name,
+              street1: addr.line1,
+              street2: addr.line2,
+              city: addr.city,
+              state: addr.state,
+              zip: addr.postal_code,
+              country: addr.country,
             },
             parcels: [
               {
@@ -119,7 +99,9 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
           setShipment(await resp.json());
         }
       } catch (exc) {
-        setErrorMessage(`Could not load rates: ${exc.message}`);
+        if (exc instanceof Error) {
+          setErrorMessage(`Could not load rates: ${exc?.message}`);
+        }
       }
     })();
   }, []);
@@ -149,20 +131,14 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   if (errorMessage) {
     return <Box>{errorMessage}</Box>;
   }
-  if (!customer) {
-    return <Box>Getting customer address&hellip;</Box>;
-  }
   if (!shipment) {
     return <Box>Loading shipping rates from Shippo&hellip;</Box>;
   }
   if (creatingLabel) {
     return <Box>Creating shipping label&hellip;</Box>
   }
-  const rateMap = {};
+  const rateMap: {[object_id: string]: Rate} = {};
   const rateItems = shipment.rates.map((rate) => {
-    const attributePills = rate.attributes.map((attr, i) => (
-      <Badge key={i} type="info">{attr}</Badge>
-    ));
     rateMap[rate.object_id] = rate;
     // This uses some undocumented CSS properties that may stop working in the future.
     // USE AT YOUR OWN RISK!
@@ -184,7 +160,12 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
         value={rate.amount}
       >
         <Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>
-        <Box slot="description">{rate.duration_terms}</Box>
+        <Box
+          // @ts-ignore - TODO: Fix bug in the SDK type definitions, "slot" exists
+          slot="description"
+        >
+          {rate.duration_terms}
+        </Box>
       </ListItem>
     );
   });

@@ -10,14 +10,14 @@ import type {ShippingDetailsMetadata} from './ShippingDetails';
 import ShippingDetails from './ShippingDetails';
 import stripeClient from './stripe_client';
 import Stripe from 'stripe';
+import invariant from 'ts-invariant';
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
-const logo = require('../shippo-logo.svg') as string;
-
 const AddShipping = ({environment}: TailorExtensionContextValue) => {
+  invariant(environment, 'Unexpectedly null environment');
   const {objectContext: {id: invoiceId}} = environment;
-  const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata>();
-  const [invoice, setInvoice] = useState<Stripe.Response<Stripe.Invoice>>();
+  const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata|null>();
+  const [invoice, setInvoice] = useState<Stripe.Invoice>();
   const loadShippingDetails = async (invoiceId: string) => {
     const invoice = await stripeClient.invoices.retrieve(invoiceId);
     const {
@@ -28,7 +28,7 @@ const AddShipping = ({environment}: TailorExtensionContextValue) => {
         labelUrl,
         service,
         invoiceItemId,
-    } = invoice.metadata;
+    } = invoice.metadata || {};
     if (shipmentId) {
       setShippingDetails({
         shipmentId,
@@ -43,8 +43,10 @@ const AddShipping = ({environment}: TailorExtensionContextValue) => {
     setInvoice(invoice);
   }
   const handleResetShippingDetails = useCallback(async () => {
+    invariant(shippingDetails, 'Attempted to reset shipping details when there were none');
+    invariant(invoice, 'Resetting shipping details without an invoice');
     const delItem = stripeClient.invoiceItems.del(shippingDetails.invoiceItemId);
-    const metadata: ShippingDetailsMetadata = {
+    const metadata: Record<keyof ShippingDetailsMetadata, null> = {
       shipmentId: null,
       rateId: null,
       labelId: null,
