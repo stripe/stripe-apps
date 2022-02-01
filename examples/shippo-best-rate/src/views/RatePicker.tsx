@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   Inline,
   List,
@@ -140,9 +139,6 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   }
   const rateMap: {[object_id: string]: Rate} = {};
   const rateItems = shipment.rates.map((rate) => {
-    const attributePills = (rate.attributes as Array<string>).map((attr, i) => (
-      <Badge key={i} type="info">{attr}</Badge>
-    ));
     rateMap[rate.object_id] = rate;
     // This uses some undocumented CSS properties that may stop working in the future.
     // USE AT YOUR OWN RISK!
