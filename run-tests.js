@@ -1,3 +1,7 @@
+// Makes chalk (in Jest/Yarn commands) show colorful output
+// See: https://github.com/chalk/chalk#supportscolor
+process.env['FORCE_COLOR'] = 3;
+
 const {exec} = require('child_process');
 const { readdirSync } = require('fs');
 const util = require('util');
@@ -15,7 +19,7 @@ const runCommand = async (command, cwd) => {
   console.log(stdout);
 };
 
-const exampleDirs = readdirSync('./examples', { withFileTypes: true })
+const exampleDirs = readdirSync('./examples', {withFileTypes: true})
   .filter(dirent => dirent.isDirectory())
   .map(dirent => dirent.name);
 
