@@ -7,14 +7,11 @@ import {
 } from '@stripe/ui-extension-sdk/ui';
 import { useCallback, useEffect, useState } from 'react';
 import Stripe from 'stripe';
+import invariant from 'ts-invariant';
 import type { ShippingDetailsMetadata } from './ShippingDetails';
 import type { Rate, Shipment } from './shippo_types';
 import stripeClient from './stripe_client';
-
-
-
-const SHIPPO_TOKEN =
-  'ShippoToken shippo_test_ccc7f1c4ed9ef8beaa43c07b2941e2260f40fd72';
+import {request as shippoRequest} from './shippo_client';
 
 const addShippingLineItem = async (rate: Rate, invoiceId: string, customerId: string) => {
   return stripeClient.invoiceItems.create({
@@ -23,17 +20,6 @@ const addShippingLineItem = async (rate: Rate, invoiceId: string, customerId: st
     description: `${rate.provider} ${rate.servicelevel.name}`,
     invoice: invoiceId,
     customer: customerId,
-  });
-};
-
-const shippoRequest = (endpoint: string, method: 'GET' | 'POST', requestData: string) => {
-  return fetch(`https://api.goshippo.com/${endpoint}`, {
-    method,
-    headers: {
-      Authorization: SHIPPO_TOKEN,
-      'Content-Type': 'application/json',
-    },
-    body: requestData,
   });
 };
 
@@ -81,13 +67,8 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   useEffect(() => {
     (async () => {
       try {
-        if (typeof invoice.customer !== 'string')
-          throw new Error('Expected customer not to be expanded');
-        const customer = await stripeClient.customers.retrieve(
-          invoice.customer,
-        );
         const addr = invoice.customer_address;
-        if (!addr) throw new Error('Missing customer address');
+        invariant(addr, 'Missing customer address');
         const resp = await shippoRequest(
           'shipments',
           'POST',

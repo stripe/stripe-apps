@@ -1,22 +1,10 @@
 import AddShipping from './AddShipping';
 import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import {render} from '@stripe/ui-extension-sdk/testing';
-import { invoice } from '../test/mock_objects';
-import Stripe from 'stripe';
+import {List} from '@stripe/ui-extension-sdk/ui';
 
-jest.mock('./stripe_client', () => ({
-  __esModule: true,
-  default: {
-    invoices: {
-      retrieve: (): Promise<Stripe.Invoice> => Promise.resolve(invoice),
-      update: jest.fn(),
-    },
-    invoiceItems: {
-      create: jest.fn(),
-      del: jest.fn(),
-    },
-  }
-}));
+jest.mock('./stripe_client');
+jest.mock('./shippo_client');
 
 describe('AddShipping component', () => {
   it('Renders a loader and then the RatePicker', async () => {
@@ -43,7 +31,12 @@ describe('AddShipping component', () => {
         },
       },
     };
-    const {wrapper} = render(<AddShipping {...context} />);
+    const {wrapper, update} = render(<AddShipping {...context} />);
     expect(wrapper).toContainText('Loading');
+    // First wait for loading the invoice
+    await update();
+    // Second wait for getting rates from shippo
+    await update();
+    expect(wrapper).toContainComponent(List);
   });
 });
