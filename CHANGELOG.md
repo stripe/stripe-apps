@@ -1,5 +1,16 @@
 # Changelog
 
+## 2022-02-02
+- Released version 2.0.0 of the SDK (@stripe/ui-extension-sdk)
+    - Fixes a render error with `SettingsView`
+    - Updates `SettingsView` types to match the available component props
+    - Adds a `getMockContextProps` helper for testing. See [the docs](https://stripe.com/docs/stripe-apps/reference/ui-testing#mock-context-props) for details.
+    - List component now accepts `React.ReactNode` as a valid type to the `value` prop, rather than just a `string`.
+    - Adds hover state to ListItem components
+    - Updates ListItem component such that hover state is only visible when there is an action associated
+    - Fix Select rendering when multiple is true
+    - Fix Checkbox onChange firing twice
+
 ## 2022-01-28
 - Released version 1.1.7 of the SDK (@stripe/ui-extension-sdk)
     - Adds a "testing" module which includes helpers for writing Jest tests for apps. See [the docs](https://stripe.com/docs/stripe-apps/reference/ui-testing) for details.

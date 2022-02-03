@@ -30,6 +30,9 @@ const main = async () => {
 
     const cwd = `./examples/${exampleDir}`;
 
+    // Make sure that Yalc packages have been uninstalled
+    await runCommand('type yalc &>/dev/null || exit 0 && yalc check', cwd);
+
     const hasJestConfig = !!readdirSync(`${cwd}`)
       .filter(dirent => dirent === 'jest.config.ts').length;
 
