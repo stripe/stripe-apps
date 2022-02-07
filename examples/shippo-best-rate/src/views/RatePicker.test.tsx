@@ -1,6 +1,6 @@
 import RatePicker from './RatePicker';
 import {render} from '@stripe/ui-extension-sdk/testing';
-import {List, ListItem} from '@stripe/ui-extension-sdk/ui';
+import {List} from '@stripe/ui-extension-sdk/ui';
 import {invoice, invoiceItem, shippoShipment, shippoTransaction} from './__mocks__/mock_objects';
 
 jest.mock('./shippo_client');
@@ -14,8 +14,8 @@ describe('RatePicker component', () => {
     await update();
     expect(wrapper).toContainComponent(List);
     const rate = shippoShipment.rates[0];
-    expect(wrapper.find(ListItem)).toContainText(rate.servicelevel.name);
-    expect(wrapper.find(ListItem)).toContainText(rate.duration_terms);
+    expect(wrapper.find(List)).toContainText(rate.servicelevel.name);
+    expect(wrapper.find(List)).toContainText(rate.duration_terms);
   });
   it('creates a new shipping label when a rate is clicked', async () => {
     const onRatePicked = jest.fn();
