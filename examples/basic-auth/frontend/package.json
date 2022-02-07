@@ -1,0 +1,15 @@
+{
+  "name": "com.example.oauth2-test",
+  "version": "0.0.1",
+  "description": "OAuth2 Test",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^1.1.7",
+    "react": "^17.0.2",
+    "stripe": "^8.200.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
