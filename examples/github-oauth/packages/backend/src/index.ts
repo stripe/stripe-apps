@@ -1,6 +1,5 @@
 import axios, { AxiosError } from 'axios';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { randomUUID } from 'crypto';
 import * as date from 'date-fns';
@@ -41,7 +40,6 @@ const USER_URI = `${githubAPIURI}/user`;
 
 const app = express();
 
-app.use(cookieParser(process.env.COOKIE_SIGNING_SECRET));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
