@@ -27,10 +27,10 @@ type TokenSet = {
 };
 
 // Replace these with the information for your auth server
-const LOGIN_URI = `https://${process.env.TENANT_DOMAIN}/authorize`;
-const LOGOUT_URI = `https://${process.env.TENANT_DOMAIN}/v2/logout`;
-const TOKEN_URI = `https://${process.env.TENANT_DOMAIN}/oauth/token`;
-const USERINFO_URI = `https://${process.env.TENANT_DOMAIN}/userinfo`;
+const LOGIN_URI = `https://${process.env.AUTH_HOST}/authorize`;
+const LOGOUT_URI = `https://${process.env.AUTH_HOST}/v2/logout`;
+const TOKEN_URI = `https://${process.env.AUTH_HOST}/oauth/token`;
+const USERINFO_URI = `https://${process.env.AUTH_HOST}/userinfo`;
 
 const app = express();
 
@@ -56,7 +56,6 @@ const verifyCaller: Handler = (req, res, next) => {
 };
 
 const verifyUser = (userId: unknown, accountId: unknown, sig: unknown) => {
-  // TODO: Add Stripe signature verification here when it is ready
   if (
     !(
       typeof userId === "string" &&
@@ -136,7 +135,7 @@ const refreshToken = async (
 };
 
 /**
- * This is the URL that will be opened in a separate tab by the app. It will redirect to the OAuth tenant's login page
+ * This is the URL that will be opened in a separate tab by the app. It will redirect to the OAuth authorization server's login page
  */
 app.get("/auth/login", (req, res) => {
   const { state } = req.query;
@@ -178,7 +177,7 @@ app.get("/auth/callback/logged-in", (req, res) => {
 });
 
 /**
- * To log out from the auth tenant and thus revoke the refresh token we must redirect to it
+ * To log out from the auth server and thus revoke the refresh token we must redirect to it
  */
 app.get("/auth/logout", (req, res) => {
   res.redirect(303, LOGOUT_URI);
