@@ -29,9 +29,9 @@
     "@remote-ui/types" "^1.1.2"
 
 "@remote-ui/react@^4.3.0":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.4.1.tgz#355110d7b72a5e76e48b260303ddbe6dd947b3f0"
-  integrity sha512-ANmoQZexqmGCpfmIzsnKWnwJaJF7VsmnWNmrs9FbiHvFI8fI7uROnb/4/RPklbKNbtW8M8H92kgJ+6WClqSz7w==
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.4.2.tgz#ad5c39beb023150a2eb792936b21c0070e9bae51"
+  integrity sha512-jQXsg9LwdfLJ0Sr31C/WtO/SwKolWvlJhhc8YGbYlWknUAnjTDrI682Mmv6Zh5VVRh+8fMjeuThJA7Bfhx8vXg==
   dependencies:
     "@remote-ui/async-subscription" "^2.1.8"
     "@remote-ui/core" "^2.1.7"
@@ -58,10 +58,10 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.2.tgz#ae9219a56bb4bb6ff5aabfacb29a1e71adbd97d4"
   integrity sha512-F2u6McqvHj2c89FHeozQ0O8qbqhOFMMNYR2HqF33mHCMNTEXzUVheCj7laNO1/dGNXwcJHpoWIBNwfChbEfVyA==
 
-"@stripe/ui-extension-sdk@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.7.tgz#d63095f76b65061e8a9a67ae6082fe5c9aa29d90"
-  integrity sha512-jE0f1BpBOQsoACuN4uybea5qw7U5HKpWNA6JrWqHiMMbhhx579e6Zba4ITuod5re7833+DU5mVNhWIJgCnzmhQ==
+"@stripe/ui-extension-sdk@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-2.0.0.tgz#9bcadcfb5957666ef5684168f56cd1b5ec280306"
+  integrity sha512-Gn9p6bPuE8IW8078gkEX/uapBsbVClayEBdY3lEQ7uBpars8lHKBRYzGxMPTfL4brCFb8ONQiNM2M17ti6DCAQ==
   dependencies:
     "@remote-ui/react" "^4.3.0"
     "@remote-ui/testing" "^1.3.6"
@@ -90,9 +90,9 @@
     "@types/istanbul-lib-report" "*"
 
 "@types/node@*", "@types/node@>=8.1.0":
-  version "17.0.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.12.tgz#f7aa331b27f08244888c47b7df126184bc2339c5"
-  integrity sha512-4YpbAsnJXWYK/fpTVFlMIcUIho2AYCi4wg5aNPrG1ng7fn/1/RZfCIpRCiBX+12RVa34RluilnvCqD+g3KiSiA==
+  version "17.0.16"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.16.tgz#e3733f46797b9df9e853ca9f719c8a6f7b84cd26"
+  integrity sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==
 
 "@types/prop-types@*":
   version "15.7.4"
@@ -107,9 +107,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@>=17.0.0 <18.0.0":
-  version "17.0.38"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.38.tgz#f24249fefd89357d5fa71f739a686b8d7c7202bd"
-  integrity sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==
+  version "17.0.39"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.39.tgz#d0f4cde092502a6db00a1cded6e6bf2abb7633ce"
+  integrity sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -328,10 +328,10 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
-stripe@^8.174.0, stripe@^8.200.0:
-  version "8.200.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.200.0.tgz#be5abc86a9e91cd83e1bff86ac814fae9c465a21"
-  integrity sha512-oM6jBvsIwY3x9cuNUSytwQ3daGuo2xxcMM6diUrNZhvOm5hbY2AvP2JPWW8RPMK0OHFskmYbWTKMJ1wg7AvLSQ==
+stripe@^8.174.0, stripe@^8.202.0:
+  version "8.202.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.202.0.tgz#884760713a690983d5a3128ea3cbeb677ee2645f"
+  integrity sha512-3YGHVnUatEn/At5+aRy+REdB2IyVa96/zls2xvQrKFTgaJzRu1MsJcK0GKg0p2B0y0VqlZo9gmdDEqphSHHvtA==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"

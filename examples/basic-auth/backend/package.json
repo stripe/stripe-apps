@@ -9,7 +9,7 @@
     "node": "^14.18.1"
   },
   "scripts": {
-    "build": "npm-run-all clean tsc",
+    "build": "tsc",
     "nodemon": "nodemon --watch dist",
     "start": "node dist/index.js",
     "dev": "npm-run-all build --parallel tsc:watch nodemon",
@@ -22,7 +22,8 @@
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "express": "^4.17.2",
-    "source-map-support": "^0.5.16"
+    "source-map-support": "^0.5.16",
+    "stripe": "^8.202.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

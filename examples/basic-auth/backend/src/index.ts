@@ -2,16 +2,21 @@ import "source-map-support/register";
 import express, { Handler } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { randomUUID } from "crypto";
 import axios, { AxiosError } from "axios";
 import { createServer } from "https";
 import { readFileSync } from "fs";
 import { Stream } from "stream";
+import { Stripe } from "stripe";
 import * as date from "date-fns";
 
+// Use your Stripe API key here
+const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
+  apiVersion: "2020-08-27",
+});
+
 // These will be replaced with an actual persistent state store like Redis or a RDBMS.
-const tokenStore = new Map<string, TokenSet>();
-const authStore = new Map<string, AuthSession>();
+const tokenStore = new Map<string, TokenSet>(); // Maps users to their saved tokens
+const authStore = new Map<string, string>(); // Maps auth states to their received codes
 
 type TokenSet = {
   access_token: string;
@@ -21,16 +26,11 @@ type TokenSet = {
   expires: Date;
 };
 
-type AuthSession = {
-  sessionId: string;
-};
-
 // Replace these with the information for your auth server
-const TENANT_URI = "https://www.example.com";
-const LOGIN_URI = `${TENANT_URI}/authorize`;
-const LOGOUT_URI = `${TENANT_URI}/v2/logout`;
-const TOKEN_URI = `${TENANT_URI}/oauth/token`;
-const USERINFO_URI = `${TENANT_URI}/userinfo`;
+const LOGIN_URI = `https://${process.env.TENANT_DOMAIN}/authorize`;
+const LOGOUT_URI = `https://${process.env.TENANT_DOMAIN}/v2/logout`;
+const TOKEN_URI = `https://${process.env.TENANT_DOMAIN}/oauth/token`;
+const USERINFO_URI = `https://${process.env.TENANT_DOMAIN}/userinfo`;
 
 const app = express();
 
@@ -44,8 +44,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 const verifyCaller: Handler = (req, res, next) => {
   const sig = req.headers["stripe-signature"];
-  const userId = req.query["user"] || req.headers["stripe-user-id"];
-  const accountId = req.query["account"] || req.headers["stripe-account-id"];
+  const userId = req.headers["stripe-user-id"];
+  const accountId = req.headers["stripe-account-id"];
   try {
     verifyUser(userId, accountId, sig);
     res.locals.sessionId = `${userId}----${accountId}`;
@@ -55,13 +55,25 @@ const verifyCaller: Handler = (req, res, next) => {
   }
 };
 
-const verifyUser = (
-  userId: string | string[] | undefined,
-  accountId: string | string[] | undefined,
-  sig: string | string[] | undefined,
-) => {
+const verifyUser = (userId: unknown, accountId: unknown, sig: unknown) => {
   // TODO: Add Stripe signature verification here when it is ready
-  if (!(userId && accountId)) throw new Error("Missing user identifiers");
+  if (
+    !(
+      typeof userId === "string" &&
+      typeof accountId === "string" &&
+      typeof sig === "string"
+    )
+  )
+    throw new Error("Missing user identifiers");
+  stripe.webhooks.signature.verifyHeader(
+    JSON.stringify({
+      user_id: userId,
+      account_id: accountId,
+    }),
+    sig,
+    // Find your app's secret in your app settings page in the Developers Dashboard
+    process.env.APP_SECRET!
+  );
 };
 
 /**
@@ -70,7 +82,7 @@ const verifyUser = (
  */
 const fetchToken = async (
   sessionId: string,
-  code: string,
+  code: string
 ): Promise<TokenSet> => {
   const queryParams = new URLSearchParams({
     grant_type: "authorization_code",
@@ -100,7 +112,7 @@ const fetchToken = async (
  */
 const refreshToken = async (
   sessionId: string,
-  refreshToken: string,
+  refreshToken: string
 ): Promise<TokenSet> => {
   const queryParams = new URLSearchParams({
     grant_type: "refresh_token",
@@ -126,20 +138,21 @@ const refreshToken = async (
 /**
  * This is the URL that will be opened in a separate tab by the app. It will redirect to the OAuth tenant's login page
  */
-app.get("/auth/login", verifyCaller, (req, res) => {
-  const state = randomUUID();
-  authStore.set(state, {
-    sessionId: res.locals.sessionId,
-  });
-  const queryParams = new URLSearchParams({
-    audience: "https://test-api.example.com",
-    response_type: "code",
-    client_id: process.env.CLIENT_ID!,
-    redirect_uri: "https://localhost:8080/auth/callback/logged-in",
-    state,
-    scope: "offline_access openid profile email",
-  });
-  res.redirect(303, `${LOGIN_URI}?${queryParams.toString()}`);
+app.get("/auth/login", (req, res) => {
+  const { state } = req.query;
+  if (typeof state !== "string") {
+    res.sendStatus(400);
+  } else {
+    const queryParams = new URLSearchParams({
+      audience: "https://test-api.example.com",
+      response_type: "code",
+      client_id: process.env.CLIENT_ID!,
+      redirect_uri: "https://localhost:8080/auth/callback/logged-in",
+      state,
+      scope: "offline_access openid profile email",
+    });
+    res.redirect(303, `${LOGIN_URI}?${queryParams.toString()}`);
+  }
 });
 
 /**
@@ -155,34 +168,59 @@ app.get("/auth/callback/logged-in", (req, res) => {
     typeof code !== "string" ||
     !code
   ) {
-    res.status(400).send();
+    res.sendStatus(400);
   } else {
-    const storedSession = authStore.get(state);
-    if (!storedSession) {
-      res.sendStatus(401);
-    } else {
-      authStore.delete(state);
-      fetchToken(storedSession.sessionId, code)
-        .then(() => {
-          res.send(
-            "Successfully authenticated. Please close this tab to return to Stripe.",
-          );
-        })
-        .catch((error: AxiosError) => {
-          if (error.response) {
-            console.error(error);
-            res.sendStatus(401);
-          } else {
-            res.status(503).send("Cannot contact authentication server");
-          }
-        });
-    }
+    authStore.set(state, code);
+    res.send(
+      "Successfully authenticated. Please close this tab to return to Stripe."
+    );
   }
 });
 
-app.get("/auth/logout", verifyCaller, (req, res) => {
-  tokenStore.delete(res.locals.sessionId);
+/**
+ * To log out from the auth tenant and thus revoke the refresh token we must redirect to it
+ */
+app.get("/auth/logout", (req, res) => {
   res.redirect(303, LOGOUT_URI);
+});
+
+/**
+ * Deleting the tokens stored in session must be a separate call from logout, since logout redirects
+ * are not signed, so we have no way of verifying the user on this server.
+ */
+app.delete("/auth/session", verifyCaller, (req, res) => {
+  tokenStore.delete(res.locals.sessionId);
+  res.sendStatus(204);
+});
+
+/**
+ * Here we receive a signed request from the app that associates our known state key with
+ * a session ID. With this information we can fetch and save the user's tokens.
+ */
+app.get("/auth/verify", verifyCaller, (req, res) => {
+  const { state } = req.query;
+  if (typeof state !== "string") {
+    res.sendStatus(400);
+    return;
+  }
+  const code = authStore.get(state);
+  if (!code) {
+    res.sendStatus(401);
+    return;
+  }
+  authStore.delete(state);
+  fetchToken(res.locals.sessionId, code)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((error: AxiosError) => {
+      if (error.response) {
+        console.error(error);
+        res.sendStatus(401);
+      } else {
+        res.status(503).send("Cannot contact authentication server");
+      }
+    });
 });
 
 /**
@@ -226,5 +264,5 @@ createServer(
     key: readFileSync("key.pem"),
     cert: readFileSync("cert.pem"),
   },
-  app,
+  app
 ).listen(8080, () => console.log("Server started"));

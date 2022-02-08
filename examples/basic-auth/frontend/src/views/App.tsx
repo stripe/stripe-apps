@@ -1,29 +1,43 @@
 import { Box, Button, ContextView } from "@stripe/ui-extension-sdk/ui";
 import type { TailorExtensionContextValue } from "@stripe/ui-extension-sdk/context";
+import fetchStripeSignature from "@stripe/ui-extension-sdk/signature";
 import { Reducer, useCallback, useEffect, useReducer } from "react";
+
+// Typescript < 4.6 doesn't have this browser API yet
+declare global {
+  interface Crypto {
+    randomUUID: () => string;
+  }
+}
 
 const LOGIN_URI = "https://localhost:8080/auth/login";
 const LOGOUT_URI = "https://localhost:8080/auth/logout";
+const VERIFY_URI = "https://localhost:8080/auth/verify";
 const INFO_URI = "https://localhost:8080/auth/userinfo";
+const SESSION_URI = "https://localhost:8080/auth/session";
 
 type State =
-  | { name: "initializing" }
+  | { name: "initializing"; context: { stateKey: string } }
   | {
       name: "logged-out";
+      context: { stateKey: string };
     }
   | { name: "logging-out" }
-  | { name: "waiting-for-auth" }
+  | { name: "waiting-for-auth"; context: { stateKey: string } }
   | { name: "logged-in"; context: { user: UserInfo } };
 
 type Action =
   | { type: "initialized"; payload: { user: UserInfo | null } }
   | { type: "log-in" }
-  | { type: "authorized"; payload: { user: UserInfo } }
+  | { type: "authorized" }
   | { type: "log-out" }
   | { type: "session-deleted" };
 
 const initialState = (): State => ({
   name: "initializing",
+  context: {
+    stateKey: window.crypto.randomUUID(),
+  },
 });
 
 // The following is a simple state machine implemented in plain React. However, in your app you might
@@ -41,6 +55,7 @@ const reducer: Reducer<State, Action> = (prevState, action) => {
             ? { name: "logged-in", context: { user: action.payload.user } }
             : {
                 name: "logged-out",
+                context: prevState.context,
               };
         default:
           return fallthrough();
@@ -51,6 +66,7 @@ const reducer: Reducer<State, Action> = (prevState, action) => {
         case "log-in":
           return {
             name: "waiting-for-auth",
+            context: prevState.context,
           };
         default:
           return fallthrough();
@@ -59,10 +75,7 @@ const reducer: Reducer<State, Action> = (prevState, action) => {
     case "waiting-for-auth": {
       switch (action.type) {
         case "authorized":
-          return {
-            name: "logged-in",
-            context: { user: action.payload.user },
-          };
+          return initialState();
         case "log-out":
           return { name: "logging-out" };
         default:
@@ -98,11 +111,12 @@ type UserInfo = {
 const App = ({ userContext }: TailorExtensionContextValue) => {
   const [state, dispatch] = useReducer(reducer, null, initialState);
   const fetchWithCredentials = useCallback(
-    (uri: string, { headers, ...options }: RequestInit = {}) => {
+    async (uri: string, { headers, ...options }: RequestInit = {}) => {
       const headersObject = new Headers(headers);
       headersObject.append("stripe-user-id", userContext?.id ?? "");
       headersObject.append("stripe-account-id", userContext?.account.id ?? "");
-      return fetch(uri, {
+      headersObject.append("stripe-signature", await fetchStripeSignature());
+      return await fetch(uri, {
         ...options,
         headers: headersObject,
       });
@@ -141,31 +155,37 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
       case "waiting-for-auth": {
         // While the user logs in and consents to our app's scopes in another tab or window
         // we are continually polling the API. Once the user is logged in, the API will return
-        // successfully and we know the user is logged in.
+        // successfully and we know the user is logged in. We then return to the start so the
+        // initialization process can fetch the user information.
         const interval = setInterval(() => {
-          fetchWithCredentials(INFO_URI).then((res) =>
-            res.json().then(
-              (user) =>
-                user &&
-                dispatch({
-                  type: "authorized",
-                  payload: { user },
-                })
-            )
+          fetchWithCredentials(
+            `${VERIFY_URI}?state=${state.context.stateKey}`
+          ).then(
+            (res) =>
+              res.status >= 200 &&
+              res.status < 300 &&
+              dispatch({
+                type: "authorized",
+              })
           );
         }, 5000);
         return () => clearInterval(interval);
       }
       case "logging-out": {
-        // Since logging out also occurs in a separate window, we could use the same polling technique
-        // as with logging in, but because logging out is quick and is very unlikely to fail, it's simpler
-        // to assume it will have worked after 1 second and return the frontend to the "initializing" state
-        // to check
-        const timeout = setTimeout(
-          () => dispatch({ type: "session-deleted" }),
-          1000
-        );
-        return () => clearTimeout(timeout);
+        // When logging out we send a deletion request so our session is cleared in the backend
+        // even while the link redirects the user to log out from the auth server in another tab
+        const controller = new AbortController();
+        fetchWithCredentials(SESSION_URI, {
+          signal: controller.signal,
+          method: "DELETE",
+        }).finally(() => {
+          dispatch({
+            type: "session-deleted",
+          });
+        });
+        return () => {
+          controller.abort();
+        };
       }
     }
   }, [state, dispatch]);
@@ -181,8 +201,7 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
             // We must both open the login screen in a separate tab or window and kick off the polling process
             // A link with target _blank and an onPress handler allows us to accomplish this double purpose
             href={`${LOGIN_URI}?${new URLSearchParams({
-              account: userContext!.account.id,
-              user: userContext!.id,
+              state: state.context.stateKey,
             })}`}
             target="_blank"
             onPress={() => dispatch({ type: "log-in" })}
