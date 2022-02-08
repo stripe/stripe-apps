@@ -8,6 +8,7 @@ import { readFileSync } from 'fs';
 import { createServer } from 'https';
 import 'source-map-support/register';
 import { Stream } from 'stream';
+import { Stripe } from 'stripe';
 
 import {
   client_id,
@@ -15,11 +16,17 @@ import {
   githubAPIURI,
   githubAuthURI,
   redirect_uri,
+  stripeAppSecret,
+  stripeSecretKey,
 } from './config';
+
+const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: '2020-08-27',
+});
 
 // These will be replaced with an actual persistent state store like Redis or a RDBMS.
 const tokenStore = new Map<string, TokenSet>();
-const authStore = new Map<string, AuthSession>();
+const authStore = new Map<string, string>();
 
 type TokenSet = {
   access_token: string;
@@ -27,10 +34,6 @@ type TokenSet = {
   id_token: string;
   token_type: string;
   expires: Date;
-};
-
-type AuthSession = {
-  sessionId: string;
 };
 
 const LOGIN_URI = `${githubAuthURI}/authorize`;
@@ -51,9 +54,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 const verifyCaller: Handler = (req, res, next) => {
   const sig = req.headers['stripe-signature'];
-  const userId = (req.query['user'] as string) || req.headers['stripe-user-id'];
-  const accountId =
-    (req.query['account'] as string) || req.headers['stripe-account-id'];
+  const userId = req.headers['stripe-user-id'];
+  const accountId = req.headers['stripe-account-id'];
   try {
     verifyUser(userId, accountId, sig);
     res.locals.sessionId = `${userId}----${accountId}`;
@@ -63,13 +65,24 @@ const verifyCaller: Handler = (req, res, next) => {
   }
 };
 
-const verifyUser = (
-  userId: string | string[] | undefined,
-  accountId: string | string[] | undefined,
-  sig: string | string[] | undefined,
-) => {
-  // TODO: Add Stripe signature verification here when it is ready
-  if (!(userId && accountId)) throw new Error('Missing user identifiers');
+const verifyUser = (userId: unknown, accountId: unknown, sig: unknown) => {
+  if (
+    !(
+      typeof userId === 'string' &&
+      typeof accountId === 'string' &&
+      typeof sig === 'string'
+    )
+  )
+    throw new Error('Missing user identifiers');
+  stripe.webhooks.signature.verifyHeader(
+    JSON.stringify({
+      user_id: userId,
+      account_id: accountId,
+    }),
+    sig,
+    // Find your app's secret in your app settings page in the Developers Dashboard
+    stripeAppSecret,
+  );
 };
 
 /**
@@ -135,19 +148,20 @@ const refreshToken = async (
 /**
  * This is the URL that will be opened in a separate tab by the app. It will redirect to the OAuth tenant's login page
  */
-app.get('/auth/login', verifyCaller, (req, res) => {
-  const state = randomUUID();
-  authStore.set(state, {
-    sessionId: res.locals.sessionId,
-  });
-  const queryParams = new URLSearchParams({
-    response_type: 'code',
-    client_id,
-    redirect_uri,
-    state,
-    scope: 'user repo',
-  });
-  res.redirect(303, `${LOGIN_URI}?${queryParams.toString()}`);
+app.get('/auth/login', (req, res) => {
+  const { state } = req.query;
+  if (typeof state !== 'string') {
+    res.sendStatus(400);
+  } else {
+    const queryParams = new URLSearchParams({
+      response_type: 'code',
+      client_id,
+      redirect_uri,
+      state,
+      scope: 'user repo',
+    });
+    res.redirect(303, `${LOGIN_URI}?${queryParams.toString()}`);
+  }
 });
 
 /**
@@ -165,33 +179,46 @@ app.get('/auth/callback/logged-in', (req, res) => {
   ) {
     res.status(400).send();
   } else {
-    const storedSession = authStore.get(state);
-    if (!storedSession) {
-      res.send(401);
-      res.send(`Didn't work. State: ${state}, Code: ${code}`);
-    } else {
-      authStore.delete(state);
-      fetchToken(storedSession.sessionId, code)
-        .then(() => {
-          res.send(
-            'Successfully authenticated. Please close this tab to return to Stripe.',
-          );
-        })
-        .catch((error: AxiosError) => {
-          if (error.response) {
-            console.error(error);
-            res.sendStatus(401);
-          } else {
-            res.status(503).send('Cannot contact authentication server');
-          }
-        });
-    }
+    authStore.set(state, code);
+    res.send(
+      'Successfully authenticated. Please close this tab to return to Stripe.',
+    );
   }
 });
 
-app.get('/auth/logout', verifyCaller, (req, res) => {
+app.delete('/auth/logout', verifyCaller, (req, res) => {
   tokenStore.delete(res.locals.sessionId);
   res.redirect(303, LOGOUT_URI);
+});
+
+/**
+ * Here we receive a signed request from the app that associates our known state key with
+ * a session ID. With this information we can fetch and save the user's tokens.
+ */
+app.get('/auth/verify', verifyCaller, (req, res) => {
+  const { state } = req.query;
+  if (typeof state !== 'string') {
+    res.sendStatus(400);
+    return;
+  }
+  const code = authStore.get(state);
+  if (!code) {
+    res.sendStatus(401);
+    return;
+  }
+  authStore.delete(state);
+  fetchToken(res.locals.sessionId, code)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((error: AxiosError) => {
+      if (error.response) {
+        console.error(error);
+        res.sendStatus(401);
+      } else {
+        res.status(503).send('Cannot contact authentication server');
+      }
+    });
 });
 
 /**
