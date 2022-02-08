@@ -14,6 +14,7 @@ import {
   client_secret,
   githubAPIURI,
   githubAuthURI,
+  redirect_uri,
 } from './config';
 
 // These will be replaced with an actual persistent state store like Redis or a RDBMS.
@@ -82,7 +83,7 @@ const fetchToken = async (
   const queryParams = new URLSearchParams({
     client_id,
     client_secret,
-    redirect_uri: 'https://localhost:8080/auth/callback/logged-in',
+    redirect_uri,
     code,
   });
   const response = await axios.post(TOKEN_URI, queryParams, {
@@ -142,7 +143,7 @@ app.get('/auth/login', verifyCaller, (req, res) => {
   const queryParams = new URLSearchParams({
     response_type: 'code',
     client_id,
-    redirect_uri: 'https://localhost:8080/auth/callback/logged-in',
+    redirect_uri,
     state,
     scope: 'user repo',
   });
