@@ -1,7 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { randomUUID } from 'crypto';
 import * as date from 'date-fns';
 import express, { Handler } from 'express';
 import { readFileSync } from 'fs';
@@ -248,7 +247,7 @@ app.get('/auth/repositories', verifyCaller, async (req, res) => {
       res.sendStatus(401);
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.sendStatus(503);
   }
 });

@@ -35,7 +35,7 @@ type State =
 type Action =
   | { type: 'initialized'; payload: { user: UserInfo | null } }
   | { type: 'log-in' }
-  | { type: 'authorized'; payload: { user: UserInfo } }
+  | { type: 'authorized' }
   | { type: 'log-out' }
   | { type: 'session-deleted' };
 
@@ -81,10 +81,7 @@ const reducer: Reducer<State, Action> = (prevState, action) => {
     case 'waiting-for-auth': {
       switch (action.type) {
         case 'authorized':
-          return {
-            name: 'logged-in',
-            context: { user: action.payload.user },
-          };
+          return initialState();
         case 'log-out':
           return { name: 'logging-out' };
         default:
@@ -120,7 +117,7 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
       headersObject.append('stripe-user-id', userContext?.id ?? '');
       headersObject.append('stripe-account-id', userContext?.account.id ?? '');
       headersObject.append('stripe-signature', await fetchStripeSignature());
-      return fetch(uri, {
+      return await fetch(uri, {
         ...options,
         headers: headersObject,
       });
@@ -137,20 +134,28 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
         fetchWithCredentials(INFO_URI, {
           signal: controller.signal,
         })
-          .then(res =>
-            res.json().then(user =>
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              res.json().then(user =>
+                dispatch({
+                  type: 'initialized',
+                  payload: { user },
+                }),
+              );
+            } else {
+              throw new Error(
+                `Initial authentication failed. ${res.status} - ${res.statusText}`,
+              );
+            }
+          })
+          .catch(() => {
+            if (!controller.signal.aborted) {
               dispatch({
                 type: 'initialized',
-                payload: { user },
-              }),
-            ),
-          )
-          .catch(() =>
-            dispatch({
-              type: 'initialized',
-              payload: { user: null },
-            }),
-          );
+                payload: { user: null },
+              });
+            }
+          });
         return () => {
           controller.abort();
         };
@@ -161,15 +166,15 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
         // successfully and we know the user is logged in. We then return to the start so the
         // initialization process can fetch the user information.
         const interval = setInterval(() => {
-          fetchWithCredentials(INFO_URI).then(res =>
-            res.json().then(
-              user =>
-                user &&
-                dispatch({
-                  type: 'authorized',
-                  payload: { user },
-                }),
-            ),
+          fetchWithCredentials(
+            `${VERIFY_URI}?state=${state.context.stateKey}`,
+          ).then(
+            res =>
+              res.status >= 200 &&
+              res.status < 300 &&
+              dispatch({
+                type: 'authorized',
+              }),
           );
         }, 5000);
         return () => clearInterval(interval);
