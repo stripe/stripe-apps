@@ -245,11 +245,6 @@ const App = ({ userContext }: TailorExtensionContextValue) => {
             </Box>
             <Button
               type="destructive"
-              href={`${LOGOUT_URI}?${new URLSearchParams({
-                account: userContext!.account.id,
-                user: userContext!.id,
-              })}`}
-              target="_blank"
               onPress={() => dispatch({ type: 'log-out' })}
             >
               Log Out

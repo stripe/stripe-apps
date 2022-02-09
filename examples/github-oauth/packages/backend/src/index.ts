@@ -38,7 +38,6 @@ type TokenSet = {
 const LOGIN_URI = `${githubAuthURI}/authorize`;
 const TOKEN_URI = `${githubAuthURI}/access_token`;
 const REFRESH_URI = `${githubAuthURI}/access_token`;
-const LOGOUT_URI = 'https://dashboard.stripe.com';
 const USER_URI = `${githubAPIURI}/user`;
 
 const app = express();
@@ -187,7 +186,7 @@ app.get('/auth/callback/logged-in', (req, res) => {
 
 app.delete('/auth/logout', verifyCaller, (req, res) => {
   tokenStore.delete(res.locals.sessionId);
-  res.redirect(303, LOGOUT_URI);
+  res.sendStatus(204);
 });
 
 /**
