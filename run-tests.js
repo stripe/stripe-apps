@@ -19,38 +19,63 @@ const runCommand = async (command, cwd) => {
   console.log(stdout);
 };
 
-const exampleDirs = readdirSync('./examples', {withFileTypes: true})
+const getHasFile = (dir, fileName) => !!readdirSync(dir)
+  .filter(dirent => dirent === fileName).length;
+
+const getDirs = (cwd) => readdirSync(cwd, {withFileTypes: true})
   .filter(dirent => dirent.isDirectory())
   .map(dirent => dirent.name);
 
-const main = async () => {
-  for (const exampleDir of exampleDirs) {
-    console.log(`🔵 Testing example: ${exampleDir}`);
-    console.log('');
+const allPackageDirs = [];
 
-    const cwd = `./examples/${exampleDir}`;
+const processDir = (dir) => {
+  for (subDir of getDirs(dir)) {
+    if (subDir !== 'node_modules') {
+      const cwd = `${dir}/${subDir}`;
 
-    // Make sure that Yalc packages have been uninstalled
-    await runCommand('type yalc &>/dev/null || exit 0 && yalc check', cwd);
+      if (getHasFile(cwd, 'package.json')) {
+        allPackageDirs.push(cwd);
+      }
 
-    const hasJestConfig = !!readdirSync(`${cwd}`)
-      .filter(dirent => dirent === 'jest.config.ts').length;
-
-    // This check can be removed once all examples have tests
-    if (!hasJestConfig) {
-      console.log('No tests, skipping.');
-    } else {
-      // Install dependencies
-      await runCommand('yarn install --frozen-lockfile', cwd);
-
-      // Check types
-      await runCommand('yarn tsc', cwd);
-
-      // Run tests
-      await runCommand('yarn jest', cwd);
-
-      console.log('✅ Tests passed');
+      processDir(cwd);
     }
+  }
+};
+
+processDir('./examples');
+
+// Process in reverse order so that child directories are processed first
+allPackageDirs.reverse();
+
+const testDir = async (dir) => {
+  console.log(`🔵 Testing example: ${dir}`);
+  console.log('');
+
+  // Make sure that Yalc packages have been uninstalled
+  await runCommand('type yalc &>/dev/null || exit 0 && yalc check', dir);
+
+  // Install dependencies
+  await runCommand('yarn install --frozen-lockfile', dir);
+
+  if (getHasFile(dir, 'tsconfig.json')) {
+    // Check types
+    await runCommand('yarn tsc --noEmit', dir);
+  }
+
+  // This check can be removed once all examples have tests
+  if (!getHasFile(dir, 'jest.config.ts')) {
+    console.log('No tests, skipping.');
+  } else {
+    // Run tests
+    await runCommand('yarn jest', dir);
+
+    console.log('✅ Tests passed');
+  }
+};
+
+const main = async () => {
+  for (dir of allPackageDirs) {
+    await testDir(dir);
 
     console.log('');
   }
