@@ -11,5 +11,8 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.0-dev.20220110"
   }
 }

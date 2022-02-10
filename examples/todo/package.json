@@ -5,8 +5,11 @@
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^1.1.6",
+    "@stripe/ui-extension-sdk": "^2.0.2",
     "react": "^17.0.2",
     "stripe": "^8.191.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.0-dev.20220110"
   }
 }
