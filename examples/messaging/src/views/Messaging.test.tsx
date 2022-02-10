@@ -2,8 +2,6 @@ import {render} from '@stripe/ui-extension-sdk/testing';
 import {List, Badge} from '@stripe/ui-extension-sdk/ui';
 import Messaging from './Messaging';
 import stripeClient from '../clients/stripe';
-import {fakeUserMessages} from '../fakeData';
-import {getEpochMsDisplayText} from '../utils/time';
 
 jest.mock('../clients/stripe');
 const mockCustomersRetrieve = stripeClient.customers.retrieve as jest.Mock;
@@ -26,7 +24,7 @@ describe('Messaging', () => {
     expect(wrapper).toContainText('Refund processing');
 
     // Open the first message
-    wrapper.find(List)?.trigger('onAction', '1');
+    wrapper.find(List)!.trigger('onAction', '1');
 
     // Expect the date badge to appear
     expect(wrapper.find(Badge)).toContainText('Test date');

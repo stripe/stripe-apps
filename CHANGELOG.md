@@ -1,5 +1,13 @@
 # Changelog
 
+### 2022-02-10
+- Released version 2.0.2 of the SDK
+    - Fixes an issue with the `testing` package in which comopnents with fragment props were not findable using `wrapper.find()`
+
+### 2022-02-08
+- Released version 2.0.1 of the SDK
+    - Fixes an issue where certain components would throw an error if they had only one child
+
 ## 2022-02-02
 - Released version 2.0.0 of the SDK (@stripe/ui-extension-sdk)
     - Fixes a render error with `SettingsView`
