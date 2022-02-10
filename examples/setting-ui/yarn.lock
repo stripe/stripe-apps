@@ -202,3 +202,8 @@ stripe@^8.174.0, stripe@^8.194.0:
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
+
+typescript@^4.6.0-dev.20220110:
+  version "4.6.0-dev.20220110"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/typescript/-/typescript-4.6.0-dev.20220110.tgz#3f553b81b0b1f78432170e90786f4660ef27c98e"
+  integrity sha512-OqcSY8hktJW3KbW3HKOAaLt/bJstt5hKS+z8o71dMvEv1+xMIYkRUlnVmuPZExJY7sf8ELFRx9cFhjOQ7moSbg==

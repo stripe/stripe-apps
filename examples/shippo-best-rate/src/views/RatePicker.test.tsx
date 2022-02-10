@@ -1,6 +1,6 @@
 import RatePicker from './RatePicker';
 import {render} from '@stripe/ui-extension-sdk/testing';
-import {List} from '@stripe/ui-extension-sdk/ui';
+import {List, ListItem} from '@stripe/ui-extension-sdk/ui';
 import {invoice, invoiceItem, shippoShipment, shippoTransaction} from './__mocks__/mock_objects';
 
 jest.mock('./shippo_client');
@@ -14,8 +14,8 @@ describe('RatePicker component', () => {
     await update();
     expect(wrapper).toContainComponent(List);
     const rate = shippoShipment.rates[0];
-    expect(wrapper.find(List)).toContainText(rate.servicelevel.name);
-    expect(wrapper.find(List)).toContainText(rate.duration_terms);
+    expect(wrapper.find(ListItem)).toContainText(rate.servicelevel.name);
+    expect(wrapper.find(ListItem)).toContainText(rate.duration_terms);
   });
   it('creates a new shipping label when a rate is clicked', async () => {
     const onRatePicked = jest.fn();
@@ -23,16 +23,16 @@ describe('RatePicker component', () => {
     expect(wrapper).toContainText('Loading shipping rates from Shippo…');
     await update();
     const rate = shippoShipment.rates[0];
-    wrapper.find(List)?.trigger('onAction', rate.object_id);
+    wrapper.find(List)!.trigger('onAction', rate.object_id);
     await update();
     expect(onRatePicked).toHaveBeenCalledWith({
-        rateId: rate.object_id,
-        shipmentId: shippoShipment.object_id,
-        labelId: shippoTransaction.object_id,
-        service: `${rate.provider} ${rate.servicelevel.name}`,
-        trackingUrl: shippoTransaction.tracking_url_provider,
-        labelUrl: shippoTransaction.label_url,
-        invoiceItemId: invoiceItem.id,
-      })
+      rateId: rate.object_id,
+      shipmentId: shippoShipment.object_id,
+      labelId: shippoTransaction.object_id,
+      service: `${rate.provider} ${rate.servicelevel.name}`,
+      trackingUrl: shippoTransaction.tracking_url_provider,
+      labelUrl: shippoTransaction.label_url,
+      invoiceItemId: invoiceItem.id,
+    });
   });
 })

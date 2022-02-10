@@ -212,7 +212,7 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
                     alignX: 'end',
                     alignY: 'center'
                   }}>
-                    <Inline css={{width: '115px'}}>{todo.text}</Inline>
+                    <Inline>{todo.text}</Inline>
                     {
                       mode === Mode.Uncompleted ?
                         <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
