@@ -13,37 +13,37 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@remote-ui/async-subscription@^2.1.7":
+"@remote-ui/async-subscription@^2.1.8":
+  version "2.1.8"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/async-subscription/-/async-subscription-2.1.8.tgz#c5852180ec5a909ca74eb4d064c995cfa516d40a"
+  integrity sha512-prrHLURIqJQKDMDHn404u4uywYXBm4oz7ke43OLQx5e/dvM0Io72KHJUx3ZwoYNCTS9q9M+wICHS6g9S2d8d3g==
+  dependencies:
+    "@remote-ui/rpc" "^1.2.6"
+
+"@remote-ui/core@^2.1.6", "@remote-ui/core@^2.1.7":
   version "2.1.7"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/async-subscription/-/async-subscription-2.1.7.tgz#c8e18aad37a05aab63c0578da650dce291c63fad"
-  integrity sha512-Tou3pVlt/7PE3+hOT9pmlwaNgbsTYejeHcRZ9u8FfwmMNs0YOjrEHhQMPlVotpZFucoGMNAEmpcbmjVZBR8TWw==
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/core/-/core-2.1.7.tgz#5936810a18225f6cef586ec8baf3b1bd00459006"
+  integrity sha512-urcIKnhGLwTn/fE0RyKqvYAxxDDBj46ANHT0zNooIHLeOMxKafAvrWZcdItxYKH6k51lR1/wmbOPKwG0lzm7Qg==
   dependencies:
-    "@remote-ui/rpc" "^1.2.5"
+    "@remote-ui/rpc" "^1.2.6"
+    "@remote-ui/types" "^1.1.2"
 
-"@remote-ui/core@^2.1.6":
-  version "2.1.6"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/core/-/core-2.1.6.tgz#ac9afa402bc5d743f0b5528590dd5cdd04e09dfd"
-  integrity sha512-jYTsNZws0H6//jehQgAG3mJfm7rDuEM7Oo4JaJ8kDt64Qbzizr4+lsAk4H6OJVscAIxX03bvr4oZGYzrvtZ9Ig==
+"@remote-ui/react@^4.4.2":
+  version "4.4.2"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/react/-/react-4.4.2.tgz#ad5c39beb023150a2eb792936b21c0070e9bae51"
+  integrity sha512-jQXsg9LwdfLJ0Sr31C/WtO/SwKolWvlJhhc8YGbYlWknUAnjTDrI682Mmv6Zh5VVRh+8fMjeuThJA7Bfhx8vXg==
   dependencies:
-    "@remote-ui/rpc" "^1.2.5"
-    "@remote-ui/types" "^1.1.1"
-
-"@remote-ui/react@^4.3.0":
-  version "4.3.0"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/react/-/react-4.3.0.tgz#5f1ed2482cb1f0e920fcfc2479b2a1cee72ea101"
-  integrity sha512-FOTzF2PZIUJqJQwyzUFboDg+EyDilJjcjwOpKl84/izvewD0HcM+4E7xD5yx7CRES1jYSVGiMxxRuL7SQ4wF4w==
-  dependencies:
-    "@remote-ui/async-subscription" "^2.1.7"
-    "@remote-ui/core" "^2.1.6"
-    "@remote-ui/rpc" "^1.2.5"
+    "@remote-ui/async-subscription" "^2.1.8"
+    "@remote-ui/core" "^2.1.7"
+    "@remote-ui/rpc" "^1.2.6"
     "@types/react" ">=17.0.0 <18.0.0"
     "@types/react-reconciler" "^0.26.0"
     react-reconciler ">=0.26.0 <1.0.0"
 
-"@remote-ui/rpc@^1.2.5":
-  version "1.2.5"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/rpc/-/rpc-1.2.5.tgz#b3a919bb82433e8ae478d739491703d4ec8ea1f6"
-  integrity sha512-yh08pSDuYxHKrw7jlCMshWmMOid1b07lKOlv9MYPC8kLw0sqQh0qY8zqNZTXjtxHhZyHYcJyHR5EOTuIGTNFMw==
+"@remote-ui/rpc@^1.2.6":
+  version "1.2.6"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/rpc/-/rpc-1.2.6.tgz#33ebfd97f5d5ab16b000bacbe392d96738b3d693"
+  integrity sha512-KdfDEnQEJmlNh8gbcPMG5Ldae94rsRytDqeuFUVsviQQ2CDui3RygN64iZlw8bVqbKiRpJ66hlVfpHkY6NbEDg==
 
 "@remote-ui/testing@^1.3.6":
   version "1.3.6"
@@ -53,17 +53,17 @@
     "@remote-ui/core" "^2.1.6"
     jest-matcher-utils "^26.0.1"
 
-"@remote-ui/types@^1.1.1":
-  version "1.1.1"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/types/-/types-1.1.1.tgz#c74cbd6d4442a6b260138d3c86d2d74c19a84663"
-  integrity sha512-FCcUpt61PwtTlOwTAMpPzxI8un7HfNKKr5Mu876+hfr2w3SG2zO/5RjmX9UWQnNGwnbofIpdn36z6AmK6AyjVw==
+"@remote-ui/types@^1.1.2":
+  version "1.1.2"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@remote-ui/types/-/types-1.1.2.tgz#ae9219a56bb4bb6ff5aabfacb29a1e71adbd97d4"
+  integrity sha512-F2u6McqvHj2c89FHeozQ0O8qbqhOFMMNYR2HqF33mHCMNTEXzUVheCj7laNO1/dGNXwcJHpoWIBNwfChbEfVyA==
 
-"@stripe/ui-extension-sdk@^1.1.6":
-  version "1.1.7"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/ui-extension-sdk/-/ui-extension-sdk-1.1.7.tgz#d63095f76b65061e8a9a67ae6082fe5c9aa29d90"
-  integrity sha512-jE0f1BpBOQsoACuN4uybea5qw7U5HKpWNA6JrWqHiMMbhhx579e6Zba4ITuod5re7833+DU5mVNhWIJgCnzmhQ==
+"@stripe/ui-extension-sdk@^2.0.1":
+  version "2.0.1"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@stripe/ui-extension-sdk/-/ui-extension-sdk-2.0.1.tgz#41c10b9c296de708d18fb1c9b4a7c5bb67945430"
+  integrity sha512-HPg0Xy6ZjIsSeFINt3PdeQDNcLpgZynCP4hPU1b1f8yhWUAk10JcITuQbbsweM3vl3fDUQJVR5eyETusrkEKsA==
   dependencies:
-    "@remote-ui/react" "^4.3.0"
+    "@remote-ui/react" "^4.4.2"
     "@remote-ui/testing" "^1.3.6"
     "@types/stylis" "^4.0.2"
     invariant "^2.2.4"
@@ -90,9 +90,9 @@
     "@types/istanbul-lib-report" "*"
 
 "@types/node@*", "@types/node@>=8.1.0":
-  version "12.20.39"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/node/-/node-12.20.39.tgz#ef3cb119eaba80e9f1012c78b9384a7489a18bf6"
-  integrity sha512-U7PMwkDmc3bnL0e4U8oA0POpi1vfsYDc+DEUS2+rPxm9NlLcW1dBa5JcRhO633PoPUcCSWMNXrMsqhmAVEo+IQ==
+  version "17.0.8"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/node/-/node-17.0.8.tgz#50d680c8a8a78fe30abe6906453b21ad8ab0ad7b"
+  integrity sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg==
 
 "@types/prop-types@*":
   version "15.7.4"
@@ -126,9 +126,9 @@
   integrity sha512-wtckGuk1eXUlUz0Qb1eXHG37Z7HWT2GfMdqRf8F/ifddTwadSS9Jwsqi4qtXk7cP7MtoyGVIHPElFCLc6HItbg==
 
 "@types/yargs-parser@*":
-  version "11.0.4"
-  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/yargs-parser/-/yargs-parser-11.0.4.tgz#6fcac3b95ab1d22866acfad62153b46fca066e90"
-  integrity sha512-l+jxGV/WPsyrdpPi9+jUzZ/lKuL1oJ39MFfj/fiW/a2Dom7BqbZaGDtapIfR2eJMNCkLEZ45yoAarDlGjG4sqQ==
+  version "20.2.1"
+  resolved "https://artifactory-content.stripe.build/artifactory/api/npm/npm/@types/yargs-parser/-/yargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
+  integrity sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==
 
 "@types/yargs@^15.0.0":
   version "15.0.14"
