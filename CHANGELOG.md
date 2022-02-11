@@ -5,6 +5,7 @@
     - Fixes an issue with the `testing` package in which comopnents with fragment props were not findable using `wrapper.find()`
     - Fixes an issue where certain components would throw an error if they had only one child
     - Updated example apps to use the latest version of the SDK
+- Fixed [Hot Loading Bug](https://github.com/stripe/stripe-apps/issues/169)
 
 ## 2022-02-02
 - Released version 2.0.0 of the SDK (@stripe/ui-extension-sdk)
