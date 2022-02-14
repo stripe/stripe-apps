@@ -1,5 +1,12 @@
 # Changelog
 
+### 2022-02-11
+- Released version 2.0.3 of the SDK
+    - Returns a promise from useRefreshDashboardData that resolves after dashboard data is refreshed.
+    - Adds `fetchStripeSignature` method that optionally accepts additional request payload. Signature can be used to make authenticated request to your app's backend. See [the docs](https://stripe.com/docs/stripe-apps/authenticate) for details.
+    - Fixes an issue where the test element check method `.is` would sometimes fail to identify a component.
+- Fixed https://github.com/stripe/stripe-apps/issues/104
+
 ### 2022-02-10
 - Released version 2.0.2 of the SDK
     - Fixes an issue with the `testing` package in which comopnents with fragment props were not findable using `wrapper.find()`
