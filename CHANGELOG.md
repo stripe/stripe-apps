@@ -1,5 +1,11 @@
 # Changelog
 
+### 2022-02-18
+- Released CLI v0.1.7-apps-preview
+    - You can now use the Stripe CLI to generate a SettingsView with the `add` command. See [the docs](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api) for details.
+    - Stripe Apps CLI commands now requires authentication to ensure Apps are being uploaded to the right Stripe accounts.
+    - When uploading Apps, we will now prompt users to confirm before uploading.
+    
 ### 2022-02-11
 - Released version 2.0.3 of the SDK
     - Returns a promise from useRefreshDashboardData that resolves after dashboard data is refreshed.
