@@ -596,7 +596,7 @@ and set it as the `apiBaseUrl` in the frontend.
 If you try to run the frontend now you will see an error message:
 
 > Refused to connect to
-> 'https://e78f-198-98-122-155.ngrok.io/api/<account>/notes/<customer>' because
+> 'https://e78f-198-98-122-155.ngrok.io/api/\<account\>/notes/\<customer\>' because
 > it violates the document's Content Security Policy.
 
 Stripe is protecting users of your app by blocking the sending of Stripe data to
