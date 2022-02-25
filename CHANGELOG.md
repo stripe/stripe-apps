@@ -1,5 +1,17 @@
 # Changelog
 
+## 2022-02-25
+- Released version 2.1.0 of the SDK
+    - Introduces `ButtonGroup` component.
+    - Makes styling improvements to `Button`.
+    - Allows hiding `error` and `description` on form controls via the `hiddenElements` prop.
+    - Exposes invalid and size props on Select and TextArea.
+    - Exposes defaultChecked attribute on Radio.
+    - Exposes resizeable and rows props on TextArea.
+- Fixed https://github.com/stripe/stripe-apps/issues/157
+- Fixed https://github.com/stripe/stripe-apps/issues/158
+- Fixed https://github.com/stripe/stripe-apps/issues/176
+- Fixed https://github.com/stripe/stripe-apps/issues/195
 ## 2022-02-18
 - Released CLI v0.1.7-apps-preview
     - You can now use the Stripe CLI to generate a SettingsView with the `add` command. See [the docs](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api) for details.
