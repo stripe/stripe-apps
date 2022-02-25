@@ -3,7 +3,6 @@
 ## 2022-02-25
 - Released version 2.1.0 of the SDK
     - Introduces `ButtonGroup` component.
-    - `ContextView`: replaces `actions` slot with a fragment prop.
     - Makes styling improvements to `Button`.
     - Allows hiding `error` and `description` on form controls via the `hiddenElements` prop.
     - Exposes invalid and size props on Select and TextArea.
