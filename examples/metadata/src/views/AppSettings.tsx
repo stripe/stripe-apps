@@ -57,8 +57,6 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
 
     return (
         <SettingsView 
-            header="Favorite colors" 
-            subheader="Record your customer's favorite colors so you never forget!"
             statusMessage={statusLabel}
             onSave={saveSettings}
         >
@@ -107,7 +105,6 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
                                 What is their favorite color?
                                 <Select 
                                     name="favorite_color" 
-                                    id="favorite_color"
                                     label="&nbsp;Favorite Color" 
                                 >
                                     <option value="">Select a color</option>

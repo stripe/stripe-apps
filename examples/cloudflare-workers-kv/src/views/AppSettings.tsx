@@ -66,7 +66,7 @@ const AppSettings = () => {
     const statusLabel = determineStatusLabel();
 
     return (
-        <SettingsView onSave={saveSettings} statusMessage={statusLabel} header="Set a Greeting">
+        <SettingsView onSave={saveSettings} statusMessage={statusLabel}>
             <Box css={{
                 padding:'medium',
                 backgroundColor: 'container',
@@ -93,9 +93,6 @@ const AppSettings = () => {
                     type="text"
                     label="Greeting:"
                     size="medium"
-                    css={{
-                        marginBottom: 'medium'
-                    }}
                 />
             </Box>
         </SettingsView>
