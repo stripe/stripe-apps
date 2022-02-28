@@ -3,8 +3,6 @@
 ## 2022-02-25
 - Released version 2.2.0 of the SDK
     - Adds `actions` prop to `ContextView`.
-
-## 2022-02-25
 - Released version 2.1.0 of the SDK
     - Introduces `ButtonGroup` component.
     - Makes styling improvements to `Button`.
