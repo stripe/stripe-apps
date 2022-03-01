@@ -1,0 +1,23 @@
+{
+  "id": "com.example.graphql",
+  "version": "0.0.1",
+  "name": "Apollo GraphQL Example",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [
+        "https://countries.trevorblades.com/graphql"
+      ],
+      "purpose": "Fetch country data"
+    }
+  }
+}
