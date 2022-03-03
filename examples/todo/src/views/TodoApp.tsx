@@ -12,15 +12,8 @@ import {
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 import { useState, useEffect, ChangeEvent } from 'react';
-
-import { createHttpClient, STRIPE_API_KEY } from '@stripe/ui-extension-sdk/http_client';
 import Stripe from 'stripe';
-
-// A key isn't necessary, since behind the scenes the app uses the dashboard credentials to make requests
-const stripe = new Stripe(STRIPE_API_KEY, {
-  httpClient: createHttpClient() as Stripe.HttpClient,
-  apiVersion: '2020-08-27',
-});
+import stripe from './stripeClient';
 
 type Todo = {
   text: string,
@@ -61,7 +54,6 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
       try {
         const cust: Stripe.Customer = await stripe.customers.retrieve(environment?.objectContext.id as string) as Stripe.Customer;
         const todoList: Todo[] = parseCustomerMetadata(cust.metadata);
-
         setTodoList(todoList);
         setCustomer(cust);
       } catch(err) {
@@ -73,7 +65,9 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
   }, []);
 
   if (!todoList) {
-    return 'Loading...';
+    return (
+      <Box>Loading...</Box>
+    );
   }
 
   const addTodo = async () => {
@@ -179,6 +173,7 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
   return (
     <ContextView title="Todos">
       <Box
+        key="controls-container"
         css={{
           layout: 'row',
           gap: 'medium',
@@ -186,22 +181,23 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
         }}
       >
         <TextField type="text" size="small" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
-        <Button size="medium" type="primary" onPress={() => addTodo()}>
+        <Button size="medium" type="primary" id="add-task" onPress={() => addTodo()}>
           + Add task
         </Button>
       </Box>
       <Box
+        key="todo-list-container"
         css={{
           paddingY: 'medium',
           layout: 'column',
         }}
       >
-        {todoList.map((todo: Todo) => {
-          // Only show the todos for the selected mode
-          // Also hide the "Complete" button if the task is already completed
-          if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
-            return (
-              <List>
+        <List key={`todo-list-${mode}`}>
+          {todoList.map((todo: Todo) => {
+            // Only show the todos for the selected mode
+            // Also hide the "Complete" button if the task is already completed
+            if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
+              return (
                 <ListItem key={`todo-${todo.created}`}>
                   <Inline css={{
                     font: 'body',
@@ -225,12 +221,12 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
                     <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
                   </Inline>
                 </ListItem>
-              </List>
-            );
-          }
-        })}
+              );
+            }
+          })}
+        </List>
       </Box>
-      <Box css={{margin: 'medium'}}>
+      <Box key="mode-controls" css={{margin: 'medium'}}>
         <Switch
           id="mode-switch"
           checked={mode === Mode.Completed}
@@ -239,6 +235,7 @@ const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
         />
       </Box>
       <FocusView
+        key="notes"
         shown={!!openNotes}
         title={openNotes ? `Notes for: "${openNotes.text}"` : 'Loading...'}
         onClose={() => setOpenNotes(false)}
