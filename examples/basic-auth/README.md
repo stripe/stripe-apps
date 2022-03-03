@@ -7,7 +7,7 @@ authorization server.
 Because an app cannot at the moment receive an OAuth2 callback or securely save
 auth tokens, we need a server with a storage solution which will store the
 tokens for a user. User identity can be securely validated using
-[signature checking](https://stripe.com/docs/stripe-apps/authenticate), allowing
+[signature checking](https://stripe.com/docs/stripe-apps/build-backend#authenticate-ui-to-backend), allowing
 tokens to be fetched as needed.
 
 The example backend here is one that keeps the tokens on the server and expects
