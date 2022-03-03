@@ -1,5 +1,5 @@
 import { Box, Button, ContextView } from "@stripe/ui-extension-sdk/ui";
-import type { TailorExtensionContextValue } from "@stripe/ui-extension-sdk/context";
+import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 import fetchStripeSignature from "@stripe/ui-extension-sdk/signature";
 import { Reducer, useCallback, useEffect, useReducer } from "react";
 
@@ -108,7 +108,7 @@ type UserInfo = {
   email: string;
 };
 
-const App = ({ userContext }: TailorExtensionContextValue) => {
+const App = ({ userContext }: ExtensionContextValue) => {
   const [state, dispatch] = useReducer(reducer, null, initialState);
   const fetchWithCredentials = useCallback(
     async (uri: string, { headers, ...options }: RequestInit = {}) => {

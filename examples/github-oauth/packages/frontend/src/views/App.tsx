@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Reducer, useCallback, useEffect, useReducer } from 'react';
 
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import fetchStripeSignature from '@stripe/ui-extension-sdk/signature';
 import { Box, Button, ContextView } from '@stripe/ui-extension-sdk/ui';
 
@@ -109,7 +109,7 @@ const reducer: Reducer<State, Action> = (prevState, action) => {
   }
 };
 
-const App = ({ userContext }: TailorExtensionContextValue) => {
+const App = ({ userContext }: ExtensionContextValue) => {
   const [state, dispatch] = useReducer(reducer, null, initialState);
   const fetchWithCredentials = useCallback(
     async (uri: string, { headers, ...options }: RequestInit = {}) => {

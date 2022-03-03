@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react';
 import {ContextView, Box} from '@stripe/ui-extension-sdk/ui';
-import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
+import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import stripeClient from '../clients/stripe';
 
 type ColorOption = "critical" | "primary" | "disabled" | "brand" | "info" | "success" | "attention" | null;
 const ColorOptions = [ "critical", "primary", "disabled", "brand", "info", "success", "attention" ];
 
-const MetadataStorage = ({ environment }: TailorExtensionContextValue) => {
+const MetadataStorage = ({ environment }: ExtensionContextValue) => {
   const object = environment?.objectContext;
   const [favoriteColor, setFavoriteColor] = useState<ColorOption>(null);
   const [isLoading, setIsLoading] = useState(true);

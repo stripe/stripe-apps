@@ -6,11 +6,11 @@ import {
 } from '@stripe/ui-extension-sdk/ui';
 import stripeClient from '../clients/stripe';
 import Stripe from 'stripe';
-import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
+import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
 type FormStatus = 'initial' | 'saving' | 'saved' | 'error';
 
-const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
+const AppSettings = ({ userContext }: ExtensionContextValue) => {
     const [status, setStatus] = useState<FormStatus>('initial');
     const [customers, setCustomers] = useState<Array<Stripe.Customer>>([]);
 
