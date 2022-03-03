@@ -6,12 +6,12 @@ import {
   Button,
   Inline,
 } from '@stripe/ui-extension-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import { useSendMail } from '../hooks/sendMail';
 import { useCustomerLoader } from '../hooks/loadCustomer';
 
-const App = (props: TailorExtensionContextValue) => {
-  const { 
+const App = (props: ExtensionContextValue) => {
+  const {
     customerLoadingErrorMessage,
     customerLoadingStatus,
     customer,

@@ -9,7 +9,7 @@ import {
   Switch,
   FocusView,
 } from '@stripe/ui-extension-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 import { useState, useEffect, ChangeEvent } from 'react';
 
@@ -48,7 +48,7 @@ const parseCustomerMetadata = (metadata: any) => {
   return JSON.parse(metadata.todos);
 }
 
-const TodoApp = ({userContext, environment}: TailorExtensionContextValue) => {
+const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
   const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState<string>('');
   const [notesTextFieldValue, setNotesTextFieldValue] = useState<string>('');
   const [todoList, setTodoList] = useState<Todo[]>([]);

@@ -3,9 +3,9 @@ import {
   ContextView,
   Link,
 } from '@stripe/ui-extension-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
-const App = ({userContext, environment}: TailorExtensionContextValue) => {
+const App = ({userContext, environment}: ExtensionContextValue) => {
   return (
     <ContextView title="Create your first Stripe app">
       <Box

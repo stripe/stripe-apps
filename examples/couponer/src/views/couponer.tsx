@@ -7,7 +7,7 @@ import {createHttpClient, STRIPE_API_KEY} from '@stripe/ui-extension-sdk/http_cl
 import {useCallback, useState, useEffect} from 'react';
 import Stripe from 'stripe';
 import { useRefreshDashboardData } from '@stripe/ui-extension-sdk/context';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 enum Discounts {
   industry = 'industry',
@@ -44,7 +44,7 @@ const updateProductCouponMetadata = async (productId: string, newCouponState: Co
     metadata: newCouponState as {[key: string]: string},
   });
 
-const Couponer = ({environment}: TailorExtensionContextValue) => {
+const Couponer = ({environment}: ExtensionContextValue) => {
   const refresh = useRefreshDashboardData();
   const productId = environment!.objectContext.id;
   const options = [
