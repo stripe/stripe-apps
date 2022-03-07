@@ -158,14 +158,9 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
         key={rate.object_id}
         id={rate.object_id}
         value={rate.amount}
+        title={<Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>}
+        secondaryTitle={<Box>{rate.duration_terms}</Box>}
       >
-        <Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>
-        <Box
-          // @ts-ignore - TODO: Fix bug in the SDK type definitions, "slot" exists
-          slot="description"
-        >
-          {rate.duration_terms}
-        </Box>
       </ListItem>
     );
   });
@@ -173,7 +168,7 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
     const rate = rateMap[object_id];
     handleRatePicked(invoice, rate, shipment)}
   }>{rateItems}</List>;
-        
+
 };
 
 export default RatePicker;

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2022-03-07
+- Released version 3.0.0 of the SDK
+    - Adds support for the `Notice`, `Charts`, and `Tabs` components
+    - Breaking changes:
+      - `ListItem`: Previously, content passed as children would be the primary content rendered in the component. Now, main content is passed to the `title` prop. The `description` slot has also been reassigned to a `secondaryTitle` prop.
+      - `MenuTrigger`: This component has been deprecated in favor of a `trigger` prop on the `Menu` component. Slot API usage has also been removed.
+      - Removed permissions from being passed into the user context.
+- Fixed https://github.com/stripe/stripe-apps/issues/231
+
 ## 2022-02-25
 - Released version 2.2.0 of the SDK
     - Adds `actions` prop to `ContextView`.
@@ -14,12 +23,13 @@
 - Fixed https://github.com/stripe/stripe-apps/issues/158
 - Fixed https://github.com/stripe/stripe-apps/issues/176
 - Fixed https://github.com/stripe/stripe-apps/issues/195
+
 ## 2022-02-18
 - Released CLI v0.1.7-apps-preview
     - You can now use the Stripe CLI to generate a SettingsView with the `add` command. See [the docs](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api) for details.
     - Stripe Apps CLI commands now requires authentication, validating that the user is logged in before attempting upload.
     - When uploading Apps, we will now prompt users to confirm before uploading.
-    
+
 ## 2022-02-11
 - Released version 2.0.3 of the SDK
     - Returns a promise from useRefreshDashboardData that resolves after dashboard data is refreshed.

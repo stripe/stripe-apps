@@ -202,29 +202,32 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
           if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
             return (
               <List>
-                <ListItem key={`todo-${todo.created}`}>
-                  <Inline css={{
-                    font: 'body',
-                    color: 'primary',
-                    fontWeight: 'semibold',
-                    layout: 'row',
-                    gap: 'small',
-                    alignX: 'end',
-                    alignY: 'center'
-                  }}>
-                    <Inline>{todo.text}</Inline>
-                    {
-                      mode === Mode.Uncompleted ?
-                        <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
-                        null
-                    }
-                    <Button size="small" onPress={() => {
-                      setNotesTextFieldValue(todo.notes);
-                      setOpenNotes(todo);
-                    }}>✍️</Button>
-                    <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
-                  </Inline>
-                </ListItem>
+                <ListItem
+                  key={`todo-${todo.created}`}
+                  title={
+                    <Inline css={{
+                      font: 'body',
+                      color: 'primary',
+                      fontWeight: 'semibold',
+                      layout: 'row',
+                      gap: 'small',
+                      alignX: 'end',
+                      alignY: 'center'
+                    }}>
+                      <Inline>{todo.text}</Inline>
+                      {
+                        mode === Mode.Uncompleted ?
+                          <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
+                          null
+                      }
+                      <Button size="small" onPress={() => {
+                        setNotesTextFieldValue(todo.notes);
+                        setOpenNotes(todo);
+                      }}>✍️</Button>
+                      <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
+                    </Inline>
+                  }
+                />
               </List>
             );
           }
@@ -232,7 +235,6 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
       </Box>
       <Box css={{margin: 'medium'}}>
         <Switch
-          id="mode-switch"
           checked={mode === Mode.Completed}
           onChange={() => setMode(mode === Mode.Completed ? Mode.Uncompleted : Mode.Completed)}
           label="Show completed tasks"
