@@ -29,3 +29,9 @@ Please rewrite this file from dummy DB to use your own API (and your own databas
 ```
 stripe-preview apps start
 ```
+
+## Unit test
+
+```bash
+npm run test
+```
