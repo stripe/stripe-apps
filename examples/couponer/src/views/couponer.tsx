@@ -132,7 +132,6 @@ const Couponer = ({environment}: ExtensionContextValue) => {
           {options.map(({value, description, label}) => (
             <Switch
               key={value}
-              id={value}
               label={label}
               disabled={couponState[value] === 'pending'}
               checked={!!couponState[value]}

@@ -58,10 +58,10 @@
   resolved "https://registry.yarnpkg.com/@remote-ui/types/-/types-1.1.2.tgz#ae9219a56bb4bb6ff5aabfacb29a1e71adbd97d4"
   integrity sha512-F2u6McqvHj2c89FHeozQ0O8qbqhOFMMNYR2HqF33mHCMNTEXzUVheCj7laNO1/dGNXwcJHpoWIBNwfChbEfVyA==
 
-"@stripe/ui-extension-sdk@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-2.2.0.tgz#2c91f3fd59823f710a3eb68d61a5bed9e8d3b2bb"
-  integrity sha512-faFOT13ZHrZbaKkr2FTRsqF65j7Ne/ddZFPtD1gmnqHE6vJYDnn72tgUJFYwZvCitKXYV1/pbpbXkOvm+Gr2aw==
+"@stripe/ui-extension-sdk@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-3.0.0.tgz#db9d01a418a30291aa3a8f4bf0ddcbe74e64e92f"
+  integrity sha512-3rsUhjCMrPgviI2WA1JkRK62m2TCeL4i3OhcXa0XaxTjTJm9IQV7vft8b28pfrBTgLiaku1EKU5CUfCO6cK3BQ==
   dependencies:
     "@remote-ui/react" "^4.4.2"
     "@remote-ui/testing" "^1.3.6"

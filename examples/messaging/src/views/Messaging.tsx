@@ -29,12 +29,15 @@ const Messaging = ({environment, userContext}: ExtensionContextValue) => {
             <ListItem
               id={message.id}
               key={message.id}
-            >
-              <Box>{message.subject}</Box>
-              <Box css={{font: 'caption', color: 'secondary'}}>
-                {getEpochMsDisplayText(message.date)}
-              </Box>
-            </ListItem>
+              title={
+                <>
+                  <Box>{message.subject}</Box>
+                  <Box css={{font: 'caption', color: 'secondary'}}>
+                    {getEpochMsDisplayText(message.date)}
+                  </Box>
+                </>
+              }
+            />
           ))}
         </List>
       ) : (

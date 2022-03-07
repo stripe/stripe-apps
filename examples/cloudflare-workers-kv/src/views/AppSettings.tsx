@@ -71,14 +71,14 @@ const AppSettings = () => {
                 padding:'medium',
                 backgroundColor: 'container',
             }}>
-                <Box 
+                <Box
                     css={{
                         font: 'lead'
                     }}
                 >
                     Please enter a greeting
                 </Box>
-                <Box 
+                <Box
                     css={{
                         marginBottom: 'medium',
                         font: 'caption'
@@ -87,7 +87,6 @@ const AppSettings = () => {
                     Saved Greeting: {storedValue || 'None'}
                 </Box>
                 <TextField
-                    id="greeting"
                     // @ts-ignore
                     name="greeting"
                     type="text"
