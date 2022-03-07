@@ -16,7 +16,12 @@ const isActiveCustomer = (customer: Stripe.Customer | Stripe.DeletedCustomer): c
 };
 
 export type LoadingStatus = '' | 'loading' | 'complete' | 'error';
-export const useCustomerLoader = ({environment}: ExtensionContextValue) => {
+export type CustomerLoaderProps = {
+    customerLoadingStatus: LoadingStatus;
+    customerLoadingErrorMessage: string;
+    customer?: Stripe.Customer | null;
+};
+export const useCustomerLoader = ({environment}: ExtensionContextValue): CustomerLoaderProps => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [customerLoadingStatus, setCustomerLoadingStatus] = useState<LoadingStatus>('');
     const [customer, setCustomer] = useState<Stripe.Customer | null>(null);
