@@ -10,7 +10,7 @@ export const useSendMail = ({userContext}: ExtensionContextValue) => {
     const [text, setText] = useState('');
     const fromAddress = userContext?.email;
     return {
-        callSendMailAPI: async (customer: Stripe.Customer | null) => {
+        callSendMailAPI: async (customer: Stripe.Customer | null | undefined) => {
             if (!customer) {
                 return;
             }
