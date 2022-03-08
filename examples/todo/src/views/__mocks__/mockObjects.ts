@@ -19,9 +19,7 @@ export const customer: Stripe.Customer = {
       "footer": null,
   },
   "livemode": false,
-  "metadata": {
-      "todos": "[{\"text\":\"item\",\"created\":1646155247350,\"completed\":false,\"notes\":\"\"},{\"text\":\"item 2\",\"created\":1646155303351,\"completed\":false,\"notes\":\"\"}]"
-  },
+  "metadata": {},
   "name": null,
   "next_invoice_sequence": 1,
   "phone": null,
