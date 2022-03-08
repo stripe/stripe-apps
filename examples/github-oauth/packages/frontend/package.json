@@ -9,7 +9,7 @@
     "upload": "stripe-preview apps upload"
   },
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^2.0.0",
+    "@stripe/ui-extension-sdk": "^2.2.0",
     "react": "^17.0.2",
     "stripe": "^8.200.0"
   }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import Stripe from 'stripe';
 import {createHttpClient, STRIPE_API_KEY } from '@stripe/ui-extension-sdk/http_client';
 
@@ -16,7 +16,12 @@ const isActiveCustomer = (customer: Stripe.Customer | Stripe.DeletedCustomer): c
 };
 
 export type LoadingStatus = '' | 'loading' | 'complete' | 'error';
-export const useCustomerLoader = ({environment}: TailorExtensionContextValue) => {
+export type CustomerLoaderProps = {
+    customerLoadingStatus: LoadingStatus;
+    customerLoadingErrorMessage: string;
+    customer?: Stripe.Customer | null;
+};
+export const useCustomerLoader = ({environment}: ExtensionContextValue): CustomerLoaderProps => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [customerLoadingStatus, setCustomerLoadingStatus] = useState<LoadingStatus>('');
     const [customer, setCustomer] = useState<Stripe.Customer | null>(null);

@@ -66,19 +66,19 @@ const AppSettings = () => {
     const statusLabel = determineStatusLabel();
 
     return (
-        <SettingsView onSave={saveSettings} statusMessage={statusLabel} header="Set a Greeting">
+        <SettingsView onSave={saveSettings} statusMessage={statusLabel}>
             <Box css={{
                 padding:'medium',
                 backgroundColor: 'container',
             }}>
-                <Box 
+                <Box
                     css={{
                         font: 'lead'
                     }}
                 >
                     Please enter a greeting
                 </Box>
-                <Box 
+                <Box
                     css={{
                         marginBottom: 'medium',
                         font: 'caption'
@@ -87,15 +87,11 @@ const AppSettings = () => {
                     Saved Greeting: {storedValue || 'None'}
                 </Box>
                 <TextField
-                    id="greeting"
                     // @ts-ignore
                     name="greeting"
                     type="text"
                     label="Greeting:"
                     size="medium"
-                    css={{
-                        marginBottom: 'medium'
-                    }}
                 />
             </Box>
         </SettingsView>

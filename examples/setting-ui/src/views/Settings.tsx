@@ -24,8 +24,6 @@ const Settings = () => {
     const [status, setStatus] = useState<string>('');
     return (
         <SettingsView
-            header="Custom app settings"
-            subheader="App settings subheader"
             onSave={async() => {
                 await dbClient.saveOptions({
                     username,

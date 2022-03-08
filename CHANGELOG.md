@@ -1,15 +1,39 @@
 # Changelog
 
+## 2022-03-07
+- Released version 3.0.0 of the SDK
+    - Adds support for the `Notice`, `Charts`, and `Tabs` components
+    - Breaking changes:
+      - `ListItem`: Previously, content passed as children would be the primary content rendered in the component. Now, main content is passed to the `title` prop. The `description` slot has also been reassigned to a `secondaryTitle` prop.
+      - `MenuTrigger`: This component has been deprecated in favor of a `trigger` prop on the `Menu` component. Slot API usage has also been removed.
+      - Removed permissions from being passed into the user context.
+- Fixed https://github.com/stripe/stripe-apps/issues/231
+
+## 2022-02-25
+- Released version 2.2.0 of the SDK
+    - Adds `actions` prop to `ContextView`.
+- Released version 2.1.0 of the SDK
+    - Introduces `ButtonGroup` component.
+    - Makes styling improvements to `Button`.
+    - Allows hiding `error` and `description` on form controls via the `hiddenElements` prop.
+    - Exposes invalid and size props on Select and TextArea.
+    - Exposes defaultChecked attribute on Radio.
+    - Exposes resizeable and rows props on TextArea.
+- Fixed https://github.com/stripe/stripe-apps/issues/157
+- Fixed https://github.com/stripe/stripe-apps/issues/158
+- Fixed https://github.com/stripe/stripe-apps/issues/176
+- Fixed https://github.com/stripe/stripe-apps/issues/195
+
 ## 2022-02-18
 - Released CLI v0.1.7-apps-preview
     - You can now use the Stripe CLI to generate a SettingsView with the `add` command. See [the docs](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api) for details.
     - Stripe Apps CLI commands now requires authentication, validating that the user is logged in before attempting upload.
     - When uploading Apps, we will now prompt users to confirm before uploading.
-    
+
 ## 2022-02-11
 - Released version 2.0.3 of the SDK
     - Returns a promise from useRefreshDashboardData that resolves after dashboard data is refreshed.
-    - Adds `fetchStripeSignature` method that optionally accepts additional request payload. Signature can be used to make authenticated request to your app's backend. See [the docs](https://stripe.com/docs/stripe-apps/authenticate) for details.
+    - Adds `fetchStripeSignature` method that optionally accepts additional request payload. Signature can be used to make authenticated request to your app's backend. See [the docs](https://stripe.com/docs/stripe-apps/build-backend#authenticate-ui-to-backend) for details.
     - Fixes an issue where the test element check method `.is` would sometimes fail to identify a component.
 - Fixed https://github.com/stripe/stripe-apps/issues/104
 

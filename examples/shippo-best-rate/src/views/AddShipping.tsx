@@ -11,9 +11,9 @@ import ShippingDetails from './ShippingDetails';
 import stripeClient from './stripe_client';
 import Stripe from 'stripe';
 import invariant from 'ts-invariant';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
-const AddShipping = ({environment}: TailorExtensionContextValue) => {
+const AddShipping = ({environment}: ExtensionContextValue) => {
   invariant(environment, 'Unexpectedly null environment');
   const {objectContext: {id: invoiceId}} = environment;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata|null>();

@@ -1,16 +1,16 @@
 import { useState } from "react";
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import Stripe from 'stripe';
 
 export type SendingStatus = '' | 'sending' | 'complete' | 'error';
-export const useSendMail = ({userContext}: TailorExtensionContextValue) => {
+export const useSendMail = ({userContext}: ExtensionContextValue) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [sendingStatus, setSendingStatus] = useState<SendingStatus>('');
     const [subject, setSubject] = useState('');
     const [text, setText] = useState('');
     const fromAddress = userContext?.email;
     return {
-        callSendMailAPI: async (customer: Stripe.Customer | null) => {
+        callSendMailAPI: async (customer: Stripe.Customer | null | undefined) => {
             if (!customer) {
                 return;
             }

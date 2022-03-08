@@ -1,7 +1,7 @@
 /* WARNING! API token-based APIs cannot be safely used from UI Extensions. This example is
  * ok because it's a test token and not sensitive, but if this were to be productionized
  * we'd have to modify this code to be secure. There are two options:
- * - If we control the backend, we can use [Stripe-provided signed payloads](https://site-admin.stripe.com/docs/stripe-apps/authenticate)
+ * - If we control the backend, we can use [Stripe-provided signed payloads](https://stripe.com/docs/stripe-apps/build-backend#authenticate-ui-to-backend)
  *   to verify the origin of the request.
  * - If we do not control the backend (as is the case in this example), we would need to either
  *   authenticate the user with Shippo using OAuth or write our own backend that communicates

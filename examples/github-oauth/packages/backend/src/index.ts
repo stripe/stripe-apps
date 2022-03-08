@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * Here we extract the session key used. Because we cannot use cookies to set a secure session id, the
  * only thing we can rely on is stripe's user and account IDs. These will be possible to securely verify
- * using a signed header once this is implemented in the Stripe apps SDK (see https://stripe.com/docs/stripe-apps/authenticate)
+ * using a signed header once this is implemented in the Stripe apps SDK (see https://stripe.com/docs/stripe-apps/build-backend#authenticate-ui-to-backend)
  */
 const verifyCaller: Handler = (req, res, next) => {
   const sig = req.headers['stripe-signature'];

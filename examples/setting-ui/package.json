@@ -5,14 +5,21 @@
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^1.1.6",
+    "@stripe/ui-extension-sdk": "^3.0.0",
     "react": "^17.0.2",
     "stripe": "^8.194.0"
   },
   "engines": {
     "node": ">=14"
   },
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
-    "typescript": "^4.6.0-dev.20220110"
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.6.0-dev.20220204"
   }
 }

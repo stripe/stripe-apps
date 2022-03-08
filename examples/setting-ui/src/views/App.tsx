@@ -33,15 +33,11 @@ const App = () => {
         <Box css={{paddingTop: 'large', marginBottom: 'large'}}>
           <Inline>Hello! Here is your application settings.</Inline>
           <List aria-label="settings">
-            <ListItem id={username}>
-              <Box>Username: {username}</Box>
-            </ListItem>
-            <ListItem id={country}>
-              <Box>Country: {country}</Box>
-            </ListItem>
+            <ListItem id={username} title={<Box>Username: {username}</Box>} />
+            <ListItem id={country} title={<Box>Country: {country}</Box>} />
           </List>
         </Box>
-        
+
         <Box css={{paddingBottom: 'xlarge'}}>
           <Link
             href="https://stripe.com/docs/stripe-apps/ui-toolkit/components"

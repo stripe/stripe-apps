@@ -6,11 +6,11 @@ import {
 } from '@stripe/ui-extension-sdk/ui';
 import stripeClient from '../clients/stripe';
 import Stripe from 'stripe';
-import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
+import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
 type FormStatus = 'initial' | 'saving' | 'saved' | 'error';
 
-const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
+const AppSettings = ({ userContext }: ExtensionContextValue) => {
     const [status, setStatus] = useState<FormStatus>('initial');
     const [customers, setCustomers] = useState<Array<Stripe.Customer>>([]);
 
@@ -57,8 +57,6 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
 
     return (
         <SettingsView 
-            header="Favorite colors" 
-            subheader="Record your customer's favorite colors so you never forget!"
             statusMessage={statusLabel}
             onSave={saveSettings}
         >
@@ -107,7 +105,6 @@ const AppSettings = ({ userContext }: TailorExtensionContextValue) => {
                                 What is their favorite color?
                                 <Select 
                                     name="favorite_color" 
-                                    id="favorite_color"
                                     label="&nbsp;Favorite Color" 
                                 >
                                     <option value="">Select a color</option>

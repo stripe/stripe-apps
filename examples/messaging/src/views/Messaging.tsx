@@ -8,14 +8,14 @@ import {
   List,
   ListItem,
 } from '@stripe/ui-extension-sdk/ui';
-import type {TailorExtensionContextValue} from '@stripe/ui-extension-sdk/context';
+import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 
 import type { Message } from "../types";
 import {getEpochMsDisplayText} from '../utils/time';
 import {fakeUserMessages} from '../fakeData';
 import {useCustomer} from '../utils/stripeApi';
 
-const Messaging = ({environment, userContext}: TailorExtensionContextValue) => {
+const Messaging = ({environment, userContext}: ExtensionContextValue) => {
   const customer = useCustomer(environment?.objectContext?.id);
   const [openMessage, setOpenMessage] = useState<Message | undefined>(undefined);
 
@@ -29,12 +29,15 @@ const Messaging = ({environment, userContext}: TailorExtensionContextValue) => {
             <ListItem
               id={message.id}
               key={message.id}
-            >
-              <Box>{message.subject}</Box>
-              <Box css={{font: 'caption', color: 'secondary'}}>
-                {getEpochMsDisplayText(message.date)}
-              </Box>
-            </ListItem>
+              title={
+                <>
+                  <Box>{message.subject}</Box>
+                  <Box css={{font: 'caption', color: 'secondary'}}>
+                    {getEpochMsDisplayText(message.date)}
+                  </Box>
+                </>
+              }
+            />
           ))}
         </List>
       ) : (
