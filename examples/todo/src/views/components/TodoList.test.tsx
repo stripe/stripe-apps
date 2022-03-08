@@ -1,9 +1,9 @@
-import { render, getMockContextProps } from '@stripe/ui-extension-sdk/testing';
+import { render } from '@stripe/ui-extension-sdk/testing';
 
 import { List, ListItem } from '@stripe/ui-extension-sdk/ui';
 
 import TodoList, { TodoListProps } from './TodoList';
-import { Todo, Mode } from '../TodoApp';
+import { Mode } from '../TodoApp';
 
 describe('TodoList', () => {
   const mocks: TodoListProps = {

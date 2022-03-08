@@ -24,7 +24,7 @@ const TodoList = ({
       {todoList.filter((todo: Todo) => {
         return todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted;
       }).map((todo: Todo) => (
-        <ListItem key={`todo-${todo.created}`} title={todo.text} secondaryTitle={(
+        <ListItem key={`todo-${todo.created}`} title={todo.text} value={(
           <Inline css={{
             layout: 'row',
             fontWeight: 'semibold',
