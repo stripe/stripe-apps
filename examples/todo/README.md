@@ -17,4 +17,12 @@ Make sure you are set up correctly by following the [UI Extension docs](https://
 stripe-preview apps start
 ```
 
-Then in your Stripe dashboard navigate to any Customer and open up the app drawer on the right. You'll then be able to add, remove and complete Todos that are saved uniquely to this customer.
+Then in your Stripe dashboard, navigate to any Customer and open up the app drawer on the right. You'll then be able to add, remove and complete Todos that are saved uniquely to this customer.
+
+## Testing
+
+```
+yarn run test
+```
+
+To run all the UI tests.

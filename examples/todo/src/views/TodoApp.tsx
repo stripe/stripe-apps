@@ -1,42 +1,38 @@
 import {
   ContextView,
-  List,
-  ListItem,
-  Inline,
   Box,
   TextField,
   Button,
-  Switch,
   FocusView,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
 } from '@stripe/ui-extension-sdk/ui';
-import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+
+import TodoList from './components/TodoList';
 
 import { useState, useEffect, ChangeEvent } from 'react';
-
-import { createHttpClient, STRIPE_API_KEY } from '@stripe/ui-extension-sdk/http_client';
 import Stripe from 'stripe';
+import stripe from './stripeClient';
 
-// A key isn't necessary, since behind the scenes the app uses the dashboard credentials to make requests
-const stripe = new Stripe(STRIPE_API_KEY, {
-  httpClient: createHttpClient() as Stripe.HttpClient,
-  apiVersion: '2020-08-27',
-});
-
-type Todo = {
+export type Todo = {
   text: string,
   created: Number,
   completed: boolean,
   notes: string,
 };
 
-type Metadata = {
-  todos: string,
-};
-
-enum Mode {
+export enum Mode {
   Completed = 'Completed',
   Uncompleted = 'Uncompleted',
 }
+
+type Metadata = {
+  todos: string,
+};
 
 // Stripe metadata is portrayed as key -> value, where value is a string.
 // We stringify/parse our todos to be able to store them as a string in the metadata.
@@ -48,12 +44,11 @@ const parseCustomerMetadata = (metadata: any) => {
   return JSON.parse(metadata.todos);
 }
 
-const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
+const TodoApp = ({environment}: TailorExtensionContextValue) => {
   const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState<string>('');
   const [notesTextFieldValue, setNotesTextFieldValue] = useState<string>('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [customer, setCustomer] = useState<Stripe.Customer>();
-  const [mode, setMode] = useState<string>(Mode.Uncompleted);
   const [openNotes, setOpenNotes] = useState<Todo|false>(false);
 
   useEffect(() => {
@@ -61,7 +56,6 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
       try {
         const cust: Stripe.Customer = await stripe.customers.retrieve(environment?.objectContext.id as string) as Stripe.Customer;
         const todoList: Todo[] = parseCustomerMetadata(cust.metadata);
-
         setTodoList(todoList);
         setCustomer(cust);
       } catch(err) {
@@ -72,8 +66,11 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
     getTodos();
   }, []);
 
-  if (!todoList) {
-    return 'Loading...';
+  // Returning a loading state if we're not ready yet
+  if (customer === undefined) {
+    return (
+      <ContextView title="todos">Loading...</ContextView>
+    );
   }
 
   const addTodo = async () => {
@@ -97,9 +94,6 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
 
     // Set the new state of the UI first so it looks snappy
     setTodoList(todoList);
-
-    // Also set the mode to "Uncompleted" so we see our todo being added
-    setMode(Mode.Uncompleted);
 
     // Update the customer to reflect the new todo list
     const cust: Stripe.Customer = await updateCustomerTodoList(newMetadata) as Stripe.Customer;
@@ -179,68 +173,42 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
   return (
     <ContextView title="Todos">
       <Box
+        key="controls-container"
         css={{
           layout: 'row',
           gap: 'medium',
           alignY: 'center',
         }}
       >
-        <TextField type="text" size="small" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
-        <Button size="medium" type="primary" onPress={() => addTodo()}>
+        <TextField type="text" size="small" key="new-task" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
+        <Button size="medium" type="primary" key="add-task" onPress={addTodo}>
           + Add task
         </Button>
       </Box>
       <Box
+        key="todo-list-container"
         css={{
           paddingY: 'medium',
           layout: 'column',
         }}
       >
-        {todoList.map((todo: Todo) => {
-          // Only show the todos for the selected mode
-          // Also hide the "Complete" button if the task is already completed
-          if (todo.completed && mode === Mode.Completed || !todo.completed && mode === Mode.Uncompleted) {
-            return (
-              <List>
-                <ListItem
-                  key={`todo-${todo.created}`}
-                  title={
-                    <Inline css={{
-                      font: 'body',
-                      color: 'primary',
-                      fontWeight: 'semibold',
-                      layout: 'row',
-                      gap: 'small',
-                      alignX: 'end',
-                      alignY: 'center'
-                    }}>
-                      <Inline>{todo.text}</Inline>
-                      {
-                        mode === Mode.Uncompleted ?
-                          <Button size="small" type="primary" onPress={() => completeTodo(todo)}>✓ Complete</Button> :
-                          null
-                      }
-                      <Button size="small" onPress={() => {
-                        setNotesTextFieldValue(todo.notes);
-                        setOpenNotes(todo);
-                      }}>✍️</Button>
-                      <Button size="small" type="destructive" onPress={() => deleteTodo(todo)}>✕</Button>
-                    </Inline>
-                  }
-                />
-              </List>
-            );
-          }
-        })}
-      </Box>
-      <Box css={{margin: 'medium'}}>
-        <Switch
-          checked={mode === Mode.Completed}
-          onChange={() => setMode(mode === Mode.Completed ? Mode.Uncompleted : Mode.Completed)}
-          label="Show completed tasks"
-        />
+        <Tabs fitted >
+          <TabList>
+            <Tab key={Mode.Uncompleted}>{Mode.Uncompleted}</Tab>
+            <Tab key={Mode.Completed}>{Mode.Completed}</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel key={Mode.Uncompleted}>
+              <TodoList todoList={todoList} mode={Mode.Uncompleted} onDelete={deleteTodo} onComplete={completeTodo} setOpenNotes={setOpenNotes} setNotesTextFieldValue={setNotesTextFieldValue}/>
+            </TabPanel>
+            <TabPanel key={Mode.Completed}>
+              <TodoList todoList={todoList} mode={Mode.Completed} onDelete={deleteTodo} setOpenNotes={setOpenNotes} setNotesTextFieldValue={setNotesTextFieldValue}/>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Box>
       <FocusView
+        key="notes"
         shown={!!openNotes}
         title={openNotes ? `Notes for: "${openNotes.text}"` : 'Loading...'}
         onClose={() => setOpenNotes(false)}
@@ -253,7 +221,7 @@ const TodoApp = ({userContext, environment}: ExtensionContextValue) => {
         }}>Save note</Button>}
         secondaryAction={<Button onPress={() => setOpenNotes(false)}>Cancel</Button>}
       >
-        <TextField aria-label="Notes field for this todo" label="Additional notes for this todo item:" value={notesTextFieldValue} onChange={(e: ChangeEvent) => {
+        <TextField aria-label="Notes field for this todo" size="large" label="Additional notes for this todo item:" value={notesTextFieldValue} onChange={(e: ChangeEvent) => {
           setNotesTextFieldValue((e.target as HTMLInputElement).value);
         }}/>
         <Box>
