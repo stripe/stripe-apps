@@ -1,0 +1,13 @@
+export const apiUrl = 'mock-url';
+export const authUrl = 'https://accounts.google.com/o/oauth2/auth';
+export const authTokenUrl = 'https://oauth2.googleapis.com/token';
+export const authRedirectUrl = `${apiUrl}/api/auth/callback/logged-in`;
+export const authSuccessRedirectURL = 'mock-redirect-url';
+export const authLogoutUrl = 'https://accounts.google.com/o/oauth2/revoke';
+export const authClientId = 'mock-client-id';
+export const authClientSecret = 'mock-client-secret';
+export const authUserInfoUrl = 'https://www.googleapis.com/oauth2/v3/userinfo';
+export const port = 3000;
+export const scope = 'mock scopes';
+export const stripeAPIKey = 'mock-stripe-api-key';
+export const stripeAppSecret = 'mock-stripe-app-secret';

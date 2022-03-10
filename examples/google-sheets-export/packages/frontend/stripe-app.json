@@ -1,0 +1,21 @@
+{
+  "id": "com.example.google-sheets",
+  "version": "0.0.2",
+  "name": "Google Sheets Exporter",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.home.overview",
+        "component": "GoogleExport"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": ["https://accounts.google.com/o/oauth2/auth"],
+      "purpose": ""
+    }
+  }
+}

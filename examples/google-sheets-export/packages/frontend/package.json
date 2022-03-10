@@ -1,0 +1,11 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "Allows users to export their Stripe data to Google Sheets",
+  "private": true,
+  "license": "~~proprietary~~",
+  "scripts": {
+    "start": "stripe-preview apps start",
+    "upload": "stripe-preview apps upload"
+  }
+}
