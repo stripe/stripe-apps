@@ -122,18 +122,21 @@ export default function Export({ userContext, dispatch }: Props) {
         {urlList.length > 0 && (
           <List aria-label="Exported data list">
             {urlList.map((item, index) => (
-              <ListItem key={index}>
-                <Box>{item.category}</Box>
-                <Box slot="description">
-                  <Link
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open spreadsheet
-                  </Link>
-                </Box>
-              </ListItem>
+              <ListItem
+                key={index}
+                title={item.category}
+                secondaryTitle={
+                  <Box slot="description">
+                    <Link
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open spreadsheet
+                    </Link>
+                  </Box>
+                }
+              />
             ))}
           </List>
         )}
