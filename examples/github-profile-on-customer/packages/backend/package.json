@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for Stripe GitHub app.",
+  "private": true,
+  "license": "~~proprietary~~",
+  "scripts": {
+    "start": "nodemon ./src/index.ts",
+    "generateKeys": "openssl req -nodes -new -x509 -keyout server.key -out server.cert"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "graphql": "^16.3.0",
+    "graphql-request": "^4.0.0",
+    "stripe": "^8.202.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.13",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
+  }
+}
