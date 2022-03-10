@@ -1,0 +1,21 @@
+{
+  "id": "com.example.github-oauth-example",
+  "version": "0.0.1",
+  "name": "GitHub OAuth Example",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "CustomerDetail"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}
