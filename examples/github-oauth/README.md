@@ -8,7 +8,6 @@ This example uses [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/wor
 
 Before starting the app, you will need to:
 
-- Add the `stripe-preview` executable to your `/usr/bin` or `/usr/local/bin` folder if you're on MacOS. This allows Stripe Apps to be launched from within a `package.json` script. [Using an alias as in the documentation](https://stripe.com/docs/stripe-apps/getting-started#install) is insufficient.
 - Create a `.env` file inside the `/backend` folder with your Github Client Id and Client Secret variables. The included `.env.example` file can be used as a template.
 - Run `yarn generateKeys` inside the `/backend` folder to generate a certificate for running the local back end server over HTTPS. (_Note_: these local keys won't be trusted by your browser. For example, in Chrome, when the requests are inevitably blocked, type `thisisunsafe` while the tab is open to proceed.)
 - View your [Stripe API keys](https://dashboard.stripe.com/test/apikeys) to get values for `STRIPE_PUBLIC_KEY` and `STRIPE_SECRET_KEY`. To get a value for the `.env` variable `STRIPE_APP_SECRET`, you will need to upload your app to Stripe. You can do this with `yarn workspace frontend upload`. Then go to the [developer dashboard](https://dashboard.stripe.com/test/apps) to find your app and the generated key.

@@ -1,1 +1,1 @@
-Download the CLI from https://github.com/stripe/stripe-apps/releases/latest.
+Install the Stripe Apps CLI plugin by following this [guide](https://stripe.com/docs/stripe-apps/getting-started).

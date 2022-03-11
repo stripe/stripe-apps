@@ -24,10 +24,10 @@ Please rewrite this file from dummy DB to use your own API (and your own databas
 ## Running
 
 1. From the `stripe-apps/examples/etting-ui` directory, run `yarn` to install dependencies
-2. Once you have the `stripe-preview` CLI fork available locally, run the start command:
+2. Once you install the `stripe apps` CLI plugin, run the start command:
 
 ```
-stripe-preview apps start
+stripe apps start
 ```
 
 ## Unit test
