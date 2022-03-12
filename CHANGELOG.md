@@ -1,5 +1,5 @@
 # Changelog
-## 2022-03-14
+## 2022-03-11
 - Released version 1.0.0 of Stripe Apps CLI plugin. Follow this [guide](https://stripe.com/docs/stripe-apps/getting-started) to install the CLI plugin.
 
 ## 2022-03-07
