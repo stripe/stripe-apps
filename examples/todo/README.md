@@ -11,10 +11,10 @@ Make sure you are set up correctly by following the [UI Extension docs](https://
 ## Running
 
 1. From the `stripe-apps/examples/todo` directory, run `yarn` to install dependencies
-2. Once you have the `stripe-preview` CLI fork available locally, run the start command:
+2. Once you install the `stripe apps` CLI plugin, run the start command:
 
 ```
-stripe-preview apps start
+stripe apps start
 ```
 
 Then in your Stripe dashboard, navigate to any Customer and open up the app drawer on the right. You'll then be able to add, remove and complete Todos that are saved uniquely to this customer.

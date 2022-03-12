@@ -5,8 +5,8 @@
   "private": true,
   "license": "~~proprietary~~",
   "scripts": {
-    "start": "stripe-preview apps start",
-    "upload": "stripe-preview apps upload"
+    "start": "stripe apps start",
+    "upload": "stripe apps upload"
   },
   "dependencies": {
     "@stripe/ui-extension-sdk": "^2.2.0",

@@ -4,10 +4,10 @@ An example Tailor UI Extension that fetches and displays data from a Cloudflare 
 
 To run this application, ensure you are setup by following the [UI Extension docs](https://stripe.com/docs/stripe-apps)
 
-Once you have the `stripe-preview` CLI fork available, run the start command from the application directory:
+Once you install the `stripe apps` CLI plugin, run the start command from the application directory:
 
 ```
-stripe-preview apps start
+stripe apps start
 ```
 _Make sure you install with `yarn` before serving!_
 
