@@ -58,3 +58,15 @@ General questions should be asked in the [Stripe Discord](https://stripe.com/go/
 We encourage you to share feedback through a format that we call for Friction logs. Friction logs are documents that describe the frustrations and delights of a product, focused around a specific use case. They're also intended to be brutally honest - feel free to vent or to praise!
 
 You can use this template by the [Tensorflow team](https://github.com/tensorflow/community/blob/master/sigs/build/tensorflow-testing.md) to have a structure: [TensorFlow friction log template](https://docs.google.com/document/d/1HVG3t-mgGZKU4iMeguTWGejbnQ54qUTXwdCFkA5xHG0/edit)
+
+## Contributing
+
+To upgrade all `@stripe/ui-extension-sdk` packages in the example apps to the latest version, run:
+```
+node update-sdk
+```
+
+To run a typecheck and unit tests (if present) on all example apps, run:
+```
+node run-tests
+```
