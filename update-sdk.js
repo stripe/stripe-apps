@@ -3,10 +3,11 @@
 process.env['FORCE_COLOR'] = 3;
 
 const {exec} = require('child_process');
-const { readdirSync } = require('fs');
+const {readdirSync, readFile} = require('fs');
 const util = require('util');
 
 const execAsync = util.promisify(exec);
+const readFileAsync = util.promisify(readFile);
 
 const runCommand = async (command, cwd) => {
   const { stdout, stderr } = await execAsync(command, {cwd});
@@ -47,40 +48,32 @@ processDir('./examples');
 // Process in reverse order so that child directories are processed first
 allPackageDirs.reverse();
 
-const testDir = async (dir) => {
-  console.log(`🔵 Testing example: ${dir}`);
+const upgradeDir = async (dir) => {
+  console.log(`🔵 Upgrading example: ${dir}`);
   console.log('');
+
+  const data = await readFileAsync(`${dir}/package.json`, {encoding: 'utf8'});
+
+  if(!data.includes('@stripe/ui-extension-sdk')) {
+    console.log('No SDK, skipping.');
+    return;
+  }
 
   // Make sure that Yalc packages have been uninstalled
   await runCommand('type yalc &>/dev/null || exit 0 && yalc check', dir);
 
-  // Install dependencies
-  await runCommand('yarn install --frozen-lockfile', dir);
-
-  if (getHasFile(dir, 'tsconfig.json')) {
-    // Check types
-    await runCommand('yarn tsc --noEmit', dir);
-  }
-
-  // This check can be removed once all examples have tests
-  if (!getHasFile(dir, 'jest.config.ts')) {
-    console.log('No tests, skipping.');
-  } else {
-    // Run tests
-    await runCommand('yarn jest', dir);
-
-    console.log('✅ Tests passed');
-  }
+  // Upgrade the SDK
+  await runCommand('yarn upgrade @stripe/ui-extension-sdk@latest', dir);
 };
 
 const main = async () => {
   for (dir of allPackageDirs) {
-    await testDir(dir);
+    await upgradeDir(dir);
 
     console.log('');
   }
 
-  console.log('✨ Success—all tests passed! ✨');
+  console.log('✨ Success—all examples upgraded! ✨');
 };
 
 main();

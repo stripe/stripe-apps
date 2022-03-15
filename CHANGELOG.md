@@ -1,4 +1,9 @@
 # Changelog
+
+## 2022-03-14
+- Released version 3.1.0 of the SDK
+    - Adds support for the `Img` component
+
 ## 2022-03-11
 - Released version 1.0.0 of Stripe Apps CLI plugin. Follow this [guide](https://stripe.com/docs/stripe-apps/getting-started) to install the CLI plugin.
 
