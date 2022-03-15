@@ -1,26 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import { Box, Button, Divider, Inline } from '@stripe/ui-extension-sdk/ui';
 
 import { useAuthenticatedFetch } from '../hooks/useAuthenticatedFetch';
 import { useCustomer } from '../hooks/useCustomer';
+import { GitHubContext } from './GitHubProvider';
 
 const SEARCH_URI = 'https://localhost:8080/github/search';
 
 function queryUri(
   q: string,
-  firstOrLast: 'first' | 'last',
-  beforeOrAfter?: 'before' | 'after',
+  firstOrLast?: string | null,
+  beforeOrAfter?: string | null,
   cursor?: string,
 ) {
-  const moveFromCursor = beforeOrAfter
-    ? beforeOrAfter === 'before'
-      ? `&before=${cursor}`
-      : `&after=${cursor}`
-    : '';
-  return `${SEARCH_URI}?q=${q}${moveFromCursor}&${firstOrLast}=10`;
+  const moveFromCursor =
+    cursor && beforeOrAfter
+      ? beforeOrAfter === 'before'
+        ? `&before=${cursor}`
+        : `&after=${cursor}`
+      : '';
+  return `${SEARCH_URI}?q=${q}${moveFromCursor}&${
+    firstOrLast ? firstOrLast : 'first'
+  }=10`;
 }
 
 interface GithubUser {
@@ -56,23 +59,23 @@ export const CustomerSearch = ({
     error: githubError,
     execute,
   } = useAuthenticatedFetch<GithubData>(userContext);
-  const [previousCursor, setPreviousCursor] = useState<string | null>(null);
-  const [nextCursor, setNextCursor] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const { state, dispatch } = useContext(GitHubContext);
+  const [wentBack, setWentBack] = useState<boolean>(false);
 
   useEffect(() => {
     if (customer && typeof customer.name === 'string')
-      execute(queryUri(customer.name, 'first'));
+      execute(
+        queryUri(customer?.name as string, 'first', 'after', state.cursor),
+      );
   }, [customer]);
 
   useEffect(() => {
-    if (data) {
-      if (data.search.pageInfo.hasNextPage) {
-        setNextCursor(data.search.pageInfo.endCursor);
-      }
-      if (data.search.pageInfo.hasPreviousPage) {
-        setPreviousCursor(data.search.pageInfo.startCursor);
-      }
+    if (data && wentBack) {
+      dispatch({
+        type: 'UPDATE_CURSOR',
+        cursor: data.search.pageInfo.endCursor,
+      });
+      setWentBack(false);
     }
   }, [data]);
 
@@ -121,7 +124,8 @@ export const CustomerSearch = ({
                   <Box>
                     <Button
                       onPress={() => {
-                        navigate(`/profile/${login}`);
+                        dispatch({ type: 'UPDATE_USERNAME', username: login });
+                        dispatch({ type: 'TOGGLE_SEARCH_OR_PROFILE' });
                       }}
                       size="small"
                       type="secondary"
@@ -139,32 +143,37 @@ export const CustomerSearch = ({
               <Button
                 disabled={!data?.search.pageInfo.hasPreviousPage}
                 type="secondary"
-                onPress={() =>
+                onPress={() => {
+                  setWentBack(true);
                   execute(
                     queryUri(
                       customer?.name as string,
                       'last',
                       'before',
-                      previousCursor as string,
+                      data.search.pageInfo.startCursor as string,
                     ),
-                  )
-                }
+                  );
+                }}
               >
                 Previous
               </Button>
               <Button
                 disabled={!data?.search.pageInfo.hasNextPage}
                 type="secondary"
-                onPress={() =>
+                onPress={async () => {
+                  await dispatch({
+                    type: 'UPDATE_CURSOR',
+                    cursor: data.search.pageInfo.endCursor,
+                  });
                   execute(
                     queryUri(
                       customer?.name as string,
                       'first',
                       'after',
-                      nextCursor as string,
+                      data.search.pageInfo.endCursor as string,
                     ),
-                  )
-                }
+                  );
+                }}
               >
                 Next
               </Button>

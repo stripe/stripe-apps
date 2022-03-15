@@ -34,6 +34,7 @@ export const useAuthenticatedFetch = <DataType>(
         res => res.json(),
       );
       setData(response);
+      if (error) setError(null);
       setIsLoading(false);
     } catch (error) {
       setError(error as Error);

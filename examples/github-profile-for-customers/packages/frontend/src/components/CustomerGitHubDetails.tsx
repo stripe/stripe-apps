@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 
 import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import { Box, Button, Inline } from '@stripe/ui-extension-sdk/ui';
@@ -8,6 +7,7 @@ import { useAuthenticatedFetch } from '../hooks/useAuthenticatedFetch';
 import { useCustomer } from '../hooks/useCustomer';
 import { GithubData } from '../types/GitHub';
 import { GitHubProfile } from './GitHubProfile';
+import { GitHubContext } from './GitHubProvider';
 
 const SEARCH_URI = 'https://localhost:8080/github/profile';
 
@@ -30,11 +30,10 @@ export const CustomerGitHubDetails = ({
     error: githubError,
     execute,
   } = useAuthenticatedFetch<GithubData>(userContext);
-  const navigate = useNavigate();
-  const { username } = useParams();
+  const { state, dispatch } = useContext(GitHubContext);
 
   useEffect(() => {
-    execute(queryUri(username as string));
+    execute(queryUri(state.username as string));
   }, []);
 
   return (
@@ -83,7 +82,11 @@ export const CustomerGitHubDetails = ({
               ? 'Unlink GitHub Profile'
               : 'Link GitHub Profile'}
           </Button>
-          <Button onPress={() => navigate(-1)}>Back</Button>
+          <Button
+            onPress={() => dispatch({ type: 'TOGGLE_SEARCH_OR_PROFILE' })}
+          >
+            Back
+          </Button>
         </Box>
       )}
     </Box>
