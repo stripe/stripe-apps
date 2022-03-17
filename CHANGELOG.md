@@ -1,6 +1,9 @@
 # Changelog
 
-## 2022-03-14
+## 2022-03-17
+- Released version 3.2.0 of the SDK
+    - Adds the `createOAuthState` function
+    - Adds `oauthContext` to the `ExtensionContextValue` type
 - Released version 3.1.0 of the SDK
     - Adds support for the `Img` component
 
