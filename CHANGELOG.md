@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2022-03-17
+- Fixed https://github.com/stripe/stripe-apps/issues/244
 - Released version 3.2.0 of the SDK
     - Adds the `createOAuthState` function
     - Adds `oauthContext` to the `ExtensionContextValue` type
