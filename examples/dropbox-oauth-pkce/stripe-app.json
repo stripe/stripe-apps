@@ -1,0 +1,27 @@
+{
+  "id": "com.example.dropbox-oauth-pkce",
+  "version": "0.0.1",
+  "name": "Dropbox OAuth PKCE",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.drawer.default",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": [
+        "https://api.dropboxapi.com/oauth2/token",
+        "https://api.dropboxapi.com/2/users/get_account"
+      ],
+      "img-src": null,
+      "purpose": "Enables Dropbox integration"
+    }
+  }
+}
