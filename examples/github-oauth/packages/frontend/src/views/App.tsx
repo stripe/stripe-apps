@@ -261,7 +261,7 @@ const App = ({ userContext }: ExtensionContextValue) => {
   };
   return (
     <ContextView title="Get started with Stripe Apps">
-      <Box slot="actions">{actions(state)}</Box>
+      <Box>{actions(state)}</Box>
     </ContextView>
   );
 };
