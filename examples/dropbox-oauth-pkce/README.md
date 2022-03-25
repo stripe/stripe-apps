@@ -20,3 +20,5 @@ This test app will require the correct redirect URI to be set in the app setting
 ```
 https://dashboard.stripe.com/test/apps-oauth/com.example.dropbox-oauth-pkce
 ```
+
+Finally, for the Load Account Data button to work, grant your app the `sharing.read` scope.
