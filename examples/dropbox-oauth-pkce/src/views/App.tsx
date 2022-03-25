@@ -7,6 +7,11 @@ import {
 } from '@stripe/ui-extension-sdk/ui';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import {createOAuthState} from '@stripe/ui-extension-sdk/oauth';
+import Stripe from 'stripe';
+import {
+  STRIPE_API_KEY,
+  createHttpClient,
+} from '@stripe/ui-extension-sdk/http_client';
 
 const clientID = 'REDACTED';
 const redirectURI = 'https://dashboard.stripe.com/test/apps-oauth/com.example.dropbox-oauth-pkce';
@@ -28,6 +33,11 @@ interface AccountData {
     display_name: string;
   }
 }
+
+const stripe = new Stripe(STRIPE_API_KEY, {
+  httpClient: createHttpClient(),
+  apiVersion: '2020-08-27',
+});
 
 const getToken = async ({code, verifier}: {code: string, verifier: string}): Promise<null | TokenData> => {
   try {
@@ -62,7 +72,7 @@ const getAccount = async (tokenData: TokenData): Promise<null | AccountData> => 
   }
 };
 
-const App = ({oauthContext}: ExtensionContextValue) => {
+const App = ({userContext, oauthContext}: ExtensionContextValue) => {
   const [oauthState, setOAuthState] = useState('');
   const [challenge, setChallenge] = useState('');
   const [tokenData, setTokenData] = useState<null | TokenData>(null);
@@ -73,6 +83,41 @@ const App = ({oauthContext}: ExtensionContextValue) => {
   const error = oauthContext?.error;
 
   const showAuthLink = !code && !tokenData;
+
+  // Create the Secret Store API URL path.
+  let postTokenPath = `apps/secrets?scope[type]=user&scope[id]=${userContext?.id}&name=secret_token`;
+  let getTokenPath = `${postTokenPath}&expand[]=payload`;
+
+  // Create a `StripeResource` to load the custom Secret Store API endpoint.
+  const createSecretResource = Stripe.StripeResource.extend({
+    request: Stripe.StripeResource.method({
+      method: 'POST',
+      path: postTokenPath,
+    }),
+  });
+
+  // Create a `StripeResource` to load the custom Secret Store API endpoint.
+  const getSecretResource = Stripe.StripeResource.extend({
+    request: Stripe.StripeResource.method({
+      method: 'GET',
+      path: getTokenPath,
+    }),
+  });
+
+  useEffect(() => {
+    if (!tokenData) {
+      new getSecretResource(stripe).request(
+        {},
+        function (err: any, secret: any) {
+          if (!err) {
+            setTokenData(JSON.parse(secret.payload));
+          } else {
+            console.error(err);
+          }
+        },
+      );
+    }
+  }, []);
 
   // Call createOAuthState to generate a unique random state that is required for the OAuth flow
   useEffect(() => {
