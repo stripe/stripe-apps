@@ -9,3 +9,14 @@ The "Dropbox OAuth PKCE" app allows Dashboard users to retrieve an OAuth token f
   - `createOAuthState` function
 - Connecting to an external API
 
+## Usage
+
+To test this example, you'll need to [create a Dropbox app](https://www.dropbox.com/lp/developers).
+
+Once you've created an app, copy the "App key" from the developer console into the `client_id` variable in `src/views/App.tsx`.
+
+This test app will require the correct redirect URI to be set in the app settings. In the case of this example, that's:
+
+```
+https://dashboard.stripe.com/test/apps-oauth/com.example.dropbox-oauth-pkce
+```
