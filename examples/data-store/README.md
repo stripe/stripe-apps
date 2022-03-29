@@ -18,3 +18,11 @@ Docs: https://stripe.com/docs/stripe-apps/store-auth-data-custom-objects
 ```bash
 % stripe apps start
 ```
+
+# Screenshots
+## Default view
+<img width="360" alt="スクリーンショット 2022-03-29 12 29 48" src="https://user-images.githubusercontent.com/95597878/160527545-fee372bd-502d-4816-922c-d2213b6a10e2.png">
+
+## Updating the data
+<img width="347" alt="スクリーンショット 2022-03-29 12 29 58" src="https://user-images.githubusercontent.com/95597878/160527555-80700ee0-c28f-4e5c-ae63-fe79918e5849.png">
+
