@@ -10,7 +10,13 @@ import { DataStoreView } from '../components/DataStoreView';
 const App = ({userContext}: ExtensionContextValue) => {
   return (
     <DataStoreProvider userContext={userContext}>
-      <ContextView title='Create your first Stripe app'>
+      <ContextView
+        title='[Demo] Data store'
+        externalLink={{
+          label: 'Document',
+          href: 'https://stripe.com/docs/stripe-apps/store-auth-data-custom-objects'
+        }}
+      >
         <Box>
           <DataStoreForm />
           <DataStoreView />
