@@ -6,7 +6,10 @@ import { APIPlayground } from '../components/APIPlayground';
 export default function Index(props: ExtensionContextValue) {
   return (
     <BackendAPIProvider userContext={props.userContext} apiURL='http://localhost:8080'>
-      <ContextView title='Create your first Stripe app'>
+      <ContextView title='Backend API demo' externalLink={{
+        label: "Learn more",
+        href: "https://stripe.com/docs/stripe-apps/build-backend"
+      }}>
         <APIPlayground
           description='Call the secret backend API'
           api={{
