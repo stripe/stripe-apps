@@ -4,6 +4,9 @@ This is the example app to learn how can we call the external backend API secure
 
 Related Document: https://stripe.com/docs/stripe-apps/build-backend
 
+<img width="925" alt="スクリーンショット 2022-03-30 19 11 41" src="https://user-images.githubusercontent.com/95597878/160808074-1db2686d-7463-4251-849f-eea903b6e6f0.png">
+
+
 ## Getting started
 
 We need to process several steps to work this application.
