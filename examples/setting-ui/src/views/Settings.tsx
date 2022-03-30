@@ -1,13 +1,14 @@
+import { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import {
     SettingsView,
     Box,
     TextField,
     Select,
 } from '@stripe/ui-extension-sdk/ui';
-import { useState } from 'react';
-import { DummyDB } from '../libs/dummyDB';
+import { useState, useEffect } from 'react';
+import { SecretStore } from '../libs/SecretStore';
   
-const dbClient = new DummyDB();
+const dbClient = new SecretStore();
 const options = [{
     label: 'Choose your country',
     value: ''
@@ -18,14 +19,23 @@ const options = [{
     label: 'Japan',
     value: 'jp'
 }];
-const Settings = () => {
+const Settings = ({userContext}: ExtensionContextValue) => {
     const [username, setUsername] = useState<string>('');
     const [country, setCountry] = useState<string>('');
     const [status, setStatus] = useState<string>('');
+    useEffect(() => {
+      if (!userContext) return;
+      dbClient.getOptions(userContext.id)
+        .then(data => {
+          setUsername(data.username || '');
+          setCountry(data.country || '');
+        });
+    }, [userContext]);
     return (
         <SettingsView
             onSave={async() => {
-                await dbClient.saveOptions({
+                if (!userContext) return;
+                await dbClient.saveOptions(userContext.id, {
                     username,
                     country,
                 })
@@ -57,6 +67,7 @@ const Settings = () => {
                         onChange={e=>{
                             setUsername(e.target.value)
                         }}
+                        value={username}
                     />
                 </Box>
                 <Box>
@@ -67,6 +78,7 @@ const Settings = () => {
                           const target = options[e.target.selectedIndex];
                           setCountry(target.value);
                         }}
+                        value={country}
                     >
                         {options.map(option => {
                             return (
