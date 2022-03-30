@@ -12,7 +12,7 @@ Docs: https://stripe.com/docs/stripe-apps/store-auth-data-custom-objects
 
 # Getting started
 
-- From the stripe-apps/examples/etting-ui directory, run yarn to install dependencies
+- From the `stripe-apps/examples/data-store` directory, run yarn to install dependencies
 - Once you install the stripe apps CLI plugin, run the start command:
 
 ```bash
