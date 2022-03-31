@@ -12,6 +12,7 @@
     - Adds the `getDashboardUserEmail` function
 - Fixed
     - https://github.com/stripe/stripe-apps/issues/261
+    - https://github.com/stripe/stripe-apps/issues/251
     - https://github.com/stripe/stripe-apps/issues/47
     - https://github.com/stripe/stripe-apps/issues/49
     - https://github.com/stripe/stripe-apps/issues/43
