@@ -85,8 +85,10 @@ const App = ({userContext, oauthContext}: ExtensionContextValue) => {
   const showAuthLink = !code && !tokenData;
 
   // Create the Secret Store API URL path.
-  let postTokenPath = `apps/secrets?scope[type]=user&scope[id]=${userContext?.id}&name=secret_token`;
-  let getTokenPath = `${postTokenPath}&expand[]=payload`;
+  const SECRET_NAME = 'secret_token';
+  let sharedTokenPath = `scope[type]=user&scope[user]=${userContext?.id}&name=${SECRET_NAME}`
+  let postTokenPath = `apps/secrets?${sharedTokenPath}`;
+  let getTokenPath = `apps/secrets/find?${sharedTokenPath}&expand[]=payload`;
 
   // Create a `StripeResource` to load the custom Secret Store API endpoint.
   const createSecretResource = Stripe.StripeResource.extend({
