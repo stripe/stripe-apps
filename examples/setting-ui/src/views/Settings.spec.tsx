@@ -1,11 +1,13 @@
-import {render} from '@stripe/ui-extension-sdk/testing';
+import {render, getMockContextProps} from '@stripe/ui-extension-sdk/testing';
 import { Select, SettingsView, TextField } from '@stripe/ui-extension-sdk/ui';
 import Settings from "./Settings";
 
+const context = getMockContextProps();
+
 describe("views/Settings", () => {
-    let {wrapper} = render(<Settings />);
+    let {wrapper} = render(<Settings {...context} />);
     beforeEach(() => {
-        wrapper = render(<Settings />).wrapper;
+        wrapper = render(<Settings {...context} />).wrapper;
     });
     it('Should wrapped by the Setting view', () => {
         expect(wrapper).toContainComponent(SettingsView, {

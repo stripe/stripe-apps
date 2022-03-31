@@ -10,7 +10,7 @@ import {
   TabPanels,
   TabPanel,
 } from '@stripe/ui-extension-sdk/ui';
-import type { TailorExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 import TodoList from './components/TodoList';
 
@@ -44,7 +44,7 @@ const parseCustomerMetadata = (metadata: any) => {
   return JSON.parse(metadata.todos);
 }
 
-const TodoApp = ({environment}: TailorExtensionContextValue) => {
+const TodoApp = ({environment}: ExtensionContextValue) => {
   const [newTodoTextFieldValue, setNewTodoTextFieldValue] = useState<string>('');
   const [notesTextFieldValue, setNotesTextFieldValue] = useState<string>('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
@@ -54,7 +54,7 @@ const TodoApp = ({environment}: TailorExtensionContextValue) => {
   useEffect(() => {
     async function getTodos() {
       try {
-        const cust: Stripe.Customer = await stripe.customers.retrieve(environment?.objectContext.id as string) as Stripe.Customer;
+        const cust: Stripe.Customer = await stripe.customers.retrieve(environment?.objectContext?.id as string) as Stripe.Customer;
         const todoList: Todo[] = parseCustomerMetadata(cust.metadata);
         setTodoList(todoList);
         setCustomer(cust);

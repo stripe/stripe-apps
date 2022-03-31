@@ -15,7 +15,7 @@ import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
 const AddShipping = ({environment}: ExtensionContextValue) => {
   invariant(environment, 'Unexpectedly null environment');
-  const {objectContext: {id: invoiceId}} = environment;
+  const invoiceId = environment?.objectContext?.id;
   const [shippingDetails, setShippingDetails] = useState<ShippingDetailsMetadata|null>();
   const [invoice, setInvoice] = useState<Stripe.Invoice>();
   const loadShippingDetails = async (invoiceId: string) => {
@@ -61,7 +61,9 @@ const AddShipping = ({environment}: ExtensionContextValue) => {
   }, [shippingDetails, invoice]);
 
   useEffect(() => {
-    loadShippingDetails(invoiceId);
+    if (invoiceId) {
+      loadShippingDetails(invoiceId);
+    }
   }, [invoiceId]);
   let content: JSX.Element;
   if (!invoice) {

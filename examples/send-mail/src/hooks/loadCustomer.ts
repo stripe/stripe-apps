@@ -25,8 +25,8 @@ export const useCustomerLoader = ({environment}: ExtensionContextValue): Custome
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [customerLoadingStatus, setCustomerLoadingStatus] = useState<LoadingStatus>('');
     const [customer, setCustomer] = useState<Stripe.Customer | null>(null);
-    const objectType = environment?.objectContext.object;
-    const objectId = environment?.objectContext.id;
+    const objectType = environment?.objectContext?.object;
+    const objectId = environment?.objectContext?.id;
     useEffect(() => {
         if (objectType !== 'customer' || !objectId) {
             return;

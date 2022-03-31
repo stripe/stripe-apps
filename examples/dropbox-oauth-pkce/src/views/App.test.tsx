@@ -1,5 +1,7 @@
-import {render} from '@stripe/ui-extension-sdk/testing';
+import {render, getMockContextProps} from '@stripe/ui-extension-sdk/testing';
 import App from './App';
+
+const context = getMockContextProps();
 
 jest.mock('@stripe/ui-extension-sdk/oauth', () => {
   return {
@@ -10,7 +12,7 @@ jest.mock('@stripe/ui-extension-sdk/oauth', () => {
 
 describe('App', () => {
   it('renders properly', () => {
-    const {wrapper} = render(<App />);
+    const {wrapper} = render(<App {...context} />);
     expect(wrapper).toContainText('Begin authorization flow');
   });
 });

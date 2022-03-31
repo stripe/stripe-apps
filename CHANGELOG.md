@@ -1,5 +1,23 @@
 # Changelog
 
+## 2022-03-31
+- Released version 5.0.1 of the SDK
+    - Adds the `Accordion`, `Icon`, `Spinner`, and `Tooltip` components
+    - Adds tooltips to `BarChart` and `LineChart`
+    - Fix prop typing for `BarChart` and `LineChart`
+    - Deprecates legacy view context parameters (details: https://github.com/stripe/stripe-apps/issues/297)
+    - Enables setting width via `css={{ width: ... }}` on `Select`, `TextArea`, `TextField`, `Button`, and `Link`
+    - Enables setting internal horizontal alignment via `css={{ alignX: ... }}` on `Button` and `Link`
+    - Adds the `clipboardWriteText` function
+    - Adds the `getDashboardUserEmail` function
+- Fixed
+    - https://github.com/stripe/stripe-apps/issues/261
+    - https://github.com/stripe/stripe-apps/issues/47
+    - https://github.com/stripe/stripe-apps/issues/49
+    - https://github.com/stripe/stripe-apps/issues/43
+    - https://github.com/stripe/stripe-apps/issues/293
+    - https://github.com/stripe/stripe-apps/issues/112
+
 ## 2022-03-18
 - Add Dropbox OAuth PKCE example app
 - Released version 4.0.0 of the SDK
