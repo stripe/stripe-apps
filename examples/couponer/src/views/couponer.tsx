@@ -46,7 +46,7 @@ const updateProductCouponMetadata = async (productId: string, newCouponState: Co
 
 const Couponer = ({environment}: ExtensionContextValue) => {
   const refresh = useRefreshDashboardData();
-  const productId = environment!.objectContext.id;
+  const productId = environment!.objectContext!.id;
   const options = [
     {
       value: 'industry',

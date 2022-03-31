@@ -1,4 +1,4 @@
-import {render} from '@stripe/ui-extension-sdk/testing';
+import {render, getMockContextProps} from '@stripe/ui-extension-sdk/testing';
 import {List, Badge} from '@stripe/ui-extension-sdk/ui';
 import Messaging from './Messaging';
 import stripeClient from '../clients/stripe';
@@ -6,18 +6,12 @@ import stripeClient from '../clients/stripe';
 jest.mock('../clients/stripe');
 const mockCustomersRetrieve = stripeClient.customers.retrieve as jest.Mock;
 
+const context = getMockContextProps();
+
 // FIXME: Figure out how to inspect components passed into props like the ListItem title prop
 describe.skip('Messaging', () => {
   it('opens a message and renders the date badge', async () => {
-    const {wrapper, update} = render(
-      <Messaging
-        environment={{
-          objectContext: { id: 'test', object: 'customer' },
-          mode: 'test',
-          viewportID: 'test',
-        }}
-      />
-    );
+    const {wrapper, update} = render(<Messaging {...context} />);
 
     await update();
 
@@ -38,15 +32,7 @@ describe.skip('Messaging', () => {
       email: customerEmail,
     });
 
-    const {wrapper, update} = render(
-      <Messaging
-        environment={{
-          objectContext: { id: 'test', object: 'customer' },
-          mode: 'test',
-          viewportID: 'test',
-        }}
-      />
-    );
+    const {wrapper, update} = render(<Messaging {...context} />);
 
     await update();
 
