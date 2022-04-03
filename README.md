@@ -19,7 +19,7 @@ The documentation is available at [https://stripe.com/docs/stripe-apps](https://
 ### Figma library
 If you are working with designers, share the [Figma library](stripe-apps-design-library-220401.fig) with them.
 
-**Latest update (03/25/22)**
+**Latest update (04/01/22)**
 * **Badge, Checkbox, Link, List, Radio, Switch:** aligned with latest code versions
 * **BarChart:** added new component
 * **LineChart:** added new component
