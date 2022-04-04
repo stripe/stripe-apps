@@ -20,7 +20,7 @@ Stripe Apps give the user access to Stripe's API, allowing them to retrieve and 
 
 Imagine a customer support SaaS app that you want to integrate with the Stripe Dashboard. As you load the Stripe App, the context of the Stripe Customer is sent to your backend API. Your backend responds with data about that customer's support history. Your app can also hook into the support live chat, allowing a user to talk to your customer while they're inside the Stripe Dashboard. A live support case can take place entirely within the Stripe Dashboard.
 
-Whatever data is available to you, you can display it and work with it through your Stripe App.
+Whatever data is available to you, you can display it and work with it through your Stripe App utilizing the available UI components.
 
 ## Updating Data
 
