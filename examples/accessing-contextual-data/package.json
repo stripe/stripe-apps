@@ -1,0 +1,27 @@
+{
+  "name": "com.example.accessing-contextual-data",
+  "version": "0.0.1",
+  "description": "Accessing Contextual Data",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^5.0.1",
+    "react": "^17.0.2",
+    "stripe": "^8.214.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "jest",
+    "format": "prettier --write ./src"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
