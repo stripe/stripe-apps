@@ -1,5 +1,13 @@
 # Changelog
 
+## 2022-04-06
+- Released version 6.0.0 of the SDK
+    - Deprecates email in view context
+    - Consolidates utilites in /utils path
+    - Fixes react-reconciler dependency issue affecting unit tests
+- Fixed
+    - https://github.com/stripe/stripe-apps/issues/369
+
 ## 2022-03-31
 - Released version 5.0.1 of the SDK
     - Adds the `Accordion`, `Icon`, `Spinner`, and `Tooltip` components

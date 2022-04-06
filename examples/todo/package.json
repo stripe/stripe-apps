@@ -5,7 +5,7 @@
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^5.0.1",
+    "@stripe/ui-extension-sdk": "^6.0.0",
     "react": "^17.0.2",
     "stripe": "^8.191.0"
   },

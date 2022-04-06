@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
+import {getDashboardUserEmail} from '@stripe/ui-extension-sdk/utils';
 import Stripe from 'stripe';
 
 export type SendingStatus = '' | 'sending' | 'complete' | 'error';
@@ -8,9 +9,9 @@ export const useSendMail = ({userContext}: ExtensionContextValue) => {
     const [sendingStatus, setSendingStatus] = useState<SendingStatus>('');
     const [subject, setSubject] = useState('');
     const [text, setText] = useState('');
-    const fromAddress = userContext?.email;
     return {
         callSendMailAPI: async (customer: Stripe.Customer | null | undefined) => {
+            const dashboardUserEmailResp = await getDashboardUserEmail();
             if (!customer) {
                 return;
             }
@@ -24,7 +25,7 @@ export const useSendMail = ({userContext}: ExtensionContextValue) => {
             setErrorMessage([
                 "API will called by these props",
                 JSON.stringify({
-                    from: fromAddress,
+                    from: (dashboardUserEmailResp?.json as any)?.email,
                     to: customer.email,
                     subject,
                     text

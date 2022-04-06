@@ -13,10 +13,11 @@ import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
 import type { Message } from "../types";
 import {getEpochMsDisplayText} from '../utils/time';
 import {fakeUserMessages} from '../fakeData';
-import {useCustomer} from '../utils/stripeApi';
+import {useCustomer, useDashboardUserEmail} from '../utils/stripeApi';
 
 const Messaging = ({environment, userContext}: ExtensionContextValue) => {
   const customer = useCustomer(environment?.objectContext?.id);
+  const dashboardUserEmail = useDashboardUserEmail();
   const [openMessage, setOpenMessage] = useState<Message | undefined>(undefined);
 
   return (
@@ -45,7 +46,7 @@ const Messaging = ({environment, userContext}: ExtensionContextValue) => {
           No messages found.
         </Box>
       )}
-      {!!customer && 'email' in customer && !!customer.email && (
+      {!!customer && 'email' in customer && !!customer.email && dashboardUserEmail && (
         <Box
           css={{
             font: 'caption',
@@ -53,7 +54,7 @@ const Messaging = ({environment, userContext}: ExtensionContextValue) => {
             paddingY: 'medium',
           }}
         >
-          Displaying messages between {customer.email} and {userContext?.email}.
+          Displaying messages between {customer.email} and {dashboardUserEmail}.
         </Box>
       )}
       <FocusView

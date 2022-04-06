@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "name": "Easy Mail Sender",
   "icon": "",
-  "permissions": [],
+  "permissions": [
+    {
+      "permission": "user_email_read",
+      "purpose": "Allows the app to access the dashboard user email."
+    }
+  ],
   "app_backend": {},
   "ui_extension": {
     "views": [
