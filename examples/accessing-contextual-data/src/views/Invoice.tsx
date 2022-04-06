@@ -48,47 +48,55 @@ const Invoice = ({ userContext, environment }: ExtensionContextValue) => {
           {!invoice ? (
             <Box css={{ marginY: 'xxlarge' }}>Loading Invoice details...</Box>
           ) : (
-            <Box css={{ layout: 'inline-row', gapX: 'large' }}>
-              <Box css={{ font: 'subheading' }}>
-                <Box>Invoice:</Box>
-                <Box>Billed To:</Box>
-                <Box css={{ marginTop: 'small' }}>Amount Paid:</Box>
-                <Box css={{ marginTop: 'small' }}>Balance:</Box>
-                <Box css={{ marginTop: 'medium' }}>Billing Details:</Box>
-                <Box css={{ marginTop: 'xxlarge' }}>Shipping Details:</Box>
-              </Box>
-              <Box>
-                <Box>{invoice.number}</Box>
-                <Box>
-                  <Link>{invoice.customer_email}</Link>
-                </Box>
-                <Box css={{ marginTop: 'xlarge' }}>
-                  {invoice.amount_paid}{' '}
-                  <Badge type="positive">{invoice.status}</Badge>
-                </Box>
-                <Box css={{ marginTop: 'xlarge' }}>
-                  {invoice.amount_remaining}
-                </Box>
-                <Box css={{ marginY: 'medium' }}>
-                  <Inline>{invoice.customer_address?.line1}</Inline>
-                  <Inline>, {invoice.customer_address?.line2}</Inline>
-                  <Inline>{invoice.customer_address?.city}</Inline>
-                  <Inline>, {invoice.customer_address?.state}</Inline>
-                  <Inline> {invoice.customer_address?.postal_code}</Inline>
-                  <Inline> {invoice.customer_address?.country}</Inline>
+            <>
+              <Box css={{ layout: 'inline-row', gapX: 'large' }}>
+                <Box css={{ font: 'subheading' }}>
+                  <Box>Invoice:</Box>
+                  <Box>Billed To:</Box>
+                  <Box css={{ marginTop: 'small' }}>Amount Paid:</Box>
+                  <Box css={{ marginTop: 'small' }}>Balance:</Box>
+                  <Box css={{ marginTop: 'medium' }}>Billing Details:</Box>
+                  <Box css={{ marginTop: 'xxlarge' }}>Shipping Details:</Box>
                 </Box>
                 <Box>
-                  <Inline>{invoice.customer_shipping?.address?.line1}</Inline>
-                  <Inline>, {invoice.customer_shipping?.address?.line2}</Inline>
-                  <Inline>{invoice.customer_shipping?.address?.city}</Inline>
-                  <Inline>, {invoice.customer_shipping?.address?.state}</Inline>
-                  <Inline>
-                    {invoice.customer_shipping?.address?.postal_code}
-                  </Inline>
-                  <Inline>{invoice.customer_shipping?.address?.country}</Inline>
+                  <Box>{invoice.number}</Box>
+                  <Box>
+                    <Link>{invoice.customer_email}</Link>
+                  </Box>
+                  <Box css={{ marginTop: 'xlarge' }}>
+                    {invoice.amount_paid}{' '}
+                    <Badge type="positive">{invoice.status}</Badge>
+                  </Box>
+                  <Box css={{ marginTop: 'xlarge' }}>
+                    {invoice.amount_remaining}
+                  </Box>
+                  <Box css={{ marginY: 'medium' }}>
+                    <Inline>{invoice.customer_address?.line1}</Inline>
+                    <Inline>, {invoice.customer_address?.line2}</Inline>
+                    <Inline>{invoice.customer_address?.city}</Inline>
+                    <Inline>, {invoice.customer_address?.state}</Inline>
+                    <Inline> {invoice.customer_address?.postal_code}</Inline>
+                    <Inline> {invoice.customer_address?.country}</Inline>
+                  </Box>
+                  <Box>
+                    <Inline>{invoice.customer_shipping?.address?.line1}</Inline>
+                    <Inline>
+                      , {invoice.customer_shipping?.address?.line2}
+                    </Inline>
+                    <Inline>{invoice.customer_shipping?.address?.city}</Inline>
+                    <Inline>
+                      , {invoice.customer_shipping?.address?.state}
+                    </Inline>
+                    <Inline>
+                      {invoice.customer_shipping?.address?.postal_code}
+                    </Inline>
+                    <Inline>
+                      {invoice.customer_shipping?.address?.country}
+                    </Inline>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            </>
           )}
         </Box>
       </Box>
