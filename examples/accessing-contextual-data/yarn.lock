@@ -534,17 +534,17 @@
     "@remote-ui/rpc" "^1.3.0"
     "@remote-ui/types" "^1.1.2"
 
-"@remote-ui/react@^4.4.2":
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.4.4.tgz#3e96ad5b4b0e5731b35fc2140410398696c73ac1"
-  integrity sha512-H5EsH4VNm1iCesPTafvpBytSuswoUgmesfdbF9jyILw19vI4faMsdnS4q7ZPW6cbWpPs2qrkOD73TQE43fhchA==
+"@remote-ui/react@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@remote-ui/react/-/react-4.4.5.tgz#6c9330a679498489cf92c4d9f21c7aa5f187094b"
+  integrity sha512-GWVAnK5OqigKsdhAcEzNzW2tw7HKewSX5FD3bnBRuk6xOzGJZElips9kfEG7o74Z9mg1ACJ+rHMegzB1AsdPvg==
   dependencies:
     "@remote-ui/async-subscription" "^2.1.9"
     "@remote-ui/core" "^2.1.8"
     "@remote-ui/rpc" "^1.3.0"
     "@types/react" ">=17.0.0 <18.0.0"
     "@types/react-reconciler" "^0.26.0"
-    react-reconciler ">=0.26.0 <1.0.0"
+    react-reconciler ">=0.26.0 <0.27.0"
 
 "@remote-ui/rpc@^1.3.0":
   version "1.3.0"
@@ -578,12 +578,12 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stripe/ui-extension-sdk@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-5.0.1.tgz#7eb2413343b1d96969740229aa569cdb5c8c1aa6"
-  integrity sha512-yvIuXfZPUcs2p0di+4YVT3TqMo0vyBFyOuKgB0rTsK3coDHClNUxdBWJsRbpSvibQ6kJeg8c3BUkIwwob2KW2w==
+"@stripe/ui-extension-sdk@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-6.0.0.tgz#64634815f7859fc069930b7b0a2e5e9575b66ff4"
+  integrity sha512-T5KI8XucJtIHbXQqNXeYrMARYxF6w/r9zhPZamJfLsHtWjH6ADtatc5XFABkLtWauOB035uy77sF992XtXMy5Q==
   dependencies:
-    "@remote-ui/react" "^4.4.2"
+    "@remote-ui/react" "^4.4.5"
     "@remote-ui/testing" "^1.3.6"
     "@types/stylis" "^4.0.2"
     invariant "^2.2.4"
@@ -2380,13 +2380,14 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-"react-reconciler@>=0.26.0 <1.0.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.27.0.tgz#360124fdf2d76447c7491ee5f0e04503ed9acf5b"
-  integrity sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==
+"react-reconciler@>=0.26.0 <0.27.0":
+  version "0.26.2"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.2.tgz#bbad0e2d1309423f76cf3c3309ac6c96e05e9d91"
+  integrity sha512-nK6kgY28HwrMNwDnMui3dvm3rCFjZrcGiuwLc5COUipBK5hWHLOxMJhSnSomirqWwjPBJKV1QcbkI0VJr7Gl1Q==
   dependencies:
     loose-envify "^1.1.0"
-    scheduler "^0.21.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.2"
 
 react@^17.0.2:
   version "17.0.2"
@@ -2451,12 +2452,13 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0.tgz#6fd2532ff5a6d877b6edb12f00d8ab7e8f308820"
-  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
+scheduler@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
   dependencies:
     loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 semver@7.x, semver@^7.3.2:
   version "7.3.5"
@@ -2580,10 +2582,18 @@ strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-stripe@^8.174.0, stripe@^8.214.0:
+stripe@^8.174.0:
   version "8.214.0"
   resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.214.0.tgz#fc465662320c35b141956246647097c93fa01201"
   integrity sha512-6LfoBlW2o26Jks5D9OuGddKWSr5V7lMnQQXV1Los0y3t2BPG3fwJESV1tSvcH3NrMjZPW76HrE52kBmqyU8hzA==
+  dependencies:
+    "@types/node" ">=8.1.0"
+    qs "^6.10.3"
+
+stripe@^8.194.0:
+  version "8.215.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.215.0.tgz#bb464e256fb83da9ea2f514711fd0f6f7ae7dc9a"
+  integrity sha512-M+7iTZ9bzTkU1Ms+Zsuh0mTQfEzOjMoqyEaVBpuUmdbWTvshavzpAihsOkfabEu+sNY0vdbQxxHZ4kI3W8pKHQ==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.10.3"
