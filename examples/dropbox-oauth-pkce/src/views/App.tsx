@@ -1,101 +1,77 @@
-import {useCallback, useEffect, useState} from 'react';
-import {
-  Box,
-  Button,
-  ContextView,
-  Link,
-} from '@stripe/ui-extension-sdk/ui';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { Box, Button, ContextView, Link } from '@stripe/ui-extension-sdk/ui';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
-import {createOAuthState} from '@stripe/ui-extension-sdk/oauth';
+import { createOAuthState } from '@stripe/ui-extension-sdk/oauth';
 
-const clientID = 'REDACTED';
-const redirectURI = 'https://dashboard.stripe.com/test/apps-oauth/com.example.dropbox-oauth-pkce';
-const getAuthURL = (state: string, challenge: string) =>
-  `https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=${clientID}&redirect_uri=${redirectURI}&state=${state}&code_challenge=${challenge}&code_challenge_method=S256`;
+import { TokenData, AccountData } from '../util/types';
+import { useSecretStore } from '../hooks/useSecretStore';
+import { getDropboxToken, getDropboxAuthURL } from '../util/getDropboxToken';
+import { getDropboxAccount } from '../util/getDropboxAccount';
 
-interface TokenData {
-  access_token: string;
-  account_id: string;
-  expires_in: number;
-  scope: string;
-  token_type: string;
-  uid: string;
-}
-
-interface AccountData {
-  email: string;
-  name: {
-    display_name: string;
-  }
-}
-
-const getToken = async ({code, verifier}: {code: string, verifier: string}): Promise<null | TokenData> => {
-  try {
-    const response = await fetch(`https://api.dropboxapi.com/oauth2/token?code=${code}&grant_type=authorization_code&code_verifier=${verifier}&client_id=${clientID}&redirect_uri=${redirectURI}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    });
-    if (response.ok) {
-      return await response.json();
-    }
-    throw new Error(await response.text());
-  } catch (e) {
-    console.error('Unable to retrieve access token:', (e as Error).message);
-    return null;
-  }
-};
-
-const getAccount = async (tokenData: TokenData): Promise<null | AccountData> => {
-  try {
-    const response = await fetch('https://api.dropboxapi.com/2/users/get_account', {
-      method: 'POST',
-      body: JSON.stringify({ account_id: tokenData.account_id }),
-      headers: { Authorization: `Bearer ${tokenData.access_token}`, 'Content-Type': 'application/json' },
-    });
-    if (response.ok) {
-      return await response.json();
-    }
-    throw new Error(await response.text());
-  } catch (e) {
-    console.error('Unable to get account data:', (e as Error).message);
-    return null;
-  }
-};
-
-const App = ({oauthContext}: ExtensionContextValue) => {
+const App = ({ userContext, oauthContext }: ExtensionContextValue) => {
   const [oauthState, setOAuthState] = useState('');
   const [challenge, setChallenge] = useState('');
+  const credentialsUsed = useRef(false);
   const [tokenData, setTokenData] = useState<null | TokenData>(null);
   const [accountData, setAccountData] = useState<null | AccountData>(null);
+  const { secret, postSecret } = useSecretStore<TokenData>(
+    userContext!.id,
+    'dropbox_token',
+  );
 
   const code = oauthContext?.code;
   const verifier = oauthContext?.verifier;
   const error = oauthContext?.error;
 
-  const showAuthLink = !code && !tokenData;
+  const showAuthLink = (!code || credentialsUsed.current) && !tokenData;
 
-  // Call createOAuthState to generate a unique random state that is required for the OAuth flow
   useEffect(() => {
-    if (!oauthState && !code) {
-      createOAuthState().then(({state, challenge}) => {
+    // First we check if the token is already in the secret store.
+    // If it is, we set the tokenData state equal to it.
+    if (secret) {
+      setTokenData(secret as TokenData);
+    }
+    // Otherwise, let's see if we've got a code and verifier, but
+    // not tokenData. If so, we are ready to fetch a token from
+    // Dropbox. Then we post the secret to the store.
+    // We use the ref credentialsUsed to keep track of whether we
+    // already used the code and verifier derived from props to
+    // get a token. We should only fetch a token if we have not
+    // used this code and verifier yet, or else we'll get an error.
+    else if (code && verifier && !tokenData && !credentialsUsed.current) {
+      getDropboxToken({ code, verifier }).then(token => {
+        if (token) {
+          credentialsUsed.current = true;
+          postSecret(token);
+        }
+      });
+    }
+    // Finally, we probably don't have any OAuth stuff ready or in process.
+    // Create the OAuthState in preparation for logging in and getting a token.
+    else if (!oauthState && !tokenData) {
+      createOAuthState().then(({ state, challenge }) => {
         setOAuthState(state);
         setChallenge(challenge);
-      })
+      });
     }
-  }, [oauthState, code]);
-
-  // Exchange the code and verifier for a token
-  useEffect(() => {
-    if (code && verifier && !tokenData) {
-      getToken({code, verifier}).then(setTokenData);
-    }
-  }, [code, verifier, tokenData]);
+  }, [secret, oauthState, code, verifier]);
 
   const handleGetAccount = useCallback(() => {
     if (tokenData) {
-      getAccount(tokenData).then(setAccountData);
+      getDropboxAccount(tokenData).then(data => {
+        if (data) {
+          setAccountData(data);
+        }
+      });
     }
   }, [tokenData]);
+
+  const logOut = () => {
+    if (tokenData) {
+      postSecret(null);
+      setTokenData(null);
+    }
+  };
 
   return (
     <ContextView title="Dropbox OAuth PKCE Example">
@@ -107,38 +83,39 @@ const App = ({oauthContext}: ExtensionContextValue) => {
           borderRadius: 'small',
         }}
       >
-        <Box css={{paddingBottom: 'xlarge'}}>
+        <Box css={{ paddingBottom: 'xlarge' }}>
           {showAuthLink && (
-            <Link
-              href={getAuthURL(oauthState, challenge)}
-            >
+            <Link href={getDropboxAuthURL(oauthState, challenge)}>
               Begin authorization flow
             </Link>
           )}
           {error && (
-            <Box css={{paddingY: 'large', marginY: 'large'}}>
+            <Box css={{ paddingY: 'large', marginY: 'large' }}>
               OAuth error: {error}
             </Box>
           )}
           {tokenData && (
             <>
-              <Box css={{paddingY: 'large', marginY: 'large'}}>
+              <Box css={{ paddingY: 'large', marginY: 'large' }}>
                 Dropbox account is connected.
               </Box>
               {!accountData && (
-                <Box css={{paddingY: 'small', marginY: 'small'}}>
+                <Box css={{ paddingY: 'small', marginY: 'small' }}>
                   <Button onPress={handleGetAccount}>Load Account Data</Button>
                 </Box>
               )}
+              <Box css={{ paddingY: 'small', marginY: 'small' }}>
+                <Button onPress={logOut}>Log Out</Button>
+              </Box>
             </>
           )}
           {accountData && (
-            <Box css={{paddingY: 'small', marginY: 'small'}}>
+            <Box css={{ paddingY: 'small', marginY: 'small' }}>
               Your Dropbox identity: {accountData.name.display_name}
             </Box>
           )}
         </Box>
-        <Box css={{paddingY: 'xxlarge', marginY: 'xxlarge'}} />
+        <Box css={{ paddingY: 'xxlarge', marginY: 'xxlarge' }} />
       </Box>
     </ContextView>
   );
