@@ -1,0 +1,24 @@
+{
+  "id": "com.example.install-webhooks",
+  "version": "0.0.1",
+  "name": "Webhooks Example App",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.drawer.default",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  }
+}
