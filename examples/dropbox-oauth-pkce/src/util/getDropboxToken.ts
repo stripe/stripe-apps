@@ -1,7 +1,7 @@
 import { addSeconds } from 'date-fns';
 
 import { TokenData } from "./types";
-import { client_id } from '../../config';
+import { client_id } from '../../config.example';
 
 const APP_NAME = 'com.example.thisdot-dropbox-oauth-pkce';
 const redirectURI = `https://dashboard.stripe.com/test/apps-oauth/${APP_NAME}`;
