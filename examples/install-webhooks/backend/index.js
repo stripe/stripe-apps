@@ -18,7 +18,7 @@ app.post(
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+      event = stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_APP_SECRET);
     } catch (err) {
       response.status(400).send(`Webhook Error: ${err.message}`);
       return;
@@ -28,7 +28,13 @@ app.post(
     switch (event.type) {
       // The "authorized" event will get sent when an account installs the App
       case "account.application.authorized":
-        accountStore.set(account, { id: account, dateCreated: Date.now() });
+        stripe.accounts.retrieve(account).then((account) => {
+          accountStore.set(account.id, {
+            id: account.id,
+            name: account.settings.dashboard.display_name,
+            dateCreated: Date.now(),
+          });
+        });
         break;
       // The "deauthorized" event will get sent when an account uninstalls the App
       case "account.application.deauthorized":

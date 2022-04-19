@@ -8,9 +8,10 @@ const App = ({ userContext, environment }: ExtensionContextValue) => {
   const [loading, setLoading] = useState(true);
   const [accountData, setAccountData] = useState<{
     id: string;
+    name: string;
     dateCreated: number;
   }>();
-  const currentAccountId = userContext.account.id
+  const currentAccountId = userContext.account.id;
 
   useEffect(() => {
     if (loading) {
@@ -34,7 +35,7 @@ const App = ({ userContext, environment }: ExtensionContextValue) => {
       >
         {!loading &&
           (accountData
-            ? `This account installed the app on ${new Date(
+            ? `This account (${accountData.name}) installed the app on ${new Date(
                 accountData.dateCreated
               ).toLocaleDateString()}`
             : "No information found for this account.")}
