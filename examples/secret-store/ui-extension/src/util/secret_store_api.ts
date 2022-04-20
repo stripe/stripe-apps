@@ -12,52 +12,37 @@ const stripe: Stripe = new Stripe(STRIPE_API_KEY, {
   apiVersion: '2020-08-27',
 });
 
-const addSecret = async (userId: string, name: string, value: string) => {
-  const apiPath = `apps/secrets?scope[type]=user&scope[user]=${userId}&name=${name}`;
-
-  // Create a `StripeResource` to load the custom Secret Store API endpoint.
-  const CreateSecretResource = Stripe.StripeResource.extend({
-    request: Stripe.StripeResource.method({
+// Since Secret Store isn't in the SDK yet, we create a new Stripe resource with the information
+// needed to send requests to the Secret Store API.
+const SecretResource = Stripe.StripeResource.extend({
+  find: Stripe.StripeResource.method({
+    method: 'GET',
+    path: 'apps/secrets/find',
+  }) as (...args: any[]) => Promise<Secret>,
+  set: Stripe.StripeResource.method({
     method: 'POST',
-    path: apiPath,
-    }) as (...args: any[]) => Promise<Secret>,
-  });
-  const secretResource = new CreateSecretResource(stripe);
+    path: 'apps/secrets'
+  }) as (...args: any[]) => Promise<Secret>,
+  delete: Stripe.StripeResource.method({
+    method: 'POST',
+    path: 'apps/secrets/delete'
+  }) as (...args: any[]) => Promise<Secret>,
+});
+const secretResource = new SecretResource(stripe);
 
+const addSecret = async (userId: string, name: string, value: string) => {
   // Add secret to the Secret Store API; returns either error or secret object.
-  return await secretResource.request({payload: value});
+  return await secretResource.set({'scope[user]': userId, 'scope[type]': 'user', name: name, payload: value});
 };
 
 const getSecret = async (userId: string, name: string) => {
-  const apiPath = `apps/secrets/find?scope[type]=user&scope[user]=${userId}&name=${name}&expand[]=payload`;
-
-  // Create a `StripeResource` to load the custom Secret Store API endpoint.
-  const GetSecretResource = Stripe.StripeResource.extend({
-    request: Stripe.StripeResource.method({
-      method: 'GET',
-      path: apiPath,
-    }) as () => Promise<Secret>,
-  });
-  const secretResource = new GetSecretResource(stripe);
-
   // Get secret from the Secret Store API; returns either error or secret object.
-  return await secretResource.request();
+  return await secretResource.find({'scope[user]': userId, 'scope[type]': 'user', name: name, 'expand[]': 'payload'});
 };
 
 const deleteSecret = async (userId: string, name: string) => {
-  const apiPath = `apps/secrets/delete?scope[type]=user&scope[user]=${userId}&name=${name}`;
-
-  // Create a `StripeResource` to load the custom Secret Store API endpoint.
-  const DeleteSecretResource = Stripe.StripeResource.extend({
-    request: Stripe.StripeResource.method({
-      method: 'POST',
-      path: apiPath,
-    }) as () => Promise<Secret>,
-  });
-  const secretResource = new DeleteSecretResource(stripe);
-
   // Delete secret from the Secret Store API; returns either error or secret object.
-  return await secretResource.request();
+  return await secretResource.delete({'scope[user]': userId, 'scope[type]': 'user', name: name});
 };
 
 export { addSecret, getSecret, deleteSecret };

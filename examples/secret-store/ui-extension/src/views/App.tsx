@@ -68,7 +68,7 @@ const App = ({userContext}: ExtensionContextValue) => {
       const secret = await deleteSecret(userContext.id, secretNameForDeleteSecret);
       appendToLogs("Secret '" + secret.name + "' has been deleted");
     } catch(e) {
-      console.err(e);
+      console.error(e);
       appendToLogs("ERROR: " + (e as Error).message);
     }
   }

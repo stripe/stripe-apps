@@ -4,9 +4,11 @@ const app = express();
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_API_KEY);
 
+// Since Secret Store isn't in the SDK yet, we create a new Stripe resource with the information
+// needed to send requests to the Secret Store API.
 const SecretResource = Stripe.StripeResource.extend({
   find: Stripe.StripeResource.method({
-    method: "GET",
+    method: 'GET',
     path: 'apps/secrets/find',
   }),
   set: Stripe.StripeResource.method({
@@ -42,7 +44,7 @@ app.get('/get_secret', async (req, res) => {
   const secretName = req.query.secret_name;
 
   try {
-    const secret = await secretResource.find({'scope[user]': userId, 'scope[type]': 'user', name: secretName});
+    const secret = await secretResource.find({'scope[user]': userId, 'scope[type]': 'user', name: secretName, 'expand[]': 'payload'});
 
     res.status(200).json(secret);
   } catch(e) {
