@@ -566,10 +566,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stripe/ui-extension-sdk@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-6.0.0.tgz#64634815f7859fc069930b7b0a2e5e9575b66ff4"
-  integrity sha512-T5KI8XucJtIHbXQqNXeYrMARYxF6w/r9zhPZamJfLsHtWjH6ADtatc5XFABkLtWauOB035uy77sF992XtXMy5Q==
+"@stripe/ui-extension-sdk@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@stripe/ui-extension-sdk/-/ui-extension-sdk-6.1.0.tgz#8398b888f5c14d9132ef1d85ce97ff671a9e6f83"
+  integrity sha512-9FeePpm3rT8700ohjr8Q/IL+8Iq9VE5RLE1+uAHFb+7MigapCJq5NDY10hRnoEBtK2rVt6vDkbYtTaEWUWp2kQ==
   dependencies:
     "@remote-ui/react" "^4.4.5"
     "@remote-ui/testing" "^1.3.6"
