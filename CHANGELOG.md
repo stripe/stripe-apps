@@ -1,5 +1,22 @@
 # Changelog
 
+## 2022-04-20
+- Released version 6.1.0 of the SDK
+    - Add a confirmation dialog to `FocusView`
+    - Add `Chip` and `ChipList` components
+    - Update the `getDashboardUserEmail` utility to return the email directly and reject the promise if there's an error
+    - Fix React components not being accepted in the `label` prop of form elements
+    - Expose `text-overflow: ellipsis` and `word-wrap: normal | break-word` on `Box` `css`
+    - Add `country` to the account passed to extensions in the `userContext` property
+    - Add `data:` URL support for the `Img` component - [docs](https://stripe.com/docs/stripe-apps/ui-toolkit/components/img#data-urls)
+- Fixed
+    - https://github.com/stripe/stripe-apps/issues/385
+    - https://github.com/stripe/stripe-apps/issues/343
+    - https://github.com/stripe/stripe-apps/issues/306
+    - https://github.com/stripe/stripe-apps/issues/285
+    - https://github.com/stripe/stripe-apps/issues/166
+    - https://github.com/stripe/stripe-apps/issues/52
+
 ## 2022-04-06
 - Released version 6.0.0 of the SDK
     - Deprecates email in view context

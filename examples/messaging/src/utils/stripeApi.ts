@@ -27,9 +27,12 @@ export const useDashboardUserEmail = () => {
   const [customer, setCustomer] = useState<string | null>(null);
 
   const loadEmail = async () => {
-    const resp = await getDashboardUserEmail();
-
-    setCustomer((resp?.json as any)?.email);
+    try {
+      const {email} = await getDashboardUserEmail();
+      setCustomer(email);
+    } catch(e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
