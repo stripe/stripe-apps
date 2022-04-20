@@ -48,6 +48,7 @@ const App = ({userContext}: ExtensionContextValue) => {
       const secret = await addSecret(userContext.id, secretNameForSetSecret, secretValueForSetSecret);
       appendToLogs("Created secret " + secret.name);
     } catch(e) {
+      console.error(e);
       appendToLogs("ERROR: " + (e as Error).message);
     }
   }
@@ -57,6 +58,7 @@ const App = ({userContext}: ExtensionContextValue) => {
       const secret = await getSecret(userContext.id, secretNameForGetSecret);
       appendToLogs("Secret '" + secret.name + "' has value: '" + secret.payload + "'");
     } catch(e) {
+      console.error(e);
       appendToLogs("ERROR: " + (e as Error).message);
     }
   }
@@ -66,7 +68,7 @@ const App = ({userContext}: ExtensionContextValue) => {
       const secret = await deleteSecret(userContext.id, secretNameForDeleteSecret);
       appendToLogs("Secret '" + secret.name + "' has been deleted");
     } catch(e) {
-      console.log(e);
+      console.err(e);
       appendToLogs("ERROR: " + (e as Error).message);
     }
   }
