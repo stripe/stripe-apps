@@ -1,4 +1,4 @@
-# Secret Store Demo
+# Secret Store UI Extension Demo
 
 This is an example of using the Secret Store API from a UI extension. The extension allows you to fetch, set, and delete secrets associated with the currently authenticated user.
 
