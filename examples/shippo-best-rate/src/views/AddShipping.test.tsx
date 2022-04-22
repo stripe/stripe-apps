@@ -1,6 +1,6 @@
 import AddShipping from './AddShipping';
-import {render, getMockContextProps} from '@stripe/ui-extension-sdk/testing';
-import {List} from '@stripe/ui-extension-sdk/ui';
+import { render, getMockContextProps } from '@stripe/ui-extension-sdk/testing';
+import { List } from '@stripe/ui-extension-sdk/ui';
 
 jest.mock('./stripe_client');
 jest.mock('./shippo_client');
@@ -8,7 +8,7 @@ jest.mock('./shippo_client');
 describe('AddShipping component', () => {
   it('Renders a loader and then the RatePicker', async () => {
     const context = getMockContextProps();
-    const {wrapper, update} = render(<AddShipping {...context} />);
+    const { wrapper, update } = render(<AddShipping {...context} />);
     expect(wrapper).toContainText('Loading');
     // First wait for loading the invoice
     await update();
