@@ -1,8 +1,9 @@
 import {
   Box,
-  Inline,
+  Img,
   List,
-  ListItem
+  ListItem,
+  Spinner
 } from '@stripe/ui-extension-sdk/ui';
 import { useCallback, useEffect, useState } from 'react';
 import Stripe from 'stripe';
@@ -10,7 +11,7 @@ import invariant from 'ts-invariant';
 import type { ShippingDetailsMetadata } from './ShippingDetails';
 import type { Rate, Shipment } from './shippo_types';
 import stripeClient from './stripe_client';
-import {request as shippoRequest} from './shippo_client';
+import { request as shippoRequest } from './shippo_client';
 
 const addShippingLineItem = async (rate: Rate, invoiceId: string, customerId: string) => {
   return stripeClient.invoiceItems.create({
@@ -40,7 +41,7 @@ const updateInvoiceMetadata = async (
   shippingDetails: ShippingDetailsMetadata,
 ) => {
   return stripeClient.invoices.update(invoiceId, {
-    metadata: {...shippingDetails},
+    metadata: { ...shippingDetails },
   });
 };
 
@@ -59,7 +60,7 @@ type RatePickerProps = {
   invoice: Stripe.Invoice,
   onRatePicked: (p: ShippingDetailsMetadata) => void,
 };
-const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
+const RatePicker = ({ invoice, onRatePicked }: RatePickerProps) => {
   const [shipment, setShipment] = useState<Shipment>();
   const [creatingLabel, setCreatingLabel] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -132,33 +133,41 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
     return <Box>{errorMessage}</Box>;
   }
   if (!shipment) {
-    return <Box>Loading shipping rates from Shippo&hellip;</Box>;
+    return (
+      <Box css={{ layout: 'column', alignX: 'center', gap: 'medium' }}>
+        <Spinner />Loading shipping rates from Shippo
+      </Box>
+    );
   }
   if (creatingLabel) {
-    return <Box>Creating shipping label&hellip;</Box>
+    return (
+      <Box css={{ layout: 'column', alignX: 'center', gap: 'medium' }}>
+        <Spinner />Creating shipping label
+      </Box>
+    );
   }
-  const rateMap: {[object_id: string]: Rate} = {};
+  const rateMap: { [object_id: string]: Rate } = {};
   const rateItems = shipment.rates.map((rate) => {
     rateMap[rate.object_id] = rate;
-    // This uses some undocumented CSS properties that may stop working in the future.
-    // USE AT YOUR OWN RISK!
-    const backgroundCSS: any = {
-      backgroundImage: `url(${rate.provider_image_75})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'contain',
-      backgroundPosition: 'center center',
-      height: '16px',
-      width: '16px',
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      marginRight: '4px',
-    };
     return (
       <ListItem
         key={rate.object_id}
         id={rate.object_id}
         value={rate.amount}
-        title={<Box><Inline css={backgroundCSS}/>{`${rate.provider} ${rate.servicelevel.name}`}</Box>}
+        title={
+          <Box css={{
+            layout: 'row',
+            gap: 'small',
+            alignY: 'top',
+          }}>
+            <Box css={{ padding: 'xxsmall' }}>
+              <Img src={rate.provider_image_75} height="12" />
+            </Box>
+            <Box>
+              {`${rate.provider} ${rate.servicelevel.name}`}
+            </Box>
+          </Box>
+        }
         secondaryTitle={<Box>{rate.duration_terms}</Box>}
       >
       </ListItem>
@@ -166,7 +175,8 @@ const RatePicker = ({invoice, onRatePicked}: RatePickerProps) => {
   });
   return <List onAction={(object_id) => {
     const rate = rateMap[object_id];
-    handleRatePicked(invoice, rate, shipment)}
+    handleRatePicked(invoice, rate, shipment)
+  }
   }>{rateItems}</List>;
 
 };

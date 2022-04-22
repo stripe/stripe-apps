@@ -1,7 +1,7 @@
 import RatePicker from './RatePicker';
-import {render} from '@stripe/ui-extension-sdk/testing';
-import {List, ListItem} from '@stripe/ui-extension-sdk/ui';
-import {invoice, invoiceItem, shippoShipment, shippoTransaction} from './__mocks__/mock_objects';
+import { render } from '@stripe/ui-extension-sdk/testing';
+import { List, ListItem } from '@stripe/ui-extension-sdk/ui';
+import { invoice, invoiceItem, shippoShipment, shippoTransaction } from './__mocks__/mock_objects';
 
 jest.mock('./shippo_client');
 jest.mock('./stripe_client');
@@ -10,8 +10,8 @@ describe('RatePicker component', () => {
   // FIXME: Figure out how to inspect components passed into props like the ListItem title prop
   it.skip('displays a list of rates', async () => {
     const onRatePicked = jest.fn();
-    const {wrapper, update} = render(<RatePicker invoice={invoice} onRatePicked={onRatePicked} />);
-    expect(wrapper).toContainText('Loading shipping rates from Shippo…');
+    const { wrapper, update } = render(<RatePicker invoice={invoice} onRatePicked={onRatePicked} />);
+    expect(wrapper).toContainText('Loading shipping rates from Shippo');
     await update();
     expect(wrapper).toContainComponent(List);
     const rate = shippoShipment.rates[0];
@@ -20,8 +20,8 @@ describe('RatePicker component', () => {
   });
   it('creates a new shipping label when a rate is clicked', async () => {
     const onRatePicked = jest.fn();
-    const {wrapper, update} = render(<RatePicker invoice={invoice} onRatePicked={onRatePicked} />);
-    expect(wrapper).toContainText('Loading shipping rates from Shippo…');
+    const { wrapper, update } = render(<RatePicker invoice={invoice} onRatePicked={onRatePicked} />);
+    expect(wrapper).toContainText('Loading shipping rates from Shippo');
     await update();
     const rate = shippoShipment.rates[0];
     wrapper.find(List)!.trigger('onAction', rate.object_id);
