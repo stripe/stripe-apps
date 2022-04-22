@@ -1,6 +1,6 @@
 import { Todo, Mode } from '../TodoApp';
 
-import { Inline, List, ListItem, Button } from '@stripe/ui-extension-sdk/ui';
+import { Inline, List, ListItem, Button, Icon } from '@stripe/ui-extension-sdk/ui';
 
 export type TodoListProps = {
   todoList: Todo[],
@@ -32,14 +32,20 @@ const TodoList = ({
           }}>
             {
               mode === Mode.Uncompleted ?
-                <Button size="small" type="primary" onPress={() => onComplete!(todo)}>Complete</Button> :
+                <Button size="small" type="primary" onPress={() => onComplete!(todo)}>
+                  <Icon name="check" />
+                </Button> :
                 null
             }
             <Button size="small" onPress={() => {
               setNotesTextFieldValue(todo.notes);
               setOpenNotes(todo);
-            }}>✍️</Button>
-            <Button size="small" type="destructive" onPress={() => onDelete(todo)}>X</Button>
+            }}>
+              <Icon name="edit" />
+            </Button>
+            <Button size="small" type="destructive" onPress={() => onDelete(todo)}>
+              <Icon name="cancel" />
+            </Button>
           </Inline>
         )} />
       ))}
