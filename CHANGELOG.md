@@ -1,5 +1,17 @@
 # Changelog
 
+## 2022-04-22
+- Released version 6.2.0 of the SDK
+  - `BarChart` and `LineChart` improvements:
+    - Configurable axis formatting
+    - Configurable value formatting
+    - Configurable channel domains
+    - Configurable channel ranges
+    - Show/hide axis labels and ticks in charts
+    - Show/hide grid lines in charts
+    - Show/hide tooltips in chart presets
+    - Show/hide legends in chart presets
+
 ## 2022-04-20
 - Released version 6.1.0 of the SDK
     - Add a confirmation dialog to `FocusView`
