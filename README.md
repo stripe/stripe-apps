@@ -21,7 +21,7 @@ If you are working with designers, share the [Figma library](stripe-apps-design-
 
 **Latest update (04/22/22)**
 * **App examples:** 5 new app examples.
-* **Patterns:** new patterns includeing: authentication, loading/empty/error/success state, list, form, and chart.
+* **Patterns:** new patterns including: authentication, loading/empty/error/success state, list, form, and chart.
 * **Marketplace app listing:** new guideline and assets for marketplace app listing.
 
 ## Sample Apps
