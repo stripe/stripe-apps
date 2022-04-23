@@ -17,15 +17,12 @@ In these docs, you'll find all the information you need to get started building 
 The documentation is available at [https://stripe.com/docs/stripe-apps](https://stripe.com/docs/stripe-apps).
 
 ### Figma library
-If you are working with designers, share the [Figma library](stripe-apps-design-library-220325.fig) with them.
+If you are working with designers, share the [Figma library](stripe-apps-design-library-220422.fig) with them.
 
-**Latest update (03/25/22)**
-* **App Dock:** added to all sample pages
-* **Button:** new component usage guidance
-* **Notice:** new variants with correct text and button wrapping
-* **Drawer:** new variants
-* **Tabs:** new component and variants
-* **General:** Improved auto-layout behavior on components
+**Latest update (04/22/22)**
+* **App examples:** 5 new app examples.
+* **Patterns:** new patterns including: authentication, loading/empty/error/success state, list, form, and chart.
+* **Marketplace app listing:** new guideline and assets for marketplace app listing.
 
 ## Sample Apps
 
