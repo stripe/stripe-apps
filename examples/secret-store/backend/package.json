@@ -1,0 +1,13 @@
+{
+  "name": "com.natw.secret_store_example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {},
+  "author": "Stripe",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "stripe": "^8.216.0"
+  }
+}

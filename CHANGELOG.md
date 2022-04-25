@@ -1,5 +1,42 @@
 # Changelog
 
+## 2022-04-22
+- Released version 6.2.0 of the SDK
+  - `BarChart` and `LineChart` improvements:
+    - Configurable axis formatting
+    - Configurable value formatting
+    - Configurable channel domains
+    - Configurable channel ranges
+    - Show/hide axis labels and ticks in charts
+    - Show/hide grid lines in charts
+    - Show/hide tooltips in chart presets
+    - Show/hide legends in chart presets
+
+## 2022-04-20
+- Released version 6.1.0 of the SDK
+    - Add a confirmation dialog to `FocusView`
+    - Add `Chip` and `ChipList` components
+    - Update the `getDashboardUserEmail` utility to return the email directly and reject the promise if there's an error
+    - Fix React components not being accepted in the `label` prop of form elements
+    - Expose `text-overflow: ellipsis` and `word-wrap: normal | break-word` on `Box` `css`
+    - Add `country` to the account passed to extensions in the `userContext` property
+    - Add `data:` URL support for the `Img` component - [docs](https://stripe.com/docs/stripe-apps/ui-toolkit/components/img#data-urls)
+- Fixed
+    - https://github.com/stripe/stripe-apps/issues/385
+    - https://github.com/stripe/stripe-apps/issues/343
+    - https://github.com/stripe/stripe-apps/issues/306
+    - https://github.com/stripe/stripe-apps/issues/285
+    - https://github.com/stripe/stripe-apps/issues/166
+    - https://github.com/stripe/stripe-apps/issues/52
+
+## 2022-04-06
+- Released version 6.0.0 of the SDK
+    - Deprecates email in view context
+    - Consolidates utilites in /utils path
+    - Fixes react-reconciler dependency issue affecting unit tests
+- Fixed
+    - https://github.com/stripe/stripe-apps/issues/369
+
 ## 2022-03-31
 - Released version 5.0.1 of the SDK
     - Adds the `Accordion`, `Icon`, `Spinner`, and `Tooltip` components

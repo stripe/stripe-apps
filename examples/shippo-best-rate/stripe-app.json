@@ -3,8 +3,19 @@
   "version": "0.0.1",
   "name": "Shippo Rate Selector",
   "icon": "",
-  "permissions": [],
-  "app_backend": {},
+  "permissions": [
+    {
+      "permission": "invoice_read",
+      "purpose": "Read the customer's address to calculate shipping rates"
+    },
+    {
+      "permission": "invoice_write",
+      "purpose": "Write metadata about shipping details to the invoice, update the invoice with new shipping charges"
+    }
+  ],
+  "app_backend": {
+    "webhooks": null
+  },
   "ui_extension": {
     "views": [
       {
@@ -18,7 +29,10 @@
         "https://api.goshippo.com/shipments",
         "https://api.goshippo.com/transactions"
       ],
-      "purpose": ""
+      "image-src": [
+        "https://shippo-static.s3.amazonaws.com/providers/"
+      ],
+      "purpose": "To load shipping partner logos"
     }
   }
 }
