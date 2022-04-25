@@ -9,6 +9,8 @@ import {
   TabList,
   TabPanels,
   TabPanel,
+  Inline,
+  Icon,
 } from '@stripe/ui-extension-sdk/ui';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
@@ -181,8 +183,9 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
         }}
       >
         <TextField type="text" size="small" key="new-task" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
-        <Button size="medium" type="primary" key="add-task" onPress={addTodo}>
-          + Add task
+        <Button css={{ gap: 'small' }} size="medium" type="secondary" key="add-task" onPress={addTodo}>
+          <Icon name="add" />
+          <Inline>Add task</Inline>
         </Button>
       </Box>
       <Box
