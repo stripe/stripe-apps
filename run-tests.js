@@ -59,7 +59,12 @@ const testDir = async (dir) => {
 
   if (getHasFile(dir, 'tsconfig.json')) {
     // Check types
-    await runCommand('yarn tsc --noEmit', dir);
+    try {
+      await runCommand('yarn tsc --noEmit', dir);
+    } catch (e) {
+      console.error(`${dir}: Type checking failed: `, e);
+      process.exit(1);
+    }
   }
 
   // This check can be removed once all examples have tests
@@ -67,7 +72,12 @@ const testDir = async (dir) => {
     console.log('No tests, skipping.');
   } else {
     // Run tests
-    await runCommand('yarn jest', dir);
+    try {
+      await runCommand('yarn jest', dir);
+    } catch (e) {
+      console.error('Test suite failed: ', e);
+      process.exit(2);
+    }
 
     console.log('✅ Tests passed');
   }
