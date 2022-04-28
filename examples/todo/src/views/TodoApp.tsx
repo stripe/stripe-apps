@@ -183,7 +183,7 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
         }}
       >
         <TextField type="text" size="small" key="new-task" value={newTodoTextFieldValue} onChange={(e: ChangeEvent) => setNewTodoTextFieldValue((e.target as HTMLInputElement).value)}/>
-        <Button css={{ gap: 'small' }} size="medium" type="secondary" key="add-task" onPress={addTodo}>
+        <Button size="medium" type="secondary" key="add-task" onPress={addTodo}>
           <Icon name="add" />
           <Inline>Add task</Inline>
         </Button>

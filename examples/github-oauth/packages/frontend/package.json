@@ -9,7 +9,7 @@
     "upload": "stripe apps upload"
   },
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^6.2.0",
+    "@stripe/ui-extension-sdk": "^6.3.0",
     "react": "^17.0.2",
     "stripe": "^8.200.0"
   }
