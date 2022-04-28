@@ -1,5 +1,15 @@
 # Changelog
 
+## 2022-04-28
+- Released version 6.3.0 of the SDK
+  - Add `Banner` component
+  - Add deprecation warning for `Notice` component
+  - Add `locale` to `ExtensionContextValue['oauthContext']`
+  - Add `overflowWrap` and `wordBreak` to `Box` `css` properties
+  - Add `textTransform` to `Box` and `Inline` `css` properties
+  - Add `primaryAction`, `secondaryAction`, and `footerContent` properties to `ContextView`.
+  - Add `whiteSpace` to `Box` `css` properties
+
 ## 2022-04-22
 - Released version 6.2.0 of the SDK
   - `BarChart` and `LineChart` improvements:
