@@ -1,6 +1,9 @@
 # Changelog
 
-## 2022-04-28
+## 2022-04-29
+- Released version 7.0.0 of the SDK
+  - Deprecate `Notice` component - use `Banner`
+  - Add `overflowX` and `overflowY` to `Box` `css`
 - Released version 6.3.0 of the SDK
   - Add `Banner` component
   - Add deprecation warning for `Notice` component
