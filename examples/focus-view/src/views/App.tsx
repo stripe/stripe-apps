@@ -10,28 +10,29 @@ import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 import { useState } from "react";
 
 const App = ({ userContext, environment }: ExtensionContextValue) => {
-  const [openFocus, setOpenFocus] = useState(false);
-  const [text, setText] = useState("");
-  const [state, setState] = useState("");
+  const [openFocus, setOpenFocus] = useState<boolean>(false);
+  const [text, setText] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
-  //This should save the data to your backend.
+  // For this example, we save the result in memory.
+  // You may wish to store this data on your backend in a real life scenario.
   const handleSave = () => {
-    setState(text);
+    setName(text);
     setOpenFocus(false);
   };
 
   return (
     <ContextView title="FocusView Example">
       <Box css={{ marginBottom: "medium" }}>
-        The focusView gives you a dedicated space to display info or complete
-        task. Click the button below to open the focusView
+        The FocusView provides a dedicated space to display info or complete
+        tasks. Click the button below to open the FocusView.
       </Box>
       <Button type="primary" onPress={() => setOpenFocus(true)}>
         Open
       </Button>
       <Box css={{ marginTop: "medium" }}>
-        {state ? (
-          <Inline css={{ font: "bodyEmphasized" }}>Name: {state}</Inline>
+        {name ? (
+          <Inline css={{ font: "bodyEmphasized" }}>Name: {name}</Inline>
         ) : (
           "No Name Found"
         )}
