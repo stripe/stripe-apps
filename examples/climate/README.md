@@ -23,7 +23,7 @@ link snippet
 ## Using in your own app
 To integrate within your app, follow these steps:
 
-- Copy the files in /src/components (ClimateLinkComponent.tsx, etc) into your own app.
+- Copy the files in /src/components (ClimateLinkComponent.tsx, etc.) into your own app.
 - Add a reference to <ClimateLinkComponent /> in your UI as follows:
 ```
     <ClimateLinkComponent appId="<YOUR APP ID HERE>" />
@@ -40,4 +40,4 @@ Please do not use language that references ‘offsets’ as it pertains to Strip
 - In the best case, we hope that these projects can grow to provide a material portion of the gigatons of carbon removal the world needs to limit a rise in temperature below agreed-upon targets.
 - We select carbon removal projects based on criteria we developed in partnership with our scientific expert advisors, and we rely on our [public application and review process](https://github.com/stripe/carbon-removal-source-materials) instead of verifying through traditional carbon offset verifiers.
 
-Have questions on Stripe Climate? Reach out to us at support@stripe.com
+Have questions on Stripe Climate? Reach out to us at support+climate@stripe.com
