@@ -1,6 +1,6 @@
 # Secret Store Express Demo
 
-This example Express app shows how to interact with Secret Store from a backend app. The app exposes three API endpoints, `/set_secret`, `/find_secret`, `/delete_secret` and `/list_secrets`. Usage is as follows:
+This example Express app shows how to interact with Secret Store from a backend app. The app exposes four API endpoints, `/set_secret`, `/find_secret`, `/delete_secret` and `/list_secrets`. Usage is as follows:
 
 ## Starting the server
 
