@@ -26,7 +26,7 @@ curl "localhost:4242/find_secret?secret_name=name&user_id=usr_5"
 curl localhost:4242/delete_secret -d "secret_name"="name" -d "user_id"="usr_5"
 ```
 
-## Listing a secret
+## Listing secrets
 
 ```
 curl "localhost:4242/list_secrets?user_id=usr_5"
