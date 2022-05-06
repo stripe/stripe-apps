@@ -1,26 +1,19 @@
-import Stripe from 'stripe';
-import {createHttpClient, STRIPE_API_KEY} from '@stripe/ui-extension-sdk/http_client';
-import type {ExtensionContextValue} from '@stripe/ui-extension-sdk/context';
-import { useEffect, useState } from 'react';
-import { addSecret, getSecret, deleteSecret } from '../util/secret_store_api';
-
-
+import { useState } from 'react';
+import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import {
-  Badge,
   Box,
   Button,
   ContextView,
-  FocusView,
-  List,
-  ListItem,
   Inline,
   Accordion,
   AccordionItem,
-  TextField,
-  Divider
+  TextField
 } from '@stripe/ui-extension-sdk/ui';
 
+import { addSecret, getSecret, deleteSecret, listSecrets } from '../util/secret_store_api';
+
 const App = ({userContext}: ExtensionContextValue) => {
+  
   const [logs, setLogs] = useState<Array<string>>([]);
 
   // Set secret form
@@ -35,7 +28,7 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const appendToLogs = (text: string) => {
     setLogs((currentLogs) => {
-      return [...currentLogs, text];
+      return [text, ...currentLogs];
     });
   }
 
@@ -67,6 +60,19 @@ const App = ({userContext}: ExtensionContextValue) => {
     try {
       const secret = await deleteSecret(userContext.id, secretNameForDeleteSecret);
       appendToLogs("Secret '" + secret.name + "' has been deleted");
+    } catch(e) {
+      console.error(e);
+      appendToLogs('ERROR: ' + (e as Error).message);
+    }
+  }
+
+  const listSecretButtonPressed = async () => {
+    try {
+      const secrets = await listSecrets(userContext.id);
+      appendToLogs(secrets.data.length + " secret(s) found");
+      for (var i = 0; i < secrets.data.length; i++) {
+        appendToLogs("Secret " + (i + 1) + " name: '" + secrets.data[i].name + "'");
+      }
     } catch(e) {
       console.error(e);
       appendToLogs('ERROR: ' + (e as Error).message);
@@ -110,6 +116,11 @@ const App = ({userContext}: ExtensionContextValue) => {
               setSecretNameForDeleteSecret(e.target.value);
             }}></TextField>
             <Button type='primary' onPress={deleteSecretButtonPressed}>Delete</Button>
+          </Box>
+        </AccordionItem>
+        <AccordionItem title='List secrets'>
+          <Box css={{margin: 'medium', layout: 'column', gap: 'medium'}}>
+            <Button type='primary' onPress={listSecretButtonPressed}>Fetch</Button>
           </Box>
         </AccordionItem>
       </Accordion>
