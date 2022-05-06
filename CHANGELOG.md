@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022-05-06
+- Released version 7.1.0 of the SDK
+  - Add `brandIcon` and `brandColor` to `ContextView`
+
 ## 2022-04-29
 - Released version 7.0.0 of the SDK
   - Deprecate `Notice` component - use `Banner`
