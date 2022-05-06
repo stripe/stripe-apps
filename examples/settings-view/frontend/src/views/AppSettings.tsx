@@ -3,6 +3,7 @@ import {
   Inline,
   Select,
   SettingsView,
+  Switch,
   TextArea,
 } from "@stripe/ui-extension-sdk/ui";
 import fetchStripeSignature from "@stripe/ui-extension-sdk/signature";
@@ -22,6 +23,7 @@ const BACKEND_URL = "http://localhost:8080/api/settings";
 const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
   const [status, setStatus] = useState("");
   const [storedValue, setStoredValue] = useState<SettingsData>();
+  const [enableSetting, setEnableSetting] = useState<boolean>(false)
 
   const user_id = userContext.id;
 
@@ -31,6 +33,7 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
         const response = await fetch(`${BACKEND_URL}/${key}`);
         const storedSettingValue = await response.json();
         setStoredValue(storedSettingValue);
+        console.log(storedSettingValue)
       } catch (error) {
         console.log("Error fetching setting: ", error);
       }
@@ -39,6 +42,7 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
   }, [user_id]);
 
   const saveSettings = useCallback(async (values) => {
+    console.log(values)
     setStatus("Saving...");
     try {
       const signaturePayload = {
@@ -86,12 +90,6 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
             <Box css={{ padding: "small" }}>
               <Box>
                 <Inline css={{ marginRight: "large", font: "heading" }}>
-                  Description:
-                </Inline>
-                {storedValue.description}
-              </Box>
-              <Box>
-                <Inline css={{ marginRight: "large", font: "heading" }}>
                   Country:
                 </Inline>
                 {storedValue.country}
@@ -105,19 +103,20 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
             </Box>
           )}
           <Box>
-            <TextArea
-              label="App Description"
-              name="description"
-              placeholder="This App was created to…"
+            <Switch
+              label="Enable this app setting"
+              value="disabled"
+              onChange={(e) => setEnableSetting(e.target.checked)}
+
             />
-            <Select name="country" label="Select Country">
+            <Select name="country" label="Select Country" disabled={!enableSetting}>
               <option value="">--Options--</option>
               <option value="United states">United States</option>
               <option value="Netherlands">Netherlands</option>
               <option value="Canada">Canada</option>
               <option value="England">England</option>
             </Select>
-            <Select name="language" label="Change App Language">
+            <Select name="language" label="Change App Language" disabled={!enableSetting}>
               <option value="">--Options--</option>
               <option value="English">English</option>
               <option value="French">French</option>
