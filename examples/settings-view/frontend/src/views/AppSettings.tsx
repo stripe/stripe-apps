@@ -33,7 +33,6 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
         const response = await fetch(`${BACKEND_URL}/${key}`);
         const storedSettingValue = await response.json();
         setStoredValue(storedSettingValue);
-        console.log(storedSettingValue)
       } catch (error) {
         console.log("Error fetching setting: ", error);
       }
@@ -42,7 +41,6 @@ const AppSettings = ({ userContext, environment }: ExtensionContextValue) => {
   }, [user_id]);
 
   const saveSettings = useCallback(async (values) => {
-    console.log(values)
     setStatus("Saving...");
     try {
       const signaturePayload = {
