@@ -42,7 +42,7 @@ const Invoice = ({ userContext, environment }: ExtensionContextValue) => {
           borderRadius: 'small',
         }}
       >
-        <Box css={{ marginBottom: 'xxlarge' }}>
+        <Box css={{ marginBottom: 'xxlarge',wordBreak: 'break-word' }}>
           <Box css={{ font: 'subtitle' }}>Invoice Details</Box>
           <Divider />
           {!invoice ? (

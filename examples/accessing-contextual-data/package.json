@@ -5,9 +5,9 @@
   "private": true,
   "license": "~~proprietary~~",
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^6.0.0",
+    "@stripe/ui-extension-sdk": "^7.0.0",
     "react": "^17.0.2",
-    "stripe": "^8.194.0"
+    "stripe": "^8.214.0"
   },
   "engines": {
     "node": ">=14"
