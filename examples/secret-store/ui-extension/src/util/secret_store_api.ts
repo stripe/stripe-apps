@@ -7,6 +7,10 @@ interface Secret {
   payload: string;
 }
 
+interface Secrets {
+  data: Secret[];
+}
+
 const stripe: Stripe = new Stripe(STRIPE_API_KEY, {
   httpClient: createHttpClient() as Stripe.HttpClient,
   apiVersion: '2020-08-27',
@@ -27,6 +31,10 @@ const SecretResource = Stripe.StripeResource.extend({
     method: 'POST',
     path: 'apps/secrets/delete'
   }) as (...args: any[]) => Promise<Secret>,
+  list: Stripe.StripeResource.method({
+    method: 'GET',
+    path: 'apps/secrets'
+  }) as (...args: any[]) => Promise<Secrets>,
 });
 const secretResource = new SecretResource(stripe);
 
@@ -45,4 +53,8 @@ const deleteSecret = async (userId: string, name: string) => {
   return await secretResource.delete({'scope[user]': userId, 'scope[type]': 'user', name: name});
 };
 
-export { addSecret, getSecret, deleteSecret };
+const listSecrets = async (userId: string) => {
+  return await secretResource.list({'scope[user]': userId, 'scope[type]': 'user'});
+};
+
+export { addSecret, getSecret, deleteSecret, listSecrets };

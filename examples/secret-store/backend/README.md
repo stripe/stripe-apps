@@ -1,6 +1,6 @@
 # Secret Store Express Demo
 
-This example Express app shows how to interact with Secret Store from a backend app. The app exposes three API endpoints, `/get_secret`, `/set_secret`, and `/delete_secret`. Usage is as follows:
+This example Express app shows how to interact with Secret Store from a backend app. The app exposes four API endpoints, `/set_secret`, `/find_secret`, `/delete_secret` and `/list_secrets`. Usage is as follows:
 
 ## Starting the server
 
@@ -14,16 +14,22 @@ STRIPE_API_KEY=$STRIPE_TEST_KEY node app.js
 curl localhost:4242/set_secret -d "secret_name"="name" -d "secret_value"="shh" -d "user_id"="usr_5"
 ```
 
-## Getting a secret
+## Finding a secret
 
 ```
-curl "localhost:4242/get_secret?secret_name=name&user_id=usr_5"
+curl "localhost:4242/find_secret?secret_name=name&user_id=usr_5"
 ```
 
 ## Deleting a secret
 
 ```
 curl localhost:4242/delete_secret -d "secret_name"="name" -d "user_id"="usr_5"
+```
+
+## Listing secrets
+
+```
+curl "localhost:4242/list_secrets?user_id=usr_5"
 ```
 
 ## More information
