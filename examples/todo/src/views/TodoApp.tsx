@@ -74,7 +74,7 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
   // Returning a loading state if we're not ready yet
   if (customer === undefined) {
     return (
-      <ContextView title="todos" brandColor="#f662ad" brandIcon={appIcon}><Spinner /></ContextView>
+      <ContextView title="Todo" brandColor="#f662ad" brandIcon={appIcon}><Spinner /></ContextView>
     );
   }
 
@@ -176,7 +176,7 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
   }
 
   return (
-    <ContextView title="Todos" brandColor="#f662ad" brandIcon={appIcon}>
+    <ContextView title="Todo" brandColor="#f662ad" brandIcon={appIcon}>
       <Box
         key="controls-container"
         css={{

@@ -2,7 +2,7 @@
   "id": "com.example.todo",
   "version": "1.0.0",
   "name": "todo",
-  "icon": "",
+  "icon": "todo-logo-sidebar.png",
   "permissions": [
     {
       "permission": "customer_read",
