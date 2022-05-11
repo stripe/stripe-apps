@@ -11,6 +11,7 @@ import {
   TabPanel,
   Inline,
   Icon,
+  Spinner,
 } from '@stripe/ui-extension-sdk/ui';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 
@@ -19,6 +20,8 @@ import TodoList from './components/TodoList';
 import { useState, useEffect, ChangeEvent } from 'react';
 import Stripe from 'stripe';
 import stripe from './stripeClient';
+
+import appIcon from '../../todo-logo.svg';
 
 export type Todo = {
   text: string,
@@ -71,7 +74,7 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
   // Returning a loading state if we're not ready yet
   if (customer === undefined) {
     return (
-      <ContextView title="todos">Loading...</ContextView>
+      <ContextView title="todos" brandColor="#f662ad" brandIcon={appIcon}><Spinner /></ContextView>
     );
   }
 
@@ -173,7 +176,7 @@ const TodoApp = ({environment}: ExtensionContextValue) => {
   }
 
   return (
-    <ContextView title="Todos">
+    <ContextView title="Todos" brandColor="#f662ad" brandIcon={appIcon}>
       <Box
         key="controls-container"
         css={{
