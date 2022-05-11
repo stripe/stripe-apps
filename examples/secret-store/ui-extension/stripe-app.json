@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "name": "Secret Store Example",
   "icon": "",
-  "permissions": [],
+  "permissions": [
+    {
+      "permission": "secret_write",
+      "purpose": "For storing secrets in Stripe"
+    }
+  ],
   "app_backend": {
     "webhooks": null
   },
