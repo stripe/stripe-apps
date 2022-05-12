@@ -21,5 +21,5 @@ cp .env.example backend/node/.env
    - APP_SECRET, get this from the uploaded app's details view
    - STRIPE_API_KEY, get this from your Stripe developer dashboard
 4. `cd` to `frontend` folder and run `yarn` to install dependencies.
-6. Form the `backend` folder, pick the server language you want and follow the instructions in the server folder README on how to run.
+6. From the `backend` folder, pick the server language you want and follow the instructions in the server folder README on how to run.
 7. Run the frontend with `stripe apps start`
