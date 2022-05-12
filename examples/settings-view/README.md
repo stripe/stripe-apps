@@ -11,14 +11,15 @@ Make sure you are set up correctly by following the [UI Extension docs](https://
 
 ## Running
 
-1. Upload the example using `stripe apps upload`. This is necessary to get the APP_SECRET.
-2. Set the following environment variables:
+1. Rename the app ID in `frontend/stripe-app.json` to something unique.
+2. Upload the example using `stripe apps upload`. This is necessary to get the APP_SECRET.
+3. Copy the `.env.example` file into a file named `.env` in the folder of the server you want to use. For example:
+```bash
+cp .env.example backend/node/.env
+``` 
+4.  Set the following values:
    - APP_SECRET, get this from the uploaded app's details view
    - STRIPE_API_KEY, get this from your Stripe developer dashboard
-3. From the `stripe-apps/examples/settings-view` directory, `cd` to `frontend` folder and run `yarn` to install dependencies. Do this also for the `backend` folder.
-4. Run the backend server with `yarn dev`
-5. Run the frontend with `stripe apps start`
-
-## Testing
-
-There are no tests for this example.
+4. `cd` to `frontend` folder and run `yarn` to install dependencies.
+6. Form the `backend` folder, pick the server language you want and follow the instructions in the server folder README on how to run.
+7. Run the frontend with `stripe apps start`
