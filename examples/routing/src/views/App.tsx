@@ -16,9 +16,14 @@ import {
   useParams,
 } from "react-router-dom";
 
+type Person = {
+  id: string;
+  name: string;
+};
+
 // This is a mock representation of an external data store, for example data
 // retrieved from the Stripe API or a custom backend server.
-const data = new Map([
+const data = new Map<string, Person>([
   ["1", { id: "1", name: "Mollie Osborne" }],
   ["2", { id: "2", name: "Jeff Bowen" }],
   ["3", { id: "3", name: "Timothy Mendoza" }],
