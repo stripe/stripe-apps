@@ -14,7 +14,7 @@ import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 import { useCallback, useEffect, useState } from "react";
 
 const CustomerView = ({ userContext, environment }: ExtensionContextValue) => {
-  const [customer, setCustomer] = useState<Stripe.Customer>();
+  const [customer, setCustomer] = useState<Stripe.Customer | Stripe.DeletedCustomer>();
 
   const BASE_URL =
     environment.mode == "test"
@@ -54,8 +54,12 @@ const CustomerView = ({ userContext, environment }: ExtensionContextValue) => {
           }}
         >
           <Box>
-            <Box>{customer?.name}</Box>
-            <Link href={`mailto:${customer?.email}`} type="secondary">{customer?.email}</Link>
+            {!customer?.deleted && (
+              <>
+                <Box>{customer?.name}</Box>
+                <Link href={`mailto:${customer?.email}`} type="secondary">{customer?.email}</Link>
+              </>
+            )}
           </Box>
           <Box></Box>
         </Box>

@@ -53,12 +53,16 @@ const Subscription = ({ userContext, environment }: ExtensionContextValue) => {
               <Box css={{ marginY: 'large' }}>
                 Customer: <Inline>{subscription.customer}</Inline>
               </Box>
-              <Box css={{ marginY: 'large' }}>
-                Email: <Link>{subscription.customer_email}</Link>
-              </Box>
-              <Box css={{ marginY: 'large' }}>
-                Name: <Inline>{subscription.customer_name}</Inline>
-              </Box>
+              {typeof subscription.customer !== 'string' && !subscription.customer.deleted && (
+                <>
+                  <Box css={{ marginY: 'large' }}>
+                    Email: <Link>{subscription.customer.email}</Link>
+                  </Box>
+                  <Box css={{ marginY: 'large' }}>
+                    Name: <Inline>{subscription.customer.name}</Inline>
+                  </Box>
+                </>
+              )}
               <Box css={{ marginY: 'large' }}>
                 Due Date: <Inline>{subscription.days_until_due}</Inline>
               </Box>

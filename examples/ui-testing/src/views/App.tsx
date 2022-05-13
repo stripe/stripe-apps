@@ -3,7 +3,7 @@ import {
   Button,
   ContextView,
   FormFieldGroup,
-  Notice,
+  Banner,
   TextField,
 } from '@stripe/ui-extension-sdk/ui';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
@@ -37,8 +37,8 @@ const App = ({ userContext, environment }: ExtensionContextValue) => {
           <Button onPress={handleSubmit}>Submit</Button>
         </FormFieldGroup>
         {show && (
-          <Notice
-            type={type == 'success' ? 'positive' : 'negative'}
+          <Banner
+            type={type == 'success' ? 'default' : 'critical'}
             title={type}
             description={
               type == 'success'

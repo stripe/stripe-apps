@@ -19,7 +19,7 @@ const stripeClient = new Stripe(STRIPE_API_KEY, {
 });
 
 const Customer = ({ userContext, environment }: ExtensionContextValue) => {
-  const [customer, setCustomer] = useState<Stripe.Customer>();
+  const [customer, setCustomer] = useState<Stripe.Customer | Stripe.DeletedCustomer>();
 
   const getCustomer = useCallback(async (customerId: string) => {
     const data = await stripeClient.customers.retrieve(customerId);
@@ -47,7 +47,7 @@ const Customer = ({ userContext, environment }: ExtensionContextValue) => {
           <Divider />
           {!customer ? (
             <Box css={{ marginY: 'xxlarge' }}>Loading Customer's Detail...</Box>
-          ) : (
+          ) : !customer.deleted && (
             <>
               <Box css={{ font: 'heading', fontWeight: 'bold' }}>
                 Name: <Inline>{customer.name}</Inline>
