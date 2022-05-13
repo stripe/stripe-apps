@@ -1,5 +1,11 @@
 # Changelog
 
+## 2022-05-13
+- Released version 8.0.0 of the SDK
+  - Add deprecation notice to the `value` prop on `TextArea`, `TextField`, and `Select` components
+  - Add deprecation notice to the `checked` prop on `Checkbox`, `Radio`, and `Switch` components
+  - Remove unsupported `outerRef` props from inputs
+
 ## 2022-05-06
 - Released version 7.1.0 of the SDK
   - Add `brandIcon` and `brandColor` to `ContextView`

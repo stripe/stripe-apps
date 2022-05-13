@@ -2,7 +2,7 @@ import { render, getMockContextProps } from '@stripe/ui-extension-sdk/testing';
 import {
   Button,
   FormFieldGroup,
-  Notice,
+  Banner,
   TextField,
 } from '@stripe/ui-extension-sdk/ui';
 import App from './App';
@@ -19,12 +19,12 @@ describe('App', () => {
     const button = wrapper.find(Button);
     button!.trigger('onPress');
 
-    const notice = wrapper.find(Notice);
+    const notice = wrapper.find(Banner);
     expect(notice?.prop('description')).toEqual(
       'First name or last name not entered!'
     );
     notice?.trigger('onDismiss');
-    expect(wrapper).not.toContainComponent(Notice);
+    expect(wrapper).not.toContainComponent(Banner);
   });
 
   it('renders Notice Component with success message when a button is clicked', async () => {
@@ -34,7 +34,7 @@ describe('App', () => {
     const button = wrapper.find(Button);
     button!.trigger('onPress');
 
-    const notice = wrapper.find(Notice);
+    const notice = wrapper.find(Banner);
     expect(notice?.prop('description')).toEqual('Added full Name!');
   });
 

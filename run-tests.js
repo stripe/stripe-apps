@@ -73,7 +73,7 @@ const testDir = async (dir) => {
   } else {
     // Run tests
     try {
-      await runCommand('yarn jest', dir);
+      await runCommand('yarn jest --passWithNoTests', dir);
     } catch (e) {
       console.error('Test suite failed: ', e);
       process.exit(2);

@@ -46,7 +46,7 @@ const Payment = ({ userContext, environment }: ExtensionContextValue) => {
       case 'processing':
         return 'warning';
       default:
-        return '';
+        return undefined;
     }
   };
 
