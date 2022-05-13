@@ -1,0 +1,29 @@
+{
+  "name": "com.example.router",
+  "version": "0.0.1",
+  "description": "Router Example",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^6.0.0",
+    "react": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "stripe": "^8.218.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.2"
+  }
+}
