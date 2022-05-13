@@ -7,24 +7,25 @@ and provision resources for them.
 
 ## Running
 
-1. Create a .env file with the following variables:
+1. Start by forwarding events to the local server by running
+   `stripe listen --forward-connect-to localhost:8080/webhook`. Make a note of
+   the signing secret the CLI gives you when it starts listening.
+2. Duplicate the `.env.example` file in this folder and rename the copy `.env`.
+   Fill out this new `.env` with the following variables:
    1. STRIPE_API_KEY with the secret API key from
       [your Developer Dashboard](https://dashboard.stripe.com/test/apikeys)
-   2. STRIPE_WEBHOOK_SECRET with the endpoint secret you can find in the
-      [testing webhooks code sample](https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local)
-2. Install dependencies by running `yarn`
-3. Start the server by running `yarn start`
-4. In a second terminal, forward events to the local server by running
-   `stripe listen --forward-connect-to localhost:8080/webhook`
-5. If your test account is not already set up as a Connect platform, it will
+   2. STRIPE_WEBHOOK_SECRET with the signing secret you noted earlier
+3. In a second terminal, install dependencies by running `yarn` and start the
+   server by running `yarn start`
+4. If your test account is not already set up as a Connect platform, it will
    need to be set up as one in order to test connected account webhooks. Go to
    [the Connect section of the Dashboard](https://dashboard.stripe.com/test/connect/accounts/overview)
    and click "Get Started" to set it up. This process isn't necessary to set up
    webhooks for production apps, it is just currently required for testing.
-6. In that same connect overview page, press the "Create" button and create a
+5. In that same connect overview page, press the "Create" button and create a
    new Custom account. This is an easy way to simulate a user who has installed
    our app. Make a note of their account ID.
-7. In a third terminal, generate a mock event by running
+6. In a third terminal, generate a mock event by running
    `stripe trigger --stripe-account CONNECTED_ACCOUNT_ID customer.created` where
    CONNECTED_ACCOUNT_ID is the ID you noted above. This should add the account
    to the backend's data storage and make it visible in the App frontend.
