@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Stripe from 'stripe';
 import type { ExtensionContextValue } from '@stripe/ui-extension-sdk/context';
 import {
   Box,
@@ -9,8 +10,12 @@ import {
   AccordionItem,
   TextField
 } from '@stripe/ui-extension-sdk/ui';
+import {createHttpClient, STRIPE_API_KEY} from '@stripe/ui-extension-sdk/http_client';
 
-import { addSecret, getSecret, deleteSecret, listSecrets } from '../util/secret_store_api';
+const stripe: Stripe = new Stripe(STRIPE_API_KEY, {
+  httpClient: createHttpClient() as Stripe.HttpClient,
+  apiVersion: '2020-08-27',
+});
 
 const App = ({userContext}: ExtensionContextValue) => {
   
@@ -38,7 +43,13 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const setSecretButtonPressed = async () =>  {
     try {
-      const secret = await addSecret(userContext.id, secretNameForSetSecret, secretValueForSetSecret);
+      const secret = await stripe.apps.secrets.create(
+        {
+          scope: { type: "user", user: userContext.id },
+          name: secretNameForSetSecret,
+          payload: secretValueForSetSecret
+        }
+      );
       appendToLogs('Created secret ' + secret.name);
     } catch(e) {
       console.error(e);
@@ -48,7 +59,13 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const getSecretButtonPressed = async () => {
     try {
-      const secret = await getSecret(userContext.id, secretNameForGetSecret);
+      const secret = await stripe.apps.secrets.find(
+        {
+          scope: { type: "user", user: userContext.id },
+          name: secretNameForGetSecret,
+          expand: ['payload']
+        }
+      );
       appendToLogs("Secret '" + secret.name + "' has value: '" + secret.payload + "'");
     } catch(e) {
       console.error(e);
@@ -58,7 +75,12 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const deleteSecretButtonPressed = async () => {
     try {
-      const secret = await deleteSecret(userContext.id, secretNameForDeleteSecret);
+      const secret = await stripe.apps.secrets.deleteWhere(
+        {
+          scope: { type: "user", user: userContext.id },
+          name: secretNameForDeleteSecret
+        }
+      );
       appendToLogs("Secret '" + secret.name + "' has been deleted");
     } catch(e) {
       console.error(e);
@@ -68,7 +90,12 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const listSecretButtonPressed = async () => {
     try {
-      const secrets = await listSecrets(userContext.id);
+      const secrets = await stripe.apps.secrets.list(
+        {
+          scope: { type: "user", user: userContext.id }
+        }
+      );
+
       appendToLogs(secrets.data.length + " secret(s) found");
       for (var i = 0; i < secrets.data.length; i++) {
         appendToLogs("Secret " + (i + 1) + " name: '" + secrets.data[i].name + "'");
