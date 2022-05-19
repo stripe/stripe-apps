@@ -26,7 +26,7 @@ app.get('/find_secret', async (req, res) => {
   const secretName = req.query.secret_name;
 
   try {
-    const secret = await stripe.apps.secrets.find({scope: { type: 'user', user: userId }, name: secretName, 'expand[]': 'payload'});
+    const secret = await stripe.apps.secrets.find({scope: { type: 'user', user: userId }, name: secretName, expand: ['payload']});
 
     res.status(200).json(secret);
   } catch(e) {
