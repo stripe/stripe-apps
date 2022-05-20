@@ -1,22 +1,22 @@
 {
-  "name": "com.example.todo",
+  "name": "com.example.super-todo",
   "version": "0.0.1",
-  "description": "todo",
+  "description": "Super Todo",
   "private": true,
   "license": "~~proprietary~~",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
-    "@stripe/ui-extension-sdk": "^8.0.0",
+    "@stripe/ui-extension-sdk": "^7.1.0",
     "react": "^17.0.2",
-    "stripe": "^8.191.0"
+    "stripe": "^8.202.0"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "devDependencies": {
-    "@types/jest": "^27.4.0",
-    "jest": "^27.4.7",
-    "ts-jest": "^27.1.3",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.6.0-dev.20220110"
-  },
-  "scripts": {
-    "test": "jest --watchAll"
+    "@types/react": "^18.0.9",
+    "typescript": "^4.5.5"
   }
 }

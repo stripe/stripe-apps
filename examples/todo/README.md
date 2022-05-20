@@ -1,28 +1,24 @@
-# Todo Example App
+# SuperTodo Example
 
-![Screenshot](./screenshot.png)
+The following example demonstrates how to build certain UI. It does not contain
+any logic, making it easy to copy and use the markup. 
 
-This is a simple Todo app built with Stripe App UI components and using Stripe Customer metadata to maintain state.
+## Views
 
-## Setup
+### Payment list view
 
-Make sure you are set up correctly by following the [UI Extension docs](https://stripe.com/docs/stripe-apps).
+This view showcases [context view](https://stripe.com/docs/stripe-apps/ui-toolkit/components/contextview)
+`actions` and [tabs](https://stripe.com/docs/stripe-apps/ui-toolkit/components/tabs).
+
+[describe the focusview]
+
+![A screenshot of the Payment list view](PaymentListView.png)
 
 ## Running
 
-1. From the `stripe-apps/examples/todo` directory, run `yarn` to install dependencies
-2. Once you install the `stripe apps` CLI plugin, run the start command:
+Although the app is not specifically made to run, one can preview it by running
+the following command and see the app in action.
 
 ```
 stripe apps start
 ```
-
-Then in your Stripe dashboard, navigate to any Customer and open up the app drawer on the right. You'll then be able to add, remove and complete Todos that are saved uniquely to this customer.
-
-## Testing
-
-```
-yarn run test
-```
-
-To run all the UI tests.
