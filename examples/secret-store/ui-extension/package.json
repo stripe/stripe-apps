@@ -7,7 +7,7 @@
   "dependencies": {
     "@stripe/ui-extension-sdk": "^8.0.0",
     "react": "^17.0.2",
-    "stripe": "^8.213.0"
+    "stripe": "^8.220.0"
   },
   "engines": {
     "node": ">=14"
