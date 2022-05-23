@@ -5,6 +5,7 @@ import {
   Checkbox,
   Divider,
   Icon,
+  Inline,
   Tab,
   TabList,
   TabPanel,
@@ -59,7 +60,7 @@ const CustomerListView = () => {
           <Button
             type="primary"
             css={{ width: "fill", alignX: "center" }}
-            onClick={() => setProgress(Progress.BASICS)}
+            onPress={() => setProgress(Progress.BASICS)}
           >
             Create list
           </Button>
@@ -92,8 +93,11 @@ const CustomerListView = () => {
           title="Authentication expired"
           description="Please re-connect to your SuperTodo account."
           actions={
-            <Button css={{ stack: "x", gap: "small" }}>
-              Sign in to SuperTodo <Icon name="external" size="xsmall" />
+            <Button>
+              <Box css={{ stack: "x", gap: "small", alignY: "center"}}>
+                <Inline>Sign in to SuperTodo</Inline>
+                <Icon name="external" size="xsmall" />
+              </Box>
             </Button>
           }
         />
@@ -101,81 +105,83 @@ const CustomerListView = () => {
         ""
       )}
 
-      <Tabs fitted size="small">
-        <TabList>
-          {Object.keys(tabs).map((name: string) => (
-            <Tab key={name}>{tabs[name as tabTypes]}</Tab>
-          ))}
-        </TabList>
-        <TabPanels>
-          {/* All lists */}
-          <ListTabPanel lists={lists} />
+      <Box css={{marginTop: 'large'}}>
+        <Tabs fitted size="small">
+          <TabList>
+            {Object.keys(tabs).map((name: string) => (
+              <Tab key={name}>{tabs[name as tabTypes]}</Tab>
+            ))}
+          </TabList>
+          <TabPanels>
+            {/* All lists */}
+            <ListTabPanel lists={lists} />
 
-          {/* Your lists */}
-          <ListTabPanel
-            lists={Object.keys(lists)
-              .filter((name) => yourLists.includes(name))
-              .reduce(
-                (list, name) => ({
-                  ...list,
-                  [name]: lists[name as listsTypes],
-                }),
-                {}
-              )}
-          />
+            {/* Your lists */}
+            <ListTabPanel
+              lists={Object.keys(lists)
+                .filter((name) => yourLists.includes(name))
+                .reduce(
+                  (list, name) => ({
+                    ...list,
+                    [name]: lists[name as listsTypes],
+                  }),
+                  {}
+                )}
+            />
 
-          {/* Your todos */}
-          <TabPanel>
-            <Box css={{ marginTop: "large" }}>
-              <Box css={{ marginTop: "small" }}>
-                <Checkbox
-                  label={
-                    <>
-                      <Box>Respond to janefisher@gmail.com</Box>
-                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                        @tayler
-                      </Box>
-                    </>
-                  }
-                />
+            {/* Your todos */}
+            <TabPanel>
+              <Box css={{ marginTop: "large" }}>
+                <Box css={{ marginTop: "small" }}>
+                  <Checkbox
+                    label={
+                      <>
+                        <Box>Respond to janefisher@gmail.com</Box>
+                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                          @tayler
+                        </Box>
+                      </>
+                    }
+                  />
+                </Box>
+                <Box css={{ marginTop: "small" }}>
+                  <Divider/>
+                </Box>
+                <Box css={{ marginTop: "small" }}>
+                  <Checkbox
+                    label={
+                      <>
+                        <Box>Respond to ryan.lee@gmail.com</Box>
+                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                          @tayler
+                        </Box>
+                      </>
+                    }
+                  />
+                </Box>
+                <Box css={{ marginTop: "small" }}>
+                  <Divider/>
+                </Box>
+                <Box css={{ marginTop: "small" }}>
+                  <Checkbox
+                    label={
+                      <>
+                        <Box>Respond to chris_p@hotmail.com</Box>
+                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                          @tayler
+                        </Box>
+                      </>
+                    }
+                  />
+                </Box>
+                <Box css={{ marginTop: "small" }}>
+                  <Divider/>
+                </Box>
               </Box>
-              <Box css={{ marginTop: "small" }}>
-                <Divider/>
-              </Box>
-              <Box css={{ marginTop: "small" }}>
-                <Checkbox
-                  label={
-                    <>
-                      <Box>Respond to ryan.lee@gmail.com</Box>
-                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                        @tayler
-                      </Box>
-                    </>
-                  }
-                />
-              </Box>
-              <Box css={{ marginTop: "small" }}>
-                <Divider/>
-              </Box>
-              <Box css={{ marginTop: "small" }}>
-                <Checkbox
-                  label={
-                    <>
-                      <Box>Respond to chris_p@hotmail.com</Box>
-                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                        @tayler
-                      </Box>
-                    </>
-                  }
-                />
-              </Box>
-              <Box css={{ marginTop: "small" }}>
-                <Divider/>
-              </Box>
-            </Box>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
     </SuperTodoView>
   );
 };
