@@ -18,10 +18,10 @@ const HomeOverviewView = ({userContext}: ExtensionContextValue) => {
       <Box css={{font: 'heading'}}>
         Welcome {userContext.account.name}
       </Box>
-      <Box css={{lineHeight: 1.5, marginTop: 'small'}}>
+      <Box css={{marginTop: 'small'}}>
         The Supertodo App for Stripe let’s you create todo lists for your team right in the Stripe Dashboard.
       </Box>
-      <Box css={{lineHeight: 1.5, marginTop: 'small'}}>
+      <Box css={{marginTop: 'small'}}>
         To start creating tasks, head to one of the following pages to see your lists.
       </Box>
 
@@ -31,7 +31,12 @@ const HomeOverviewView = ({userContext}: ExtensionContextValue) => {
         background: 'container',
         borderRadius: 'medium',
       }}>
-        <Link css={{stack: 'x', distribute: 'space-between', alignY: 'center', width: 'fill'}} href="customers"><Inline>Customers</Inline><Icon name="next" /></Link>
+        <Box css={{stack: 'x', distribute: 'space-between', alignY: 'center', width: 'fill'}}>
+          <Link  href="payments"><Inline>Customers</Inline></Link>
+          <Box css={{ color: "info"}}>
+            <Icon name="next" />
+          </Box>
+        </Box>
       </Box>
 
       <Box css={{
@@ -40,7 +45,12 @@ const HomeOverviewView = ({userContext}: ExtensionContextValue) => {
         background: 'container',
         borderRadius: 'medium',
       }}>
-        <Link css={{stack: 'x', distribute: 'space-between', alignY: 'center', width: 'fill'}} href="payments"><Inline>Payments</Inline><Icon name="next" /></Link>
+        <Box css={{stack: 'x', distribute: 'space-between', alignY: 'center', width: 'fill'}}>
+          <Link  href="payments"><Inline>Payments</Inline></Link>
+          <Box css={{ color: "info"}}>
+            <Icon name="next" />
+          </Box>
+        </Box>
       </Box>
     </SuperTodoView>
   );

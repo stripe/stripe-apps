@@ -23,7 +23,7 @@ import { useState } from "react";
 const tabs = {
   all: "All lists",
   your: "Your lists",
-  todos: "You todos",
+  todos: "Your todos",
 };
 type tabTypes = keyof typeof tabs;
 
@@ -124,45 +124,54 @@ const CustomerListView = () => {
               )}
           />
 
-          {/* You todos */}
+          {/* Your todos */}
           <TabPanel>
             <Box css={{ marginTop: "large" }}>
-              <Checkbox
-                css={{ marginTop: "small" }}
-                label={
-                  <>
-                    <Box>Respond to janefisher@gmail.com</Box>
-                    <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                      @tayler
-                    </Box>
-                  </>
-                }
-              />
-              <Divider css={{ marginTop: "small" }} />
-              <Checkbox
-                css={{ marginTop: "small" }}
-                label={
-                  <>
-                    <Box>Respond to ryan.lee@gmail.com</Box>
-                    <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                      @tayler
-                    </Box>
-                  </>
-                }
-              />
-              <Divider css={{ marginTop: "small" }} />
-              <Checkbox
-                css={{ marginTop: "small" }}
-                label={
-                  <>
-                    <Box>Respond to chris_p@hotmail.com</Box>
-                    <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                      @tayler
-                    </Box>
-                  </>
-                }
-              />
-              <Divider css={{ marginTop: "small" }} />
+              <Box css={{ marginTop: "small" }}>
+                <Checkbox
+                  label={
+                    <>
+                      <Box>Respond to janefisher@gmail.com</Box>
+                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                        @tayler
+                      </Box>
+                    </>
+                  }
+                />
+              </Box>
+              <Box css={{ marginTop: "small" }}>
+                <Divider/>
+              </Box>
+              <Box css={{ marginTop: "small" }}>
+                <Checkbox
+                  label={
+                    <>
+                      <Box>Respond to ryan.lee@gmail.com</Box>
+                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                        @tayler
+                      </Box>
+                    </>
+                  }
+                />
+              </Box>
+              <Box css={{ marginTop: "small" }}>
+                <Divider/>
+              </Box>
+              <Box css={{ marginTop: "small" }}>
+                <Checkbox
+                  label={
+                    <>
+                      <Box>Respond to chris_p@hotmail.com</Box>
+                      <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                        @tayler
+                      </Box>
+                    </>
+                  }
+                />
+              </Box>
+              <Box css={{ marginTop: "small" }}>
+                <Divider/>
+              </Box>
             </Box>
           </TabPanel>
         </TabPanels>

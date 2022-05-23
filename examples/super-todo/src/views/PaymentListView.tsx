@@ -7,7 +7,7 @@ const PaymentListView = () => {
 
   useEffect(() => {
     setTimeout(() => setLoadingState("DONE"), 2000);
-  });
+  }, []);
 
   if (loadingState === "LOADING") {
     return (
@@ -54,7 +54,7 @@ const PaymentListView = () => {
       <Box css={{ marginTop: "small", font: "heading" }}>
         No lists have been created.
       </Box>
-      <Box css={{ marginTop: "xsmall", lineHeight: 1.5 }}>
+      <Box css={{ marginTop: "xsmall" }}>
         You need to have a list before you can create and assign tasks.
       </Box>
     </SuperTodoView>
