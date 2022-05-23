@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`TodoApp renders the app correctly 1`] = `
-Object {
-  "act": [Function],
-  "unmount": [Function],
-}
-`;
