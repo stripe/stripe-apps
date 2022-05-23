@@ -1,0 +1,22 @@
+{
+  "name": "com.example.super-todo",
+  "version": "0.0.1",
+  "description": "Super Todo",
+  "private": true,
+  "license": "~~proprietary~~",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^7.1.0",
+    "react": "^17.0.2",
+    "stripe": "^8.202.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.9",
+    "typescript": "^4.5.5"
+  }
+}
