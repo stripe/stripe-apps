@@ -15,7 +15,7 @@ Read more about Stripe Apps on [https://stripe.com/docs/stripe-apps](https://str
 <h2><img src='./.readme/blocks.svg' width='24'> Resources</h2>
 
 - **[Stripe Apps Docs](https://stripe.com/docs/stripe-apps)** - Get familiar with Stripe Apps
-- **[Stripe Apps Samples](https://github.com/stripe/stripe-apps/tree/master/examples)** - Explore examples of Stripe Apps.
+- **[Stripe Apps Samples](examples)** - Explore examples of Stripe Apps.
 - **[Technical chat on Stripe Discord](https://stripe.com/go/developer-chat)** - Our developers hang out on Stripe Discord
 - **[Open issues](https://github.com/stripe/stripe-apps/issues)** - Our open issue tracker for Stripe Apps
 
