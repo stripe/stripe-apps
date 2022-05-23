@@ -1,0 +1,21 @@
+{
+  "id": "com.example.oauth2-test",
+  "version": "0.0.1",
+  "name": "OAuth2 Test",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {},
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.home.overview",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "purpose": ""
+    }
+  }
+}

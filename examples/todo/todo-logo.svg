@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Slice 1</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo" fill="#FFFFFF">
+            <path d="M100,0 C44.7715,0 0,44.7715 0,100 L0,200 C0,255.22875 44.7715,300 100,300 L200,300 C255.22875,300 300,255.22875 300,200 L300,100 C300,44.7715 255.22875,0 200,0 L100,0 Z M150,262.5 C212.1325,262.5 262.5,212.1325 262.5,150 C262.5,87.868 212.1325,37.5 150,37.5 C87.868,37.5 37.5,87.868 37.5,150 C37.5,212.1325 87.868,262.5 150,262.5 Z" id="Shape"></path>
+            <polygon id="Path" fill-rule="nonzero" points="150 75 225 150 150 225 75 150"></polygon>
+        </g>
+    </g>
+</svg>

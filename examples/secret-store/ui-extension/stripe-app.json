@@ -1,0 +1,29 @@
+{
+  "id": "com.natw.secret_store_example",
+  "version": "0.0.1",
+  "name": "Secret Store Example",
+  "icon": "",
+  "permissions": [
+    {
+      "permission": "secret_write",
+      "purpose": "For storing secrets in Stripe"
+    }
+  ],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.drawer.default",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  }
+}

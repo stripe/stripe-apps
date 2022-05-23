@@ -1,0 +1,16 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "Allows users to create invoices from GitHub issues and pull requests.",
+  "private": true,
+  "license": "~~proprietary~~",
+  "scripts": {
+    "start": "stripe apps start",
+    "upload": "stripe apps upload"
+  },
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^8.0.0",
+    "react": "^17.0.2",
+    "stripe": "^8.200.0"
+  }
+}
