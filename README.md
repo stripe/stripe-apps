@@ -23,6 +23,10 @@ Read more about Stripe Apps on [https://stripe.com/docs/stripe-apps](https://str
 
 Reach out to us directly in our [Developer Support](https://github.com/stripe/stripe-apps/wiki/Developer-Support).
 
+<h2> Publishing </h2>
+
+Built an app? Want to publish it to everyone on Stripe? Publishing your app to the Stripe App Marketplace is rolling out to all developers in the coming months. In the meantime, you can request early access to publishing your app to Stripe App Marketplace by filling in this [form](https://stripe.co1.qualtrics.com/jfe/form/SV_6SbwKWloqeiCJw2). 
+
 © Stripe
 
 <img src="./.readme/bg-banner-bottom.png" align="right" width="515" alt="top background banner">
