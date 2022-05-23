@@ -1,0 +1,19 @@
+{
+  "name": "install-webhooks-example-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "~~proprietary~~",
+  "private": true,
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "stripe": "^8.214.0"
+  },
+  "devDependencies": {
+    "@types/stripe": "^8.0.417"
+  }
+}

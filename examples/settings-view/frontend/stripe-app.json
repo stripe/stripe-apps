@@ -1,0 +1,28 @@
+{
+  "id": "com.example.settings-view",
+  "version": "0.0.1",
+  "name": "Settings View Example",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.drawer.default",
+        "component": "App"
+      },
+      {
+        "viewport": "settings",
+        "component": "AppSettings"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "setting-view-example",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "stripe": "^8.216.0"
+  },
+  "devDependencies": {
+    "@types/stripe": "^8.0.417"
+  }
+}
