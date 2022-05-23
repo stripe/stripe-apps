@@ -32,7 +32,7 @@ const HomeOverviewView = ({userContext}: ExtensionContextValue) => {
         borderRadius: 'medium',
       }}>
         <Box css={{stack: 'x', distribute: 'space-between', alignY: 'center', width: 'fill'}}>
-          <Link  href="payments"><Inline>Customers</Inline></Link>
+          <Link  href="customers"><Inline>Customers</Inline></Link>
           <Box css={{ color: "info"}}>
             <Icon name="next" />
           </Box>
