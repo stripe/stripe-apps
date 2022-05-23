@@ -22,9 +22,8 @@ import {
 import { useState } from "react";
 
 const tabs = {
-  all: "All lists",
-  your: "Your lists",
-  todos: "Your todos",
+  all: "Lists",
+  todos: "Todos",
 };
 type tabTypes = keyof typeof tabs;
 
@@ -106,30 +105,17 @@ const CustomerListView = () => {
       )}
 
       <Box css={{marginTop: 'large'}}>
-        <Tabs fitted size="small">
+        <Tabs fitted size="medium">
           <TabList>
             {Object.keys(tabs).map((name: string) => (
               <Tab key={name}>{tabs[name as tabTypes]}</Tab>
             ))}
           </TabList>
           <TabPanels>
-            {/* All lists */}
+            {/* Lists */}
             <ListTabPanel lists={lists} />
 
-            {/* Your lists */}
-            <ListTabPanel
-              lists={Object.keys(lists)
-                .filter((name) => yourLists.includes(name))
-                .reduce(
-                  (list, name) => ({
-                    ...list,
-                    [name]: lists[name as listsTypes],
-                  }),
-                  {}
-                )}
-            />
-
-            {/* Your todos */}
+            {/* Todos */}
             <TabPanel>
               <Box css={{ marginTop: "large" }}>
                 <Box css={{ marginTop: "small" }}>
