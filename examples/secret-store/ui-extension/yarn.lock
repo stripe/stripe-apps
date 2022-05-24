@@ -2577,10 +2577,10 @@ stripe@^8.174.0:
     "@types/node" ">=8.1.0"
     qs "^6.10.3"
 
-stripe@^8.220.0:
-  version "8.222.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.222.0.tgz#5f159156e411b668a88b8f957df5ac3c63b119de"
-  integrity sha512-hrA79fjmN2Eb6K3kxkDzU4ODeVGGjXQsuVaAPSUro6I9MM3X+BvIsVqdphm3BXWfimAGFvUqWtPtHy25mICY1w==
+stripe@^9.4:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-9.4.0.tgz#8699830053cfc3c87d5380757328f09ec1980825"
+  integrity sha512-eTv1i8N6+f1mdfSlIUYXehwLwDAS6D7ijVz6izg7Pt2m1C9Xm8ZkDNz3KcSmQuTqHvsNHzdeCL2lIC/IcU6RMw==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.10.3"
