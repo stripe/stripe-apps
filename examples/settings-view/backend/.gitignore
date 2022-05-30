@@ -9,6 +9,30 @@ coverage
 # production
 dist
 
+# PHP
+vendor/
+composer.phar
+
+# java
+.gradle
+build
+bin
+
+# Go
+go.mod
+go.sum
+
+# ruby
+Gemfile.lock
+
+# .NET
+obj
+bin
+
+# Python
+env
+__pycache__
+
 # misc
 .DS_Store
 .env
