@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Stripe;
+using dotenv.net;
 using dotenv.net.Utilities;
 
 
@@ -13,6 +14,10 @@ namespace dotnet.Controllers;
 [Route("")]
 public class StripeWebHook : ControllerBase
 {
+    public StripeWebHook() 
+    {
+        DotEnv.Load();
+    }
     // This represents a database or other external infrastructure for
     // the purposes of this example. In a production system you would need
     // to set up a true persistent store.
