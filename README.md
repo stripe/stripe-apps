@@ -28,10 +28,10 @@ Reach out to us directly in our [Developer Support](https://github.com/stripe/st
 Built an app and want to publish it to everyone on Stripe? Publishing to the [Stripe App Marketplace](https://marketplace.stripe.com/) will be available in the coming months.
 
 In the meantime, we encourage you to continue preparing your app for publishing to the marketplace by: 
-Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines). 
-Checking out our design [best practices](https://stripe.com/docs/stripe-apps/listing-guidelines) and sample apps. 
-Watching for updates on [GitHub Discussions](https://github.com/stripe/stripe-apps/discussions).
-Joining the discussion on [Discord](https://discord.com/invite/stripe) in the [Stripe Apps channel](https://discord.com/channels/841573134531821608/974592073229549638).
+- Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines). 
+- Checking out our design [best practices](https://stripe.com/docs/stripe-apps/listing-guidelines) and sample apps. 
+- Watching for updates on [GitHub Discussions](https://github.com/stripe/stripe-apps/discussions).
+- Joining the discussion on [Discord](https://discord.com/invite/stripe) in the [Stripe Apps channel](https://discord.com/channels/841573134531821608/974592073229549638).
 
 © Stripe
 
