@@ -1,4 +1,4 @@
-# Name of sample
+# Settings-View Example (Node Server)
 An Express server implementation
 
 ## Requirements
