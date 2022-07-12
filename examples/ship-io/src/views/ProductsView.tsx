@@ -98,15 +98,21 @@ const ConsoleView = () => {
                     }}
                   >
                     <Checkbox />
-                    <Img
-                      src={product.image}
-                      height="40"
-                      width="40"
-                      alt={product.name}
+                    <Box
                       css={{
                         borderRadius: "medium",
+                        overflow: "hidden",
+                        width: "fit",
+                        display: "grid",
                       }}
-                    />
+                    >
+                      <Img
+                        src={product.image}
+                        height="40"
+                        width="40"
+                        alt={product.name}
+                      />
+                    </Box>
                     {product.name}
                   </Box>
                 </TableCell>
