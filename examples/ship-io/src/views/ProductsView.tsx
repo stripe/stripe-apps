@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -18,33 +19,32 @@ import { BaseView } from "../components/BaseView";
 import FiddleLeafFig from "../assets/fiddle-leaf-fig.jpeg";
 import FicusAltissima from "../assets/ficus-altissima.jpeg";
 import GardeningToolSet from "../assets/gardening-tool-set.jpeg";
+import { Product } from "../common/types";
 
-const defaultProducts = [
-  {
-    id: 1,
+const defaultProducts: Record<string, Product> = {
+  "1": {
     name: "Fiddle Leaf Fig",
     image: FiddleLeafFig,
     selected: false,
     quantity: 1,
   },
-  {
-    id: 2,
+  "2": {
     name: "Ficus Altissima",
     image: FicusAltissima,
     selected: false,
     quantity: 2,
   },
-  {
-    id: 3,
+  "3": {
     name: "Gardening Tool Set",
     image: GardeningToolSet,
     selected: false,
     quantity: 1,
   },
-];
+};
 const dropdownQuantity = Array.from({ length: 10 }, (_, n) => n + 1);
 
 const ConsoleView = () => {
+  const [products, setProducts] = useState(defaultProducts);
   const navigate = useNavigate();
   return (
     <BaseView
@@ -78,16 +78,28 @@ const ConsoleView = () => {
         <TableHead>
           <TableRow>
             <TableHeaderCell width="maximized">
-              <Checkbox />
+              <Checkbox
+                onChange={(e) => {
+                  Object.keys(products).map((id) => {
+                    const product = products[id];
+                    product.selected = e.target.checked;
+                  });
+                  setProducts({ ...products });
+                }}
+                checked={Object.values(products).every(
+                  (product) => product.selected
+                )}
+              />
               Product
             </TableHeaderCell>
             <TableHeaderCell>QTY</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {defaultProducts.map((product) => {
+          {Object.keys(products).map((id) => {
+            const product = products[id];
             return (
-              <TableRow key={product.id}>
+              <TableRow key={id}>
                 <TableCell>
                   <Box
                     css={{
@@ -97,7 +109,13 @@ const ConsoleView = () => {
                       alignX: "start",
                     }}
                   >
-                    <Checkbox />
+                    <Checkbox
+                      onChange={(e) => {
+                        product.selected = e.target.checked;
+                        setProducts({ ...products, [id]: product });
+                      }}
+                      checked={product.selected}
+                    />
                     <Box
                       css={{
                         borderRadius: "medium",

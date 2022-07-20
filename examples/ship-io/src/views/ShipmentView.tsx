@@ -13,26 +13,23 @@ import {
 } from "@stripe/ui-extension-sdk/ui";
 import { BaseView } from "../components/BaseView";
 import { useState } from "react";
-const defaultOptions = [
-  {
-    id: 1,
+const defaultShipmentOptions = {
+  "1": {
     label: "Add signature confirmation",
     description: "Package must be signed for",
     selected: false,
   },
-  {
-    id: 2,
+  "2": {
     label: "Add shipment insurance",
     description: "Full coverage if lost or damaged",
     selected: false,
   },
-  {
-    id: 3,
+  "3": {
     label: "Include return label",
     description: "Label in a box for easy returns",
     selected: false,
   },
-];
+};
 
 const ShipmentView = () => {
   const navigate = useNavigate();
@@ -60,7 +57,7 @@ const ShipmentView = () => {
         <Inline css={{ font: "heading" }}>Shipment options</Inline>
         <Select name="package-size" label="Package size">
           <option value="">Choose an package size</option>
-          <option value="large- box">Large box</option>
+          <option value="large-box">Large box</option>
           <option value="medium-box">Medium box</option>
           <option value="small-box">Small box</option>
         </Select>
@@ -86,10 +83,11 @@ const ShipmentView = () => {
             gap: "small",
           }}
         >
-          {defaultOptions.map((option) => {
+          {Object.entries(defaultShipmentOptions).map((kv) => {
+            const [key, option] = kv;
             return (
               <Checkbox
-                key={option.id}
+                key={key}
                 label={option.label}
                 description={option.description}
               ></Checkbox>
