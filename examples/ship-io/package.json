@@ -1,0 +1,35 @@
+{
+  "name": "com.example.ship-io",
+  "version": "0.0.1",
+  "description": "Ship.IO",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "^8.0.0",
+    "react": "^17.0.2",
+    "react-router-dom": "^6.3.0",
+    "stripe": "^9.8.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "jest": "^27.5.1",
+    "jest-transform-stub": "^2.0.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}
