@@ -22,19 +22,19 @@ import GardeningToolSet from "../assets/gardening-tool-set.jpeg";
 import { Product } from "../common/types";
 
 const defaultProducts: Record<string, Product> = {
-  "1": {
+  "fiddle-leaf-fig": {
     name: "Fiddle Leaf Fig",
     image: FiddleLeafFig,
     selected: false,
     quantity: 1,
   },
-  "2": {
+  "ficus-altissima": {
     name: "Ficus Altissima",
     image: FicusAltissima,
     selected: false,
     quantity: 2,
   },
-  "3": {
+  "gardening-tool-set": {
     name: "Gardening Tool Set",
     image: GardeningToolSet,
     selected: false,
@@ -80,11 +80,12 @@ const ConsoleView = () => {
             <TableHeaderCell width="maximized">
               <Checkbox
                 onChange={(e) => {
-                  Object.keys(products).map((id) => {
-                    const product = products[id];
+                  const productsUpdate = Object.assign({}, products);
+                  Object.keys(productsUpdate).map((id) => {
+                    const product = productsUpdate[id];
                     product.selected = e.target.checked;
                   });
-                  setProducts({ ...products });
+                  setProducts(productsUpdate);
                 }}
                 checked={Object.values(products).every(
                   (product) => product.selected

@@ -14,17 +14,17 @@ import {
 import { BaseView } from "../components/BaseView";
 import { useState } from "react";
 const defaultShipmentOptions = {
-  "1": {
+  "add-signature": {
     label: "Add signature confirmation",
     description: "Package must be signed for",
     selected: false,
   },
-  "2": {
+  "add-shipment": {
     label: "Add shipment insurance",
     description: "Full coverage if lost or damaged",
     selected: false,
   },
-  "3": {
+  "include-return": {
     label: "Include return label",
     description: "Label in a box for easy returns",
     selected: false,
