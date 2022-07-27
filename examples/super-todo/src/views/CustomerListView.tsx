@@ -2,12 +2,8 @@ import {
   Banner,
   Box,
   Button,
-  Checkbox,
-  Divider,
-  Switch,
   Tab,
   TabList,
-  TabPanel,
   TabPanels,
   Tabs,
 } from "@stripe/ui-extension-sdk/ui";
@@ -59,26 +55,19 @@ enum Progress {
   ERROR,
 }
 
-const showTodos = (showCompletedTodos) => {
+const showTodos = (showCompletedTodos: boolean, setTodoType: Function) => {
   if(showCompletedTodos) {
     return (
       /* Completed Todos */
-      <TodosComponent todos={completed_todos}/>
+      <TodosComponent todos={completed_todos} setTodoType={setTodoType} showCompletedTodos={showCompletedTodos}/>
     )
   } else {
     return (
       /* Todos */
-      <TodosComponent todos={todos}/>
+      <TodosComponent todos={todos} setTodoType={setTodoType} showCompletedTodos={showCompletedTodos}/>
     )
   }
 };
-
-async function fetchImg() {
-  const response = await fetch('https://example.com/api');
-  const json = await response.json();
-  console.log("json", json);
-}
-
 
 const CustomerListView = () => {
   const [progress, setProgress] = useState(Progress.ERROR);
@@ -93,7 +82,6 @@ const CustomerListView = () => {
             type="primary"
             css={{ width: "fill", alignX: "center" }}
             onPress={() => {
-              fetchImg();
               setProgress(Progress.BASICS)}
             }
           >
@@ -133,19 +121,11 @@ const CustomerListView = () => {
             {/* Lists */}
             <ListTabPanel lists={lists} />
 
-            {/* Todos */}
-            {/*<TodosComponent todos={todos}/>*/}
-
             {/* Render Todos */}
-            {showTodos(showCompletedTodos)}
+            {showTodos(showCompletedTodos, setTodoType, showCompletedTodos)}
           </TabPanels>
         </Tabs>
-        <Box css={{marginTop: "large"}}>
-          <Switch
-            label="Toggle Todos."
-            onChange={() => {setTodoType(!showCompletedTodos)}}
-          />
-        </Box>
+
       </Box>
     </SuperTodoView>
   );

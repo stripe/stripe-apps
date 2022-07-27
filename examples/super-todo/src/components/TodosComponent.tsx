@@ -2,14 +2,17 @@ import {
   Box,
   TabPanel,
   Checkbox,
-  Divider
+  Divider,
+  Switch
 } from "@stripe/ui-extension-sdk/ui";
 
 type TodosComponentProps = {
-  todos: object
+  todos: object,
+  setTodoType: Function,
+  showCompletedTodos: Boolean
 };
 
-const TodosComponent = ({ todos }: TodosComponentProps) => {
+const TodosComponent = ({ todos, setTodoType, showCompletedTodos }: TodosComponentProps) => {
   return (
     <TabPanel>
       <Box css={{ marginTop: "large" }}>
@@ -31,6 +34,12 @@ const TodosComponent = ({ todos }: TodosComponentProps) => {
           </>
         ))}
       </Box>
+      <Box css={{marginTop: "large"}}>
+          <Switch
+            label="Toggle Todos."
+            onChange={() => {setTodoType(!showCompletedTodos)}}
+          />
+        </Box>
     </TabPanel>
   )
 };
