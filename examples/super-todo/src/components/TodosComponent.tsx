@@ -1,0 +1,38 @@
+import {
+  Box,
+  TabPanel,
+  Checkbox,
+  Divider
+} from "@stripe/ui-extension-sdk/ui";
+
+type TodosComponentProps = {
+  todos: object
+};
+
+const TodosComponent = ({ todos }: TodosComponentProps) => {
+  return (
+    <TabPanel>
+      <Box css={{ marginTop: "large" }}>
+        {Object.entries(todos).map(([email, { task, assignee, checked}]) => (
+          <>
+            <Box css={{ marginTop: "small" }}>
+              <Checkbox
+                defaultChecked={checked}
+                label={<>
+                  <Box>{`${task} ${email}`}</Box>
+                  <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
+                    {`@${assignee}`}
+                  </Box>
+                </>} />
+            </Box>
+            <Box css={{ marginTop: "small" }}>
+              <Divider />
+            </Box>
+          </>
+        ))}
+      </Box>
+    </TabPanel>
+  )
+};
+
+export default TodosComponent;

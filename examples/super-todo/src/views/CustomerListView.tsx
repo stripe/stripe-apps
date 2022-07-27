@@ -4,8 +4,7 @@ import {
   Button,
   Checkbox,
   Divider,
-  Icon,
-  Inline,
+  Switch,
   Tab,
   TabList,
   TabPanel,
@@ -18,6 +17,7 @@ import {
   CreateListMeta,
   ListTabPanel,
   SuperTodoView,
+  TodosComponent
 } from "../components";
 import { useState } from "react";
 
@@ -36,7 +36,18 @@ const lists = {
   banana: { current: 0, total: 16 },
   melon: { current: 1, total: 3 },
 };
-const yourLists = ["pear", "orange", "melon"];
+
+const todos = {
+  "janefisher@gmail.com": { task: "Respond to", assignee: "Tayler", checked: false},
+  "ryan.lee@gmail.com": { task: "Respond to", assignee: "Tayler", checked: false},
+  "john.ryan@cloudly.com": {task: "Send payout to", assignee: "Corey", checked: false}
+};
+
+const completed_todos = {
+  "meghan.smith@cloudly.com": { task: "Set up meeting with", assignee: "Jon", checked: true},
+  "john.ryan@cloudly.com": { task: "Review most recent refunds with", assignee: "Tayler", checked: true},
+  "sarah.baker@cloudly.com": {task: "Transition operations to", assignee: "Corey", checked: true}
+};
 
 type listsTypes = keyof typeof lists;
 
@@ -48,8 +59,30 @@ enum Progress {
   ERROR,
 }
 
+const showTodos = (showCompletedTodos) => {
+  if(showCompletedTodos) {
+    return (
+      /* Completed Todos */
+      <TodosComponent todos={completed_todos}/>
+    )
+  } else {
+    return (
+      /* Todos */
+      <TodosComponent todos={todos}/>
+    )
+  }
+};
+
+async function fetchImg() {
+  const response = await fetch('https://example.com/api');
+  const json = await response.json();
+  console.log("json", json);
+}
+
+
 const CustomerListView = () => {
   const [progress, setProgress] = useState(Progress.ERROR);
+  const [showCompletedTodos, setTodoType] = useState(false);
 
   return (
     <SuperTodoView
@@ -59,7 +92,10 @@ const CustomerListView = () => {
           <Button
             type="primary"
             css={{ width: "fill", alignX: "center" }}
-            onPress={() => setProgress(Progress.BASICS)}
+            onPress={() => {
+              fetchImg();
+              setProgress(Progress.BASICS)}
+            }
           >
             Create list
           </Button>
@@ -86,24 +122,6 @@ const CustomerListView = () => {
         ""
       )}
 
-      {progress === Progress.ERROR ? (
-        <Banner
-          type="critical"
-          title="Authentication expired"
-          description="Please re-connect to your SuperTodo account."
-          actions={
-            <Button>
-              <Box css={{ stack: "x", gap: "small", alignY: "center"}}>
-                <Inline>Sign in to SuperTodo</Inline>
-                <Icon name="external" size="xsmall" />
-              </Box>
-            </Button>
-          }
-        />
-      ) : (
-        ""
-      )}
-
       <Box css={{marginTop: 'large'}}>
         <Tabs fitted size="medium">
           <TabList>
@@ -116,57 +134,18 @@ const CustomerListView = () => {
             <ListTabPanel lists={lists} />
 
             {/* Todos */}
-            <TabPanel>
-              <Box css={{ marginTop: "large" }}>
-                <Box css={{ marginTop: "small" }}>
-                  <Checkbox
-                    label={
-                      <>
-                        <Box>Respond to janefisher@gmail.com</Box>
-                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                          @tayler
-                        </Box>
-                      </>
-                    }
-                  />
-                </Box>
-                <Box css={{ marginTop: "small" }}>
-                  <Divider/>
-                </Box>
-                <Box css={{ marginTop: "small" }}>
-                  <Checkbox
-                    label={
-                      <>
-                        <Box>Respond to ryan.lee@gmail.com</Box>
-                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                          @tayler
-                        </Box>
-                      </>
-                    }
-                  />
-                </Box>
-                <Box css={{ marginTop: "small" }}>
-                  <Divider/>
-                </Box>
-                <Box css={{ marginTop: "small" }}>
-                  <Checkbox
-                    label={
-                      <>
-                        <Box>Respond to chris_p@hotmail.com</Box>
-                        <Box css={{ color: "secondary", marginTop: "xxsmall" }}>
-                          @tayler
-                        </Box>
-                      </>
-                    }
-                  />
-                </Box>
-                <Box css={{ marginTop: "small" }}>
-                  <Divider/>
-                </Box>
-              </Box>
-            </TabPanel>
+            {/*<TodosComponent todos={todos}/>*/}
+
+            {/* Render Todos */}
+            {showTodos(showCompletedTodos)}
           </TabPanels>
         </Tabs>
+        <Box css={{marginTop: "large"}}>
+          <Switch
+            label="Toggle Todos."
+            onChange={() => {setTodoType(!showCompletedTodos)}}
+          />
+        </Box>
       </Box>
     </SuperTodoView>
   );

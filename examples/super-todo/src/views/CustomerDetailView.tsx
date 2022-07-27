@@ -1,6 +1,6 @@
 import { Box, Button, Icon, Link, Img, Inline } from "@stripe/ui-extension-sdk/ui";
-import StripeLogo from "../assets/stripe-logo.svg";
-import SuperTodoLogo from "../assets/super-todo-logo.svg";
+const StripeLogo = require("../assets/stripe-logo.svg");
+const SuperTodoLogo = require("../assets/super-todo-logo.svg");
 import { SuperTodoView } from "../components";
 
 // Example of a Customer Details View

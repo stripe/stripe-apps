@@ -1,5 +1,5 @@
 import { ContextView } from "@stripe/ui-extension-sdk/ui";
-import SuperTodoIcon from "../assets/super-todo-icon.svg";
+const SuperTodoIcon =  require("../assets/super-todo-icon.svg");
 
 const SuperTodoView = ({ title = "SuperTodo", ...contextViewProps }) => (
   <ContextView
