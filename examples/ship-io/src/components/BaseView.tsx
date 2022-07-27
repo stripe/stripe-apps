@@ -1,6 +1,6 @@
 import { Box, ContextView, Inline, Link } from "@stripe/ui-extension-sdk/ui";
 import BrandIconLight from "../assets/brand-icon-light.svg";
-import { TITLE } from "../constants";
+import { TITLE, BRAND_COLOR } from "../constants";
 import { useLogin } from "../hooks/LoginState";
 
 export const BaseView = ({ ...contextViewProps }) => {
@@ -8,7 +8,7 @@ export const BaseView = ({ ...contextViewProps }) => {
   return (
     <ContextView
       title={TITLE}
-      brandColor="#00356b"
+      brandColor={BRAND_COLOR}
       brandIcon={BrandIconLight}
       {...contextViewProps}
     >
