@@ -8,8 +8,8 @@ import {
 
 type TodosComponentProps = {
   todos: object,
-  setTodoType: Function,
-  showCompletedTodos: Boolean
+  setTodoType: void,
+  showCompletedTodos: boolean
 };
 
 const TodosComponent = ({ todos, setTodoType, showCompletedTodos }: TodosComponentProps) => {

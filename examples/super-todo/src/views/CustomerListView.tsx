@@ -39,7 +39,7 @@ const todos = {
   "john.ryan@cloudly.com": {task: "Send payout to", assignee: "Corey", checked: false}
 };
 
-const completed_todos = {
+const completedTodos = {
   "meghan.smith@cloudly.com": { task: "Set up meeting with", assignee: "Jon", checked: true},
   "john.ryan@cloudly.com": { task: "Review most recent refunds with", assignee: "Tayler", checked: true},
   "sarah.baker@cloudly.com": {task: "Transition operations to", assignee: "Corey", checked: true}
@@ -55,11 +55,11 @@ enum Progress {
   ERROR,
 }
 
-const showTodos = (showCompletedTodos: boolean, setTodoType: Function) => {
+const showTodos = (showCompletedTodos: boolean, setTodoType: void) => {
   if(showCompletedTodos) {
     return (
       /* Completed Todos */
-      <TodosComponent todos={completed_todos} setTodoType={setTodoType} showCompletedTodos={showCompletedTodos}/>
+      <TodosComponent todos={completedTodos} setTodoType={setTodoType} showCompletedTodos={showCompletedTodos}/>
     )
   } else {
     return (
@@ -122,7 +122,7 @@ const CustomerListView = () => {
             <ListTabPanel lists={lists} />
 
             {/* Render Todos */}
-            {showTodos(showCompletedTodos, setTodoType, showCompletedTodos)}
+            {showTodos(showCompletedTodos, setTodoType)}
           </TabPanels>
         </Tabs>
 
