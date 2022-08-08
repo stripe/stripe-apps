@@ -8,10 +8,16 @@ This example Express app shows how to interact with Secret Store from a backend 
 STRIPE_API_KEY=$STRIPE_TEST_KEY node app.js
 ```
 
-## Setting a secret
+## Setting a secret that doesn't expire
 
 ```
 curl localhost:4242/set_secret -d "secret_name"="name" -d "secret_value"="shh" -d "user_id"="usr_5"
+```
+
+## Setting a secret that expires
+
+```
+curl localhost:4242/set_secret -d "secret_name"="name" -d "secret_value"="shh" -d "user_id"="usr_5" -d "secret_expiry"=3490367953
 ```
 
 ## Finding a secret
