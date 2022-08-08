@@ -10,9 +10,15 @@ app.post('/set_secret', async (req, res) => {
   const userId = req.body.user_id;
   const secretName = req.body.secret_name;
   const secretValue = req.body.secret_value;
+  const secretExpiry = req.body.secret_expiry;
 
   try {
-    const secret = await stripe.apps.secrets.create({scope: { type: 'user', user: userId }, name: secretName, payload: secretValue});
+    const secret = await stripe.apps.secrets.create({
+      scope: { type: 'user', user: userId }, 
+      name: secretName, 
+      payload: secretValue, 
+      expires_at: secretExpiry
+    });
 
     res.status(200).json(secret);
   } catch(e) {

@@ -24,6 +24,7 @@ const App = ({userContext}: ExtensionContextValue) => {
   // Set secret form
   const [secretNameForSetSecret, setSecretNameForSetSecret] = useState('');
   const [secretValueForSetSecret, setSecretValueForSetSecret] = useState('');
+  const [secretExpiryForSetSecret, setSecretExpiryForSetSecret] = useState<number | null>(null);
 
   // Get secret form
   const [secretNameForGetSecret, setSecretNameForGetSecret] = useState('');
@@ -43,13 +44,18 @@ const App = ({userContext}: ExtensionContextValue) => {
 
   const setSecretButtonPressed = async () =>  {
     try {
-      const secret = await stripe.apps.secrets.create(
-        {
-          scope: { type: "user", user: userContext.id },
-          name: secretNameForSetSecret,
-          payload: secretValueForSetSecret
-        }
-      );
+      const params = {
+        scope: { type: "user", user: userContext.id },
+        name: secretNameForSetSecret,
+        payload: secretValueForSetSecret,
+      };
+
+      if (secretExpiryForSetSecret) {
+        params['expires_at'] = secretExpiryForSetSecret;
+      }
+
+      const secret = await stripe.apps.secrets.create(params);
+      
       appendToLogs('Created secret ' + secret.name);
     } catch(e) {
       console.error(e);
@@ -66,7 +72,7 @@ const App = ({userContext}: ExtensionContextValue) => {
           expand: ['payload']
         }
       );
-      appendToLogs("Secret '" + secret.name + "' has value: '" + secret.payload + "'");
+      appendToLogs("Secret '" + secret.name + "' has value: '" + secret.payload + "', expiration: " + secret.expires_at);
     } catch(e) {
       console.error(e);
       appendToLogs('ERROR: ' + (e as Error).message);
@@ -98,7 +104,7 @@ const App = ({userContext}: ExtensionContextValue) => {
 
       appendToLogs(secrets.data.length + " secret(s) found");
       for (var i = 0; i < secrets.data.length; i++) {
-        appendToLogs("Secret " + (i + 1) + " name: '" + secrets.data[i].name + "'");
+        appendToLogs("Secret " + (i + 1) + " name: '" + secrets.data[i].name + "', expiration: " + secrets.data[i].expires_at);
       }
     } catch(e) {
       console.error(e);
@@ -125,6 +131,9 @@ const App = ({userContext}: ExtensionContextValue) => {
             }}></TextField>
             <TextField label='Secret Value' placeholder='secret_abcxyz' onChange={(e) => {
               setSecretValueForSetSecret(e.target.value);
+            }}></TextField>
+            <TextField label='Secret Expiration (optional)' placeholder='1234567891' onChange={(e) => {
+              setSecretExpiryForSetSecret(e.target.value);
             }}></TextField>
             <Button type='primary' onPress={setSecretButtonPressed}>Create</Button>
           </Box>
