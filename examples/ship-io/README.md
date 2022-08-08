@@ -10,9 +10,9 @@ The app mocks an order fulfillment app that lets users create labels for shipmen
 
 - Authentication [(LoginView)](src/views/LoginView.tsx)
 - Sign out [(BaseView)](src/components/BaseView.tsx/)
-- Navigation and routing [(App.tsx)](/src/views/App.tsx)
-- Backlinks ([HomeView](/src/views/HomeView.tsx), [ProductsView](/src/views/ProductsView.tsx), [ShipmentView](/src/views/ShipmentView.tsx))
-- Action buttons ([ProductsView](/src/views/ProductsView.tsx), [HomeView](/src/views/HomeView.tsx))
+- Navigation and routing [(App.tsx)](src/views/App.tsx)
+- Backlinks ([HomeView](src/views/HomeView.tsx), [ProductsView](src/views/ProductsView.tsx), [ShipmentView](src/views/ShipmentView.tsx))
+- Action buttons ([ProductsView](src/views/ProductsView.tsx), [HomeView](src/views/HomeView.tsx))
 
 ## Running
 
