@@ -1,0 +1,14 @@
+name: Test JSON schema
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test schema
+        run: |
+          yarn install --frozen-lockfile
+          yarn types
+          yarn lint
+          yarn test
+        working-directory: ./schema

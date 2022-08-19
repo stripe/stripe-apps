@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint", "prettier"],
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "no-shadow": "off",
+    "no-use-before-define": "off"
+  }
+}
