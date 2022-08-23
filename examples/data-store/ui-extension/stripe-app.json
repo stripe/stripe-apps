@@ -1,0 +1,42 @@
+{
+  "id": "com.mattpatt.data_store_example",
+  "version": "0.0.1",
+  "name": "Data Store Example",
+  "icon": "",
+  "permissions": [
+    {
+      "permission": "customer_write",
+      "purpose": "For storing additional data about customers"
+    },
+    {
+      "permission": "datastore_write",
+      "purpose": "For storing additional data in Stripe"
+    },
+    {
+      "permission": "payment_intent_read",
+      "purpose": "For storing additional data about payments"
+    }
+  ],
+  "app_backend": {
+    "webhooks": []
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "CustomerDetailView"
+      },
+      {
+        "viewport": "stripe.dashboard.payment.detail",
+        "component": "PaymentDetailView"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  },
+  "post_install_action": null
+}
