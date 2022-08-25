@@ -5,7 +5,7 @@
   <br/>
 </h1>
 
-<h4 align="center">Stripe Apps lets you embed custom user experiences directly in the Stripe Dashboard and orchestrate the Stripe API.</h4>
+<h4 align="center">Stripe Apps let you embed custom user experiences directly in the Stripe Dashboard and orchestrate the Stripe API.</h4>
 
 <br />
 <br />
