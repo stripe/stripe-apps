@@ -184,7 +184,7 @@
       }
     },
     "post_install_action": {
-      "description": "^^^Specify a recommended action users should take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "description": "^^^Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
       "markdownDescription": "^^^Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
       "oneOf": [
         { "type": "null" },
