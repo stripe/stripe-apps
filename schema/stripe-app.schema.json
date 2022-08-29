@@ -223,7 +223,7 @@
       ]
     },
     "ui_extension": {
-      "description": "^^^Configuration options related to the display of the app in the Dashboard.",
+      "description": "^^^Configuration options for how to display the app in the Dashboard.",
       "type": "object",
       "properties": {
         "views": {
