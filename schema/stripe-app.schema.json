@@ -295,7 +295,7 @@
               }
             },
             "purpose": {
-              "description": "^^^An message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
+              "description": "^^^A message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
               "type": "string"
             }
           }
