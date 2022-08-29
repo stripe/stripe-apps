@@ -306,7 +306,7 @@
   "$defs": {
     "postInstallActionType": {
       "description": "^^^The recommended action for users to take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
-      "markdownDescription": "^^^The recommended action users should take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
+      "markdownDescription": "^^^The recommended action for users to take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
     }
   }
 }
