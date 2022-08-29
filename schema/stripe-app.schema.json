@@ -19,38 +19,38 @@
       "type": "string"
     },
     "id": {
-      "description": "^^^The unique identifier for an app, for example \"com.invoicing.myapp\".",
-      "markdownDescription": "^^^The unique identifier for an app, for example `com.invoicing.myapp`.",
+      "description": "The unique identifier for an app, for example \"com.invoicing.myapp\".",
+      "markdownDescription": "The unique identifier for an app, for example `com.invoicing.myapp`.",
       "type": "string",
       "pattern": "^[a-zA-Z0-9\\-\\.]+$"
     },
     "version": {
-      "description": "^^^An app version that you define. You can use any format you want for version identifiers.",
+      "description": "An app version that you define. You can use any format you want for version identifiers.",
       "type": "string",
       "minLength": 1
     },
     "name": {
-      "description": "^^^The name shown in the UI when referring to your app.",
+      "description": "The name shown in the UI when referring to your app.",
       "type": "string",
       "minLength": 1
     },
     "icon": {
-      "description": "^^^The relative path to a 300x300 pixel PNG image, for example \"./icon.png\".",
-      "markdownDescription": "^^^The relative path to a 300x300 pixel PNG image, for example `./icon.png`.",
+      "description": "The relative path to a 300x300 pixel PNG image, for example \"./icon.png\".",
+      "markdownDescription": "The relative path to a 300x300 pixel PNG image, for example `./icon.png`.",
       "type": "string",
       "pattern": "^$|^\\./((\\.\\./|[a-zA-Z0-9_/\\-\\\\])[^\\.\\.]*\\.png)$"
     },
     "permissions": {
-      "description": "^^^The permissions available to the app. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
-      "markdownDescription": "^^^The permissions available to the app. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+      "description": "The permissions available to the app. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
+      "markdownDescription": "The permissions available to the app. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "permission": {
             "type": "string",
-            "description": "^^^The ID of the permission. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
-            "markdownDescription": "^^^The ID of the permission. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+            "description": "The ID of the permission. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
+            "markdownDescription": "The ID of the permission. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
             "enum": [
               "account_link_write",
               "application_fee_read",
@@ -140,7 +140,7 @@
           },
           "purpose": {
             "type": "string",
-            "description": "^^^The reason for requesting the permission.",
+            "description": "The reason for requesting the permission.",
             "minLength": 1
           }
         },
@@ -149,12 +149,12 @@
       }
     },
     "app_backend": {
-      "description": "^^^Configuration options related to the app backend.",
+      "description": "Configuration options related to the app backend.",
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
         "webhooks": {
-          "description": "^^^Configure user events to be sent to an external URL.",
+          "description": "Configure user events to be sent to an external URL.",
           "type": ["array", "null"],
           "items": {
             "type": "object",
@@ -162,11 +162,11 @@
             "properties": {
               "url": {
                 "type": "string",
-                "description": "^^^The URL to send the events to.",
+                "description": "The URL to send the events to.",
                 "format": "uri"
               },
               "enabled_events": {
-                "description": "^^^The events that we send to the webhook.",
+                "description": "The events that we send to the webhook.",
                 "type": ["array", "null"],
                 "items": {
                   "type": "string",
@@ -175,7 +175,7 @@
               },
               "api_version": {
                 "type": "string",
-                "description": "^^^The API version.",
+                "description": "The API version.",
                 "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
               }
             }
@@ -184,8 +184,8 @@
       }
     },
     "post_install_action": {
-      "description": "^^^Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
-      "markdownDescription": "^^^Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
+      "description": "Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "markdownDescription": "Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
       "oneOf": [
         { "type": "null" },
         {
@@ -213,7 +213,7 @@
               ]
             },
             "url": {
-              "description": "^^^External URL to redirect users to after installing your app.",
+              "description": "External URL to redirect users to after installing your app.",
               "type": "string",
               "format": "uri",
               "pattern": "^https?://"
@@ -223,11 +223,11 @@
       ]
     },
     "ui_extension": {
-      "description": "^^^Configuration options for how to display the app in the Dashboard.",
+      "description": "Configuration options for how to display the app in the Dashboard.",
       "type": "object",
       "properties": {
         "views": {
-          "description": "^^^Configure where the app appears in the Dashboard.",
+          "description": "Configure where the app appears in the Dashboard.",
           "type": "array",
           "items": {
             "type": "object",
@@ -235,8 +235,8 @@
             "properties": {
               "viewport": {
                 "type": "string",
-                "description": "^^^An identifier that indicates where a UI extension appears in the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
-                "markdownDescription": "^^^An identifier that indicates where a UI extension appears in the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
+                "description": "An identifier that indicates where a UI extension appears in the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
+                "markdownDescription": "An identifier that indicates where a UI extension appears in the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
                 "enum": [
                   "settings",
                   "stripe.dashboard.balance.overview",
@@ -262,21 +262,21 @@
               },
               "component": {
                 "type": "string",
-                "description": "^^^The name of the React component in the \"src/views\" directory to render.",
-                "markdownDescription": "^^^The name of the React component in the `src/views` directory to render.",
+                "description": "The name of the React component in the \"src/views\" directory to render.",
+                "markdownDescription": "The name of the React component in the `src/views` directory to render.",
                 "pattern": "^[a-zA-Z0-9_]{1,}$"
               }
             }
           }
         },
         "content_security_policy": {
-          "description": "^^^Configure the content security policy for your app.",
+          "description": "Configure the content security policy for your app.",
           "type": "object",
           "required": ["purpose"],
           "properties": {
             "connect-src": {
-              "description": "^^^URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. Read about using third-party APIs: https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis",
-              "markdownDescription": "^^^URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. [Read about using third-party APIs](https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis).",
+              "description": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. Read about using third-party APIs: https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis",
+              "markdownDescription": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. [Read about using third-party APIs](https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis).",
               "type": ["array", "null"],
               "items": {
                 "type": "string",
@@ -285,8 +285,8 @@
               }
             },
             "image-src": {
-              "description": "^^^URLs the Img component (https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
-              "markdownDescription": "^^^URLs the [Img component](https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "description": "URLs the Img component (https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "markdownDescription": "URLs the [Img component](https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
               "type": ["array", "null"],
               "items": {
                 "type": "string",
@@ -295,7 +295,7 @@
               }
             },
             "purpose": {
-              "description": "^^^A message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
+              "description": "A message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
               "type": "string"
             }
           }
@@ -305,8 +305,8 @@
   },
   "$defs": {
     "postInstallActionType": {
-      "description": "^^^The recommended action for users to take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
-      "markdownDescription": "^^^The recommended action for users to take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
+      "description": "The recommended action for users to take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "markdownDescription": "The recommended action for users to take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
     }
   }
 }
