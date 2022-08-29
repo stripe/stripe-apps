@@ -227,7 +227,7 @@
       "type": "object",
       "properties": {
         "views": {
-          "description": "^^^Configure where the app will appear within the Dashboard.",
+          "description": "^^^Configure where the app appears in the Dashboard.",
           "type": "array",
           "items": {
             "type": "object",
