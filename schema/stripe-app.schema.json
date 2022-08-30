@@ -166,7 +166,7 @@
                 "format": "uri"
               },
               "enabled_events": {
-                "description": "The events that will be sent to the webhook.",
+                "description": "The events that we send to the webhook.",
                 "type": ["array", "null"],
                 "items": {
                   "type": "string",
@@ -184,7 +184,7 @@
       }
     },
     "post_install_action": {
-      "description": "Specify a recommended action users should take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "description": "Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
       "markdownDescription": "Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
       "oneOf": [
         { "type": "null" },
@@ -223,11 +223,11 @@
       ]
     },
     "ui_extension": {
-      "description": "Configuration options related to the display of the app in the Dashboard.",
+      "description": "Configuration options for how to display the app in the Dashboard.",
       "type": "object",
       "properties": {
         "views": {
-          "description": "Configure where the app will appear within the Dashboard.",
+          "description": "Configure where the app appears in the Dashboard.",
           "type": "array",
           "items": {
             "type": "object",
@@ -235,8 +235,8 @@
             "properties": {
               "viewport": {
                 "type": "string",
-                "description": "An identifier that indicates where a UI extension will appear within the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
-                "markdownDescription": "An identifier that indicates where a UI extension will appear within the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
+                "description": "An identifier that indicates where a UI extension appears in the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
+                "markdownDescription": "An identifier that indicates where a UI extension appears in the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
                 "enum": [
                   "settings",
                   "stripe.dashboard.balance.overview",
@@ -295,7 +295,7 @@
               }
             },
             "purpose": {
-              "description": "An message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
+              "description": "A message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
               "type": "string"
             }
           }
@@ -305,8 +305,8 @@
   },
   "$defs": {
     "postInstallActionType": {
-      "description": "The recommended action users should take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
-      "markdownDescription": "The recommended action users should take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
+      "description": "The recommended action for users to take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "markdownDescription": "The recommended action for users to take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
     }
   }
 }
