@@ -1,9 +1,9 @@
 import { addSeconds } from 'date-fns';
 
 import { TokenData } from "./types";
-import { client_id } from '../../config.example';
+import { client_id } from '../../config.example.ts';
 
-const APP_NAME = 'com.example.thisdot-dropbox-oauth-pkce';
+const APP_NAME = 'com.example.dropbox-oauth-pkce';
 const redirectURI = `https://dashboard.stripe.com/test/apps-oauth/${APP_NAME}`;
 export const getDropboxAuthURL = (state: string, challenge: string) =>
   `https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirectURI}&state=${state}&code_challenge=${challenge}&code_challenge_method=S256`;
