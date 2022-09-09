@@ -1,0 +1,7 @@
+# Gemfile
+source 'https://rubygems.org'
+
+gem 'stripe'
+gem 'sinatra'
+gem "sinatra-cross_origin"
+gem 'dotenv'
