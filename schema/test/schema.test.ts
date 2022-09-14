@@ -59,6 +59,14 @@ describe("Validate manifests", () => {
     expect(valid).toBe(false);
   });
 
+  it("accepts underscores in app id", () => {
+    const valid = validate({
+      ...basicManifest,
+      id: "app_id.stripe.com"
+    });
+    expect(valid).toBe(true);
+  });
+
   it("rejects invalid permissions", () => {
     const valid = validate({
       ...basicManifest,

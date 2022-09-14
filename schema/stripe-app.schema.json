@@ -22,7 +22,7 @@
       "description": "The unique identifier for an app, for example \"com.invoicing.myapp\".",
       "markdownDescription": "The unique identifier for an app, for example `com.invoicing.myapp`.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9\\-\\.]+$"
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
     },
     "version": {
       "description": "An app version that you define. You can use any format you want for version identifiers.",
