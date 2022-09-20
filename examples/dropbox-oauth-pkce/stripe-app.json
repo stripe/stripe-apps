@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "name": "Dropbox OAuth PKCE",
   "icon": "",
-  "permissions": [],
+  "permissions": [
+    {
+      "permission": "secret_write",
+      "purpose": "For storing secrets in Stripe."
+    }
+  ],
   "app_backend": {
     "webhooks": null
   },
@@ -20,8 +25,9 @@
         "https://api.dropboxapi.com/oauth2/token",
         "https://api.dropboxapi.com/2/users/get_account"
       ],
-      "img-src": null,
+      "image-src": null,
       "purpose": "Enables Dropbox integration"
     }
-  }
+  },
+  "post_install_action": null
 }
