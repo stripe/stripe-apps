@@ -1,8 +1,12 @@
 name: Test JSON schema
-on: push
+on:
+  push:
+  pull_request_target:
+    types: [labeled]
 jobs:
   test-schema:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe-to-test')
     steps:
       - uses: actions/checkout@v3
       - name: Test schema
