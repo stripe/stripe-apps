@@ -1,12 +1,12 @@
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 import {
-  Banner,
   Box,
   Button,
   ContextView,
   Icon,
   Inline,
 } from "@stripe/ui-extension-sdk/ui";
+import { showToast } from "@stripe/ui-extension-sdk/utils";
 import { useEffect, useState } from "react";
 import { getNotesForCustomerAPI } from "../api";
 import AddNoteView from "../components/AddNoteView";
@@ -67,23 +67,13 @@ const CustomerDetailView = ({
         </Button>
       }
     >
-      {showAddNoteSuccessMessage && (
-        <Box css={{ marginBottom: "small" }}>
-          <Banner
-            type="default"
-            onDismiss={() => setShowAddNoteSuccessMessage(false)}
-            title="Added new note"
-          />
-        </Box>
-      )}
-
       <AddNoteView
         isOpen={showAddNoteView}
         customerId={customerId as string}
         agentId={agentId}
         onSuccessAction={() => {
           setShowAddNoteView(false);
-          setShowAddNoteSuccessMessage(true);
+          showToast("Added new note", { type: "success" });
           getNotes();
         }}
         onCancelAction={() => {
@@ -91,21 +81,8 @@ const CustomerDetailView = ({
         }}
       />
 
-      <Box css={{ stack: "y" }}>
-        <Box css={{}}>
-          <Inline
-            css={{
-              font: "heading",
-              color: "primary",
-              fontWeight: "semibold",
-              paddingY: "medium",
-            }}
-          >
-            View All Notes
-          </Inline>
-
-          <Notes notes={notes} />
-        </Box>
+      <Box>
+        <Notes notes={notes} />
       </Box>
     </ContextView>
   );

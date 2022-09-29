@@ -35,7 +35,7 @@ const HomeOverviewView = ({
               fontWeight: "semibold",
             }}
           >
-            View All Notes
+            All notes
           </Inline>
 
           <Notes notes={notes} />
