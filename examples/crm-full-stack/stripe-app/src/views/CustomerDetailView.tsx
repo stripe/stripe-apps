@@ -24,20 +24,26 @@ const CustomerDetailView = ({
   const agentName = userContext?.account.name || ""; //todo
 
   const [notes, setNotes] = useState<Note[] | null>(null);
-  const [showAddNoteView, setShowAddNoteView] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [showAddNoteSuccessMessage, setShowAddNoteSuccessMessage] =
     useState<boolean>(false);
+  const [showAddNoteView, setShowAddNoteView] = useState<boolean>(false);
 
   const getNotes = () => {
     if (!customerId) {
       return;
     }
 
-    getNotesForCustomerAPI({ customerId }).then((res: APIResponse) => {
-      if (!res.data.error) {
-        setNotes(res.data.notes);
-      }
-    });
+    getNotesForCustomerAPI({ customerId })
+      .then((res: APIResponse) => {
+        if (!res.data.error) {
+          setNotes(res.data.notes);
+        }
+      })
+      .catch(() => {
+        setError(true);
+        return showToast("Backend server not reachable", { type: "caution" });
+      });
   };
 
   useEffect(() => {
@@ -73,7 +79,6 @@ const CustomerDetailView = ({
         agentId={agentId}
         onSuccessAction={() => {
           setShowAddNoteView(false);
-          showToast("Added new note", { type: "success" });
           getNotes();
         }}
         onCancelAction={() => {
@@ -82,7 +87,7 @@ const CustomerDetailView = ({
       />
 
       <Box>
-        <Notes notes={notes} />
+        <Notes notes={notes} error={error} />
       </Box>
     </ContextView>
   );

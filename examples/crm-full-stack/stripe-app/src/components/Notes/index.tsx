@@ -3,6 +3,7 @@ import { Note } from "../../types";
 
 interface NotesProps {
   notes: Note[] | null;
+  error: boolean;
 }
 
 const Notes = ({ notes }: NotesProps) => {

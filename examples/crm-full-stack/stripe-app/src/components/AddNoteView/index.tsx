@@ -1,4 +1,5 @@
 import { Button, FocusView, TextArea } from "@stripe/ui-extension-sdk/ui";
+import { showToast } from "@stripe/ui-extension-sdk/utils";
 import { FunctionComponent, useState } from "react";
 import { addNoteAPI } from "../../api";
 
@@ -18,6 +19,18 @@ const AddNoteView: FunctionComponent<AddNoteViewProps> = ({
   onCancelAction,
 }: AddNoteViewProps) => {
   const [message, setMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const addNote = () => {
+    if (!customerId) {
+      return;
+    }
+
+    addNoteAPI({ customerId, agentId, message }).catch(() => {
+      return showToast("Backend server not reachable", { type: "caution" });
+    });
+    showToast("Added new note", { type: "success" });
+  };
 
   return (
     <>
@@ -31,7 +44,7 @@ const AddNoteView: FunctionComponent<AddNoteViewProps> = ({
           <Button
             type="primary"
             onPress={async () => {
-              await addNoteAPI({ customerId, agentId, message });
+              await addNote();
               setMessage("");
               onSuccessAction();
             }}
