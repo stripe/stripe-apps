@@ -22,7 +22,7 @@
     <br />
     </p>
 
-![Screenshot](https://www.saasbase.dev/content/images/size/w1600/2022/07/Screen-Shot-2022-07-09-at-1.15.00-PM.png)
+![Screenshot](https://www.saasbase.dev/content/images/size/w1600/2022/07/Screen-Shot-2022-07-09-at-1.01.21-PM.png)
 
 <p>
     <br />
