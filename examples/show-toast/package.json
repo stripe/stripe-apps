@@ -1,5 +1,5 @@
 {
-  "name": "dev.t6d.testing-app",
+  "name": "com.example.show-toast",
   "version": "0.1.0",
   "description": "App for testing toasts and other things",
   "private": true,
