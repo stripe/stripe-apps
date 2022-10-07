@@ -1,5 +1,5 @@
 {
-  "id": "dev.t6d.toaster",
+  "id": "com.example.show-toast",
   "version": "0.0.1",
   "name": "Toaster",
   "icon": "./app_icon.png",
