@@ -1,7 +1,7 @@
 {
   "id": "com.example.show-toast",
   "version": "0.0.1",
-  "name": "Toaster",
+  "name": "Show Toast",
   "icon": "./app_icon.png",
   "permissions": [],
   "app_backend": {
