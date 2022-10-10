@@ -4,13 +4,14 @@ import {
   ContextView,
   Inline,
   Radio,
-  TextField
+  TextField,
 } from "@stripe/ui-extension-sdk/ui";
 import { showToast, ToastType } from "@stripe/ui-extension-sdk/utils";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Form } from "../components";
 import { withValueFromEvent } from "../events";
 import BrandIcon from "./brand_icon.svg";
+import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -18,7 +19,7 @@ function capitalize(word: string) {
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : never;
 
-const App = () => {
+const App = (_: ExtensionContextValue) => {
   const defaultMessage = "Yummy, yummy 🍞";
   const defaultAction = "Undo";
   const [message, setMessage] = useState(defaultMessage);
@@ -28,14 +29,19 @@ const App = () => {
   const toastResults = useRef(new Set<UnwrapPromise<ReturnType<typeof showToast>>>());
 
   const onAction = action ? () => console.log('Toast onAction handler called') : undefined;
-  const renderToast = async () =>
+
+  const renderToast = useCallback(async () => {
     toastResults.current.add(await showToast(message, { type, action, onAction }));
-  const updateToasts = () =>
+  }, [message, type, action, onAction]);
+
+  const updateToasts = useCallback(() => {
     toastResults.current.forEach(({update}) => update(message, { type, action, onAction }));
-  const clearToasts = () => {
+  }, [message, type, action, onAction]);
+
+  const clearToasts = useCallback(() => {
     toastResults.current.forEach(({dismiss}) => dismiss());
     toastResults.current.clear();
-  };
+  }, []);
 
   return (
     <ContextView
