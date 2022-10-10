@@ -1,0 +1,25 @@
+{
+  "id": "com.example.show-toast",
+  "version": "0.1.0",
+  "name": "Show Toast",
+  "icon": "./app_icon.png",
+  "permissions": [],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.drawer.default",
+        "component": "App"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  },
+  "post_install_action": null
+}
