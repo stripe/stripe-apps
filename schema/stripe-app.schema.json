@@ -301,6 +301,10 @@
           }
         }
       }
+    },
+    "constants": {
+      "description": "Custom values that are passed through to your views via context props.",
+      "type": ["object", "null"]
     }
   },
   "$defs": {
