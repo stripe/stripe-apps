@@ -46,6 +46,9 @@ const basicManifest = Object.freeze({
   post_install_action: {
     type: "settings",
   },
+  constants: {
+    HELLO: "world",
+  },
 });
 
 describe("Validate manifests", () => {
@@ -62,7 +65,7 @@ describe("Validate manifests", () => {
   it("accepts underscores in app id", () => {
     const valid = validate({
       ...basicManifest,
-      id: "app_id.stripe.com"
+      id: "app_id.stripe.com",
     });
     expect(valid).toBe(true);
   });
