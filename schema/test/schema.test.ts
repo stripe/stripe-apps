@@ -1,6 +1,7 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import schema from "../stripe-app.schema.json";
+import schemaLocal from "../stripe-app-local.schema.json";
 
 const ajv = new Ajv();
 addFormats(ajv);
@@ -9,6 +10,7 @@ addFormats(ajv);
 ajv.addKeyword("markdownDescription");
 
 const validate = ajv.compile(schema);
+const validateLocal = ajv.compile(schemaLocal);
 
 const basicManifest = Object.freeze({
   id: "com.example.app",
@@ -57,9 +59,22 @@ describe("Validate manifests", () => {
     expect(valid).toBe(true);
   });
 
+  it("validates a basic local manifest", () => {
+    const valid = validateLocal({
+      extends: "stripe-app.json",
+      ...basicManifest,
+    });
+    expect(valid).toBe(true);
+  });
+
   it("rejects an empty manifest", () => {
     const valid = validate({});
     expect(valid).toBe(false);
+  });
+
+  it("accepts an empty local manifest", () => {
+    const valid = validateLocal({});
+    expect(valid).toBe(true);
   });
 
   it("accepts underscores in app id", () => {
@@ -119,11 +134,24 @@ describe("Validate manifests", () => {
       ui_extension: {
         ...basicManifest.ui_extension,
         content_security_policy: {
-          "connect-src": ["https://no-path.com/"],
+          "connect-src":
+            basicManifest.ui_extension.content_security_policy["connect-src"],
         },
       },
     });
     expect(valid).toBe(false);
+  });
+
+  it("accepts a local CSP connect-src without a purpose", () => {
+    const valid = validateLocal({
+      ui_extension: {
+        content_security_policy: {
+          "connect-src":
+            basicManifest.ui_extension.content_security_policy["connect-src"],
+        },
+      },
+    });
+    expect(valid).toBe(true);
   });
 
   it("accepts post-install action url property for external", () => {
