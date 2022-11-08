@@ -1,0 +1,306 @@
+{
+  "$id": "https://stripe.com/stripe-app-base.schema.json",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "Stripe App manifest",
+  "description": "A manifest describing a Stripe App.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "description": "The unique identifier for an app, for example \"com.invoicing.myapp\".",
+      "markdownDescription": "The unique identifier for an app, for example `com.invoicing.myapp`.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+    },
+    "version": {
+      "description": "An app version that you define. You can use any format you want for version identifiers.",
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "description": "The name shown in the UI when referring to your app.",
+      "type": "string",
+      "minLength": 1
+    },
+    "icon": {
+      "description": "The relative path to a 300x300 pixel PNG image, for example \"./icon.png\".",
+      "markdownDescription": "The relative path to a 300x300 pixel PNG image, for example `./icon.png`.",
+      "type": "string",
+      "pattern": "^$|^\\./((\\.\\./|[a-zA-Z0-9_/\\-\\\\])[^\\.\\.]*\\.png)$"
+    },
+    "permissions": {
+      "description": "The permissions available to the app. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
+      "markdownDescription": "The permissions available to the app. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "permission": {
+            "type": "string",
+            "description": "The ID of the permission. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
+            "markdownDescription": "The ID of the permission. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+            "enum": [
+              "account_link_write",
+              "application_fee_read",
+              "application_fee_write",
+              "apply_pay_domain_read",
+              "apply_pay_domain_write",
+              "balance_read",
+              "balance_transaction_source_read",
+              "billing_clock_read",
+              "billing_clock_write",
+              "capital_for_platforms_financing_offer_read",
+              "charge_read",
+              "charge_write",
+              "checkout_session_read",
+              "checkout_session_write",
+              "connected_account_read",
+              "coupon_read",
+              "coupon_write",
+              "credit_note_read",
+              "credit_note_write",
+              "customer_portal_read",
+              "customer_portal_write",
+              "customer_read",
+              "customer_write",
+              "dispute_read",
+              "dispute_write",
+              "edit_link_write",
+              "elements_write",
+              "event_read",
+              "file_read",
+              "file_write",
+              "invoice_read",
+              "invoice_write",
+              "issuing_authorization_read",
+              "issuing_authorization_write",
+              "issuing_card_read",
+              "issuing_card_write",
+              "issuing_cardholder_read",
+              "issuing_cardholder_write",
+              "issuing_dispute_read",
+              "issuing_dispute_write",
+              "issuing_transaction_read",
+              "issuing_transaction_write",
+              "mandate_read",
+              "mandate_write",
+              "order_read",
+              "order_write",
+              "payment_intent_read",
+              "payment_intent_write",
+              "payment_links_read",
+              "payment_links_write",
+              "payment_method_read",
+              "payment_method_write",
+              "payout_read",
+              "payout_write",
+              "plan_read",
+              "plan_write",
+              "product_read",
+              "product_write",
+              "quote_read",
+              "quote_write",
+              "report_runs_and_report_types_read",
+              "secret_write",
+              "setup_intent_read",
+              "setup_intent_write",
+              "sku_read",
+              "sku_write",
+              "source_read",
+              "source_write",
+              "stripecli_session_write",
+              "subscription_read",
+              "subscription_write",
+              "tax_rate_read",
+              "tax_rate_write",
+              "token_read",
+              "token_write",
+              "top_up_read",
+              "top_up_write",
+              "transfer_read",
+              "transfer_write",
+              "usage_record_read",
+              "usage_record_write",
+              "user_email_read",
+              "webhook_read",
+              "webhook_write"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "description": "The reason for requesting the permission.",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": ["permission", "purpose"]
+      }
+    },
+    "app_backend": {
+      "description": "Configuration options related to the app backend.",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "webhooks": {
+          "description": "Configure user events to be sent to an external URL.",
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "required": ["url", "enabled_events", "api_version"],
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The URL to send the events to.",
+                "format": "uri"
+              },
+              "enabled_events": {
+                "description": "The events that we send to the webhook.",
+                "type": ["array", "null"],
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z]{1,}\\.(deleted|created|updated)$"
+                }
+              },
+              "api_version": {
+                "type": "string",
+                "description": "The API version.",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post_install_action": {
+      "description": "Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "markdownDescription": "Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "allOf": [
+                { "$ref": "#/$defs/postInstallActionType" },
+                { "const": "settings" }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "url"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "allOf": [
+                { "$ref": "#/$defs/postInstallActionType" },
+                { "const": "external" }
+              ]
+            },
+            "url": {
+              "description": "External URL to redirect users to after installing your app.",
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https?://"
+            }
+          }
+        }
+      ]
+    },
+    "ui_extension": {
+      "description": "Configuration options for how to display the app in the Dashboard.",
+      "type": "object",
+      "properties": {
+        "views": {
+          "description": "Configure where the app appears in the Dashboard.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["viewport", "component"],
+            "properties": {
+              "viewport": {
+                "type": "string",
+                "description": "An identifier that indicates where a UI extension appears in the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
+                "markdownDescription": "An identifier that indicates where a UI extension appears in the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
+                "enum": [
+                  "settings",
+                  "stripe.dashboard.balance.overview",
+                  "stripe.dashboard.billing.overview",
+                  "stripe.dashboard.customer.detail",
+                  "stripe.dashboard.customer.list",
+                  "stripe.dashboard.drawer.default",
+                  "stripe.dashboard.home.overview",
+                  "stripe.dashboard.invoice.detail",
+                  "stripe.dashboard.invoice.list",
+                  "stripe.dashboard.payment-link.detail",
+                  "stripe.dashboard.payment-link.list",
+                  "stripe.dashboard.payment.detail",
+                  "stripe.dashboard.payment.list",
+                  "stripe.dashboard.product.detail",
+                  "stripe.dashboard.product.list",
+                  "stripe.dashboard.report.overview",
+                  "stripe.dashboard.revenue-recognition.overview",
+                  "stripe.dashboard.subscription.detail",
+                  "stripe.dashboard.subscription.list",
+                  "stripe.dashboard.tax-report.overview"
+                ]
+              },
+              "component": {
+                "type": "string",
+                "description": "The name of the React component in the \"src/views\" directory to render.",
+                "markdownDescription": "The name of the React component in the `src/views` directory to render.",
+                "pattern": "^[a-zA-Z0-9_]{1,}$"
+              }
+            }
+          }
+        },
+        "content_security_policy": {
+          "description": "Configure the content security policy for your app.",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "connect-src": {
+              "description": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. Read about using third-party APIs: https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis",
+              "markdownDescription": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. [Read about using third-party APIs](https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis).",
+              "type": ["array", "null"],
+              "items": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://.*/.+"
+              }
+            },
+            "image-src": {
+              "description": "URLs the Img component (https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "markdownDescription": "URLs the [Img component](https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "type": ["array", "null"],
+              "items": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://.+"
+              }
+            },
+            "purpose": {
+              "description": "A message to show users when the app is installed that explains why the app needs to communicate with external URLs.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "constants": {
+      "description": "Custom values that are passed through to your views via context props.",
+      "type": ["object", "null"]
+    }
+  },
+  "$defs": {
+    "postInstallActionType": {
+      "description": "The recommended action for users to take after installing your app. Read about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
+      "markdownDescription": "The recommended action for users to take after installing your app. [Read about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions)."
+    }
+  }
+}
