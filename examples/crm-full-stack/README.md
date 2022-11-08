@@ -14,7 +14,7 @@
     ·
      <a href="https://stripe.com/docs/stripe-apps">Stripe Docs</a>
      .
-    <a href="https://www.saasbase.dev">Built by SaaSBase</a>
+    <a href="https://twitter.com/thisissukh_">Written by Sukh</a>
   </p>
 </div>
 
