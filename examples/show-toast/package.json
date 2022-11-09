@@ -1,0 +1,34 @@
+{
+  "name": "com.example.show-toast",
+  "version": "0.1.0",
+  "description": "App for testing toasts and other things",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "8.3.0",
+    "react": "^17.0.2",
+    "stripe": "^9.13.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.19.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^27.5.1",
+    "jest-transform-stub": "^2.0.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
