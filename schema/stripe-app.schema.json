@@ -303,7 +303,8 @@
       }
     },
     "constants": {
-      "description": "Custom values that are passed through to your views via context props.",
+      "description": "Custom values that are passed through to your views via context props. Read about context props: https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props",
+      "markdownDescription": "Custom values that are passed through to your views via context props. [Read about context props](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props).",
       "type": ["object", "null"]
     }
   },
