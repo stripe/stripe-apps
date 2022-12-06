@@ -1,0 +1,29 @@
+{
+  "id": "com.saasbase.stripe-app-fe",
+  "version": "0.0.1",
+  "name": "CRM Buddy",
+  "icon": "",
+  "permissions": [],
+  "app_backend": {
+    "webhooks": null
+  },
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "CustomerDetailView"
+      },
+      {
+        "viewport": "stripe.dashboard.home.overview",
+        "component": "HomeOverviewView"
+      }
+    ],
+    "actions": [],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  },
+  "post_install_action": null
+}
