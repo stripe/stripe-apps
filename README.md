@@ -31,7 +31,6 @@ In the meantime, we encourage you to continue preparing your app for publishing 
 - Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines). 
 - Checking out our design [best practices](https://stripe.com/docs/stripe-apps/listing-guidelines) and sample apps. 
 - Watching for updates on [GitHub Discussions](https://github.com/stripe/stripe-apps/discussions).
-- Joining the discussion on [Discord](https://discord.com/invite/stripe) in the [Stripe Apps channel](https://discord.com/channels/841573134531821608/974592073229549638).
 
 © Stripe
 
