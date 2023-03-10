@@ -308,7 +308,7 @@
     },
     "allowed_redirect_uris": {
       "description": "A list of allowed urls to which the user can be redirected upon successful install of this app. Read about using allowed redirect urls: https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls",
-      "markdownDescription": "A list of allowed urls to which the user can be redirected upon successful install of this app. [Read about using allowed redirect urls](https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls",
+      "markdownDescription": "A list of allowed urls to which the user can be redirected upon successful install of this app. [Read about using allowed redirect urls](https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls).",
       "type": ["array", "null"],
       "items": {
         "type": "string",
