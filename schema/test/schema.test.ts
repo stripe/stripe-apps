@@ -51,6 +51,10 @@ const basicManifest = Object.freeze({
   constants: {
     HELLO: "world",
   },
+  allowed_redirect_uris: [
+    "https://myapp.com?_state=abc&acct_id=xxx",
+    "https://localhost.com?_state=ab&acct_id=xxx"
+  ]
 });
 
 describe("Validate manifests", () => {
@@ -172,6 +176,14 @@ describe("Validate manifests", () => {
         type: "settings",
         url: "https://example.com",
       },
+    });
+    expect(valid).toBe(false);
+  });
+
+  it("rejects invalid url property for allowed_redirect_uris", () => {
+    const valid = validate({
+      ...basicManifest,
+      allowed_redirect_uris: ["invalid"]
     });
     expect(valid).toBe(false);
   });

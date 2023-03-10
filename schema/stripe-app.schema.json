@@ -9,7 +9,6 @@
     "name",
     "icon",
     "permissions",
-    "app_backend",
     "ui_extension"
   ],
   "type": "object",
@@ -306,6 +305,16 @@
       "description": "Custom values that are passed through to your views via context props. Read about context props: https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props",
       "markdownDescription": "Custom values that are passed through to your views via context props. [Read about context props](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props).",
       "type": ["object", "null"]
+    },
+    "allowed_redirect_uris": {
+      "description": "A list of allowed urls to which the user can be redirected upon successful install of this app. Read about using allowed redirect urls: https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls",
+      "markdownDescription": "A list of allowed urls to which the user can be redirected upon successful install of this app. [Read about using allowed redirect urls](https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls).",
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://.*/.+"
+      }
     }
   },
   "$defs": {
