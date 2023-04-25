@@ -25,7 +25,7 @@ Reach out to us directly in our [Developer Support](https://github.com/stripe/st
 
 <h2> Publishing </h2>
 
-Built an app and want to make it available to everyone on Stripe? Make your app discoverable to any user by publishing it on the [Stripe App Marketplace](https://marketplace.stripe.com/).
+Built an app and want to make it available to everyone on Stripe? Make your app discoverable by publishing it on the [Stripe App Marketplace](https://marketplace.stripe.com/).
 
 You can prepare your app for publishing to the marketplace by:
 - Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines).
