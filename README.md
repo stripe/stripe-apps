@@ -15,7 +15,7 @@ Read more about Stripe Apps on [https://stripe.com/docs/stripe-apps](https://str
 <h2><img src='./.readme/blocks.svg' width='24'> Resources</h2>
 
 - **[Stripe Apps Docs](https://stripe.com/docs/stripe-apps)** - Get familiar with Stripe Apps
-- **[Stripe Apps Samples](examples)** - Explore examples of Stripe Apps.
+- **[Stripe Apps Samples](examples)** - Explore examples of Stripe Apps
 - **[Technical chat on Stripe Discord](https://stripe.com/go/developer-chat)** - Our developers hang out on Stripe Discord
 - **[Open issues](https://github.com/stripe/stripe-apps/issues)** - Our open issue tracker for Stripe Apps
 
@@ -28,9 +28,8 @@ Reach out to us directly in our [Developer Support](https://github.com/stripe/st
 Built an app and want to make it available to everyone on Stripe? Make your app discoverable by publishing it on the [Stripe App Marketplace](https://marketplace.stripe.com/).
 
 You can prepare your app for publishing to the marketplace by:
-- Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines).
-- Checking out our design [best practices](https://stripe.com/docs/stripe-apps/listing-guidelines) and sample apps.
-- Watching for updates on [GitHub Discussions](https://github.com/stripe/stripe-apps/discussions).
+- Ensuring your app meets the marketplace [review requirements](https://stripe.com/docs/stripe-apps/review-requirements) and [listing guidelines](https://stripe.com/docs/stripe-apps/listing-guidelines)
+- Checking out our design [best practices](https://stripe.com/docs/stripe-apps/listing-guidelines) and sample apps
 
 © Stripe
 
