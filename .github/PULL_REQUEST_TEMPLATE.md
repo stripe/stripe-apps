@@ -1,4 +1,3 @@
-<!-- If this branch is in-progress, start the title with [wip] -->
 <!-- Please note that a maintainer must add the `safe-for-testing` label to your pull request before GitHub actions will run and test your change. -->
 
 ## Summary
