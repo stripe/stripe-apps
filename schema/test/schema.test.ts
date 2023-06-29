@@ -43,8 +43,8 @@ const basicManifest = Object.freeze({
     HELLO: "world",
   },
   allowed_redirect_uris: [
-    "https://myapp.com?_state=abc&acct_id=xxx",
-    "https://localhost.com?_state=ab&acct_id=xxx"
+    "https://myapp.com/cb",
+    "https://localhost:3000/callback",
   ]
 });
 

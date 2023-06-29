@@ -35,6 +35,9 @@
     "post_install_action": {
       "$ref": "stripe-app.schema.json#/properties/post_install_action"
     },
+    "allowed_redirect_uris": {
+      "$ref": "stripe-app.schema.json#/properties/allowed_redirect_uris"
+    },
     "ui_extension": {
       "description": "Configuration options for how to display the app in the Dashboard.",
       "type": "object",
