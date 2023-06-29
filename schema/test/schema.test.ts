@@ -23,15 +23,6 @@ const basicManifest = Object.freeze({
       purpose: "Cool purpose",
     },
   ],
-  app_backend: {
-    webhooks: [
-      {
-        url: "https://example.com",
-        enabled_events: ["customer.created"],
-        api_version: "1.0.0",
-      },
-    ],
-  },
   ui_extension: {
     views: [
       {

@@ -4,7 +4,6 @@
   "name": "OAuth2 Test",
   "icon": "",
   "permissions": [],
-  "app_backend": {},
   "ui_extension": {
     "views": [
       {

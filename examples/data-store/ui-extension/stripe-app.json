@@ -17,9 +17,6 @@
       "purpose": "For storing additional data about payments"
     }
   ],
-  "app_backend": {
-    "webhooks": []
-  },
   "ui_extension": {
     "views": [
       {

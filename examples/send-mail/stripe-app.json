@@ -9,7 +9,6 @@
       "purpose": "Allows the app to access the dashboard user email."
     }
   ],
-  "app_backend": {},
   "ui_extension": {
     "views": [
       {

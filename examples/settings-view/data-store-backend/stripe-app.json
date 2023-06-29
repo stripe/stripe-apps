@@ -9,9 +9,6 @@
       "purpose": "For storing additional data in Stripe"
     }
   ],
-  "app_backend": {
-    "webhooks": null
-  },
   "ui_extension": {
     "views": [
       {

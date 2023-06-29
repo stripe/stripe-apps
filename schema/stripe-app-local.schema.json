@@ -10,15 +10,28 @@
       "description": "The base manifest that this local manifest will extend.",
       "type": "string",
       "pattern": "^(./)?((../)+)?(([a-zA-Z0-9-_]+/)+)?stripe-app(.[a-zA-Z0-9-_]+)?.json$",
-      "examples": ["stripe-app.json"]
+      "examples": [
+        "stripe-app.json"
+      ]
     },
-    "$schema": { "$ref": "stripe-app.schema.json#/properties/$schema" },
-    "id": { "$ref": "stripe-app.schema.json#/properties/id" },
-    "version": { "$ref": "stripe-app.schema.json#/properties/version" },
-    "name": { "$ref": "stripe-app.schema.json#/properties/name" },
-    "icon": { "$ref": "stripe-app.schema.json#/properties/icon" },
-    "permissions": { "$ref": "stripe-app.schema.json#/properties/permissions" },
-    "app_backend": { "$ref": "stripe-app.schema.json#/properties/app_backend" },
+    "$schema": {
+      "$ref": "stripe-app.schema.json#/properties/$schema"
+    },
+    "id": {
+      "$ref": "stripe-app.schema.json#/properties/id"
+    },
+    "version": {
+      "$ref": "stripe-app.schema.json#/properties/version"
+    },
+    "name": {
+      "$ref": "stripe-app.schema.json#/properties/name"
+    },
+    "icon": {
+      "$ref": "stripe-app.schema.json#/properties/icon"
+    },
+    "permissions": {
+      "$ref": "stripe-app.schema.json#/properties/permissions"
+    },
     "post_install_action": {
       "$ref": "stripe-app.schema.json#/properties/post_install_action"
     },

@@ -25,9 +25,6 @@
       "purpose": "Allows this example app to read details of a subscription"
     }
   ],
-  "app_backend": {
-    "webhooks": null
-  },
   "ui_extension": {
     "views": [
       {

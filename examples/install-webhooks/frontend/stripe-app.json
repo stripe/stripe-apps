@@ -4,9 +4,6 @@
   "name": "Webhooks Example App",
   "icon": "",
   "permissions": [],
-  "app_backend": {
-    "webhooks": null
-  },
   "ui_extension": {
     "views": [
       {
