@@ -144,71 +144,54 @@
           }
         },
         "additionalProperties": false,
-        "required": ["permission", "purpose"]
-      }
-    },
-    "app_backend": {
-      "description": "Configuration options related to the app backend.",
-      "type": ["object", "null"],
-      "additionalProperties": false,
-      "properties": {
-        "webhooks": {
-          "description": "Configure user events to be sent to an external URL.",
-          "type": ["array", "null"],
-          "items": {
-            "type": "object",
-            "required": ["url", "enabled_events", "api_version"],
-            "properties": {
-              "url": {
-                "type": "string",
-                "description": "The URL to send the events to.",
-                "format": "uri"
-              },
-              "enabled_events": {
-                "description": "The events that we send to the webhook.",
-                "type": ["array", "null"],
-                "items": {
-                  "type": "string",
-                  "pattern": "^[a-z]{1,}\\.(deleted|created|updated)$"
-                }
-              },
-              "api_version": {
-                "type": "string",
-                "description": "The API version.",
-                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-              }
-            }
-          }
-        }
+        "required": [
+          "permission",
+          "purpose"
+        ]
       }
     },
     "post_install_action": {
       "description": "Specify a recommended action for users to take after installing your app. Read more about post-install actions: https://stripe.com/docs/stripe-apps/post-install-actions",
       "markdownDescription": "Specify a recommended action users should take after installing your app. [Read more about post-install actions](https://stripe.com/docs/stripe-apps/post-install-actions).",
       "oneOf": [
-        { "type": "null" },
+        {
+          "type": "null"
+        },
         {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "additionalProperties": false,
           "properties": {
             "type": {
               "allOf": [
-                { "$ref": "#/$defs/postInstallActionType" },
-                { "const": "settings" }
+                {
+                  "$ref": "#/$defs/postInstallActionType"
+                },
+                {
+                  "const": "settings"
+                }
               ]
             }
           }
         },
         {
           "type": "object",
-          "required": ["type", "url"],
+          "required": [
+            "type",
+            "url"
+          ],
           "additionalProperties": false,
           "properties": {
             "type": {
               "allOf": [
-                { "$ref": "#/$defs/postInstallActionType" },
-                { "const": "external" }
+                {
+                  "$ref": "#/$defs/postInstallActionType"
+                },
+                {
+                  "const": "external"
+                }
               ]
             },
             "url": {
@@ -230,7 +213,10 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["viewport", "component"],
+            "required": [
+              "viewport",
+              "component"
+            ],
             "properties": {
               "viewport": {
                 "type": "string",
@@ -271,12 +257,17 @@
         "content_security_policy": {
           "description": "Configure the content security policy for your app.",
           "type": "object",
-          "required": ["purpose"],
+          "required": [
+            "purpose"
+          ],
           "properties": {
             "connect-src": {
               "description": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. Read about using third-party APIs: https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis",
               "markdownDescription": "URLs of permitted third-party APIs. If the URL ends in a slash, all of its children also receive permission. [Read about using third-party APIs](https://stripe.com/docs/stripe-apps/build-ui#use-third-party-apis).",
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
                 "type": "string",
                 "format": "uri",
@@ -286,7 +277,10 @@
             "image-src": {
               "description": "URLs the Img component (https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
               "markdownDescription": "URLs the [Img component](https://stripe.com/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
                 "type": "string",
                 "format": "uri",
@@ -304,12 +298,18 @@
     "constants": {
       "description": "Custom values that are passed through to your views via context props. Read about context props: https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props",
       "markdownDescription": "Custom values that are passed through to your views via context props. [Read about context props](https://stripe.com/docs/stripe-apps/reference/extensions-sdk-api#props).",
-      "type": ["object", "null"]
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "allowed_redirect_uris": {
       "description": "A list of allowed urls to which the user can be redirected upon successful install of this app. Read about using allowed redirect urls: https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls",
       "markdownDescription": "A list of allowed urls to which the user can be redirected upon successful install of this app. [Read about using allowed redirect urls](https://stripe.com/docs/stripe-apps/reference/app-manifest#allowed-redirect-urls).",
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "type": "string",
         "format": "uri",

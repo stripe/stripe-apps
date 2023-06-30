@@ -23,15 +23,6 @@ const basicManifest = Object.freeze({
       purpose: "Cool purpose",
     },
   ],
-  app_backend: {
-    webhooks: [
-      {
-        url: "https://example.com",
-        enabled_events: ["customer.created"],
-        api_version: "1.0.0",
-      },
-    ],
-  },
   ui_extension: {
     views: [
       {
@@ -52,8 +43,8 @@ const basicManifest = Object.freeze({
     HELLO: "world",
   },
   allowed_redirect_uris: [
-    "https://myapp.com?_state=abc&acct_id=xxx",
-    "https://localhost.com?_state=ab&acct_id=xxx"
+    "https://myapp.com/cb",
+    "https://localhost:3000/callback",
   ]
 });
 

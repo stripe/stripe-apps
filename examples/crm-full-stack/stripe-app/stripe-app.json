@@ -4,9 +4,6 @@
   "name": "CRM Buddy",
   "icon": "",
   "permissions": [],
-  "app_backend": {
-    "webhooks": null
-  },
   "ui_extension": {
     "views": [
       {

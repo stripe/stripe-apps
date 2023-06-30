@@ -4,7 +4,6 @@
   "name": "GitHub OAuth Example",
   "icon": "",
   "permissions": [],
-  "app_backend": {},
   "ui_extension": {
     "views": [
       {
