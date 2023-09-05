@@ -315,6 +315,25 @@
         "format": "uri",
         "pattern": "^https?://.*/.+"
       }
+    },
+    "distribution_type": {
+      "type": "string",
+      "description": "Stripe Apps gives you two ways to distribute your apps. You can make them publicly available or privately share them only with your team members. Read about Distribution Type: https://stripe.com/docs/stripe-apps/reference/app-manifest#distribution-type",
+      "markdownDescription": "Stripe Apps gives you two ways to distribute your apps. You can make them publicly available or privately share them only with your team member. [Read about specifying Distribution Type](https://stripe.com/docs/stripe-apps/reference/app-manifest#distribution-type).",
+      "enum": [
+        "public",
+        "private"
+      ]
+    },
+    "stripe_api_access_type": {
+      "type": "string",
+      "description": "A property that describes how your application calls Stripe API. Read about using stripe api access type: https://stripe.com/docs/stripe-apps/reference/app-manifest#stripe-api-access-type",
+      "markdownDescription": "A property that describes how your application accesses Stripe API. [Read about specifying Stripe API access type](https://stripe.com/docs/stripe-apps/reference/app-manifest#stripe-api-access-type).",
+      "enum": [
+        "restricted_api_key",
+        "oauth",
+        "platform"
+      ]
     }
   },
   "$defs": {

@@ -38,6 +38,12 @@
     "allowed_redirect_uris": {
       "$ref": "stripe-app.schema.json#/properties/allowed_redirect_uris"
     },
+    "distribution_type": {
+      "$ref": "stripe-app.schema.json#/properties/distribution_type"
+    },
+    "stripe_api_access_type": {
+      "$ref": "stripe-app.schema.json#/properties/stripe_api_access_type"
+    },
     "ui_extension": {
       "description": "Configuration options for how to display the app in the Dashboard.",
       "type": "object",
