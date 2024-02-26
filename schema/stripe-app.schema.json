@@ -29,7 +29,8 @@
       "minLength": 1
     },
     "name": {
-      "description": "The name shown in the UI when referring to your app.",
+      "description": "The name shown in the UI when referring to your app. Read more about restricted words for public distribution: https://stripe.com/docs/stripe-apps/reference/app-manifest",
+      "markdownDescription": "The name shown in the UI when referring to your app. [Read more about restricted words for public distribution](https://stripe.com/docs/stripe-apps/reference/app-manifest).",
       "type": "string",
       "minLength": 1
     },
