@@ -109,6 +109,8 @@
               "plan_write",
               "product_read",
               "product_write",
+              "promotion_code_read",
+              "promotion_code_write",
               "quote_read",
               "quote_write",
               "report_runs_and_report_types_read",
