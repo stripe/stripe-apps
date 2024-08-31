@@ -1,0 +1,12 @@
+{
+    "name": "stripe-app-example-wordperss-oauth",
+    "license": "Unlicense",
+    "private": true,
+    "workspaces": [
+        "stripe-app",
+        "wordpress"
+    ],
+    "scripts": {
+        "preinstall": "npx only-allow npm"
+    }
+}
