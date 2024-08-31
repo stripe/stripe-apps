@@ -5,7 +5,7 @@ require 'date'
 
 Dotenv.load
 
-Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+Stripe.api_key = ENV['STRIPE_API_KEY']
 set :port, 8080
 
 # This Hash represents a database or other external infrastructure for
@@ -18,7 +18,7 @@ post '/webhook' do
 
   sig = request.env["HTTP_STRIPE_SIGNATURE"]
   payload = request.body.read
-  endpoint_secret = ENV['ENDPOINT_SECRET']
+  endpoint_secret = ENV['STRIPE_WEBHOOK_SECRET']
   event = nil
   
   begin
