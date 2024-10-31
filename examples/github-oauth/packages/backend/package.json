@@ -12,7 +12,7 @@
     "axios": "^0.25.0",
     "cors": "^2.8.5",
     "dotenv": "^15.0.0",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "stripe": "^8.202.0"
   },
   "devDependencies": {
