@@ -25,9 +25,13 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+ - Browser: [e.g. chrome, safari]
+ - Version: [e.g. 22]
+ - Viewport dimensions: [e.g. 1920 x 1080]
 
+**App (please complete the following information):**
+ - App Id: [e.g. com.example.helloworld]
+ - @stripe/ui-extension-sdk package version: [e.g. 8.9.1]
 
 **Additional context**
 Add any other context about the problem here.
