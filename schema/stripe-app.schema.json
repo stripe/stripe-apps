@@ -336,12 +336,12 @@
         "oauth",
         "platform"
       ]
+    },
+    "sandbox_install_compatible": {
+      "type": "boolean",
+      "description": "A property that when set to true will allow your app to be installable into a sandbox. Read more about enabling Sandbox support: https://docs.stripe.com/stripe-apps/enable-sandbox-support",
+      "markdownDescription": "A property that when set to true will allow your app to be installable into a sandbox. [Read about Sandbox compatibility](https://docs.stripe.com/stripe-apps/enable-sandbox-support)."
     }
-  },
-  "sandbox_install_compatible": {
-    "type": "boolean",
-    "description": "A property that when set to true will allow your app to be installable into a sandbox. Read more about enabling Sandbox support: https://docs.stripe.com/stripe-apps/enable-sandbox-support",
-    "markdownDescription": "A property that when set to true will allow your app to be installable into a sandbox. [Read about Sandbox compatibility](https://docs.stripe.com/stripe-apps/enable-sandbox-support)."
   },
   "$defs": {
     "postInstallActionType": {
