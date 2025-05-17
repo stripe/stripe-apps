@@ -45,7 +45,8 @@ const basicManifest = Object.freeze({
   allowed_redirect_uris: [
     "https://myapp.com/cb",
     "https://localhost:3000/callback",
-  ]
+  ],
+  sandbox_install_compatible: true,
 });
 
 describe("Validate manifests", () => {
@@ -178,4 +179,12 @@ describe("Validate manifests", () => {
     });
     expect(valid).toBe(false);
   });
+
+  it("rejects invalid value for sandbox_install_compatible", () => {
+    const valid = validate({
+      ...basicManifest,
+      sandbox_install_compatible: { enabled: true },
+    });
+    expect(valid).toBe(false);
+  })
 });
