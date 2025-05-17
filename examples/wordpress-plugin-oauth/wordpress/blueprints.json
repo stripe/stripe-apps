@@ -1,0 +1,14 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "landingPage": "/wp-admin/",
+    "steps": [
+        {
+            "step": "runPHP",
+            "code": "<?php require '/wordpress/wp-load.php'; update_option( 'permalink_structure', '/%postname%/' );"
+        },
+        {
+            "step": "runPHP",
+            "code": "<?php require '/wordpress/wp-load.php'; flush_rewrite_rules();"
+        }
+    ]
+}
