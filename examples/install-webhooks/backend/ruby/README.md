@@ -13,7 +13,7 @@ bundle install
 
 2. Run the application
 ```bash
-ruby server.rb
+ruby index.rb
 ```
 
 Server is running on `localhost:8080`
