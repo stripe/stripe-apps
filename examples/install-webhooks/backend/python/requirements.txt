@@ -10,4 +10,4 @@ charset-normalizer==2.0.12
 idna==3.3
 requests==2.27.1
 stripe==3.0.0
-urllib3==1.26.9
+urllib3==1.26.19
