@@ -225,6 +225,7 @@
                 "description": "An identifier that indicates where a UI extension appears in the Dashboard. Read more about viewports: https://stripe.com/docs/stripe-apps/reference/viewports",
                 "markdownDescription": "An identifier that indicates where a UI extension appears in the Dashboard. [Read more about viewports](https://stripe.com/docs/stripe-apps/reference/viewports).",
                 "enum": [
+                  "onboarding",
                   "settings",
                   "stripe.dashboard.balance.overview",
                   "stripe.dashboard.billing.overview",
