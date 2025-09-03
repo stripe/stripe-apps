@@ -160,11 +160,32 @@ describe("Validate manifests", () => {
     expect(valid).toBe(true);
   });
 
+  it("accepts post-install onboarding action", () => {
+    const valid = validate({
+      ...basicManifest,
+      post_install_action: {
+        type: "onboarding",
+      },
+    });
+    expect(valid).toBe(true);
+  });
+
   it("rejects post-install action url property for settings", () => {
     const valid = validate({
       ...basicManifest,
       post_install_action: {
         type: "settings",
+        url: "https://example.com",
+      },
+    });
+    expect(valid).toBe(false);
+  });
+
+  it("rejects post-install action url property for onboarding", () => {
+    const valid = validate({
+      ...basicManifest,
+      post_install_action: {
+        type: "onboarding",
         url: "https://example.com",
       },
     });
