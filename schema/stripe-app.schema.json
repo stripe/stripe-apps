@@ -172,7 +172,10 @@
                   "$ref": "#/$defs/postInstallActionType"
                 },
                 {
-                  "const": "settings"
+                  "oneOf": [
+                    { "const": "onboarding" },
+                    { "const": "settings" }
+                  ]
                 }
               ]
             }
