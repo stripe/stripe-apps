@@ -1,0 +1,244 @@
+{
+  "$id": "https://stripe.com/app-manifest.schema.json",
+  "$schema": "http://json-schema.org/draft-01/schema",
+  "title": "Stripe App Manifest Extension",
+  "description": "A version two manifest describing a Stripe App with extensions.",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "managed_resources",
+    "extension"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "description": "The unique identifier for an app, for example \"com.invoicing.myapp\".",
+      "markdownDescription": "The unique identifier for an app, for example `com.invoicing.myapp`.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+    },
+    "version": {
+      "description": "An app version that you define. You can use any format you want for version identifiers.",
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "description": "The name shown in the UI when referring to your app.",
+      "type": "string",
+      "minLength": 1
+    },
+    "managed_resources": {
+      "type": "array",
+      "description": "List of managed resources used by the app",
+      "items": {
+        "type": "object",
+        "required": ["object", "id", "type"],
+        "optional": ["url"],
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "description": "The type of the managed resource",
+            "pattern": "^(?:v2\\.[a-z_]+\\.[a-z_]+|[a-z_]+)$"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the managed resource",
+            "pattern":  "^[a-z]{1,7}(?:_test)?_6[a-zA-Z0-9]{31,}$"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the resource",
+            "enum": ["remote_function"]
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL endpoint for the remote function",
+            "format": "uri",
+            "pattern": "^https?://.+"
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "description": "List of extensions provided by the app",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "interface_id", "version", "permissions", "methods"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the extension",
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the extension",
+            "minLength": 1
+          },
+          "interface_id": {
+            "type": "string",
+            "description": "The interface identifier this extension implements",
+            "pattern": "^stripe\\.[a-zA-Z0-9_\\-\\.]+$"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the extension",
+             "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "List of permissions required by the extension",
+            "markdownDescription": "The permissions required by the extension. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+            "items": {
+              "type": "object",
+              "properties": {
+                "permission": {
+                  "type": "string",
+                  "description": "The ID of the permission. Read more about permissions: https://stripe.com/docs/stripe-apps/reference/permissions",
+                  "markdownDescription": "The ID of the permission. [Read more about permissions](https://stripe.com/docs/stripe-apps/reference/permissions).",
+                  "enum": [
+                    "account_link_write",
+                    "application_fee_read",
+                    "application_fee_write",
+                    "apply_pay_domain_read",
+                    "apply_pay_domain_write",
+                    "balance_read",
+                    "balance_transaction_source_read",
+                    "billing_clock_read",
+                    "billing_clock_write",
+                    "capital_for_platforms_financing_offer_read",
+                    "charge_read",
+                    "charge_write",
+                    "checkout_session_read",
+                    "checkout_session_write",
+                    "connected_account_read",
+                    "coupon_read",
+                    "coupon_write",
+                    "credit_note_read",
+                    "credit_note_write",
+                    "customer_portal_read",
+                    "customer_portal_write",
+                    "customer_read",
+                    "customer_write",
+                    "dispute_read",
+                    "dispute_write",
+                    "edit_link_write",
+                    "elements_write",
+                    "event_read",
+                    "file_read",
+                    "file_write",
+                    "invoice_read",
+                    "invoice_write",
+                    "issuing_authorization_read",
+                    "issuing_authorization_write",
+                    "issuing_card_read",
+                    "issuing_card_write",
+                    "issuing_cardholder_read",
+                    "issuing_cardholder_write",
+                    "issuing_dispute_read",
+                    "issuing_dispute_write",
+                    "issuing_transaction_read",
+                    "issuing_transaction_write",
+                    "mandate_read",
+                    "mandate_write",
+                    "order_read",
+                    "order_write",
+                    "payment_intent_read",
+                    "payment_intent_write",
+                    "payment_links_read",
+                    "payment_links_write",
+                    "payment_method_read",
+                    "payment_method_write",
+                    "payout_read",
+                    "payout_write",
+                    "plan_read",
+                    "plan_write",
+                    "product_read",
+                    "product_write",
+                    "quote_read",
+                    "quote_write",
+                    "report_runs_and_report_types_read",
+                    "secret_write",
+                    "setup_intent_read",
+                    "setup_intent_write",
+                    "shipping_rate_read",
+                    "shpping_rate_write",
+                    "sku_read",
+                    "sku_write",
+                    "source_read",
+                    "source_write",
+                    "stripecli_session_write",
+                    "subscription_read",
+                    "subscription_write",
+                    "tax_rate_read",
+                    "tax_rate_write",
+                    "token_read",
+                    "token_write",
+                    "top_up_read",
+                    "top_up_write",
+                    "transfer_read",
+                    "transfer_write",
+                    "usage_record_read",
+                    "usage_record_write",
+                    "user_email_read",
+                    "webhook_read",
+                    "webhook_write"
+                  ]
+                },
+                "purpose": {
+                  "type": "string",
+                  "description": "The reason for requesting the permission.",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "permission",
+                "purpose"
+              ]
+            }
+          },
+          "methods": {
+            "type": "object",
+            "description": "Methods implemented by the extension",
+            "optional": ["custom_workflow_action_run"],
+            "additionalProperties": false,
+            "properties": {
+              "custom_workflow_action_run": {
+                "type": "object",
+                "required": ["implementation_type", "managed_resource_id"],
+                "optional": ["configuration"],
+                "additionalProperties": false,
+                "properties": {
+                  "implementation_type": {
+                    "type": "string",
+                    "description": "The type of implementation",
+                    "enum": ["remote_function", "script"]
+                  },
+                  "managed_resource_id": {
+                    "type": "string",
+                    "description": "The ID of the managed resource to use",
+                    "pattern": "^[a-z]{1,7}(?:_test)?_6[a-zA-Z0-9]{31,}$"
+                  },
+                  "configuration": {
+                    "type": "string",
+                    "description": "The configuration file path",
+                    "pattern": "^[a-zA-Z0-9_\\-\\.]+\\.json$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
