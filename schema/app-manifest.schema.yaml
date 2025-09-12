@@ -7,8 +7,7 @@
     "id",
     "name",
     "version",
-    "managed_resources",
-    "extension"
+    "extensions"
   ],
   "type": "object",
   "additionalProperties": false,
@@ -31,39 +30,6 @@
       "description": "The name shown in the UI when referring to your app.",
       "type": "string",
       "minLength": 1
-    },
-    "managed_resources": {
-      "type": "array",
-      "description": "List of managed resources used by the app",
-      "items": {
-        "type": "object",
-        "required": ["object", "id", "type"],
-        "optional": ["url"],
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "description": "The type of the managed resource",
-            "pattern": "^(?:v2\\.[a-z_]+\\.[a-z_]+|[a-z_]+)$"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique identifier for the managed resource",
-            "pattern":  "^[a-z]{1,7}(?:_test)?_6[a-zA-Z0-9]{31,}$"
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of the resource",
-            "enum": ["remote_function"]
-          },
-          "url": {
-            "type": "string",
-            "description": "The URL endpoint for the remote function",
-            "format": "uri",
-            "pattern": "^https?://.+"
-          }
-        }
-      }
     },
     "extensions": {
       "type": "array",
@@ -214,8 +180,8 @@
             "properties": {
               "custom_workflow_action_run": {
                 "type": "object",
-                "required": ["implementation_type", "managed_resource_id"],
-                "optional": ["configuration"],
+                "required": ["implementation_type"],
+                "optional": ["custom_input_schema"],
                 "additionalProperties": false,
                 "properties": {
                   "implementation_type": {
@@ -223,14 +189,19 @@
                     "description": "The type of implementation",
                     "enum": ["remote_function", "script"]
                   },
-                  "managed_resource_id": {
+                  "resource_id": {
                     "type": "string",
                     "description": "The ID of the managed resource to use",
                     "pattern": "^[a-z]{1,7}(?:_test)?_6[a-zA-Z0-9]{31,}$"
                   },
-                  "configuration": {
+                  "sandbox_resource_id": {
                     "type": "string",
-                    "description": "The configuration file path",
+                    "description": "The ID of the managed resource to use",
+                    "pattern": "^[a-z]{1,7}(?:_test)?_6[a-zA-Z0-9]{31,}$"
+                  },
+                  "custom_input_schema": {
+                    "type": "string",
+                    "description": "The custom input schema file path",
                     "pattern": "^[a-zA-Z0-9_\\-\\.]+\\.json$"
                   }
                 }
