@@ -1,6 +1,6 @@
 {
-  "$id": "https://stripe.com/app-manifest.schema.json",
-  "$schema": "http://json-schema.org/draft-01/schema",
+  "$id": "https://stripe.com/stripe-app.schema.yaml",
+  "$schema": "http://json-schema.org/draft-07/schema",
   "title": "Stripe App Manifest Extension",
   "description": "A version two manifest describing a Stripe App with extensions.",
   "required": [
@@ -52,7 +52,7 @@
           "interface_id": {
             "type": "string",
             "description": "The interface identifier this extension implements",
-            "pattern": "^stripe\\.[a-zA-Z0-9_\\-\\.]+$"
+            "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           "version": {
             "type": "string",
@@ -202,7 +202,7 @@
                   "custom_input_schema": {
                     "type": "string",
                     "description": "The custom input schema file path",
-                    "pattern": "^[a-zA-Z0-9_\\-\\.]+\\.json$"
+                    "pattern": "^[a-zA-Z0-9_\/\\-\\.]+\\.schema.json$"
                   }
                 }
               }
