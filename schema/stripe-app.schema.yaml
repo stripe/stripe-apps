@@ -2,7 +2,7 @@
   "$id": "https://stripe.com/stripe-app.schema.yaml",
   "$schema": "http://json-schema.org/draft-07/schema",
   "title": "Stripe App Manifest Extension",
-  "description": "A version two manifest describing a Stripe App with extensions.",
+  "description": "A manifest describing a Stripe App.",
   "required": [
     "id",
     "name",
