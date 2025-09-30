@@ -36,7 +36,8 @@
       "description": "List of extensions provided by the app",
       "items": {
         "type": "object",
-        "required": ["id", "name", "interface_id", "version", "permissions", "methods"],
+        "required": ["id", "name", "interface_id", "version", "methods"],
+        "optional": ["permissions"],
         "additionalProperties": false,
         "properties": {
           "id": {
