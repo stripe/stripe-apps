@@ -1,0 +1,18 @@
+{
+  "name": "wordpress-stripe-plugin-oauth",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "wp-now": "wp-now",
+    "start": "wp-now start --blueprint=./blueprints.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@wp-now/wp-now": "^0.1.64"
+  }
+}

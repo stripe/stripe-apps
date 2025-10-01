@@ -1,0 +1,30 @@
+{
+  "id": "com.example.wordpress-stripe-plugin-oauth",
+  "version": "0.0.6",
+  "name": "Example Wordpress Plugin",
+  "icon": "",
+  "permissions": [
+    {
+      "permission": "customer_write",
+      "purpose": "Create and list customer informations"
+    }
+  ],
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "App"
+      }
+    ],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  },
+  "allowed_redirect_uris": [
+    "https://REPLACE_YOUR_WORDPRESS_URL/wp-json/stripe-apps/v1/callback"
+  ],
+  "stripe_api_access_type": "oauth",
+  "distribution_type": "public"
+}
