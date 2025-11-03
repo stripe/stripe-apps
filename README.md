@@ -10,6 +10,10 @@
 <br />
 <br />
 
+
+⚠️ If you experience issues when running a local Stripe app in preview mode in the Stripe Dashboard, please refer to this temporary workaround, which is documented at https://github.com/stripe/stripe-apps/issues/1016, while we work on a permanent solution.
+<br />
+
 Read more about Stripe Apps on [https://stripe.com/docs/stripe-apps](https://stripe.com/docs/stripe-apps).
 
 <h2><img src='./.readme/blocks.svg' width='24'> Resources</h2>
