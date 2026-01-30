@@ -201,8 +201,51 @@
                   },
                   "custom_input_schema": {
                     "type": "string",
-                    "description": "The custom input schema file path",
-                    "pattern": "^[a-zA-Z0-9_\/\\-\\.]+\\.schema.json$"
+                    "description": "The custom input schema file path (legacy format)",
+                    "pattern": "^[a-zA-Z0-9_\/\\-\\.]+\\.json$"
+                  },
+                  "custom_input": {
+                    "type": "object",
+                    "description": "Custom input configuration with input and UI schemas",
+                    "additionalProperties": false,
+                    "properties": {
+                      "input_schema": {
+                        "type": "object",
+                        "description": "The input schema definition",
+                        "additionalProperties": false,
+                        "required": ["type", "content"],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "The schema type",
+                            "enum": ["json_schema"]
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "The schema file path",
+                            "pattern": "^[a-zA-Z0-9_\/\\-\\.]+\\.json$"
+                          }
+                        }
+                      },
+                      "ui_schema": {
+                        "type": "object",
+                        "description": "The UI schema definition (JSONForms format)",
+                        "additionalProperties": false,
+                        "required": ["type", "content"],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "The schema type",
+                            "enum": ["jsonforms"]
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "The UI schema file path",
+                            "pattern": "^[a-zA-Z0-9_\/\\-\\.]+\\.json$"
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
