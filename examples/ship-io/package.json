@@ -8,7 +8,8 @@
     "@stripe/ui-extension-sdk": "^8.0.0",
     "react": "^17.0.2",
     "react-router-dom": "^6.3.0",
-    "stripe": "^9.8.0"
+    "stripe": "^9.8.0",
+    "aunchdarkly-cpp-networking": "1.2.0"
   },
   "engines": {
     "node": ">=14"
