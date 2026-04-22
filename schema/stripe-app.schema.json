@@ -283,8 +283,8 @@
               }
             },
             "image-src": {
-              "description": "URLs the Img component (https://stripe.com/docs/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
-              "markdownDescription": "URLs the [Img component](https://stripe.com/docs/stripe-apps/ui-toolkit/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "description": "URLs the Img component (https://stripe.com/docs/stripe-apps/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
+              "markdownDescription": "URLs the [Img component](https://stripe.com/docs/stripe-apps/components/img) can load from. If the URL ends in a slash, all trailing paths are also permitted.",
               "type": [
                 "array",
                 "null"
