@@ -1,0 +1,31 @@
+{
+  "name": "full-page-example",
+  "version": "0.0.1",
+  "description": "Revenue Analytics — Full-page Stripe App example",
+  "private": true,
+  "license": "~~proprietary~~",
+  "dependencies": {
+    "@stripe/ui-extension-sdk": "9.2.0-alpha.8",
+    "stripe": "^13.4.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@stripe/ui-extension-tools/eslintrc.ui-extension.js"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint --ext ts,tsx src",
+    "test": "jest"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@stripe/ui-extension-tools": "^0.0.1",
+    "@types/jest": "^27.5.2",
+    "@types/react": "^17.0.2"
+  }
+}

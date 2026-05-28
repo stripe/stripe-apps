@@ -1,0 +1,28 @@
+{
+    "id": "full-page-example",
+    "version": "0.0.1",
+    "name": "Revenue Analytics",
+    "icon": "",
+    "permissions": [],
+    "ui_extension": {
+        "views": [
+            {
+                "viewport": "stripe.dashboard.home.overview",
+                "component": "Home"
+            },
+            {
+                "viewport": "stripe.dashboard.fullpage",
+                "component": "FullPageApp"
+            },
+            {
+                "viewport": "settings",
+                "component": "Settings"
+            }
+        ],
+        "content_security_policy": {
+            "connect-src": null,
+            "image-src": null,
+            "purpose": ""
+        }
+    }
+}
