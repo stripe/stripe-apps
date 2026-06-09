@@ -1,48 +1,66 @@
+import { useMemo } from "react";
+
 import {
   BarChart,
   Box,
+  Inline,
   LineChart,
   OverviewPage,
   OverviewPageModule,
   PropertyList,
   PropertyListItem,
-  DataTable,
-  DataTableColumn,
+  Sparkline,
 } from "@stripe/ui-extension-sdk/ui";
 
-import { payments, revenueByDay, revenueByStatus } from "../../data/mockData";
+import { revenueByDay, dailyRevenue, dailyPaymentCount, statusLabels } from "../../data/mockData";
+import type { Payment } from "../../data/mockData";
+import { PaymentsTable, summaryColumns } from "./PaymentsTable";
 
-const formatCurrency = (amount: number): string => {
+function formatCurrency(amount: number): string {
   return `$${(amount / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
-};
+}
 
-const recentPayments = payments.slice(0, 5);
+interface OverviewTabProps {
+  payments: Payment[];
+  paymentsById: Map<string, Payment>;
+  onSelectPayment: (payment: Payment) => void;
+}
 
-const columns: DataTableColumn[] = [
-  { key: "customer", label: "Customer" },
-  { key: "amount", label: "Amount" },
-  { key: "status", label: "Status" },
-  { key: "date", label: "Date" },
-];
+export function OverviewTab({
+  payments,
+  paymentsById,
+  onSelectPayment,
+}: OverviewTabProps) {
+  const recentPayments = payments.slice(0, 5);
 
-const tableItems = recentPayments.map((p) => ({
-  id: p.id,
-  customer: p.customer,
-  amount: formatCurrency(p.amount),
-  status: p.status,
-  date: p.date,
-}));
+  const succeededPayments = payments.filter(function (payment) {
+    return payment.status === "succeeded";
+  });
+  const totalRevenue = succeededPayments.reduce(function (sum, payment) {
+    return sum + payment.amount;
+  }, 0);
+  const totalPayments = payments.length;
+  const successRate =
+    totalPayments > 0
+      ? Math.round((succeededPayments.length / totalPayments) * 100)
+      : 0;
 
-const totalRevenue = payments
-  .filter((p) => p.status === "succeeded")
-  .reduce((sum, p) => sum + p.amount, 0);
+  const revenueByStatus = useMemo(
+    function () {
+      const grouped: Record<string, number> = {};
 
-const totalPayments = payments.length;
-const successRate = Math.round(
-  (payments.filter((p) => p.status === "succeeded").length / totalPayments) * 100
-);
+      for (const payment of payments) {
+        const label = statusLabels[payment.status];
+        grouped[label] = (grouped[label] || 0) + payment.amount;
+      }
 
-const OverviewTab = () => {
+      return Object.entries(grouped).map(function ([status, amount]) {
+        return { status, amount };
+      });
+    },
+    [payments],
+  );
+
   return (
     <OverviewPage
       primaryColumn={
@@ -56,7 +74,12 @@ const OverviewTab = () => {
           </OverviewPageModule>
 
           <OverviewPageModule title="Recent Payments">
-            <DataTable columns={columns} items={tableItems} />
+            <PaymentsTable
+              payments={recentPayments}
+              columns={summaryColumns}
+              paymentsById={paymentsById}
+              onSelectPayment={onSelectPayment}
+            />
           </OverviewPageModule>
         </>
       }
@@ -72,16 +95,55 @@ const OverviewTab = () => {
 
           <OverviewPageModule title="Quick Stats">
             <PropertyList>
-              <PropertyListItem label="Total Revenue" value={formatCurrency(totalRevenue)} />
-              <PropertyListItem label="Total Payments" value={String(totalPayments)} />
-              <PropertyListItem label="Success Rate" value={`${successRate}%`} />
-              <PropertyListItem label="Avg. Payment" value={formatCurrency(Math.round(totalRevenue / payments.filter(p => p.status === "succeeded").length))} />
+              <PropertyListItem
+                label="Total Revenue"
+                value={formatCurrency(totalRevenue)}
+              />
+              <PropertyListItem
+                label="Total Payments"
+                value={String(totalPayments)}
+              />
+              <PropertyListItem
+                label="Success Rate"
+                value={`${successRate}%`}
+              />
+              <PropertyListItem
+                label="Avg. Payment"
+                value={
+                  succeededPayments.length > 0
+                    ? formatCurrency(
+                        Math.round(totalRevenue / succeededPayments.length),
+                      )
+                    : "$0.00"
+                }
+              />
             </PropertyList>
+          </OverviewPageModule>
+
+          <OverviewPageModule title="Revenue Sparkline" subtitle="10-day trend">
+            <Box css={{ stack: "y", rowGap: "medium" }}>
+              <Box css={{ stack: "y", rowGap: "xsmall" }}>
+                <Inline css={{ font: "caption", color: "secondary" }}>Daily revenue</Inline>
+                <Sparkline
+                  data={dailyRevenue}
+                  x="date"
+                  y="amount"
+                  tooltip
+                />
+              </Box>
+              <Box css={{ stack: "y", rowGap: "xsmall" }}>
+                <Inline css={{ font: "caption", color: "secondary" }}>Payment volume</Inline>
+                <Sparkline
+                  data={dailyPaymentCount}
+                  x="date"
+                  y="count"
+                  tooltip
+                />
+              </Box>
+            </Box>
           </OverviewPageModule>
         </>
       }
     />
   );
-};
-
-export default OverviewTab;
+}

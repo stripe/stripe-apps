@@ -10,7 +10,7 @@ import {
 } from "@stripe/ui-extension-sdk/ui";
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 
-const Settings = ({ userContext, environment }: ExtensionContextValue) => {
+export default function Settings({ userContext, environment }: ExtensionContextValue) {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [weeklyDigest, setWeeklyDigest] = useState(false);
 
@@ -67,4 +67,3 @@ const Settings = ({ userContext, environment }: ExtensionContextValue) => {
   );
 };
 
-export default Settings;

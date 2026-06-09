@@ -1,148 +1,179 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 import {
   Box,
-  DataTable,
-  DataTableColumn,
-  DateRangePicker,
-  SearchField,
+  Chip,
+  Inline,
+  Link,
+  Menu,
+  MenuItem,
 } from "@stripe/ui-extension-sdk/ui";
 
-import { payments, customers } from "../../data/mockData";
-import type { Payment } from "../../data/mockData";
-
-const formatCurrency = (amount: number): string => {
-  return `$${(amount / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
-};
+import { statusLabels, statusOptions } from "../../data/mockData";
+import type { Payment, PaymentStatus } from "../../data/mockData";
+import { RefundConfirmation } from "./RefundConfirmation";
+import { PaymentsTable, fullColumns } from "./PaymentsTable";
 
 const PAGE_SIZE = 8;
 
-const defaultColumns: DataTableColumn[] = [
-  { key: "id", label: "ID" },
-  { key: "customer", label: "Customer" },
-  { key: "description", label: "Description" },
-  { key: "amount", label: "Amount" },
-  { key: "status", label: "Status" },
-  { key: "date", label: "Date" },
-];
+interface PaymentsTabProps {
+  payments: Payment[];
+  paymentsById: Map<string, Payment>;
+  customerFilterOptions: Array<{ id: string; label: string }>;
+  onSelectPayment: (payment: Payment) => void;
+  onRefundPayment: (id: string) => void;
+}
 
-const PaymentsTab = () => {
+export function PaymentsTab({ payments, paymentsById, customerFilterOptions, onSelectPayment, onRefundPayment }: PaymentsTabProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCustomer, setSelectedCustomer] = useState<string | null>(null);
-  const [columns, setColumns] = useState(defaultColumns);
+  const [statusFilter, setStatusFilter] = useState("");
+  const [customerFilter, setCustomerFilter] = useState("");
+  const [refundingPaymentId, setRefundingPaymentId] = useState<string | null>(null);
 
-  const filteredPayments = useMemo(() => {
+  const refundingPayment = refundingPaymentId ? paymentsById.get(refundingPaymentId) : undefined;
+
+  const hasFilters = statusFilter || customerFilter;
+
+  const customerById = useMemo(function () {
+    return new Map(customerFilterOptions.map(function (option) {
+      return [option.id, option.label];
+    }));
+  }, [customerFilterOptions]);
+
+  const filteredPayments = useMemo(function () {
     let result: Payment[] = payments;
 
-    if (selectedCustomer) {
-      const customerName = customers.find((c) => c.id === selectedCustomer)?.value;
+    if (statusFilter) {
+      result = result.filter(function (payment) {
+        return payment.status === statusFilter;
+      });
+    }
+
+    if (customerFilter) {
+      const customerName = customerById.get(customerFilter);
       if (customerName) {
-        result = result.filter((p) => p.customer === customerName);
+        result = result.filter(function (payment) {
+          return payment.customer === customerName;
+        });
       }
     }
 
     return result;
-  }, [selectedCustomer]);
+  }, [payments, statusFilter, customerFilter, customerById]);
 
-  const tableItems = filteredPayments.map((p) => ({
-    id: p.id,
-    customer: p.customer,
-    description: p.description,
-    amount: formatCurrency(p.amount),
-    status: p.status,
-    date: p.date,
-  }));
-
-  const handleBatchChange = useCallback(
-    (selectedItems: { [x: string]: unknown }) => {
-      console.log("Selected items:", Object.keys(selectedItems));
-    },
-    []
-  );
-
-  const handleRowClick = useCallback((item: { id?: string | number }) => {
-    console.log("Row clicked:", item.id);
-  }, []);
-
-  const handleColumnOrderChange = useCallback(
-    (newOrder: DataTableColumn[]) => {
-      setColumns(newOrder);
-    },
-    []
-  );
+  function clearFilters() {
+    setStatusFilter("");
+    setCustomerFilter("");
+    setCurrentPage(1);
+  }
 
   return (
     <Box css={{ stack: "y", rowGap: "large", paddingY: "large" }}>
-      <Box css={{ stack: "x", columnGap: "medium", alignItems: "end" }}>
-        <Box css={{ width: "1/3" }}>
-          <SearchField
-            label="Filter by customer"
-            placeholder="Search customers..."
-            data={customers}
-            selectionMode="single"
-            onSelectionChange={(key) => {
-              setSelectedCustomer(key as string | null);
+      <Box css={{ stack: "x", columnGap: "small", alignY: "center" }}>
+        {statusFilter ? (
+          <Chip
+            label="Status"
+            value={statusLabels[statusFilter as PaymentStatus]}
+            onClose={function () {
+              setStatusFilter("");
               setCurrentPage(1);
             }}
           />
-        </Box>
-        <Box css={{ width: "1/3" }}>
-          <DateRangePicker
-            label="Date range"
-            timeZone="America/Los_Angeles"
-            value={{ range: "last4Weeks" }}
-            onChange={() => {}}
+        ) : (
+          <Menu
+            onAction={function (key) {
+              setStatusFilter(String(key));
+              setCurrentPage(1);
+            }}
+            trigger={
+              <Link>
+                <Chip label="Status" />
+              </Link>
+            }
+          >
+            {statusOptions.map(function (option) {
+              return (
+                <MenuItem key={option.id} id={option.id}>
+                  {option.label}
+                </MenuItem>
+              );
+            })}
+          </Menu>
+        )}
+
+        {customerFilter ? (
+          <Chip
+            label="Customer"
+            value={customerById.get(customerFilter)}
+            onClose={function () {
+              setCustomerFilter("");
+              setCurrentPage(1);
+            }}
           />
-        </Box>
+        ) : (
+          <Menu
+            onAction={function (key) {
+              setCustomerFilter(String(key));
+              setCurrentPage(1);
+            }}
+            trigger={
+              <Link>
+                <Chip label="Customer" />
+              </Link>
+            }
+          >
+            {customerFilterOptions.map(function (option) {
+              return (
+                <MenuItem key={option.id} id={option.id}>
+                  {option.label}
+                </MenuItem>
+              );
+            })}
+          </Menu>
+        )}
+
+        {hasFilters && (
+          <Link onPress={clearFilters}>
+            <Inline css={{ fontWeight: "semibold" }}>Clear filters</Inline>
+          </Link>
+        )}
       </Box>
 
-      <DataTable
-        columns={columns}
-        items={tableItems}
-        emptyMessage={{
-          message: "No payments match the current filters.",
-          action: {
-            label: "Clear filters",
-            href: "https://dashboard.stripe.com/payments",
-          },
-        }}
-        pagination={{
+      <PaymentsTable
+        payments={filteredPayments}
+        columns={fullColumns}
+        paymentsById={paymentsById}
+        onSelectPayment={onSelectPayment}
+        emptyMessage="No payments match the current filters."
+        pagination={filteredPayments.length > 0 ? {
           pageSize: PAGE_SIZE,
           totalItems: filteredPayments.length,
           currentPage,
           onPageChange: setCurrentPage,
-        }}
-        batchable={{ onBatchChange: handleBatchChange }}
-        enableColumnReorder
-        onColumnOrderChange={handleColumnOrderChange}
-        onRowClick={handleRowClick}
+        } : undefined}
         rowActions={[
-          {
-            id: "view-details",
-            label: "View details",
-            onPress: (item) => {
-              console.log("View details for:", item.id);
-            },
-          },
-          {
-            id: "copy-id",
-            label: "Copy ID",
-            onPress: (item) => {
-              console.log("Copy ID:", item.id);
-            },
-          },
           {
             id: "refund",
             label: "Refund payment",
             type: "destructive",
-            onPress: (item) => {
-              console.log("Refund:", item.id);
+            onPress: function (item) {
+              setRefundingPaymentId(String(item.id));
             },
           },
         ]}
       />
+
+      <RefundConfirmation
+        payment={refundingPayment}
+        shown={!!refundingPaymentId}
+        onConfirm={function () {
+          if (refundingPaymentId) {
+            onRefundPayment(refundingPaymentId);
+            setRefundingPaymentId(null);
+          }
+        }}
+        onCancel={function () { setRefundingPaymentId(null); }}
+      />
     </Box>
   );
-};
-
-export default PaymentsTab;
+}

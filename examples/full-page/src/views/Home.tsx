@@ -10,7 +10,7 @@ import { navigateToDashboardRoute } from "@stripe/ui-extension-sdk/utils";
 
 import BrandIcon from "./brand_icon.svg";
 
-const Home = ({ userContext, environment }: ExtensionContextValue) => {
+export default function Home({ userContext, environment }: ExtensionContextValue) {
   return (
     <ContextView
       title="Revenue Analytics"
@@ -37,7 +37,7 @@ const Home = ({ userContext, environment }: ExtensionContextValue) => {
           </Box>
           <Box>
             <Inline css={{ fontWeight: "semibold" }}>Payments</Inline> —
-            Searchable, filterable payment history
+            Filterable payment list with detail navigation
           </Box>
         </Box>
 
@@ -69,4 +69,3 @@ const Home = ({ userContext, environment }: ExtensionContextValue) => {
   );
 };
 
-export default Home;
