@@ -1,3 +1,9 @@
 {
-  "extends": "@stripe/ui-extension-tools/tsconfig.ui-extension"
+  "extends": "@stripe/ui-extension-tools/tsconfig.ui-extension",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }

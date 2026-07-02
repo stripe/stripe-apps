@@ -1,28 +1,30 @@
 {
-    "id": "full-page-example",
-    "version": "0.0.1",
-    "name": "Revenue Analytics",
-    "icon": "",
-    "permissions": [],
-    "ui_extension": {
-        "views": [
-            {
-                "viewport": "stripe.dashboard.home.overview",
-                "component": "Home"
-            },
-            {
-                "viewport": "stripe.dashboard.fullpage",
-                "component": "FullPageApp"
-            },
-            {
-                "viewport": "settings",
-                "component": "Settings"
-            }
-        ],
-        "content_security_policy": {
-            "connect-src": null,
-            "image-src": null,
-            "purpose": ""
-        }
+  "$schema": "https://stripe.com/stripe-app.schema.json",
+  "id": "com.example.pizzazz-loyalty",
+  "name": "Pizzazz Loyalty",
+  "version": "0.0.1",
+  "icon": "brand_icon.png",
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.fullpage",
+        "component": "FullPage"
+      },
+      {
+        "viewport": "settings",
+        "component": "AppSettings"
+      }
+    ],
+    "content_security_policy": {
+      "purpose": ""
     }
+  },
+  "extensions": null,
+  "post_install_action": {
+    "type": "modal",
+    "url": ""
+  },
+  "distribution_type": "private",
+  "stripe_api_access_type": "platform",
+  "sandbox_install_compatible": true
 }

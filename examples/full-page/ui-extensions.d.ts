@@ -1,1 +1,1 @@
-/// <reference types="@stripe/ui-extension-sdk" />
+/// <reference types="@stripe/ui-extension-tools" />
