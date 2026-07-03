@@ -31,7 +31,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
           {
             type: "link",
             label: "Activity",
-            route: createAppRoute("home"),
+            route: createAppRoute("home", { tabId: "activity" }),
           },
         ]}
         primaryColumn={
@@ -57,7 +57,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
           {
             type: "link",
             label: "Activity",
-            route: createAppRoute("home"),
+            route: createAppRoute("home", { tabId: "activity" }),
           },
         ]}
         primaryColumn={

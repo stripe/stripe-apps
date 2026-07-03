@@ -12,6 +12,10 @@ import { MembersTab } from "./tabs/MembersTab";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { RewardsTab } from "./tabs/RewardsTab";
 import type { Member, Reward } from "@/data";
+import { useRoute } from "@stripe/ui-extension-sdk/navigation";
+
+const DEFAULT_TAB = "overview";
+type HomeTabId = "overview" | "members" | "rewards" | "activity";
 
 type HomeState = {
   editMemberDrawer: { open: boolean; member: Member | null };
@@ -69,9 +73,16 @@ function homeReducer(state: HomeState, action: HomeAction): HomeState {
 }
 
 export function Home() {
+  const {
+    route: { routeParams, key },
+    setRoute,
+  } = useRoute();
   const { data: homeData } = useHomeQuery();
   const { queueToast } = useQueuedToast();
   const [state, dispatch] = useReducer(homeReducer, initialHomeState);
+
+  const currentTab =
+    (key === "home" && routeParams.tabId) || DEFAULT_TAB;
 
   const openEditMember = (memberId: string) => {
     const member = homeData?.members.find((m) => m.id === memberId);
@@ -93,7 +104,12 @@ export function Home() {
         onPress: () => openGrantDrawer(),
       }}
     >
-      <Tabs>
+      <Tabs
+        selectedKey={currentTab}
+        onSelectionChange={(tabId) =>
+          setRoute("home", { tabId: tabId as HomeTabId })
+        }
+      >
         <Tab id="overview" label="Overview">
           <OverviewTab />
         </Tab>

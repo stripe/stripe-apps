@@ -6,7 +6,11 @@ import { routes } from "@/routes";
 
 function FullPageView(context: ExtensionContextValue) {
   return (
-    <AppRouter routes={routes} context={context} defaultRoute={{ key: "home" }} />
+    <AppRouter
+      routes={routes}
+      context={context}
+      redirectOnNotFound={{ key: "home" }}
+    />
   );
 }
 
