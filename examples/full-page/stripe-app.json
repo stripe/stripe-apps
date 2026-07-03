@@ -13,6 +13,10 @@
       {
         "viewport": "settings",
         "component": "AppSettings"
+      },
+      {
+        "viewport": "stripe.dashboard.home.overview",
+        "component": "DrawerDefaultView"
       }
     ],
     "content_security_policy": {

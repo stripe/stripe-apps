@@ -59,7 +59,7 @@ function DrawerDefaultViewContent(_props: ExtensionContextValue) {
           </Box>
         </Box>
         <Box>
-          <Link href="https://dashboard.stripe.com/dashboard?open_modal_app=com.example.pizzazz">
+          <Link href={{ name: "fullPage" }}>
             <Button type="primary">Start rewarding</Button>
           </Link>
         </Box>
