@@ -1,15 +1,23 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ComponentType } from "react";
 
-import { QueryProvider } from "./QueryProvider";
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      retry: false,
+    },
+  },
+});
 
 export function withAppProviders<P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<P> {
   return function ViewWithProviders(props: P) {
     return (
-      <QueryProvider>
+      <QueryClientProvider client={queryClient}>
         <Component {...props} />
-      </QueryProvider>
+      </QueryClientProvider>
     );
   };
 }
