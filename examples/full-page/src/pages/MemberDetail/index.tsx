@@ -1,15 +1,11 @@
-import { DetailPageTable } from "@stripe/ui-extension-sdk/ui";
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
-import { FieldGrid } from "@/components/FieldGrid";
-import { StatCard } from "@/components/StatsCard";
-import { formatDate } from "@/utils/date";
-import { formatCurrency, formatPoints } from "@/utils/format";
-import { useMemberDetailPage } from "./useMemberDetailPage";
+import { DetailsModule } from "./components/DetailsModule";
+import { PointsBreakdownModule } from "./components/PointsBreakdownModule";
+import { RecentActivityModule } from "./components/RecentActivityModule";
+import { SummaryModule } from "./components/SummaryModule";
+import { useMemberDetailPage } from "./hooks/useMemberDetailPage";
 
 type MemberDetailPageProps = {
   id: string;
@@ -65,73 +61,28 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
       ]}
       primaryColumn={
         <>
-          <PageModule title="Summary">
-            <StatCard.Row>
-              <StatCard
-                label="Points balance"
-                value={formatPoints(member.points)}
-              />
-              <StatCard label="Tier" value={member.tier} />
-              <StatCard
-                label="Lifetime spend"
-                value={formatCurrency(member.lifetimeSpend, settings?.currency)}
-              />
-              <StatCard label="Total orders" value={totalOrders} />
-            </StatCard.Row>
-          </PageModule>
-
-          <PageModule title="Points breakdown">
-            <FieldGrid>
-              <FieldGrid.Field
-                label="Lifetime earned"
-                value={formatPoints(lifetimeEarned)}
-              />
-              <FieldGrid.Field
-                label="Lifetime redeemed"
-                value={formatPoints(lifetimeRedeemed)}
-              />
-              <FieldGrid.Field
-                label="Points to next reward"
-                value={
-                  pointsToNextReward === 0
-                    ? "Eligible now"
-                    : formatPoints(pointsToNextReward)
-                }
-              />
-            </FieldGrid>
-          </PageModule>
-
-          <PageModule title="Recent activity">
-            <DetailPageTable
-              pending={pending}
-              error={
-                isError
-                  ? { message: error?.message ?? "Something went wrong" }
-                  : undefined
-              }
-              emptyMessage="No recent activity"
-              columns={[
-                { key: "description", label: "Description" },
-                { key: "type", label: "Type" },
-                { key: "points", label: "Points" },
-                { key: "timestamp", label: "Date", cell: { type: "date" } },
-              ]}
-              items={recentActivity}
-            />
-          </PageModule>
+          <SummaryModule
+            member={member}
+            totalOrders={totalOrders}
+            currency={settings?.currency}
+          />
+          <PointsBreakdownModule
+            lifetimeEarned={lifetimeEarned}
+            lifetimeRedeemed={lifetimeRedeemed}
+            pointsToNextReward={pointsToNextReward}
+          />
+          <RecentActivityModule
+            pending={pending}
+            error={
+              isError
+                ? { message: error?.message ?? "Something went wrong" }
+                : undefined
+            }
+            items={recentActivity}
+          />
         </>
       }
-      secondaryColumn={
-        <PageModule title="Details">
-          <FieldGrid>
-            <FieldGrid.Field label="Email" value={member.email} />
-            <FieldGrid.Field
-              label="Member since"
-              value={formatDate(member.joinedDate)}
-            />
-          </FieldGrid>
-        </PageModule>
-      }
+      secondaryColumn={<DetailsModule member={member} />}
     />
   );
 }
