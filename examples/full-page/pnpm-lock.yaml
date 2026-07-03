@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@stripe/ui-extension-sdk':
-        specifier: 9.2.0-alpha.10
-        version: 9.2.0-alpha.10(stripe@17.7.0)
+        specifier: 9.2.0-alpha.11
+        version: 9.2.0-alpha.11(stripe@17.7.0)
       '@tanstack/react-query':
         specifier: 5.101.2
         version: 5.101.2(react@18.3.1)
@@ -359,8 +359,8 @@ packages:
   '@sinonjs/fake-timers@8.1.0':
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.10':
-    resolution: {integrity: sha512-VGsq9HgQrj/wM9OslgzZixjuY3JFyxk3FDF1HM95hS2t8esQza4MA8E3uhp6gFYic2tQ5ZYYj2TeirOaWt6PxQ==}
+  '@stripe/ui-extension-sdk@9.2.0-alpha.11':
+    resolution: {integrity: sha512-dyYCKNdtlq0IReG7J+YbyM075Ra9SNiaKbe5CLrNcl95U9KzmGWaAXXzGaYZP4nLJaB6/K9j4VOK8E1Q3IUPBQ==}
     peerDependencies:
       stripe: '>= 8.195.0'
 
@@ -847,8 +847,8 @@ packages:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
 
-  electron-to-chromium@1.5.383:
-    resolution: {integrity: sha512-I2484/KkAvl8lm9VyjH2JnbOIV0d/UCqT7gbzs6l+o6Vmn9wgB66uVcKX+Vk6HrXtY6fbWTOEXuv8waDTuFNCw==}
+  electron-to-chromium@1.5.384:
+    resolution: {integrity: sha512-g6KAKY1vkYsADvSPWvdJsuYT0ixdcu6lUtD9P/wJKGBEDlZVXh2AX42j1mPqqaQPDluWjara9ziQ7xqAeXCt5A==}
 
   emittery@0.8.1:
     resolution: {integrity: sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==}
@@ -2752,14 +2752,14 @@ snapshots:
 
   '@remote-ui/core@2.2.5':
     dependencies:
-      '@remote-ui/rpc': 1.4.5
+      '@remote-ui/rpc': 1.4.7
       '@remote-ui/types': 1.1.3
 
   '@remote-ui/react@5.0.5(react-reconciler@0.29.0(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@remote-ui/async-subscription': 2.1.18
       '@remote-ui/core': 2.2.5
-      '@remote-ui/rpc': 1.4.5
+      '@remote-ui/rpc': 1.4.7
       '@types/react': 17.0.93
       '@types/react-reconciler': 0.28.9(@types/react@17.0.93)
       react: 18.3.1
@@ -2787,7 +2787,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 1.8.6
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.10(stripe@17.7.0)':
+  '@stripe/ui-extension-sdk@9.2.0-alpha.11(stripe@17.7.0)':
     dependencies:
       '@remote-ui/core': 2.2.5
       '@remote-ui/react': 5.0.5(react-reconciler@0.29.0(react@18.3.1))(react@18.3.1)
@@ -3194,7 +3194,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.10.40
       caniuse-lite: 1.0.30001800
-      electron-to-chromium: 1.5.383
+      electron-to-chromium: 1.5.384
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
@@ -3366,7 +3366,7 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  electron-to-chromium@1.5.383: {}
+  electron-to-chromium@1.5.384: {}
 
   emittery@0.8.1: {}
 
