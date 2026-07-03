@@ -5,15 +5,11 @@ import {
 } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
-import {
-  useMemberDetailQuery,
-  useMembersQuery,
-  useSettingsQuery,
-} from "@/data";
 import { FieldGrid } from "@/components/FieldGrid";
 import { StatCard } from "@/components/StatsCard";
 import { formatDate } from "@/utils/date";
 import { formatCurrency, formatPoints } from "@/utils/format";
+import { useMemberDetailPage } from "./useMemberDetailPage";
 
 type MemberDetailPageProps = {
   id: string;
@@ -21,14 +17,21 @@ type MemberDetailPageProps = {
 
 export function MemberDetailPage({ id }: MemberDetailPageProps) {
   const { createAppRoute } = useRoute();
-  const { data: members, isLoading: membersLoading } = useMembersQuery();
-  const { data, isLoading, isError, error } = useMemberDetailQuery();
-  const { data: settings } = useSettingsQuery();
+  const {
+    member,
+    pending,
+    notFound,
+    isError,
+    error,
+    settings,
+    lifetimeEarned,
+    lifetimeRedeemed,
+    pointsToNextReward,
+    totalOrders,
+    recentActivity,
+  } = useMemberDetailPage(id);
 
-  const member = members?.find((m) => m.id === id);
-  const pending = isLoading || membersLoading;
-
-  if (!pending && !member) {
+  if (notFound) {
     return (
       <DetailPage
         title="Member not found"
@@ -50,24 +53,9 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
     return null;
   }
 
-  const currentMember = member;
-  const { activity = [], rewards = [] } = data ?? {};
-
-  const memberTransactions = activity.filter((txn) => txn.memberId === id);
-  const memberActivity = memberTransactions.slice(0, 5);
-  const lifetimeRedeemed = memberTransactions
-    .filter((txn) => txn.type === "redeemed")
-    .reduce((sum, txn) => sum + txn.points, 0);
-  const lifetimeEarned = currentMember.points + lifetimeRedeemed;
-  const lowestRewardCost = Math.min(...rewards.map((r) => r.pointsCost));
-  const pointsToNextReward = Math.max(
-    0,
-    lowestRewardCost - currentMember.points,
-  );
-
   return (
     <DetailPage
-      title={currentMember.name}
+      title={member.name}
       breadcrumbs={[
         {
           type: "link",
@@ -81,22 +69,14 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
             <StatCard.Row>
               <StatCard
                 label="Points balance"
-                value={formatPoints(currentMember.points)}
+                value={formatPoints(member.points)}
               />
-              <StatCard label="Tier" value={currentMember.tier} />
+              <StatCard label="Tier" value={member.tier} />
               <StatCard
                 label="Lifetime spend"
-                value={formatCurrency(
-                  currentMember.lifetimeSpend,
-                  settings?.currency,
-                )}
+                value={formatCurrency(member.lifetimeSpend, settings?.currency)}
               />
-              <StatCard
-                label="Total orders"
-                value={
-                  memberTransactions.filter((t) => t.type === "earned").length
-                }
-              />
+              <StatCard label="Total orders" value={totalOrders} />
             </StatCard.Row>
           </PageModule>
 
@@ -136,13 +116,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
                 { key: "points", label: "Points" },
                 { key: "timestamp", label: "Date", cell: { type: "date" } },
               ]}
-              items={memberActivity.map((txn) => ({
-                id: txn.id,
-                description: txn.description,
-                type: txn.type === "earned" ? "Earned" : "Redeemed",
-                points: `${txn.type === "earned" ? "+" : "-"}${formatPoints(txn.points)}`,
-                timestamp: txn.timestamp,
-              }))}
+              items={recentActivity}
             />
           </PageModule>
         </>
@@ -150,10 +124,10 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
       secondaryColumn={
         <PageModule title="Details">
           <FieldGrid>
-            <FieldGrid.Field label="Email" value={currentMember.email} />
+            <FieldGrid.Field label="Email" value={member.email} />
             <FieldGrid.Field
               label="Member since"
-              value={formatDate(currentMember.joinedDate)}
+              value={formatDate(member.joinedDate)}
             />
           </FieldGrid>
         </PageModule>

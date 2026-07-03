@@ -5,26 +5,10 @@ import {
 } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
-import {
-  pointsToDollars,
-  useActivityQuery,
-  useRewardsQuery,
-  useSettingsQuery,
-} from "@/data";
 import { FieldGrid } from "@/components/FieldGrid";
 import { StatCard } from "@/components/StatsCard";
 import { formatCurrency, formatPoints } from "@/utils/format";
-
-const getCategoryLabel = (category: string) => {
-  switch (category) {
-    case "coffee":
-      return "Coffee";
-    case "merchandise":
-      return "Merchandise";
-    default:
-      return category;
-  }
-};
+import { useRewardDetailPage } from "./useRewardDetailPage";
 
 type RewardDetailPageProps = {
   id: string;
@@ -32,14 +16,20 @@ type RewardDetailPageProps = {
 
 export function RewardDetailPage({ id }: RewardDetailPageProps) {
   const { createAppRoute } = useRoute();
-  const { data: rewards, isLoading: rewardsLoading } = useRewardsQuery();
-  const { data: activity, isLoading, isError, error } = useActivityQuery();
-  const { data: settings } = useSettingsQuery();
+  const {
+    reward,
+    pending,
+    notFound,
+    isError,
+    error,
+    settings,
+    categoryLabel,
+    dollarValue,
+    pointsRedeemed,
+    recentRedemptions,
+  } = useRewardDetailPage(id);
 
-  const reward = rewards?.find((r) => r.id === id);
-  const pending = isLoading || rewardsLoading;
-
-  if (!pending && !reward) {
+  if (notFound) {
     return (
       <DetailPage
         title="Reward not found"
@@ -63,94 +53,70 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
     return null;
   }
 
-  const currentReward = reward;
-  const rewardActivity = (activity ?? [])
-    .filter(
-      (txn) =>
-        txn.type === "redeemed" && txn.description === currentReward.name,
-    )
-    .slice(0, 5);
-
   return (
     <DetailPage
-      title={currentReward.name}
-        description={currentReward.description}
-        breadcrumbs={[
-          {
-            type: "link",
-            label: "Rewards",
-            route: createAppRoute("home", { tabId: "rewards" }),
-          },
-        ]}
-        primaryColumn={
-          <>
-            <PageModule title="Summary">
-              <StatCard.Row>
-                <StatCard
-                  label="Points cost"
-                  value={formatPoints(currentReward.pointsCost)}
-                />
-                <StatCard
-                  label="Dollar value"
-                  value={formatCurrency(
-                    pointsToDollars(
-                      currentReward.pointsCost,
-                      settings?.pointsPerDollar,
-                    ),
-                    settings?.currency,
-                  )}
-                />
-                <StatCard
-                  label="Redemptions"
-                  value={currentReward.redemptionCount}
-                />
-                <StatCard
-                  label="Points redeemed"
-                  value={formatPoints(
-                    currentReward.pointsCost * currentReward.redemptionCount,
-                  )}
-                />
-              </StatCard.Row>
-            </PageModule>
+      title={reward.name}
+      description={reward.description}
+      breadcrumbs={[
+        {
+          type: "link",
+          label: "Rewards",
+          route: createAppRoute("home", { tabId: "rewards" }),
+        },
+      ]}
+      primaryColumn={
+        <>
+          <PageModule title="Summary">
+            <StatCard.Row>
+              <StatCard
+                label="Points cost"
+                value={formatPoints(reward.pointsCost)}
+              />
+              <StatCard
+                label="Dollar value"
+                value={formatCurrency(dollarValue, settings?.currency)}
+              />
+              <StatCard
+                label="Redemptions"
+                value={reward.redemptionCount}
+              />
+              <StatCard
+                label="Points redeemed"
+                value={formatPoints(pointsRedeemed)}
+              />
+            </StatCard.Row>
+          </PageModule>
 
-            <PageModule title="Details">
-              <FieldGrid>
-                <FieldGrid.Field
-                  label="Category"
-                  value={getCategoryLabel(currentReward.category)}
-                />
-                <FieldGrid.Field
-                  label="Status"
-                  value={currentReward.available ? "Available" : "Out of stock"}
-                />
-              </FieldGrid>
-            </PageModule>
+          <PageModule title="Details">
+            <FieldGrid>
+              <FieldGrid.Field label="Category" value={categoryLabel} />
+              <FieldGrid.Field
+                label="Status"
+                value={reward.available ? "Available" : "Out of stock"}
+              />
+            </FieldGrid>
+          </PageModule>
 
-            {rewardActivity.length > 0 && (
-              <PageModule title="Recent redemptions">
-                <DetailPageTable
-                  pending={pending}
-                  error={
-                    isError
-                      ? { message: error?.message ?? "Something went wrong" }
-                      : undefined
-                  }
-                  columns={[
-                    { key: "memberName", label: "Member" },
-                    { key: "points", label: "Points" },
-                    { key: "timestamp", label: "Date", cell: { type: "date" } },
-                  ]}
-                  items={rewardActivity.map((txn) => ({
-                    id: txn.id,
-                    memberName: txn.memberName,
-                    points: `-${formatPoints(txn.points)}`,
-                    timestamp: txn.timestamp,
-                  }))}
-                />
-              </PageModule>
-            )}
-          </>
-        }
+          {recentRedemptions.length > 0 && (
+            <PageModule title="Recent redemptions">
+              <DetailPageTable
+                pending={pending}
+                error={
+                  isError
+                    ? { message: error?.message ?? "Something went wrong" }
+                    : undefined
+                }
+                columns={[
+                  { key: "memberName", label: "Member" },
+                  { key: "points", label: "Points" },
+                  { key: "timestamp", label: "Date", cell: { type: "date" } },
+                ]}
+                items={recentRedemptions}
+              />
+            </PageModule>
+          )}
+        </>
+      }
     />
   );
 }
