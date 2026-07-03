@@ -81,8 +81,7 @@ export function Home() {
   const { queueToast } = useQueuedToast();
   const [state, dispatch] = useReducer(homeReducer, initialHomeState);
 
-  const currentTab =
-    (key === "home" && routeParams.tabId) || DEFAULT_TAB;
+  const currentTab = (key === "home" && routeParams.tabId) || DEFAULT_TAB;
 
   const openEditMember = (memberId: string) => {
     const member = homeData?.members.find((m) => m.id === memberId);
