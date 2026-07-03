@@ -7,15 +7,117 @@ import {
   FormFieldGroup,
   Divider,
 } from "@stripe/ui-extension-sdk/ui";
-import { withAppProviders } from "@/providers/AppProviders";
-import { useQueuedToast } from "@/hooks/useQueuedToast";
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 
+import { withAppProviders } from "@/providers/AppProviders";
 import {
   ProgramConfig,
   useSettingsQuery,
   useUpdateProgramConfigMutation,
 } from "@/data";
+import { useQueuedToast } from "@/hooks/useQueuedToast";
+
+function AppSettingsView(_props: ExtensionContextValue) {
+  const {
+    isLoading,
+    onSave,
+    programName,
+    onProgramNameChange,
+    pointsPerDollar,
+    onPointsPerDollarChange,
+    currency,
+    onCurrencyChange,
+    activeDays,
+    onActiveDaysChange,
+    atRiskDays,
+    onAtRiskDaysChange,
+  } = useAppSettingsView();
+
+  if (isLoading) {
+    return (
+      <SettingsView onSave={onSave}>
+        <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>
+      </SettingsView>
+    );
+  }
+
+  return (
+    <SettingsView onSave={onSave}>
+      <Box css={{ stack: "y", gap: "xlarge" }}>
+        <Box css={{ stack: "y", gap: "small" }}>
+          <Box css={{ font: "heading", fontWeight: "bold" }}>
+            Program configuration
+          </Box>
+          <Box css={{ font: "caption", color: "secondary" }}>
+            Configure how your loyalty program works.
+          </Box>
+        </Box>
+
+        <FormFieldGroup legend="General" layout="vertical">
+          <TextField
+            label="Program name"
+            description="The name displayed to your customers"
+            value={programName}
+            onChange={(e) => onProgramNameChange(e.target.value)}
+          />
+
+          <TextField
+            label="Points per dollar"
+            description="How many points a customer earns per dollar spent"
+            type="number"
+            value={pointsPerDollar}
+            onChange={(e) => onPointsPerDollarChange(e.target.value)}
+          />
+
+          <Select
+            label="Currency"
+            description="The currency used for monetary calculations"
+            value={currency}
+            onChange={(e) =>
+              onCurrencyChange(e.target.value as ProgramConfig["currency"])
+            }
+          >
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+            <option value="gbp">GBP</option>
+          </Select>
+        </FormFieldGroup>
+
+        <Divider />
+
+        <Box css={{ stack: "y", gap: "small" }}>
+          <Box css={{ font: "subheading", fontWeight: "semibold" }}>
+            Engagement thresholds
+          </Box>
+          <Box css={{ font: "caption", color: "secondary" }}>
+            Define when members are considered active, at risk, or dormant based
+            on days since their last purchase.
+          </Box>
+        </Box>
+
+        <FormFieldGroup legend="Thresholds" layout="vertical">
+          <TextField
+            label="Active window (days)"
+            description="Members who purchased within this many days are active"
+            type="number"
+            value={activeDays}
+            onChange={(e) => onActiveDaysChange(e.target.value)}
+          />
+
+          <TextField
+            label="At-risk window (days)"
+            description="Members past the active window but within this window are at risk"
+            type="number"
+            value={atRiskDays}
+            onChange={(e) => onAtRiskDaysChange(e.target.value)}
+          />
+        </FormFieldGroup>
+      </Box>
+    </SettingsView>
+  );
+}
+
+export default withAppProviders(AppSettingsView);
 
 type SettingsFormState = {
   programName: string;
@@ -67,7 +169,7 @@ function settingsFormReducer(
   }
 }
 
-function AppSettingsView(_props: ExtensionContextValue) {
+function useAppSettingsView() {
   const { data: settings, isLoading } = useSettingsQuery();
   const { mutate } = useUpdateProgramConfigMutation();
   const { queueToast } = useQueuedToast();
@@ -79,7 +181,7 @@ function AppSettingsView(_props: ExtensionContextValue) {
     }
   }, [settings]);
 
-  const handleSave = () => {
+  const onSave = () => {
     mutate(
       {
         name: form.programName,
@@ -101,99 +203,23 @@ function AppSettingsView(_props: ExtensionContextValue) {
     );
   };
 
-  if (isLoading || !settings) {
-    return (
-      <SettingsView onSave={handleSave}>
-        <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>
-      </SettingsView>
-    );
-  }
-
-  return (
-    <SettingsView onSave={handleSave}>
-      <Box css={{ stack: "y", gap: "xlarge" }}>
-        <Box css={{ stack: "y", gap: "small" }}>
-          <Box css={{ font: "heading", fontWeight: "bold" }}>
-            Program configuration
-          </Box>
-          <Box css={{ font: "caption", color: "secondary" }}>
-            Configure how your loyalty program works.
-          </Box>
-        </Box>
-
-        <FormFieldGroup legend="General" layout="vertical">
-          <TextField
-            label="Program name"
-            description="The name displayed to your customers"
-            value={form.programName}
-            onChange={(e) =>
-              dispatch({ type: "setProgramName", value: e.target.value })
-            }
-          />
-
-          <TextField
-            label="Points per dollar"
-            description="How many points a customer earns per dollar spent"
-            type="number"
-            value={form.pointsPerDollar}
-            onChange={(e) =>
-              dispatch({ type: "setPointsPerDollar", value: e.target.value })
-            }
-          />
-
-          <Select
-            label="Currency"
-            description="The currency used for monetary calculations"
-            value={form.currency}
-            onChange={(e) =>
-              dispatch({
-                type: "setCurrency",
-                value: e.target.value as ProgramConfig["currency"],
-              })
-            }
-          >
-            <option value="usd">USD</option>
-            <option value="eur">EUR</option>
-            <option value="gbp">GBP</option>
-          </Select>
-        </FormFieldGroup>
-
-        <Divider />
-
-        <Box css={{ stack: "y", gap: "small" }}>
-          <Box css={{ font: "subheading", fontWeight: "semibold" }}>
-            Engagement thresholds
-          </Box>
-          <Box css={{ font: "caption", color: "secondary" }}>
-            Define when members are considered active, at risk, or dormant based
-            on days since their last purchase.
-          </Box>
-        </Box>
-
-        <FormFieldGroup legend="Thresholds" layout="vertical">
-          <TextField
-            label="Active window (days)"
-            description="Members who purchased within this many days are active"
-            type="number"
-            value={form.activeDays}
-            onChange={(e) =>
-              dispatch({ type: "setActiveDays", value: e.target.value })
-            }
-          />
-
-          <TextField
-            label="At-risk window (days)"
-            description="Members past the active window but within this window are at risk"
-            type="number"
-            value={form.atRiskDays}
-            onChange={(e) =>
-              dispatch({ type: "setAtRiskDays", value: e.target.value })
-            }
-          />
-        </FormFieldGroup>
-      </Box>
-    </SettingsView>
-  );
+  return {
+    isLoading: isLoading || !settings,
+    onSave,
+    programName: form.programName,
+    onProgramNameChange: (value: string) =>
+      dispatch({ type: "setProgramName", value }),
+    pointsPerDollar: form.pointsPerDollar,
+    onPointsPerDollarChange: (value: string) =>
+      dispatch({ type: "setPointsPerDollar", value }),
+    currency: form.currency,
+    onCurrencyChange: (value: ProgramConfig["currency"]) =>
+      dispatch({ type: "setCurrency", value }),
+    activeDays: form.activeDays,
+    onActiveDaysChange: (value: string) =>
+      dispatch({ type: "setActiveDays", value }),
+    atRiskDays: form.atRiskDays,
+    onAtRiskDaysChange: (value: string) =>
+      dispatch({ type: "setAtRiskDays", value }),
+  };
 }
-
-export default withAppProviders(AppSettingsView);
