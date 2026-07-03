@@ -2,7 +2,7 @@ import { Box, Inline, Link } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 import { DATE_RANGE_OPTIONS, FilterSelect } from "@/components/FilterSelect";
-import { useMembersTab } from "./useMembersTab";
+import { useMembersTab } from "./hooks/useMembersTab";
 
 interface MembersTabProps {
   onGrantPoints: (memberId: string) => void;

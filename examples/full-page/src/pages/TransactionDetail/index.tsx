@@ -1,14 +1,10 @@
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
-import { FieldGrid } from "@/components/FieldGrid";
-import { StatCard } from "@/components/StatsCard";
-import { formatTimestamp } from "@/utils/date";
-import { formatCurrency, formatPoints } from "@/utils/format";
-import { useTransactionDetailPage } from "./useTransactionDetailPage";
+import { MemberDetailsModule } from "./components/MemberDetailsModule";
+import { OrderModule } from "./components/OrderModule";
+import { SummaryModule } from "./components/SummaryModule";
+import { useTransactionDetailPage } from "./hooks/useTransactionDetailPage";
 
 type TransactionDetailPageProps = {
   id: string;
@@ -61,55 +57,19 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
       ]}
       primaryColumn={
         <>
-          <PageModule title="Summary">
-            <StatCard.Row>
-              <StatCard label="Points" value={pointsDisplay} />
-              <StatCard label="Type" value={typeLabel} />
-              <StatCard label="Member" value={transaction.memberName} />
-              <StatCard
-                label="Time"
-                value={formatTimestamp(transaction.timestamp)}
-              />
-            </StatCard.Row>
-          </PageModule>
-
+          <SummaryModule
+            transaction={transaction}
+            pointsDisplay={pointsDisplay}
+            typeLabel={typeLabel}
+          />
           {transaction.orderId && (
-            <PageModule title="Order">
-              <FieldGrid>
-                <FieldGrid.Field
-                  label="Order ID"
-                  value={transaction.orderId}
-                />
-              </FieldGrid>
-            </PageModule>
+            <OrderModule orderId={transaction.orderId} />
           )}
-
-          <PageModule title="Member">
-            <FieldGrid>
-              <FieldGrid.Field
-                label="Email"
-                value={transaction.memberEmail}
-              />
-              {member && (
-                <FieldGrid.Field label="Tier" value={member.tier} />
-              )}
-              {member && (
-                <FieldGrid.Field
-                  label="Current balance"
-                  value={`${formatPoints(member.points)} points`}
-                />
-              )}
-              {member && (
-                <FieldGrid.Field
-                  label="Lifetime spend"
-                  value={formatCurrency(
-                    member.lifetimeSpend,
-                    settings?.currency,
-                  )}
-                />
-              )}
-            </FieldGrid>
-          </PageModule>
+          <MemberDetailsModule
+            transaction={transaction}
+            member={member}
+            currency={settings?.currency}
+          />
         </>
       }
     />

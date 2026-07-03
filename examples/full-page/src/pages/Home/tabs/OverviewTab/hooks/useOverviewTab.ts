@@ -58,6 +58,18 @@ const TIME_HORIZON_LABELS: Record<string, string> = {
   "52": "Last 12 months",
 };
 
+export type OverviewSummaryMetric = {
+  value: number;
+  pct: number | null;
+};
+
+export type OverviewSummary = {
+  totalMembers: OverviewSummaryMetric;
+  revenue: OverviewSummaryMetric;
+  redemptions: OverviewSummaryMetric;
+  pointsLiability: OverviewSummaryMetric;
+};
+
 export function useOverviewTab() {
   const { data, isLoading, isError, error } = useOverviewQuery();
   const { data: members } = useMembersQuery();
@@ -195,11 +207,9 @@ export function useOverviewTab() {
     isError,
     error,
     settings,
-    timeHorizon,
     timeHorizonLabel: TIME_HORIZON_LABELS[timeHorizon] ?? timeHorizon,
     onTimeHorizonChange,
     recentTransactions: derived?.recentTransactions ?? [],
-    isYearView: derived?.isYearView ?? false,
     tierData: derived?.tierData ?? [],
     memberGrowthChartData: derived?.memberGrowthChartData ?? [],
     revenueChartData: derived?.revenueChartData ?? [],

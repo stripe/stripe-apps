@@ -2,7 +2,7 @@ import { Box, Inline, Link } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 import { DATE_RANGE_OPTIONS, FilterSelect } from "@/components/FilterSelect";
-import { useActivityTab } from "./useActivityTab";
+import { useActivityTab } from "./hooks/useActivityTab";
 
 interface ActivityTabProps {
   onGrantPoints: (memberId: string) => void;

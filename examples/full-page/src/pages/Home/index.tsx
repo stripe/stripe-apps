@@ -10,7 +10,7 @@ import { ActivityTab } from "./tabs/ActivityTab";
 import { MembersTab } from "./tabs/MembersTab";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { RewardsTab } from "./tabs/RewardsTab";
-import { useHome } from "./useHome";
+import { useHome } from "./hooks/useHome";
 
 const DEFAULT_TAB = "overview";
 type HomeTabId = "overview" | "members" | "rewards" | "activity";
