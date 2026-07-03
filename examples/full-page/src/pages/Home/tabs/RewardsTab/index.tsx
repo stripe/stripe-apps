@@ -1,7 +1,7 @@
 import { Box, Button, Inline, Link } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
-import { FilterSelect } from "@/components/FilterSelect";
+import { FilterSelect } from "@/pages/Home/components/FilterSelect";
 import { useRewardsTab } from "./hooks/useRewardsTab";
 
 interface RewardsTabProps {
