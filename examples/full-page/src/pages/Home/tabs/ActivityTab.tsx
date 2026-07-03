@@ -1,10 +1,6 @@
 import { useReducer } from "react";
-import {
-  Box,
-  DataTable,
-  Inline,
-  Link,
-} from "@stripe/ui-extension-sdk/ui";
+import { Box, Inline, Link } from "@stripe/ui-extension-sdk/ui";
+import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 import { useActivityQuery } from "@/data";
 import { DATE_RANGE_OPTIONS, FilterSelect } from "@/components/FilterSelect";
@@ -52,9 +48,7 @@ export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
   );
 
   if (isLoading) {
-    return (
-      <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>
-    );
+    return <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>;
   }
 
   if (isError) {

@@ -8,9 +8,14 @@ import {
   Menu,
   MenuItem,
   OverviewPage,
-  OverviewPageModule,
+  PageModule,
 } from "@stripe/ui-extension-sdk/ui";
-import { BarChart, LineChart, MeterChart } from "@stripe/ui-extension-sdk/ui/next";
+import {
+  BarChart,
+  LineChart,
+  MeterChart,
+} from "@stripe/ui-extension-sdk/ui/next";
+import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
 
 import {
   pointsToDollars,
@@ -173,7 +178,7 @@ export function OverviewTab() {
     <OverviewPage
       primaryColumn={
         <>
-          <OverviewPageModule title="Program summary">
+          <PageModule title="Program summary">
             <Menu
               onAction={(key) => setTimeHorizon(String(key))}
               trigger={
@@ -286,7 +291,7 @@ export function OverviewTab() {
                 </Box>
               </Box>
             </Box>
-          </OverviewPageModule>
+          </PageModule>
 
           {/* Charts in container card */}
           <Box
@@ -374,15 +379,15 @@ export function OverviewTab() {
       }
       secondaryColumn={
         <>
-          <OverviewPageModule title="Members by tier">
+          <PageModule title="Members by tier">
             <MeterChart
               data={tierData}
               legendEnabled
               unitFormat={{ unit: "number", options: {} }}
             />
-          </OverviewPageModule>
+          </PageModule>
 
-          <OverviewPageModule title="Recent activity">
+          <PageModule title="Recent activity">
             <Box css={{ stack: "y", gap: "small" }}>
               {recentTransactions.map((txn, i) => (
                 <Box key={txn.id} css={{ stack: "y", gap: "small" }}>
@@ -419,9 +424,9 @@ export function OverviewTab() {
                 View the Activity tab for full history
               </Inline>
             </Box>
-          </OverviewPageModule>
+          </PageModule>
 
-          <OverviewPageModule title="Quick actions">
+          <PageModule title="Quick actions">
             <Box css={{ stack: "y", gap: "small" }}>
               <Link
                 href="https://dashboard.stripe.com/products"
@@ -441,7 +446,7 @@ export function OverviewTab() {
                 </Box>
               </Link>
             </Box>
-          </OverviewPageModule>
+          </PageModule>
         </>
       }
     />

@@ -1,5 +1,6 @@
 import { useReducer } from "react";
-import { Box, DataTable, Inline, Link } from "@stripe/ui-extension-sdk/ui";
+import { Box, Inline, Link } from "@stripe/ui-extension-sdk/ui";
+import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
 import {
