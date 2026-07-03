@@ -21,6 +21,69 @@ type EditMemberDrawerProps = {
   setShown: (shown: boolean) => void;
 };
 
+export function EditMemberDrawer(props: EditMemberDrawerProps) {
+  const {
+    shown,
+    handleSetShown,
+    handleClose,
+    handleSubmit,
+    name,
+    onNameChange,
+    email,
+    onEmailChange,
+    programCurrency,
+    lifetimeSpendCents,
+    onLifetimeSpendChange,
+    isSubmitDisabled,
+    isPending,
+  } = useEditMemberDrawer(props);
+
+  return (
+    <FocusView
+      title="Edit member"
+      shown={shown}
+      setShown={handleSetShown}
+      primaryAction={
+        <Button
+          type="primary"
+          onPress={handleSubmit}
+          disabled={isSubmitDisabled}
+          pending={isPending}
+        >
+          Save
+        </Button>
+      }
+      secondaryAction={<Button onPress={handleClose}>Cancel</Button>}
+    >
+      <Box css={{ stack: "y", gap: "large" }}>
+        <FormFieldGroup layout="vertical">
+          <TextField
+            name="name"
+            label="Name"
+            value={name}
+            onChange={(e) => onNameChange(e.target.value)}
+          />
+          <TextField
+            name="email"
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => onEmailChange(e.target.value)}
+          />
+          <CurrencyField
+            label="Lifetime spend"
+            description={`Total amount this member has spent, in ${programCurrency}`}
+            currency={programCurrency}
+            currencyAllowlist={[programCurrency]}
+            value={lifetimeSpendCents}
+            onChange={onLifetimeSpendChange}
+          />
+        </FormFieldGroup>
+      </Box>
+    </FocusView>
+  );
+}
+
 type EditMemberFormState = {
   name: string;
   email: string;
@@ -70,7 +133,7 @@ function editMemberFormReducer(
   }
 }
 
-export function EditMemberDrawer({
+function useEditMemberDrawer({
   member,
   shown,
   setShown,
@@ -115,59 +178,27 @@ export function EditMemberDrawer({
     );
   };
 
-  return (
-    <FocusView
-      title="Edit member"
-      shown={shown}
-      setShown={(s) => {
-        if (!s) handleClose();
-      }}
-      primaryAction={
-        <Button
-          type="primary"
-          onPress={handleSubmit}
-          disabled={!form.name || !form.email}
-          pending={isPending}
-        >
-          Save
-        </Button>
-      }
-      secondaryAction={<Button onPress={handleClose}>Cancel</Button>}
-    >
-      <Box css={{ stack: "y", gap: "large" }}>
-        <FormFieldGroup layout="vertical">
-          <TextField
-            name="name"
-            label="Name"
-            value={form.name}
-            onChange={(e) =>
-              dispatch({ type: "setName", value: e.target.value })
-            }
-          />
-          <TextField
-            name="email"
-            label="Email"
-            type="email"
-            value={form.email}
-            onChange={(e) =>
-              dispatch({ type: "setEmail", value: e.target.value })
-            }
-          />
-          <CurrencyField
-            label="Lifetime spend"
-            description={`Total amount this member has spent, in ${programCurrency}`}
-            currency={programCurrency}
-            currencyAllowlist={[programCurrency]}
-            value={form.lifetimeSpendCents}
-            onChange={(value) =>
-              dispatch({
-                type: "setLifetimeSpendCents",
-                value: value ?? 0,
-              })
-            }
-          />
-        </FormFieldGroup>
-      </Box>
-    </FocusView>
-  );
+  return {
+    shown,
+    handleSetShown: (open: boolean) => {
+      if (!open) handleClose();
+    },
+    handleClose,
+    handleSubmit,
+    name: form.name,
+    onNameChange: (value: string) =>
+      dispatch({ type: "setName", value }),
+    email: form.email,
+    onEmailChange: (value: string) =>
+      dispatch({ type: "setEmail", value }),
+    programCurrency,
+    lifetimeSpendCents: form.lifetimeSpendCents,
+    onLifetimeSpendChange: (value: number | null) =>
+      dispatch({
+        type: "setLifetimeSpendCents",
+        value: value ?? 0,
+      }),
+    isSubmitDisabled: !form.name || !form.email,
+    isPending,
+  };
 }

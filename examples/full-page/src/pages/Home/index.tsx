@@ -2,10 +2,9 @@ import { FullPageView } from "@stripe/ui-extension-sdk/ui";
 import { Tab, Tabs } from "@stripe/ui-extension-sdk/ui/next";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
 
-import { useQueuedToast } from "@/hooks/useQueuedToast";
-import { GrantPointsDrawer } from "./drawers/GrantPointsDrawer";
-import { EditMemberDrawer } from "./drawers/EditMemberDrawer";
-import { EditRewardDrawer } from "./drawers/EditRewardDrawer";
+import { GrantPointsDrawer } from "./components/GrantPointsDrawer";
+import { EditMemberDrawer } from "./components/EditMemberDrawer";
+import { EditRewardDrawer } from "./components/EditRewardDrawer";
 import { ActivityTab } from "./tabs/ActivityTab";
 import { MembersTab } from "./tabs/MembersTab";
 import { OverviewTab } from "./tabs/OverviewTab";
@@ -20,7 +19,6 @@ export function Home() {
     route: { routeParams, key },
     setRoute,
   } = useRoute();
-  const { queueToast } = useQueuedToast();
   const {
     grantDrawer,
     editMemberDrawer,
@@ -71,13 +69,6 @@ export function Home() {
           if (!shown) closeGrantDrawer();
         }}
         preselectedMemberId={grantDrawer.preselectedMemberId}
-        onGranted={() => {
-          closeGrantDrawer();
-          queueToast("Points granted", "success");
-        }}
-        onGrantError={() => {
-          queueToast("Could not grant points", "caution");
-        }}
       />
       <EditMemberDrawer
         shown={editMemberDrawer.open}

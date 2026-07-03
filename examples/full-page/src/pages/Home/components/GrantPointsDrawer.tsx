@@ -15,119 +15,42 @@ import {
   useMembersQuery,
   useSettingsQuery,
 } from "@/data";
+import { useQueuedToast } from "@/hooks/useQueuedToast";
 import { formatCurrency, formatPoints } from "@/utils/format";
 
 type GrantPointsDrawerProps = {
   shown: boolean;
   setShown: (shown: boolean) => void;
   preselectedMemberId?: string;
-  onGranted?: () => void;
-  onGrantError?: () => void;
 };
 
-type GrantPointsFormState = {
-  selectedMember: string;
-  pointsAmount: string;
-  grantReason: string;
-};
-
-type GrantPointsFormAction =
-  | { type: "syncPreselected"; preselectedMemberId?: string }
-  | { type: "setSelectedMember"; value: string }
-  | { type: "setPointsAmount"; value: string }
-  | { type: "setGrantReason"; value: string }
-  | { type: "reset"; preselectedMemberId?: string };
-
-function grantPointsFormReducer(
-  state: GrantPointsFormState,
-  action: GrantPointsFormAction,
-): GrantPointsFormState {
-  switch (action.type) {
-    case "syncPreselected":
-      return action.preselectedMemberId
-        ? { ...state, selectedMember: action.preselectedMemberId }
-        : state;
-    case "setSelectedMember":
-      return { ...state, selectedMember: action.value };
-    case "setPointsAmount":
-      return { ...state, pointsAmount: action.value };
-    case "setGrantReason":
-      return { ...state, grantReason: action.value };
-    case "reset":
-      return {
-        selectedMember: action.preselectedMemberId ?? "",
-        pointsAmount: "",
-        grantReason: "",
-      };
-  }
-}
-
-export const GrantPointsDrawer = ({
-  shown,
-  setShown,
-  preselectedMemberId,
-  onGranted,
-  onGrantError,
-}: GrantPointsDrawerProps) => {
-  const { data: members, isLoading, isError, error } = useMembersQuery();
-  const { data: settings } = useSettingsQuery();
-  const { mutate, isPending } = useGrantPointsMutation();
-  const [form, dispatch] = useReducer(grantPointsFormReducer, {
-    selectedMember: preselectedMemberId ?? "",
-    pointsAmount: "",
-    grantReason: "",
-  });
-
-  useEffect(() => {
-    dispatch({ type: "syncPreselected", preselectedMemberId });
-  }, [preselectedMemberId]);
-
-  const isFormValid =
-    form.selectedMember &&
-    form.pointsAmount &&
-    parseInt(form.pointsAmount) > 0;
-
-  const handleClose = () => {
-    setShown(false);
-    dispatch({ type: "reset", preselectedMemberId });
-  };
-
-  const handleSubmit = () => {
-    if (!members) {
-      return;
-    }
-
-    const points = parseInt(form.pointsAmount, 10);
-
-    mutate(
-      {
-        memberId: form.selectedMember,
-        points,
-        reason: form.grantReason || undefined,
-      },
-      {
-        onSuccess: () => {
-          dispatch({ type: "reset", preselectedMemberId });
-          onGranted?.();
-        },
-        onError: () => {
-          onGrantError?.();
-        },
-      },
-    );
-  };
-
-  const selectedMemberDetails = members?.find(
-    (m) => m.id === form.selectedMember,
-  );
+export const GrantPointsDrawer = (props: GrantPointsDrawerProps) => {
+  const {
+    shown,
+    handleSetShown,
+    handleClose,
+    handleSubmit,
+    isFormValid,
+    isLoading,
+    isError,
+    error,
+    members,
+    selectedMember,
+    onSelectedMemberChange,
+    pointsAmount,
+    onPointsAmountChange,
+    grantReason,
+    onGrantReasonChange,
+    selectedMemberDetails,
+    settings,
+    isPending,
+  } = useGrantPointsDrawer(props);
 
   return (
     <FocusView
       title="Grant points"
       shown={shown}
-      setShown={(s) => {
-        if (!s) handleClose();
-      }}
+      setShown={handleSetShown}
       primaryAction={
         <Button
           type="primary"
@@ -162,10 +85,8 @@ export const GrantPointsDrawer = ({
               name="member"
               label="Select member"
               description="Choose the loyalty member to receive points"
-              value={form.selectedMember}
-              onChange={(e) =>
-                dispatch({ type: "setSelectedMember", value: e.target.value })
-              }
+              value={selectedMember}
+              onChange={(e) => onSelectedMemberChange(e.target.value)}
             >
               <option value="">Select a member...</option>
               {members.map((member) => (
@@ -181,20 +102,16 @@ export const GrantPointsDrawer = ({
               type="number"
               placeholder="Enter amount"
               description="Number of bonus points to add to member's balance"
-              value={form.pointsAmount}
-              onChange={(e) =>
-                dispatch({ type: "setPointsAmount", value: e.target.value })
-              }
+              value={pointsAmount}
+              onChange={(e) => onPointsAmountChange(e.target.value)}
             />
 
             <Select
               name="reason"
               label="Reason"
               description="Categorize this points grant for reporting"
-              value={form.grantReason}
-              onChange={(e) =>
-                dispatch({ type: "setGrantReason", value: e.target.value })
-              }
+              value={grantReason}
+              onChange={(e) => onGrantReasonChange(e.target.value)}
             >
               <option value="">Select a reason...</option>
               <option value="customer_service">Customer service gesture</option>
@@ -236,7 +153,7 @@ export const GrantPointsDrawer = ({
                   )}
                 </Box>
               </Box>
-              {form.pointsAmount && parseInt(form.pointsAmount) > 0 && (
+              {pointsAmount && parseInt(pointsAmount, 10) > 0 && (
                 <Box
                   css={{
                     stack: "x",
@@ -254,7 +171,7 @@ export const GrantPointsDrawer = ({
                     <Box css={{ fontWeight: "bold" }}>
                       {formatPoints(
                         selectedMemberDetails.points +
-                          parseInt(form.pointsAmount),
+                          parseInt(pointsAmount, 10),
                       )}{" "}
                       points
                     </Box>
@@ -268,3 +185,123 @@ export const GrantPointsDrawer = ({
     </FocusView>
   );
 };
+
+type GrantPointsFormState = {
+  selectedMember: string;
+  pointsAmount: string;
+  grantReason: string;
+};
+
+type GrantPointsFormAction =
+  | { type: "syncPreselected"; preselectedMemberId?: string }
+  | { type: "setSelectedMember"; value: string }
+  | { type: "setPointsAmount"; value: string }
+  | { type: "setGrantReason"; value: string }
+  | { type: "reset"; preselectedMemberId?: string };
+
+function grantPointsFormReducer(
+  state: GrantPointsFormState,
+  action: GrantPointsFormAction,
+): GrantPointsFormState {
+  switch (action.type) {
+    case "syncPreselected":
+      return action.preselectedMemberId
+        ? { ...state, selectedMember: action.preselectedMemberId }
+        : state;
+    case "setSelectedMember":
+      return { ...state, selectedMember: action.value };
+    case "setPointsAmount":
+      return { ...state, pointsAmount: action.value };
+    case "setGrantReason":
+      return { ...state, grantReason: action.value };
+    case "reset":
+      return {
+        selectedMember: action.preselectedMemberId ?? "",
+        pointsAmount: "",
+        grantReason: "",
+      };
+  }
+}
+
+function useGrantPointsDrawer({
+  shown,
+  setShown,
+  preselectedMemberId,
+}: GrantPointsDrawerProps) {
+  const { data: members, isLoading, isError, error } = useMembersQuery();
+  const { data: settings } = useSettingsQuery();
+  const { mutate, isPending } = useGrantPointsMutation();
+  const { queueToast } = useQueuedToast();
+  const [form, dispatch] = useReducer(grantPointsFormReducer, {
+    selectedMember: preselectedMemberId ?? "",
+    pointsAmount: "",
+    grantReason: "",
+  });
+
+  useEffect(() => {
+    dispatch({ type: "syncPreselected", preselectedMemberId });
+  }, [preselectedMemberId]);
+
+  const isFormValid =
+    form.selectedMember &&
+    form.pointsAmount &&
+    parseInt(form.pointsAmount, 10) > 0;
+
+  const handleClose = () => {
+    setShown(false);
+    dispatch({ type: "reset", preselectedMemberId });
+  };
+
+  const handleSubmit = () => {
+    if (!members) {
+      return;
+    }
+
+    mutate(
+      {
+        memberId: form.selectedMember,
+        points: parseInt(form.pointsAmount, 10),
+        reason: form.grantReason || undefined,
+      },
+      {
+        onSuccess: () => {
+          queueToast("Points granted", "success");
+          handleClose();
+        },
+        onError: () => {
+          queueToast("Could not grant points", "caution");
+        },
+      },
+    );
+  };
+
+  const selectedMemberDetails = members?.find(
+    (m) => m.id === form.selectedMember,
+  );
+
+  return {
+    shown,
+    handleSetShown: (open: boolean) => {
+      if (!open) handleClose();
+    },
+    handleClose,
+    handleSubmit,
+    isFormValid,
+    isLoading,
+    isError,
+    error,
+    members,
+    selectedMember: form.selectedMember,
+    onSelectedMemberChange: (value: string) =>
+      dispatch({ type: "setSelectedMember", value }),
+    pointsAmount: form.pointsAmount,
+    onPointsAmountChange: (value: string) =>
+      dispatch({ type: "setPointsAmount", value }),
+    grantReason: form.grantReason,
+    onGrantReasonChange: (value: string) =>
+      dispatch({ type: "setGrantReason", value }),
+    selectedMemberDetails,
+    settings,
+    isPending,
+  };
+}

@@ -17,6 +17,86 @@ type EditRewardDrawerProps = {
   setShown: (shown: boolean) => void;
 };
 
+export function EditRewardDrawer(props: EditRewardDrawerProps) {
+  const {
+    shown,
+    handleSetShown,
+    handleClose,
+    handleSubmit,
+    name,
+    onNameChange,
+    description,
+    onDescriptionChange,
+    pointsCost,
+    onPointsCostChange,
+    category,
+    onCategoryChange,
+    available,
+    onAvailableChange,
+    isSubmitDisabled,
+    isPending,
+  } = useEditRewardDrawer(props);
+
+  return (
+    <FocusView
+      title="Edit reward"
+      shown={shown}
+      setShown={handleSetShown}
+      primaryAction={
+        <Button
+          type="primary"
+          onPress={handleSubmit}
+          disabled={isSubmitDisabled}
+          pending={isPending}
+        >
+          Save
+        </Button>
+      }
+      secondaryAction={<Button onPress={handleClose}>Cancel</Button>}
+    >
+      <Box css={{ stack: "y", gap: "large" }}>
+        <FormFieldGroup layout="vertical">
+          <TextField
+            name="name"
+            label="Name"
+            value={name}
+            onChange={(e) => onNameChange(e.target.value)}
+          />
+          <TextField
+            name="description"
+            label="Description"
+            value={description}
+            onChange={(e) => onDescriptionChange(e.target.value)}
+          />
+          <TextField
+            name="pointsCost"
+            label="Points cost"
+            type="number"
+            value={pointsCost}
+            onChange={(e) => onPointsCostChange(e.target.value)}
+          />
+          <Select
+            name="category"
+            label="Category"
+            value={category}
+            onChange={(e) =>
+              onCategoryChange(e.target.value as Reward["category"])
+            }
+          >
+            <option value="coffee">Coffee</option>
+            <option value="merchandise">Merchandise</option>
+          </Select>
+          <Switch
+            label="Available"
+            checked={available}
+            onChange={(e) => onAvailableChange(e.target.checked)}
+          />
+        </FormFieldGroup>
+      </Box>
+    </FocusView>
+  );
+}
+
 type EditRewardFormState = {
   name: string;
   description: string;
@@ -72,7 +152,7 @@ function editRewardFormReducer(
   }
 }
 
-export function EditRewardDrawer({
+function useEditRewardDrawer({
   reward,
   shown,
   setShown,
@@ -116,75 +196,29 @@ export function EditRewardDrawer({
     );
   };
 
-  return (
-    <FocusView
-      title="Edit reward"
-      shown={shown}
-      setShown={(s) => {
-        if (!s) handleClose();
-      }}
-      primaryAction={
-        <Button
-          type="primary"
-          onPress={handleSubmit}
-          disabled={!form.name || !form.pointsCost}
-          pending={isPending}
-        >
-          Save
-        </Button>
-      }
-      secondaryAction={<Button onPress={handleClose}>Cancel</Button>}
-    >
-      <Box css={{ stack: "y", gap: "large" }}>
-        <FormFieldGroup layout="vertical">
-          <TextField
-            name="name"
-            label="Name"
-            value={form.name}
-            onChange={(e) =>
-              dispatch({ type: "setName", value: e.target.value })
-            }
-          />
-          <TextField
-            name="description"
-            label="Description"
-            value={form.description}
-            onChange={(e) =>
-              dispatch({ type: "setDescription", value: e.target.value })
-            }
-          />
-          <TextField
-            name="pointsCost"
-            label="Points cost"
-            type="number"
-            value={form.pointsCost}
-            onChange={(e) =>
-              dispatch({ type: "setPointsCost", value: e.target.value })
-            }
-          />
-          <Select
-            name="category"
-            label="Category"
-            value={form.category}
-            onChange={(e) =>
-              dispatch({
-                type: "setCategory",
-                value: e.target.value as Reward["category"],
-              })
-            }
-          >
-            <option value="coffee">Coffee</option>
-            <option value="merchandise">Merchandise</option>
-          </Select>
-          <Switch
-            label="Available"
-            checked={form.available}
-            onChange={(e) =>
-              dispatch({ type: "setAvailable", value: e.target.checked })
-            }
-          />
-        </FormFieldGroup>
-      </Box>
-    </FocusView>
-  );
+  return {
+    shown,
+    handleSetShown: (open: boolean) => {
+      if (!open) handleClose();
+    },
+    handleClose,
+    handleSubmit,
+    name: form.name,
+    onNameChange: (value: string) =>
+      dispatch({ type: "setName", value }),
+    description: form.description,
+    onDescriptionChange: (value: string) =>
+      dispatch({ type: "setDescription", value }),
+    pointsCost: form.pointsCost,
+    onPointsCostChange: (value: string) =>
+      dispatch({ type: "setPointsCost", value }),
+    category: form.category,
+    onCategoryChange: (value: Reward["category"]) =>
+      dispatch({ type: "setCategory", value }),
+    available: form.available,
+    onAvailableChange: (value: boolean) =>
+      dispatch({ type: "setAvailable", value }),
+    isSubmitDisabled: !form.name || !form.pointsCost,
+    isPending,
+  };
 }
