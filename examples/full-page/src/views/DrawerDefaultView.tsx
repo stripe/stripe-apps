@@ -59,9 +59,14 @@ function DrawerDefaultViewContent(_props: ExtensionContextValue) {
           </Box>
         </Box>
         <Box>
-          <Link href={{ name: "fullPage" }}>
-            <Button type="primary">Start rewarding</Button>
-          </Link>
+          <Button
+            type="primary"
+            href={{
+              name: "fullPage",
+            }}
+          >
+            Start rewarding
+          </Button>
         </Box>
         <Divider />
         <Box css={{ font: "caption", color: "secondary" }}>
