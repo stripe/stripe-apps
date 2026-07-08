@@ -6,6 +6,7 @@ import {
   Select,
   FormFieldGroup,
   Divider,
+  Spinner,
 } from "@stripe/ui-extension-sdk/ui";
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 
@@ -36,7 +37,17 @@ function AppSettingsView(_props: ExtensionContextValue) {
   if (isLoading) {
     return (
       <SettingsView onSave={onSave}>
-        <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>
+        <Box
+          css={{
+            stack: "y",
+            alignX: "center",
+            alignY: "center",
+            height: "fill",
+            paddingTop: "xxlarge",
+          }}
+        >
+          <Spinner size="large" />
+        </Box>
       </SettingsView>
     );
   }

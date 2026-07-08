@@ -1,7 +1,10 @@
-import { Box, Inline, Link } from "@stripe/ui-extension-sdk/ui";
+import { Box, Inline, Link, Spinner } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useRoute } from "@stripe/ui-extension-sdk/navigation";
-import { DATE_RANGE_OPTIONS, FilterSelect } from "@/pages/Home/components/FilterSelect";
+import {
+  DATE_RANGE_OPTIONS,
+  FilterSelect,
+} from "@/pages/Home/components/FilterSelect";
 import { useMembersTab } from "./hooks/useMembersTab";
 
 interface MembersTabProps {
@@ -28,7 +31,19 @@ export function MembersTab({ onGrantPoints, onEdit }: MembersTabProps) {
   } = useMembersTab();
 
   if (isLoading) {
-    return <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>;
+    return (
+      <Box
+        css={{
+          stack: "y",
+          alignX: "center",
+          alignY: "center",
+          height: "fill",
+          paddingTop: "xxlarge",
+        }}
+      >
+        <Spinner size="large" />
+      </Box>
+    );
   }
 
   if (isError) {

@@ -1,4 +1,4 @@
-import { Box, OverviewPage } from "@stripe/ui-extension-sdk/ui";
+import { Box, OverviewPage, Spinner } from "@stripe/ui-extension-sdk/ui";
 
 import { useQueuedToast } from "@/hooks/useQueuedToast";
 import { ChartsModule } from "./components/ChartsModule";
@@ -25,7 +25,19 @@ export function OverviewTab() {
   } = useOverviewTab();
 
   if (isLoading) {
-    return <Box css={{ font: "caption", color: "secondary" }}>Loading…</Box>;
+    return (
+      <Box
+        css={{
+          stack: "y",
+          alignX: "center",
+          alignY: "center",
+          height: "fill",
+          paddingTop: "xxlarge",
+        }}
+      >
+        <Spinner size="large" />
+      </Box>
+    );
   }
 
   if (isError) {
