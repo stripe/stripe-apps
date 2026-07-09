@@ -1,5 +1,6 @@
-import { Box, Divider, Inline } from "@stripe/ui-extension-sdk/ui";
+import { Box, Divider, Inline, Link } from "@stripe/ui-extension-sdk/ui";
 import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import type { Transaction } from "@/data";
 import { formatTimestamp } from "@/utils/date";
 import { formatPoints } from "@/utils/format";
@@ -11,6 +12,8 @@ type RecentActivityModuleProps = {
 export function RecentActivityModule({
   transactions,
 }: RecentActivityModuleProps) {
+  const { createAppRoute } = useNavigation();
+
   return (
     <PageModule title="Recent activity">
       <Box css={{ stack: "y", gap: "small" }}>
@@ -24,12 +27,14 @@ export function RecentActivityModule({
                 alignY: "center",
               }}
             >
-              <Box css={{ stack: "y" }}>
-                <Box css={{ fontWeight: "semibold" }}>{txn.memberName}</Box>
-                <Box css={{ font: "caption", color: "secondary" }}>
-                  {formatTimestamp(txn.timestamp)}
+              <Link href={createAppRoute("transaction", { id: txn.id })}>
+                <Box css={{ stack: "y" }}>
+                  <Box css={{ fontWeight: "semibold" }}>{txn.memberName}</Box>
+                  <Box css={{ font: "caption", color: "secondary" }}>
+                    {formatTimestamp(txn.timestamp)}
+                  </Box>
                 </Box>
-              </Box>
+              </Link>
               <Inline
                 css={{
                   fontWeight: "semibold",
