@@ -8,13 +8,17 @@ import {
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import { FilterSelect } from "@/pages/Home/components/FilterSelect";
+import { hasRole } from "@/utils/roles";
 import { useRewardsTab } from "./hooks/useRewardsTab";
+import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 interface RewardsTabProps {
+  userContext: ExtensionContextValue["userContext"];
   onEdit: (rewardId: string) => void;
 }
 
-export function RewardsTab({ onEdit }: RewardsTabProps) {
+export function RewardsTab({ userContext, onEdit }: RewardsTabProps) {
+  const isAdmin = hasRole(userContext, "admin");
   const { setRoute } = useNavigation();
 
   const {
@@ -96,7 +100,7 @@ export function RewardsTab({ onEdit }: RewardsTabProps) {
             </Link>
           )}
         </Box>
-        {hasSelection && (
+        {isAdmin && hasSelection && (
           <Button
             type="destructive"
             onPress={onBatchArchive}
@@ -111,9 +115,13 @@ export function RewardsTab({ onEdit }: RewardsTabProps) {
         pagination={{
           pageSize: 15,
         }}
-        batchable={{
-          onBatchChange,
-        }}
+        batchable={
+          isAdmin
+            ? {
+                onBatchChange,
+              }
+            : undefined
+        }
         columns={[
           { key: "name", label: "Reward" },
           { key: "description", label: "Description" },

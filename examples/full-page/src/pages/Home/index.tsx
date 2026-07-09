@@ -1,6 +1,7 @@
 import { FullPageView } from "@stripe/ui-extension-sdk/ui";
 import { Tab, Tabs } from "@stripe/ui-extension-sdk/ui/next";
 import { useNavigation, useRoute } from "@stripe/ui-extension-sdk/navigation";
+import { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 import { GrantPointsDrawer } from "./components/GrantPointsDrawer";
 import { EditMemberDrawer } from "./components/EditMemberDrawer";
@@ -10,7 +11,6 @@ import { MembersTab } from "./tabs/MembersTab";
 import { OverviewTab } from "./tabs/OverviewTab";
 import { RewardsTab } from "./tabs/RewardsTab";
 import { useHome } from "./hooks/useHome";
-import { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 const DEFAULT_TAB = "overview";
 type HomeTabId = "overview" | "members" | "rewards" | "activity";
@@ -34,7 +34,6 @@ export function Home({ context }: HomeProps) {
     closeEditMemberDrawer,
     closeEditRewardDrawer,
   } = useHome();
-  console.log({ context });
 
   const currentTab = (key === "home" && routeParams.tabId) || DEFAULT_TAB;
 
@@ -61,7 +60,10 @@ export function Home({ context }: HomeProps) {
           />
         </Tab>
         <Tab id="rewards" label="Rewards">
-          <RewardsTab onEdit={(id) => openEditReward(id)} />
+          <RewardsTab
+            userContext={context.userContext}
+            onEdit={(id) => openEditReward(id)}
+          />
         </Tab>
         <Tab id="activity" label="Activity">
           <ActivityTab onGrantPoints={(id) => openGrantDrawer(id)} />
