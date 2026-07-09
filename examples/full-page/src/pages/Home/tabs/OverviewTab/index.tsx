@@ -70,13 +70,13 @@ export function OverviewTab() {
       }
       secondaryColumn={
         <>
-          <MembersByTierModule tierData={tierData} />
-          <RecentActivityModule transactions={recentTransactions} />
           <QuickActionsModule
             onExportMembers={() =>
               queueToast("Member data exported", "success")
             }
           />
+          <MembersByTierModule tierData={tierData} />
+          <RecentActivityModule transactions={recentTransactions} />
         </>
       }
     />
