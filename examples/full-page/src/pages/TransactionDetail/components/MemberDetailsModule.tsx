@@ -1,12 +1,12 @@
 import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
-import type { Member, Transaction } from "@/data";
+import type { Member, ProgramConfig, Transaction } from "@/data";
 import { FieldGrid } from "@/components/FieldGrid";
 import { formatCurrency, formatPoints } from "@/utils/format";
 
 type MemberDetailsModuleProps = {
   transaction: Transaction;
   member?: Member;
-  currency?: string;
+  currency?: ProgramConfig["currency"];
 };
 
 export function MemberDetailsModule({
