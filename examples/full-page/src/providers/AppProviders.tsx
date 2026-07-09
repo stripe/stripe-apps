@@ -1,3 +1,5 @@
+import { routes } from "@/routes";
+import { NavigationProvider } from "@stripe/ui-extension-sdk/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ComponentType } from "react";
 
@@ -15,9 +17,11 @@ export function withAppProviders<P extends object>(
 ): ComponentType<P> {
   return function ViewWithProviders(props: P) {
     return (
-      <QueryClientProvider client={queryClient}>
-        <Component {...props} />
-      </QueryClientProvider>
+      <NavigationProvider routes={routes}>
+        <QueryClientProvider client={queryClient}>
+          <Component {...props} />
+        </QueryClientProvider>
+      </NavigationProvider>
     );
   };
 }

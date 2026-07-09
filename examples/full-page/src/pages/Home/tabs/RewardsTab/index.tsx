@@ -6,7 +6,7 @@ import {
   Spinner,
 } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
-import { useRoute } from "@stripe/ui-extension-sdk/navigation";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import { FilterSelect } from "@/pages/Home/components/FilterSelect";
 import { useRewardsTab } from "./hooks/useRewardsTab";
 
@@ -15,7 +15,8 @@ interface RewardsTabProps {
 }
 
 export function RewardsTab({ onEdit }: RewardsTabProps) {
-  const { setRoute } = useRoute();
+  const { setRoute } = useNavigation();
+
   const {
     items,
     filterCategory,

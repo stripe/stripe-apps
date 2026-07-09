@@ -1,5 +1,8 @@
-import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
-import { useRoute } from "@stripe/ui-extension-sdk/navigation";
+import {
+  DetailPage,
+  PageModule,
+} from "@stripe/ui-extension-sdk/ui/experimental";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { MemberDetailsModule } from "./components/MemberDetailsModule";
 import { OrderModule } from "./components/OrderModule";
@@ -11,15 +14,9 @@ type TransactionDetailPageProps = {
 };
 
 export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
-  const { createAppRoute } = useRoute();
-  const {
-    transaction,
-    member,
-    notFound,
-    settings,
-    pointsDisplay,
-    typeLabel,
-  } = useTransactionDetailPage(id);
+  const { createAppRoute } = useNavigation();
+  const { transaction, member, notFound, settings, pointsDisplay, typeLabel } =
+    useTransactionDetailPage(id);
 
   if (notFound) {
     return (
@@ -62,9 +59,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
             pointsDisplay={pointsDisplay}
             typeLabel={typeLabel}
           />
-          {transaction.orderId && (
-            <OrderModule orderId={transaction.orderId} />
-          )}
+          {transaction.orderId && <OrderModule orderId={transaction.orderId} />}
           <MemberDetailsModule
             transaction={transaction}
             member={member}

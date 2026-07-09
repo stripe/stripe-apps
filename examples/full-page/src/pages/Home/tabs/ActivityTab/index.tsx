@@ -1,6 +1,6 @@
 import { Box, Inline, Link, Spinner } from "@stripe/ui-extension-sdk/ui";
 import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
-import { useRoute } from "@stripe/ui-extension-sdk/navigation";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import {
   DATE_RANGE_OPTIONS,
   FilterSelect,
@@ -12,7 +12,8 @@ interface ActivityTabProps {
 }
 
 export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
-  const { setRoute } = useRoute();
+  const { setRoute } = useNavigation();
+
   const {
     items,
     filterType,

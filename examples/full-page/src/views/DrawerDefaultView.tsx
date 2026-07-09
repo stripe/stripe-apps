@@ -1,15 +1,12 @@
-import {
-  Box,
-  ContextView,
-  Divider,
-  Link,
-  Button,
-} from "@stripe/ui-extension-sdk/ui";
+import { Box, ContextView, Divider, Button } from "@stripe/ui-extension-sdk/ui";
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 import { BRAND_COLOR } from "@/constants";
 import { withAppProviders } from "@/providers/AppProviders";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 function DrawerDefaultViewContent(_props: ExtensionContextValue) {
+  const { createAppRoute } = useNavigation();
+
   return (
     <ContextView
       title="Pizzazz Loyalty"
@@ -59,12 +56,7 @@ function DrawerDefaultViewContent(_props: ExtensionContextValue) {
           </Box>
         </Box>
         <Box>
-          <Button
-            type="primary"
-            href={{
-              name: "fullPage",
-            }}
-          >
+          <Button type="primary" href={createAppRoute("home")}>
             Start rewarding
           </Button>
         </Box>

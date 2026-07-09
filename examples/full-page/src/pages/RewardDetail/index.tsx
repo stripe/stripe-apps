@@ -1,5 +1,8 @@
-import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
-import { useRoute } from "@stripe/ui-extension-sdk/navigation";
+import {
+  DetailPage,
+  PageModule,
+} from "@stripe/ui-extension-sdk/ui/experimental";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { DetailsModule } from "./components/DetailsModule";
 import { RecentRedemptionsModule } from "./components/RecentRedemptionsModule";
@@ -11,7 +14,7 @@ type RewardDetailPageProps = {
 };
 
 export function RewardDetailPage({ id }: RewardDetailPageProps) {
-  const { createAppRoute } = useRoute();
+  const { createAppRoute } = useNavigation();
   const {
     reward,
     pending,
@@ -37,9 +40,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
           },
         ]}
         primaryColumn={
-          <PageModule title="Error">
-            This reward could not be found.
-          </PageModule>
+          <PageModule title="Error">This reward could not be found.</PageModule>
         }
       />
     );
