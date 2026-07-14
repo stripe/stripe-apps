@@ -1,5 +1,5 @@
 import { Box, Inline } from "@stripe/ui-extension-sdk/ui";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type StatCardProps = {
   label: string;

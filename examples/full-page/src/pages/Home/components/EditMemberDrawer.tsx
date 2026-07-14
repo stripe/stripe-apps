@@ -7,12 +7,8 @@ import {
   FormFieldGroup,
   TextField,
 } from "@stripe/ui-extension-sdk/ui";
-import {
-  Member,
-  ProgramConfig,
-  useSettingsQuery,
-  useUpdateMemberMutation,
-} from "@/data";
+import type { Member, ProgramConfig } from "@/data";
+import { useSettingsQuery, useUpdateMemberMutation } from "@/data";
 import { useQueuedToast } from "@/hooks/useQueuedToast";
 
 type EditMemberDrawerProps = {
@@ -186,11 +182,9 @@ function useEditMemberDrawer({
     handleClose,
     handleSubmit,
     name: form.name,
-    onNameChange: (value: string) =>
-      dispatch({ type: "setName", value }),
+    onNameChange: (value: string) => dispatch({ type: "setName", value }),
     email: form.email,
-    onEmailChange: (value: string) =>
-      dispatch({ type: "setEmail", value }),
+    onEmailChange: (value: string) => dispatch({ type: "setEmail", value }),
     programCurrency,
     lifetimeSpendCents: form.lifetimeSpendCents,
     onLifetimeSpendChange: (value: number | null) =>

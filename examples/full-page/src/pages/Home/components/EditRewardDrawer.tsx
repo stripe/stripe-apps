@@ -8,7 +8,8 @@ import {
   Select,
   Switch,
 } from "@stripe/ui-extension-sdk/ui";
-import { Reward, useUpdateRewardMutation } from "@/data";
+import type { Reward } from "@/data";
+import { useUpdateRewardMutation } from "@/data";
 import { useQueuedToast } from "@/hooks/useQueuedToast";
 
 type EditRewardDrawerProps = {
@@ -204,8 +205,7 @@ function useEditRewardDrawer({
     handleClose,
     handleSubmit,
     name: form.name,
-    onNameChange: (value: string) =>
-      dispatch({ type: "setName", value }),
+    onNameChange: (value: string) => dispatch({ type: "setName", value }),
     description: form.description,
     onDescriptionChange: (value: string) =>
       dispatch({ type: "setDescription", value }),

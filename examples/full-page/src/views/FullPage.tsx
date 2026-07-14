@@ -1,5 +1,5 @@
 import { AppRouter } from "@stripe/ui-extension-sdk/navigation";
-import { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
+import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 import { withAppProviders } from "@/providers/AppProviders";
 

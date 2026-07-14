@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useReducer } from "react";
 import {
   getMemberEngagementStatus,
-  ProgramConfig,
   useMembersQuery,
   useSettingsQuery,
   type Member,
+  type ProgramConfig,
 } from "@/data";
 import { isWithinDays } from "@/utils/date";
 

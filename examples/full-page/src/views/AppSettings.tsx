@@ -11,11 +11,8 @@ import {
 import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/context";
 
 import { withAppProviders } from "@/providers/AppProviders";
-import {
-  ProgramConfig,
-  useSettingsQuery,
-  useUpdateProgramConfigMutation,
-} from "@/data";
+import type { ProgramConfig } from "@/data";
+import { useSettingsQuery, useUpdateProgramConfigMutation } from "@/data";
 import { useQueuedToast } from "@/hooks/useQueuedToast";
 
 function AppSettingsView(_props: ExtensionContextValue) {

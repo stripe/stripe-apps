@@ -4,7 +4,7 @@ import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
 import { formatCurrency } from "@/utils/format";
 import type { OverviewSummary } from "../hooks/useOverviewTab";
 import { GrowthIndicator } from "./GrowthIndicator";
-import { ProgramConfig } from "@/data";
+import type { ProgramConfig } from "@/data";
 
 type ProgramSummaryModuleProps = {
   timeHorizonLabel: string;

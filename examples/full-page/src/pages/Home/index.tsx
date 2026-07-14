@@ -4,7 +4,7 @@ import {
   useNavigation,
   useAppRoute,
 } from "@stripe/ui-extension-sdk/navigation";
-import { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
+import type { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 import { GrantPointsDrawer } from "./components/GrantPointsDrawer";
 import { EditMemberDrawer } from "./components/EditMemberDrawer";

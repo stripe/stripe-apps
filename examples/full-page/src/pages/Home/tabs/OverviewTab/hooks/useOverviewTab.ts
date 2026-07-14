@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import {
   pointsToDollars,
-  TierName,
   useMembersQuery,
   useOverviewQuery,
   useSettingsQuery,
+  type TierName,
 } from "@/data";
 
 const assignYears = <T extends { week: string }>(data: T[]) => {
@@ -106,14 +106,18 @@ export function useOverviewTab() {
 
     const currentMembers =
       slicedMembersTrend[slicedMembersTrend.length - 1]?.value ?? 0;
-    const prevMembers = prevMembersTrend[prevMembersTrend.length - 1]?.value ?? 0;
+    const prevMembers =
+      prevMembersTrend[prevMembersTrend.length - 1]?.value ?? 0;
     const currentRevenue = slicedRevenueTrend.reduce((s, d) => s + d.value, 0);
     const prevRevenue = prevRevenueTrend.reduce((s, d) => s + d.value, 0);
     const currentRedemptions = currRedemptionsTrend.reduce(
       (s, d) => s + d.value,
       0,
     );
-    const prevRedemptions = prevRedemptionsTrend.reduce((s, d) => s + d.value, 0);
+    const prevRedemptions = prevRedemptionsTrend.reduce(
+      (s, d) => s + d.value,
+      0,
+    );
 
     const currLiability = pointsLiabilityTrend.slice(-weeksToShow);
     const prevLiability = pointsLiabilityTrend.slice(
