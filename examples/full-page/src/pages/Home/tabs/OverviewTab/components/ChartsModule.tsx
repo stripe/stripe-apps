@@ -1,15 +1,14 @@
 import { Box, Inline } from "@stripe/ui-extension-sdk/ui";
-import { BarChart, LineChart } from "@stripe/ui-extension-sdk/ui/next";
-
-type ChartDataPoint = {
-  x: Date | string;
-  y: number;
-  name: string;
-};
+import {
+  BarChart,
+  LineChart,
+  type BarChartData,
+  type LineChartData,
+} from "@stripe/ui-extension-sdk/ui/next";
 
 type ChartsModuleProps = {
-  memberGrowthChartData: ChartDataPoint[];
-  revenueChartData: ChartDataPoint[];
+  memberGrowthChartData: LineChartData;
+  revenueChartData: BarChartData;
 };
 
 export function ChartsModule({

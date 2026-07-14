@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useReducer } from "react";
 import {
   getMemberEngagementStatus,
+  ProgramConfig,
   useMembersQuery,
   useSettingsQuery,
   type Member,
@@ -38,7 +39,7 @@ const initialMembersFilters: MembersFilterState = {
 
 function getStatusLabel(
   member: Member,
-  engagementWindows?: { activeDays: number; atRiskDays: number },
+  engagementWindows?: ProgramConfig["engagementWindows"],
 ): MemberItem["status"] {
   const status = getMemberEngagementStatus(member, engagementWindows);
   if (status === "active") return "Active";
@@ -79,8 +80,7 @@ export function useMembersTab() {
       .filter((member) => {
         const statusLabel = getStatusLabel(member, settings?.engagementWindows);
         const matchesTier = !filters.tier || member.tier === filters.tier;
-        const matchesStatus =
-          !filters.status || statusLabel === filters.status;
+        const matchesStatus = !filters.status || statusLabel === filters.status;
         const matchesDate =
           !filters.date || isWithinDays(member.lastOrder, Number(filters.date));
         return matchesTier && matchesStatus && matchesDate;

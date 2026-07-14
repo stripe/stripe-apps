@@ -1,21 +1,16 @@
-import {
-  Box,
-  Inline,
-  Link,
-  Menu,
-  MenuItem,
-} from "@stripe/ui-extension-sdk/ui";
+import { Box, Inline, Link, Menu, MenuItem } from "@stripe/ui-extension-sdk/ui";
 import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
 
 import { formatCurrency } from "@/utils/format";
 import type { OverviewSummary } from "../hooks/useOverviewTab";
 import { GrowthIndicator } from "./GrowthIndicator";
+import { ProgramConfig } from "@/data";
 
 type ProgramSummaryModuleProps = {
   timeHorizonLabel: string;
   onTimeHorizonChange: (value: string) => void;
   summary: OverviewSummary;
-  currency?: string;
+  currency?: ProgramConfig["currency"];
 };
 
 export function ProgramSummaryModule({
@@ -48,7 +43,9 @@ export function ProgramSummaryModule({
                 Date range
               </Inline>
               <Inline css={{ color: "secondary" }}>|</Inline>
-              <Inline css={{ fontWeight: "semibold" }}>{timeHorizonLabel}</Inline>
+              <Inline css={{ fontWeight: "semibold" }}>
+                {timeHorizonLabel}
+              </Inline>
             </Box>
           </Link>
         }

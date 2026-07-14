@@ -1,5 +1,5 @@
 import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
-import type { Reward } from "@/data";
+import type { ProgramConfig, Reward } from "@/data";
 import { StatCard } from "@/components/StatsCard";
 import { formatCurrency, formatPoints } from "@/utils/format";
 
@@ -7,7 +7,7 @@ type SummaryModuleProps = {
   reward: Reward;
   dollarValue: number;
   pointsRedeemed: number;
-  currency?: string;
+  currency?: ProgramConfig["currency"];
 };
 
 export function SummaryModule({
@@ -19,10 +19,7 @@ export function SummaryModule({
   return (
     <PageModule title="Summary">
       <StatCard.Row>
-        <StatCard
-          label="Points cost"
-          value={formatPoints(reward.pointsCost)}
-        />
+        <StatCard label="Points cost" value={formatPoints(reward.pointsCost)} />
         <StatCard
           label="Dollar value"
           value={formatCurrency(dollarValue, currency)}
