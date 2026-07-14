@@ -9,18 +9,20 @@
   },
   "scripts": {
     "lint": "eslint --ext ts,tsx src",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "start": "stripe apps start",
     "build": "stripe apps build"
   },
   "dependencies": {
-    "@stripe/ui-extension-sdk": "9.2.0-alpha.12",
+    "@stripe/ui-extension-sdk": "9.2.0-alpha.13",
     "@tanstack/react-query": "5.101.2",
     "stripe": "^17.7.0"
   },
   "devDependencies": {
     "@stripe/ui-extension-tools": "0.0.1",
-    "@types/react": "^17.0.2"
+    "@types/react": "^17.0.2",
+    "typescript": "7.0.2"
   },
   "pnpm": {
     "overrides": {

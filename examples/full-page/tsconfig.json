@@ -1,9 +1,11 @@
 {
   "extends": "@stripe/ui-extension-tools/tsconfig.ui-extension",
   "compilerOptions": {
-    "baseUrl": ".",
+    "moduleResolution": "bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   }
 }
