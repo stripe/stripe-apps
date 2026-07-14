@@ -1,6 +1,9 @@
 import { FullPageView } from "@stripe/ui-extension-sdk/ui";
 import { Tab, Tabs } from "@stripe/ui-extension-sdk/ui/next";
-import { useNavigation, useRoute } from "@stripe/ui-extension-sdk/navigation";
+import {
+  useNavigation,
+  useAppRoute,
+} from "@stripe/ui-extension-sdk/navigation";
 import { ExtensionContextValue } from "@stripe/ui-extension-sdk/utils";
 
 import { GrantPointsDrawer } from "./components/GrantPointsDrawer";
@@ -20,8 +23,8 @@ type HomeProps = {
 };
 
 export function Home({ context }: HomeProps) {
-  const { routeParams, key } = useRoute();
-  const { setRoute } = useNavigation();
+  const { routeParams, key } = useAppRoute();
+  const { navigateToAppRoute } = useNavigation();
 
   const {
     grantDrawer,
@@ -47,7 +50,7 @@ export function Home({ context }: HomeProps) {
       <Tabs
         selectedKey={currentTab}
         onSelectionChange={(tabId) =>
-          setRoute("home", { tabId: tabId as HomeTabId })
+          navigateToAppRoute("home", { tabId: tabId as HomeTabId })
         }
       >
         <Tab id="overview" label="Overview">

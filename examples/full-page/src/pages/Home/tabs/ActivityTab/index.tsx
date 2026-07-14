@@ -12,7 +12,7 @@ interface ActivityTabProps {
 }
 
 export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
-  const { setRoute } = useNavigation();
+  const { navigateToAppRoute } = useNavigation();
 
   const {
     items,
@@ -88,7 +88,9 @@ export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
           { key: "timestamp", label: "Time", cell: { type: "date" } },
         ]}
         items={items}
-        onRowClick={(item) => setRoute("transaction", { id: String(item.id) })}
+        onRowClick={(item) =>
+          navigateToAppRoute("transaction", { id: String(item.id) })
+        }
         rowActions={[
           {
             id: "grant",

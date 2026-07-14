@@ -13,7 +13,7 @@ interface MembersTabProps {
 }
 
 export function MembersTab({ onGrantPoints, onEdit }: MembersTabProps) {
-  const { setRoute } = useNavigation();
+  const { navigateToAppRoute } = useNavigation();
   const {
     items,
     filterTier,
@@ -121,7 +121,9 @@ export function MembersTab({ onGrantPoints, onEdit }: MembersTabProps) {
           },
         ]}
         items={items}
-        onRowClick={(item) => setRoute("member", { id: String(item.id) })}
+        onRowClick={(item) =>
+          navigateToAppRoute("member", { id: String(item.id) })
+        }
         rowActions={[
           {
             id: "grant",

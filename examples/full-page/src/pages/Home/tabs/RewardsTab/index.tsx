@@ -19,7 +19,7 @@ interface RewardsTabProps {
 
 export function RewardsTab({ userContext, onEdit }: RewardsTabProps) {
   const isAdmin = hasRole(userContext, "admin");
-  const { setRoute } = useNavigation();
+  const { navigateToAppRoute } = useNavigation();
 
   const {
     items,
@@ -141,7 +141,9 @@ export function RewardsTab({ userContext, onEdit }: RewardsTabProps) {
           },
         ]}
         items={items}
-        onRowClick={(item) => setRoute("reward", { id: String(item.id) })}
+        onRowClick={(item) =>
+          navigateToAppRoute("reward", { id: String(item.id) })
+        }
         rowActions={[
           {
             id: "edit",
