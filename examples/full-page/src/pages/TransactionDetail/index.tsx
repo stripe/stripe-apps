@@ -15,8 +15,15 @@ type TransactionDetailPageProps = {
 
 export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
   const { createAppRoute } = useNavigation();
-  const { transaction, member, notFound, settings, pointsDisplay, typeLabel } =
-    useTransactionDetailPage(id);
+  const {
+    transaction,
+    member,
+    notFound,
+    pending,
+    settings,
+    pointsDisplay,
+    typeLabel,
+  } = useTransactionDetailPage(id);
 
   if (notFound) {
     return (
@@ -39,11 +46,25 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
   }
 
   if (!transaction) {
-    return null;
+    return (
+      <DetailPage
+        title="Loading transaction..."
+        pending={pending}
+        breadcrumbs={[
+          {
+            type: "link",
+            label: "Activity",
+            route: createAppRoute("home", { tabId: "activity" }),
+          },
+        ]}
+        primaryColumn={<></>}
+      />
+    );
   }
 
   return (
     <DetailPage
+      pending={pending}
       title={transaction.description}
       breadcrumbs={[
         {

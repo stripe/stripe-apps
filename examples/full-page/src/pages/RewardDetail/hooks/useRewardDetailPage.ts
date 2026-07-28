@@ -26,8 +26,8 @@ function getCategoryLabel(category: string) {
 }
 
 export function useRewardDetailPage(id: string) {
-  const { data: rewards, isLoading: rewardsLoading } = useRewardsQuery();
-  const { data: activity, isLoading, isError, error } = useActivityQuery();
+  const { data: rewards, isFetching: rewardsLoading } = useRewardsQuery();
+  const { data: activity, isFetching: isLoading, isError, error } = useActivityQuery();
   const { data: settings } = useSettingsQuery();
 
   const reward = rewards?.find((r) => r.id === id);

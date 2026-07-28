@@ -54,6 +54,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
 
   return (
     <DetailPage
+      pending={pending}
       title={member.name}
       breadcrumbs={[
         {

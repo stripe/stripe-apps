@@ -1,4 +1,4 @@
-export const MOCK_NETWORK_DELAY_MS = 400;
+export const MOCK_NETWORK_DELAY_MS = 1500;
 
 export const simulateNetworkDelay = () =>
   new Promise<void>((resolve) => {

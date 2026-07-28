@@ -24,22 +24,6 @@ export function OverviewTab() {
     summary,
   } = useOverviewTab();
 
-  if (isLoading) {
-    return (
-      <Box
-        css={{
-          stack: "y",
-          alignX: "center",
-          alignY: "center",
-          height: "fill",
-          paddingTop: "xxlarge",
-        }}
-      >
-        <Spinner size="large" />
-      </Box>
-    );
-  }
-
   if (isError) {
     return (
       <Box css={{ font: "caption", color: "critical" }}>
@@ -48,20 +32,19 @@ export function OverviewTab() {
     );
   }
 
-  if (!summary) {
-    return null;
-  }
-
   return (
     <OverviewPage
+      pending={isLoading}
       primaryColumn={
         <>
-          <ProgramSummaryModule
-            timeHorizonLabel={timeHorizonLabel}
-            onTimeHorizonChange={onTimeHorizonChange}
-            summary={summary}
-            currency={settings?.currency}
-          />
+          {summary ? (
+            <ProgramSummaryModule
+              timeHorizonLabel={timeHorizonLabel}
+              onTimeHorizonChange={onTimeHorizonChange}
+              summary={summary}
+              currency={settings?.currency}
+            />
+          ) : null}
           <ChartsModule
             memberGrowthChartData={memberGrowthChartData}
             revenueChartData={revenueChartData}

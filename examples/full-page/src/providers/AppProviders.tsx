@@ -6,7 +6,12 @@ import type { ComponentType } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      /**
+       * Force queries to always fetch fresh data on every render, and never cache results. This is useful for examples where we want to demonstrate the latest data without caching.
+       * This enable us to see the loading state of pages.
+       */
+      staleTime: 0,
+      gcTime: 0,
       retry: false,
     },
   },
