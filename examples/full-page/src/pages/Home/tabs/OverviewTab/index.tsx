@@ -11,7 +11,7 @@ import { useOverviewTab } from "./hooks/useOverviewTab";
 export function OverviewTab() {
   const { queueToast } = useQueuedToast();
   const {
-    isLoading,
+    pending,
     isError,
     error,
     settings,
@@ -34,7 +34,7 @@ export function OverviewTab() {
 
   return (
     <OverviewPage
-      pending={isLoading}
+      pending={pending}
       primaryColumn={
         <>
           {summary ? (
