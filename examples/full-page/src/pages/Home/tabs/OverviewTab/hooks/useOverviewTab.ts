@@ -207,7 +207,7 @@ export function useOverviewTab() {
   }, [data, members, settings?.pointsPerDollar, timeHorizon]);
 
   return {
-    isLoading,
+    pending: isLoading,
     isError,
     error,
     settings,

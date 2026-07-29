@@ -52,6 +52,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
 
   return (
     <DetailPage
+      pending={pending}
       title={reward.name}
       description={reward.description}
       breadcrumbs={[
