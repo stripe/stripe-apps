@@ -122,7 +122,7 @@ export function MembersTab({ onGrantPoints, onEdit }: MembersTabProps) {
         ]}
         items={items}
         onRowClick={(item) =>
-          navigateToAppRoute("member", { id: String(item.id) })
+          navigateToAppRoute({ key: "member", params: { id: String(item.id) } })
         }
         rowActions={[
           {
