@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@stripe/ui-extension-sdk':
-        specifier: 9.2.0-alpha.14
-        version: 9.2.0-alpha.14(stripe@17.7.0)
+        specifier: 9.2.0-alpha.15
+        version: 9.2.0-alpha.15(stripe@17.7.0)
       '@tanstack/react-query':
         specifier: 5.101.2
         version: 5.101.2(react@18.3.1)
@@ -362,8 +362,8 @@ packages:
   '@sinonjs/fake-timers@8.1.0':
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.14':
-    resolution: {integrity: sha512-oPwLX3fFTPVCZ6668tfWHTEozNDYBfPXfIsSJ5EWps0bERVmF97ozd9kbbFsMC/iic+gPgnTn4IEyHmB9pRoZQ==}
+  '@stripe/ui-extension-sdk@9.2.0-alpha.15':
+    resolution: {integrity: sha512-UuMgJ+cjhxSsKIW4IEtFJ3YE+g0ShNP+gGqI1UBQRqBGmrfimoTlJufBIpW5GeUn9UH76tQbKzgDM8+GGjDkaA==}
     peerDependencies:
       stripe: '>= 8.195.0'
 
@@ -2915,7 +2915,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 1.8.6
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.14(stripe@17.7.0)':
+  '@stripe/ui-extension-sdk@9.2.0-alpha.15(stripe@17.7.0)':
     dependencies:
       '@remote-ui/core': 2.2.5
       '@remote-ui/react': 5.0.5(react-reconciler@0.29.0(react@18.3.1))(react@18.3.1)
@@ -2930,7 +2930,7 @@ snapshots:
   '@stripe/ui-extension-tools@0.0.1(@babel/core@7.29.7)(babel-jest@27.5.1(@babel/core@7.29.7))':
     dependencies:
       '@types/jest': 28.1.8
-      '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@7.0.2))(eslint@8.57.1)(typescript@4.9.5)
+      '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@4.9.5))(eslint@8.57.1)(typescript@4.9.5)
       '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
       eslint: 8.57.1
       eslint-plugin-react: 7.37.5(eslint@8.57.1)
@@ -3041,7 +3041,7 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@7.0.2))(eslint@8.57.1)(typescript@4.9.5)':
+  '@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@4.9.5))(eslint@8.57.1)(typescript@4.9.5)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
       '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@4.9.5)
