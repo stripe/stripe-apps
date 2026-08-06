@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer } from "react";
-import { useSearchParams } from "@stripe/ui-extension-sdk/navigation";
+import { useSearchParam } from "@stripe/ui-extension-sdk/navigation";
 import {
   getMemberEngagementStatus,
   useMembersQuery,
@@ -64,10 +64,8 @@ function membersFilterReducer(
   }
 }
 
-// Read the `tier` search param (e.g. ?tier=Barista) as a plain string, falling
-// back to "" when it is absent or not a scalar value.
-function readTierParam(searchParams: Record<string, unknown>): string {
-  return typeof searchParams.tier === "string" ? searchParams.tier : "";
+function readTierParam(value: unknown): string {
+  return typeof value === "string" ? value : "";
 }
 
 export function useMembersTab() {
@@ -77,8 +75,8 @@ export function useMembersTab() {
   // The "Members by tier" chart on the Overview tab links here with the tier in
   // the route's search params. We seed the filter from it and keep the two in
   // sync, but the reducer stays the single source of truth for the filters.
-  const [searchParams, setSearchParams] = useSearchParams();
-  const tierParam = readTierParam(searchParams);
+  const [tierParamValue, setTierParam] = useSearchParam("tier");
+  const tierParam = readTierParam(tierParamValue);
 
   const [filters, dispatchFilters] = useReducer(
     membersFilterReducer,
@@ -123,9 +121,9 @@ export function useMembersTab() {
       dispatchFilters({ type: "setTier", value });
       // Mirror the tier into the search params so the URL stays shareable.
       // Passing `undefined` omits the key when the filter is cleared.
-      setSearchParams((prev) => ({ ...prev, tier: value || undefined }));
+      setTierParam(value || undefined);
     },
-    [setSearchParams],
+    [setTierParam],
   );
 
   const onFilterStatus = useCallback((value: string) => {
@@ -138,9 +136,9 @@ export function useMembersTab() {
 
   const onClearFilters = useCallback(() => {
     dispatchFilters({ type: "clear" });
-    // Clear every search param for the current route (this includes `tier`).
-    setSearchParams({});
-  }, [setSearchParams]);
+    // Drop the `tier` search param for the current route.
+    setTierParam(undefined);
+  }, [setTierParam]);
 
   const hasActiveFilters = Boolean(
     filters.tier || filters.status || filters.date,
