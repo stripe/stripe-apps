@@ -1,4 +1,4 @@
-import { Box, OverviewPage, Spinner } from "@stripe/ui-extension-sdk/ui";
+import { Box, OverviewPage } from "@stripe/ui-extension-sdk/ui";
 
 import { useQueuedToast } from "@/hooks/useQueuedToast";
 import { ChartsModule } from "./components/ChartsModule";
