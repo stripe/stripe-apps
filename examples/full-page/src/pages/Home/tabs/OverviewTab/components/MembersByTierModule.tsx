@@ -1,5 +1,6 @@
 import { MeterChart } from "@stripe/ui-extension-sdk/ui/next";
 import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 type TierDatum = {
   label: string;
@@ -11,12 +12,25 @@ type MembersByTierModuleProps = {
 };
 
 export function MembersByTierModule({ tierData }: MembersByTierModuleProps) {
+  const { navigateToAppRoute } = useNavigation();
+
   return (
     <PageModule title="Members by tier">
       <MeterChart
         data={tierData}
         legendEnabled
         unitFormat={{ unit: "number", options: {} }}
+        onSegmentClick={({ data }) => {
+          if (!data) return;
+          // Open the Members tab pre-filtered to the clicked tier by passing the
+          // tier through the route's search params (e.g. ?tier=Barista). The
+          // Members tab reads it back with useSearchParams.
+          navigateToAppRoute({
+            key: "home",
+            params: { tabId: "members" },
+            searchParams: { tier: data.label },
+          });
+        }}
       />
     </PageModule>
   );

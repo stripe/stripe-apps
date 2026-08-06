@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useReducer } from "react";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
+import { useSearchParam } from "@stripe/ui-extension-sdk/navigation";
 import {
   getMemberEngagementStatus,
   useMembersQuery,
@@ -63,13 +64,31 @@ function membersFilterReducer(
   }
 }
 
+function readTierParam(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
 export function useMembersTab() {
   const { data: members, isLoading, isError, error } = useMembersQuery();
   const { data: settings } = useSettingsQuery();
+
+  // The "Members by tier" chart on the Overview tab links here with the tier in
+  // the route's search params. We seed the filter from it and keep the two in
+  // sync, but the reducer stays the single source of truth for the filters.
+  const [tierParamValue, setTierParam] = useSearchParam("tier");
+  const tierParam = readTierParam(tierParamValue);
+
   const [filters, dispatchFilters] = useReducer(
     membersFilterReducer,
-    initialMembersFilters,
+    tierParam,
+    (tier): MembersFilterState => ({ ...initialMembersFilters, tier }),
   );
+
+  // Subscribe to search-param changes so navigating in with a new tier (or
+  // browser back/forward) updates the filter even if this tab stays mounted.
+  useEffect(() => {
+    dispatchFilters({ type: "setTier", value: tierParam });
+  }, [tierParam]);
 
   const items = useMemo((): MemberItem[] => {
     if (!members) {
@@ -97,9 +116,15 @@ export function useMembersTab() {
       }));
   }, [members, filters, settings?.engagementWindows]);
 
-  const onFilterTier = useCallback((value: string) => {
-    dispatchFilters({ type: "setTier", value });
-  }, []);
+  const onFilterTier = useCallback(
+    (value: string) => {
+      dispatchFilters({ type: "setTier", value });
+      // Mirror the tier into the search params so the URL stays shareable.
+      // Passing `undefined` omits the key when the filter is cleared.
+      setTierParam(value || undefined);
+    },
+    [setTierParam],
+  );
 
   const onFilterStatus = useCallback((value: string) => {
     dispatchFilters({ type: "setStatus", value });
@@ -111,7 +136,9 @@ export function useMembersTab() {
 
   const onClearFilters = useCallback(() => {
     dispatchFilters({ type: "clear" });
-  }, []);
+    // Drop the `tier` search param for the current route.
+    setTierParam(undefined);
+  }, [setTierParam]);
 
   const hasActiveFilters = Boolean(
     filters.tier || filters.status || filters.date,

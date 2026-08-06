@@ -36,7 +36,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
           {
             type: "link",
             label: "Rewards",
-            route: createAppRoute("home", { tabId: "rewards" }),
+            route: createAppRoute({ key: "home", params: { tabId: "rewards" } }),
           },
         ]}
         primaryColumn={
@@ -59,7 +59,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
         {
           type: "link",
           label: "Rewards",
-          route: createAppRoute("home", { tabId: "rewards" }),
+          route: createAppRoute({ key: "home", params: { tabId: "rewards" } }),
         },
       ]}
       primaryColumn={
