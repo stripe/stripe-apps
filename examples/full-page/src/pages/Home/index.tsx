@@ -50,7 +50,7 @@ export function Home({ context }: HomeProps) {
       <Tabs
         selectedKey={currentTab}
         onSelectionChange={(tabId) =>
-          navigateToAppRoute({ key: "home", params: { tabId: tabId as HomeTabId } })
+          navigateToAppRoute("home", { tabId: tabId as HomeTabId })
         }
       >
         <Tab id="overview" label="Overview">

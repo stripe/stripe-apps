@@ -38,7 +38,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
           {
             type: "link",
             label: "Members",
-            route: createAppRoute({ key: "home", params: { tabId: "members" } }),
+            route: createAppRoute("home", { tabId: "members" }),
           },
         ]}
         primaryColumn={
@@ -60,7 +60,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
         {
           type: "link",
           label: "Members",
-          route: createAppRoute({ key: "home", params: { tabId: "members" } }),
+          route: createAppRoute("home", { tabId: "members" }),
         },
       ]}
       primaryColumn={
