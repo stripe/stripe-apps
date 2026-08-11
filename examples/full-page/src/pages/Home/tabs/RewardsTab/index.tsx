@@ -142,7 +142,7 @@ export function RewardsTab({ userContext, onEdit }: RewardsTabProps) {
         ]}
         items={items}
         onRowClick={(item) =>
-          navigateToAppRoute({ key: "reward", params: { id: String(item.id) } })
+          navigateToAppRoute("reward", { id: String(item.id) })
         }
         rowActions={[
           {
