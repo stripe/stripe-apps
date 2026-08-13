@@ -1,11 +1,11 @@
 import {
   Box,
   Button,
+  DataTable,
   Inline,
   Link,
   Spinner,
 } from "@stripe/ui-extension-sdk/ui";
-import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import { FilterSelect } from "@/pages/Home/components/FilterSelect";
 import { hasRole } from "@/utils/roles";

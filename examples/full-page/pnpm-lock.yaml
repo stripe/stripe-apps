@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@stripe/ui-extension-sdk':
-        specifier: 9.2.0-alpha.17
-        version: 9.2.0-alpha.17(stripe@17.7.0)
+        specifier: 9.2.0
+        version: 9.2.0(stripe@17.7.0)
       '@tanstack/react-query':
         specifier: 5.101.2
         version: 5.101.2(react@18.3.1)
@@ -362,8 +362,8 @@ packages:
   '@sinonjs/fake-timers@8.1.0':
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.17':
-    resolution: {integrity: sha512-5FntHawOcPvFJ76HWkBFjrVgeRAezNkeC+3htma9QI0A7hiFXAwwBHPoiggyHnbUDCKpX9tvt7U+ns4hZS8gVw==}
+  '@stripe/ui-extension-sdk@9.2.0':
+    resolution: {integrity: sha512-DAp9BOiompadzmrknsvNa5nhR4ohLsxUra38mss81juOWSnTWeJ/wnGNX9cVRxk2bS/V1//FX9pgkgMIvf7I8g==}
     peerDependencies:
       stripe: '>= 8.195.0'
 
@@ -2915,7 +2915,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 1.8.6
 
-  '@stripe/ui-extension-sdk@9.2.0-alpha.17(stripe@17.7.0)':
+  '@stripe/ui-extension-sdk@9.2.0(stripe@17.7.0)':
     dependencies:
       '@remote-ui/core': 2.2.5
       '@remote-ui/react': 5.0.5(react-reconciler@0.29.0(react@18.3.1))(react@18.3.1)

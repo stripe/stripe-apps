@@ -1,4 +1,4 @@
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import type { Member, ProgramConfig, Transaction } from "@/data";
 import { FieldGrid } from "@/components/FieldGrid";
 import { formatCurrency, formatPoints } from "@/utils/format";

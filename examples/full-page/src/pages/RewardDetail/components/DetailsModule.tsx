@@ -1,4 +1,4 @@
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import type { Reward } from "@/data";
 import { FieldGrid } from "@/components/FieldGrid";
 

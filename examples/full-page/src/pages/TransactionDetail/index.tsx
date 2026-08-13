@@ -1,7 +1,4 @@
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { MemberDetailsModule } from "./components/MemberDetailsModule";

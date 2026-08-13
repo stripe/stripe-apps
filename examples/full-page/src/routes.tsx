@@ -10,7 +10,9 @@ import { RewardDetailPage } from "./pages/RewardDetail";
 import { TransactionDetailPage } from "./pages/TransactionDetail";
 
 export const routes = createRoutes({
-  home: route("/:tabId?", (_params, context) => <Home context={context} />),
+  home: route("/:tabId?/:tier?", (_params, context) => (
+    <Home context={context} />
+  )),
   member: route("/members/:id", ({ id }) => <MemberDetailPage id={id} />),
   reward: route("/rewards/:id", ({ id }) => <RewardDetailPage id={id} />),
   transaction: route("/activity/:id", ({ id }) => (

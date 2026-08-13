@@ -1,5 +1,10 @@
-import { Box, Inline, Link, Spinner } from "@stripe/ui-extension-sdk/ui";
-import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
+import {
+  Box,
+  DataTable,
+  Inline,
+  Link,
+  Spinner,
+} from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import {
   DATE_RANGE_OPTIONS,

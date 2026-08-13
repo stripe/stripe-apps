@@ -1,4 +1,4 @@
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import { FieldGrid } from "@/components/FieldGrid";
 
 type OrderModuleProps = {

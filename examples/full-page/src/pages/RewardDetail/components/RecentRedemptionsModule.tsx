@@ -1,8 +1,4 @@
-import { Box } from "@stripe/ui-extension-sdk/ui";
-import {
-  DataTable,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { Box, DataTable, PageModule } from "@stripe/ui-extension-sdk/ui";
 import type { RewardRedemptionItem } from "../hooks/useRewardDetailPage";
 
 type RecentRedemptionsModuleProps = {
