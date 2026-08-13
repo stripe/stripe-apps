@@ -32,7 +32,12 @@ export function RecentActivityModule({
                 alignY: "center",
               }}
             >
-              <Link href={createAppRoute({ key: "transaction", params: { id: txn.id } })}>
+              <Link
+                href={createAppRoute({
+                  key: "transaction",
+                  params: { id: txn.id },
+                })}
+              >
                 <Box css={{ stack: "y" }}>
                   <Box css={{ fontWeight: "semibold" }}>{txn.memberName}</Box>
                   <Box css={{ font: "caption", color: "secondary" }}>

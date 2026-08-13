@@ -94,7 +94,10 @@ export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
         ]}
         items={items}
         onRowClick={(item) =>
-          navigateToAppRoute({ key: "transaction", params: { id: String(item.id) } })
+          navigateToAppRoute({
+            key: "transaction",
+            params: { id: String(item.id) },
+          })
         }
         rowActions={[
           {
