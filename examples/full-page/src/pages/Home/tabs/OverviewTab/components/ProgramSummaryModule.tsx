@@ -1,5 +1,11 @@
-import { Box, Inline, Link, Menu, MenuItem } from "@stripe/ui-extension-sdk/ui";
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import {
+  Box,
+  Inline,
+  Link,
+  Menu,
+  MenuItem,
+  PageModule,
+} from "@stripe/ui-extension-sdk/ui";
 
 import { formatCurrency } from "@/utils/format";
 import type { OverviewSummary } from "../hooks/useOverviewTab";

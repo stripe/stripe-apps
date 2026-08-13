@@ -1,5 +1,10 @@
-import { Box, Icon, Inline, Link } from "@stripe/ui-extension-sdk/ui";
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import {
+  Box,
+  Icon,
+  Inline,
+  Link,
+  PageModule,
+} from "@stripe/ui-extension-sdk/ui";
 
 type QuickActionsModuleProps = {
   onExportMembers: () => void;

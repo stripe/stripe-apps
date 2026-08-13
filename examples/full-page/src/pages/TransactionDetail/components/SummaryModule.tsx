@@ -1,4 +1,4 @@
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import type { Transaction } from "@/data";
 import { StatCard } from "@/components/StatsCard";
 import { formatTimestamp } from "@/utils/date";

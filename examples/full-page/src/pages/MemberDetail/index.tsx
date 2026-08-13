@@ -1,7 +1,4 @@
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { DetailsModule } from "./components/DetailsModule";
@@ -38,7 +35,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
           {
             type: "link",
             label: "Members",
-            route: createAppRoute("home", { tabId: "members" }),
+            route: createAppRoute({ key: "home", params: { tabId: "members" } }),
           },
         ]}
         primaryColumn={
@@ -60,7 +57,7 @@ export function MemberDetailPage({ id }: MemberDetailPageProps) {
         {
           type: "link",
           label: "Members",
-          route: createAppRoute("home", { tabId: "members" }),
+          route: createAppRoute({ key: "home", params: { tabId: "members" } }),
         },
       ]}
       primaryColumn={

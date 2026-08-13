@@ -1,7 +1,4 @@
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { DetailsModule } from "./components/DetailsModule";
@@ -36,7 +33,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
           {
             type: "link",
             label: "Rewards",
-            route: createAppRoute("home", { tabId: "rewards" }),
+            route: createAppRoute({ key: "home", params: { tabId: "rewards" } }),
           },
         ]}
         primaryColumn={
@@ -59,7 +56,7 @@ export function RewardDetailPage({ id }: RewardDetailPageProps) {
         {
           type: "link",
           label: "Rewards",
-          route: createAppRoute("home", { tabId: "rewards" }),
+          route: createAppRoute({ key: "home", params: { tabId: "rewards" } }),
         },
       ]}
       primaryColumn={

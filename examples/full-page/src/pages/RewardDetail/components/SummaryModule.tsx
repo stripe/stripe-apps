@@ -1,4 +1,4 @@
-import { PageModule } from "@stripe/ui-extension-sdk/ui/experimental";
+import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import type { ProgramConfig, Reward } from "@/data";
 import { StatCard } from "@/components/StatsCard";
 import { formatCurrency, formatPoints } from "@/utils/format";

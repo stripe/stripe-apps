@@ -56,7 +56,7 @@ function DrawerDefaultViewContent(_props: ExtensionContextValue) {
           </Box>
         </Box>
         <Box>
-          <Button type="primary" href={createAppRoute("home")}>
+          <Button type="primary" href={createAppRoute({ key: "home" })}>
             Start rewarding
           </Button>
         </Box>

@@ -1,5 +1,10 @@
-import { Box, Inline, Link, Spinner } from "@stripe/ui-extension-sdk/ui";
-import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
+import {
+  Box,
+  DataTable,
+  Inline,
+  Link,
+  Spinner,
+} from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import {
   DATE_RANGE_OPTIONS,
@@ -89,7 +94,10 @@ export function ActivityTab({ onGrantPoints }: ActivityTabProps) {
         ]}
         items={items}
         onRowClick={(item) =>
-          navigateToAppRoute("transaction", { id: String(item.id) })
+          navigateToAppRoute({
+            key: "transaction",
+            params: { id: String(item.id) },
+          })
         }
         rowActions={[
           {

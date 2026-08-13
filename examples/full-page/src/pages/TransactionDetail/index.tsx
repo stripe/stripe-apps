@@ -1,7 +1,4 @@
-import {
-  DetailPage,
-  PageModule,
-} from "@stripe/ui-extension-sdk/ui/experimental";
+import { DetailPage, PageModule } from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
 import { MemberDetailsModule } from "./components/MemberDetailsModule";
@@ -33,7 +30,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
           {
             type: "link",
             label: "Activity",
-            route: createAppRoute("home", { tabId: "activity" }),
+            route: createAppRoute({ key: "home", params: { tabId: "activity" } }),
           },
         ]}
         primaryColumn={
@@ -54,7 +51,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
           {
             type: "link",
             label: "Activity",
-            route: createAppRoute("home", { tabId: "activity" }),
+            route: createAppRoute({ key: "home", params: { tabId: "activity" } }),
           },
         ]}
         primaryColumn={<></>}
@@ -70,7 +67,7 @@ export function TransactionDetailPage({ id }: TransactionDetailPageProps) {
         {
           type: "link",
           label: "Activity",
-          route: createAppRoute("home", { tabId: "activity" }),
+          route: createAppRoute({ key: "home", params: { tabId: "activity" } }),
         },
       ]}
       primaryColumn={

@@ -1,11 +1,11 @@
 import {
   Box,
   Button,
+  DataTable,
   Inline,
   Link,
   Spinner,
 } from "@stripe/ui-extension-sdk/ui";
-import { DataTable } from "@stripe/ui-extension-sdk/ui/experimental";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 import { FilterSelect } from "@/pages/Home/components/FilterSelect";
 import { hasRole } from "@/utils/roles";
@@ -142,7 +142,7 @@ export function RewardsTab({ userContext, onEdit }: RewardsTabProps) {
         ]}
         items={items}
         onRowClick={(item) =>
-          navigateToAppRoute("reward", { id: String(item.id) })
+          navigateToAppRoute({ key: "reward", params: { id: String(item.id) } })
         }
         rowActions={[
           {
