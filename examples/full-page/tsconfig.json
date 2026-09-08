@@ -1,7 +1,9 @@
 {
   "extends": "@stripe/ui-extension-tools/tsconfig.ui-extension",
   "compilerOptions": {
+    "rootDir": ".",
     "moduleResolution": "bundler",
+    "types": ["jest"],
     "verbatimModuleSyntax": true,
     "paths": {
       "@/*": [

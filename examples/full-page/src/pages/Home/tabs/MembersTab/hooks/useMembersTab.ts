@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer } from "react";
-import {
-  useAppRoute,
-  useNavigation,
-} from "@stripe/ui-extension-sdk/navigation";
+import { useSearchParam } from "@stripe/ui-extension-sdk/navigation";
 import {
   getMemberEngagementStatus,
   useMembersQuery,
@@ -67,16 +64,19 @@ function membersFilterReducer(
   }
 }
 
+function readTierParam(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
 export function useMembersTab() {
   const { data: members, isLoading, isError, error } = useMembersQuery();
   const { data: settings } = useSettingsQuery();
 
   // The "Members by tier" chart on the Overview tab links here with the tier in
-  // the route's `tier` path param. We seed the filter from it and keep the two
+  // the route's search params. We seed the filter from it and keep the two
   // in sync, but the reducer stays the single source of truth for the filters.
-  const route = useAppRoute();
-  const { navigateToAppRoute } = useNavigation();
-  const tierParam = (route.key === "home" && route.routeParams.tier) || "";
+  const [tierParamValue, setTierParam] = useSearchParam("tier");
+  const tierParam = readTierParam(tierParamValue);
 
   const [filters, dispatchFilters] = useReducer(
     membersFilterReducer,
@@ -119,14 +119,11 @@ export function useMembersTab() {
   const onFilterTier = useCallback(
     (value: string) => {
       dispatchFilters({ type: "setTier", value });
-      // Mirror the tier into the route's path param so the URL stays
-      // shareable. Omitting `tier` drops it when the filter is cleared.
-      navigateToAppRoute({
-        key: "home",
-        params: value ? { tabId: "members", tier: value } : { tabId: "members" },
-      });
+      // Mirror the tier into the search params so the URL stays shareable.
+      // Passing `undefined` omits the key when the filter is cleared.
+      setTierParam(value || undefined);
     },
-    [navigateToAppRoute],
+    [setTierParam],
   );
 
   const onFilterStatus = useCallback((value: string) => {
@@ -139,9 +136,9 @@ export function useMembersTab() {
 
   const onClearFilters = useCallback(() => {
     dispatchFilters({ type: "clear" });
-    // Drop the `tier` path param for the current route.
-    navigateToAppRoute({ key: "home", params: { tabId: "members" } });
-  }, [navigateToAppRoute]);
+    // Drop the `tier` search param for the current route.
+    setTierParam(undefined);
+  }, [setTierParam]);
 
   const hasActiveFilters = Boolean(
     filters.tier || filters.status || filters.date,

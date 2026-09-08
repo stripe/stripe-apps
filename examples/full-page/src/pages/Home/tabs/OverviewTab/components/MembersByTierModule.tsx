@@ -2,6 +2,8 @@ import { MeterChart } from "@stripe/ui-extension-sdk/ui/next";
 import { PageModule } from "@stripe/ui-extension-sdk/ui";
 import { useNavigation } from "@stripe/ui-extension-sdk/navigation";
 
+import { memberTierRoute } from "./memberTierRoute";
+
 type TierDatum = {
   label: string;
   value: number;
@@ -23,12 +25,8 @@ export function MembersByTierModule({ tierData }: MembersByTierModuleProps) {
         onSegmentClick={({ data }) => {
           if (!data) return;
           // Open the Members tab pre-filtered to the clicked tier by passing
-          // the tier through the route's `tier` path param (e.g.
-          // /members/Barista). The Members tab reads it back with useAppRoute.
-          navigateToAppRoute({
-            key: "home",
-            params: { tabId: "members", tier: data.label },
-          });
+          // the tier through the route's search params (e.g. ?tier=Barista).
+          navigateToAppRoute(memberTierRoute(data.label));
         }}
       />
     </PageModule>
