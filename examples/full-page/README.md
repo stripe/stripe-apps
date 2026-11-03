@@ -33,10 +33,10 @@ This example app showcases a loyalty program called **Pizzazz Loyalty**, featuri
 
    This runs `stripe apps start`, which launches the app in your Stripe Dashboard in development mode.
 
-3. **Build for production**
+3. **Upload your app**
 
    ```bash
-   pnpm build
+   pnpm upload
    ```
 
 ## Other Scripts

@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "start": "stripe apps start",
-    "build": "stripe apps build"
+    "upload": "stripe apps upload"
   },
   "dependencies": {
     "@stripe/ui-extension-sdk": "9.4.0",
